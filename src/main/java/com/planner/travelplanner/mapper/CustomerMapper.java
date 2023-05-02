@@ -5,6 +5,8 @@ import com.planner.travelplanner.domain.dto.CustomerDTO;
 import com.planner.travelplanner.domain.dto.CustomerDTOGet;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CustomerMapper {
 
@@ -15,6 +17,7 @@ public class CustomerMapper {
                 customerDTO.getBirthdate(),
                 customerDTO.getCountry(),
                 customerDTO.getCity(),
+                customerDTO.getStreetName(),
                 customerDTO.getPostalCode(),
                 customerDTO.getEmail(),
                 customerDTO.getPhoneNumber(),
@@ -29,6 +32,7 @@ public class CustomerMapper {
                 customer.getBirthdate(),
                 customer.getCountry(),
                 customer.getCity(),
+                customer.getStreetName(),
                 customer.getPostalCode(),
                 customer.getEmail(),
                 customer.getPhoneNumber(),
@@ -46,5 +50,11 @@ public class CustomerMapper {
                 customer.getPostalCode(),
                 customer.getEmail(),
                 customer.getPhoneNumber());
+    }
+
+    public List<CustomerDTO>mapToDTOList(final List<Customer>customers){
+        return customers.stream()
+                .map(this::mapToCustomerDTO)
+                .toList();
     }
 }

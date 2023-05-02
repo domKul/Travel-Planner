@@ -17,6 +17,7 @@ public class CustomerDTO {
 
     private String city;
 
+    private String streetName;
     private String postalCode;
 
     private String email;
@@ -27,13 +28,14 @@ public class CustomerDTO {
 
     private String password;
 
-    public CustomerDTO(long customerId, String firstName, String lastName, LocalDate birthdate, String country, String city, String postalCode, String email, int phoneNumber, String login, String password) {
+    public CustomerDTO(long customerId, String firstName, String lastName, LocalDate birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, String login, String password) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthdate = birthdate;
         this.country = country;
         this.city = city;
+        this.streetName = streetName;
         this.postalCode = postalCode;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -63,6 +65,10 @@ public class CustomerDTO {
 
     public String getCity() {
         return city;
+    }
+
+    public String getStreetName() {
+        return streetName;
     }
 
     public String getPostalCode() {

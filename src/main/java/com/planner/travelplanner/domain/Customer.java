@@ -1,13 +1,11 @@
 package com.planner.travelplanner.domain;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -27,33 +25,42 @@ public class Customer {
     private String country;
     @NotNull
     private String city;
+
+    @NotNull
+    private String streetName;
     @NotNull
     private String postalCode;
 
     private String email;
     @NotNull
     private int phoneNumber;
-
     @NotNull
     private String login;
     @NotNull
     private String password;
 
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    private List<Complaints> complaints;
+
     public Customer() {
     }
 
-    public Customer(long customerId, String firstName, String lastName, LocalDate birthdate, String country, String city, String postalCode, String email, int phoneNumber, String login, String password) {
+    public Customer(long customerId, String firstName, String lastName, LocalDate birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, String login, String password) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthdate = birthdate;
         this.country = country;
         this.city = city;
+        this.streetName = streetName;
         this.postalCode = postalCode;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.login = login;
         this.password = password;
+    }
+
+    public Customer(long customerId, String firstName, String lastName, LocalDate birthdate, String country, String city, String streetName, String email, int phoneNumber, String login, String password) {
     }
 
     public long getCustomerId() {
@@ -102,6 +109,22 @@ public class Customer {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public List<Complaints> getComplaints() {
+        return complaints;
+    }
+
+    public void setComplaints(List<Complaints> complaints) {
+        this.complaints = complaints;
     }
 
     public String getPostalCode() {
