@@ -1,6 +1,7 @@
 package com.planner.travelplanner.domain;
 
 
+import com.planner.travelplanner.mapper.IdType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -59,6 +60,7 @@ public class Customer {
         this.login = login;
         this.password = password;
     }
+
 
     public Customer(long customerId, String firstName, String lastName, LocalDate birthdate, String country, String city, String streetName, String email, int phoneNumber, String login, String password) {
     }

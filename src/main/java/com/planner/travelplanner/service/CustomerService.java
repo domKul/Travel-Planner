@@ -2,7 +2,7 @@ package com.planner.travelplanner.service;
 
 import com.planner.travelplanner.domain.Customer;
 import com.planner.travelplanner.domain.dto.CustomerDTO;
-import com.planner.travelplanner.domain.dto.CustomerDTO;
+import com.planner.travelplanner.domain.dto.CustomerDTOGet;
 import com.planner.travelplanner.domain.exception.CustomerNotFoundException;
 import com.planner.travelplanner.mapper.CustomerMapper;
 import com.planner.travelplanner.repository.CustomerRepository;
@@ -29,14 +29,30 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public List<CustomerDTO> showAllCustomers(){
+    public List<CustomerDTOGet> showAllCustomers(){
         return customerMapper.mapToDTOList(customerRepository.findAll());
     }
 
-    public CustomerDTO showCustomer(final long customerId)throws CustomerNotFoundException {
+//    public CustomerDTOGet showCustomer(final long customerId)throws CustomerNotFoundException {
+//        if (customerRepository.existsById(customerId)){
+//            return customerMapper.mapToCustomerDTOGet(customerRepository.findById(customerId).get());
+//        }else{
+//            throw  new CustomerNotFoundException();
+//        }
+//    }
+    public CustomerDTOGet showCustomerGet(final long customerId)throws CustomerNotFoundException {
         if (customerRepository.existsById(customerId)){
-            return customerMapper.mapToCustomerDTO(customerRepository.findById(customerId).get());
+            return customerMapper.mapToCustomerDTOGet(customerRepository.findById(customerId).get());
         }else{
+            throw  new CustomerNotFoundException();
+        }
+    }
+    public CustomerDTO updateCustomer(final long customerId,final CustomerDTO customerDTO)throws CustomerNotFoundException{
+        if (customerRepository.existsById(customerId)){
+        Customer getCustomer = customerMapper.mapToCustomerForUpdate(customerId,customerDTO);
+        Customer update = customerRepository.save(getCustomer);
+            return customerMapper.mapToCustomerDTO(update);
+        }else {
             throw  new CustomerNotFoundException();
         }
     }

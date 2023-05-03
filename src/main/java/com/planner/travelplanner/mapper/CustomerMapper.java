@@ -10,8 +10,23 @@ import java.util.List;
 @Service
 public class CustomerMapper {
 
+
     public Customer mapToCustomer(CustomerDTO customerDTO){
-        return new Customer(customerDTO.getCustomerId(),
+        return new Customer(IdType.EMPTY_ID.getId(),
+                customerDTO.getFirstName(),
+                customerDTO.getLastName(),
+                customerDTO.getBirthdate(),
+                customerDTO.getCountry(),
+                customerDTO.getCity(),
+                customerDTO.getStreetName(),
+                customerDTO.getPostalCode(),
+                customerDTO.getEmail(),
+                customerDTO.getPhoneNumber(),
+                customerDTO.getLogin(),
+                customerDTO.getPassword());
+    }
+    public Customer mapToCustomerForUpdate(final long customerId, CustomerDTO customerDTO){
+        return new Customer(customerId,
                 customerDTO.getFirstName(),
                 customerDTO.getLastName(),
                 customerDTO.getBirthdate(),
@@ -26,7 +41,7 @@ public class CustomerMapper {
     }
 
     public CustomerDTO mapToCustomerDTO(Customer customer){
-        return new CustomerDTO(customer.getCustomerId(),
+        return new CustomerDTO(
                 customer.getFirstName(),
                 customer.getLastName(),
                 customer.getBirthdate(),
@@ -47,14 +62,28 @@ public class CustomerMapper {
                 customer.getBirthdate(),
                 customer.getCountry(),
                 customer.getCity(),
+                customer.getStreetName(),
                 customer.getPostalCode(),
                 customer.getEmail(),
-                customer.getPhoneNumber());
+                customer.getPhoneNumber(),
+                customer.getComplaints());
+    }
+    public Customer mapToCustomerFromDTOGet(CustomerDTOGet customerDTOGet){
+        return new Customer(customerDTOGet.getCustomerId(),
+                customerDTOGet.getFirstName(),
+                customerDTOGet.getLastName(),
+                customerDTOGet.getBirthdate(),
+                customerDTOGet.getCountry(),
+                customerDTOGet.getCity(),
+                customerDTOGet.getStreetName(),
+                customerDTOGet.getEmail(),
+                customerDTOGet.getPhoneNumber(),
+                null,null);
     }
 
-    public List<CustomerDTO>mapToDTOList(final List<Customer>customers){
+    public List<CustomerDTOGet>mapToDTOList(final List<Customer>customers){
         return customers.stream()
-                .map(this::mapToCustomerDTO)
+                .map(this::mapToCustomerDTOGet)
                 .toList();
     }
 }

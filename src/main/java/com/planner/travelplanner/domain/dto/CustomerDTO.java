@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class CustomerDTO {
 
 
-    private long customerId;
+
 
     private String firstName;
 
@@ -28,8 +28,8 @@ public class CustomerDTO {
 
     private String password;
 
-    public CustomerDTO(long customerId, String firstName, String lastName, LocalDate birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, String login, String password) {
-        this.customerId = customerId;
+    public CustomerDTO( String firstName, String lastName, LocalDate birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, String login, String password) {
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthdate = birthdate;
@@ -43,9 +43,7 @@ public class CustomerDTO {
         this.password = password;
     }
 
-    public long getCustomerId() {
-        return customerId;
-    }
+
 
     public String getFirstName() {
         return firstName;
