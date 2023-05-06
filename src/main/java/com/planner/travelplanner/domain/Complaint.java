@@ -8,10 +8,12 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "complaints")
-public class Complaints {
+public class Complaint {
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long complaintId;
+    @NotNull
+    private String title;
     @NotNull
     private String description;
     @NotNull
@@ -23,22 +25,32 @@ public class Complaints {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    public Complaints() {
+    public Complaint() {
     }
 
-    public Complaints(Long id, String description, LocalDateTime complaintDate, String status) {
-        this.id = id;
+    public Complaint(Long complaintId, String title, String description, LocalDateTime complaintDate, String status, Customer customer) {
+        this.complaintId = complaintId;
+        this.title = title;
         this.description = description;
         this.complaintDate = complaintDate;
         this.status = status;
+        this.customer = customer;
     }
 
-    public Long getId() {
-        return id;
+    public Long getComplaintId() {
+        return complaintId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setComplaintId(Long complaintId) {
+        this.complaintId = complaintId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -65,26 +77,36 @@ public class Complaints {
         this.status = status;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Complaints that = (Complaints) o;
-        return Objects.equals(id, that.id) && Objects.equals(description, that.description) && Objects.equals(complaintDate, that.complaintDate) && Objects.equals(status, that.status);
+        Complaint that = (Complaint) o;
+        return Objects.equals(complaintId, that.complaintId) && Objects.equals(title, that.title) && Objects.equals(description, that.description) && Objects.equals(complaintDate, that.complaintDate) && Objects.equals(status, that.status) && Objects.equals(customer, that.customer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description, complaintDate, status);
+        return Objects.hash(complaintId, title, description, complaintDate, status, customer);
     }
 
     @Override
     public String toString() {
-        return "Complaints{" +
-                "id=" + id +
+        return "Complaint{" +
+                "id=" + complaintId +
+                ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", complaintDate=" + complaintDate +
                 ", status='" + status + '\'' +
+                ", customer=" + customer +
                 '}';
     }
 }

@@ -1,7 +1,6 @@
 package com.planner.travelplanner.controller;
 
 
-import com.planner.travelplanner.domain.dto.BookingsDTO;
 import com.planner.travelplanner.domain.dto.HotelsDTO;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

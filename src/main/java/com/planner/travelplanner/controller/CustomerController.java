@@ -2,7 +2,6 @@ package com.planner.travelplanner.controller;
 
 import com.planner.travelplanner.domain.dto.CustomerDTO;
 import com.planner.travelplanner.domain.dto.CustomerDTOGet;
-import com.planner.travelplanner.domain.dto.ToursDTO;
 import com.planner.travelplanner.domain.exception.CustomerNotFoundException;
 import com.planner.travelplanner.service.CustomerService;
 import org.springframework.http.HttpStatus;
@@ -10,7 +9,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 
 @RestController

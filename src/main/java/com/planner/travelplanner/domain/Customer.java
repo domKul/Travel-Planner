@@ -1,7 +1,6 @@
 package com.planner.travelplanner.domain;
 
 
-import com.planner.travelplanner.mapper.IdType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -10,11 +9,11 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "customerList")
+@Table(name = "customers_list")
 public class Customer {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long customerId;
     @NotNull
     private String firstName;
@@ -41,12 +40,12 @@ public class Customer {
     private String password;
 
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
-    private List<Complaints> complaints;
+    private List<Complaint> complaints;
 
     public Customer() {
     }
 
-    public Customer(long customerId, String firstName, String lastName, LocalDate birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, String login, String password) {
+    public Customer(long customerId, String firstName, String lastName, LocalDate birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, String login, String password, List<Complaint> complaints) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -59,11 +58,14 @@ public class Customer {
         this.phoneNumber = phoneNumber;
         this.login = login;
         this.password = password;
+        this.complaints = complaints;
     }
 
 
     public Customer(long customerId, String firstName, String lastName, LocalDate birthdate, String country, String city, String streetName, String email, int phoneNumber, String login, String password) {
     }
+
+
 
     public long getCustomerId() {
         return customerId;
@@ -121,11 +123,11 @@ public class Customer {
         this.streetName = streetName;
     }
 
-    public List<Complaints> getComplaints() {
+    public List<Complaint> getComplaints() {
         return complaints;
     }
 
-    public void setComplaints(List<Complaints> complaints) {
+    public void setComplaints(List<Complaint> complaints) {
         this.complaints = complaints;
     }
 
@@ -169,17 +171,18 @@ public class Customer {
         this.password = password;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return customerId == customer.customerId && phoneNumber == customer.phoneNumber && Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName) && Objects.equals(birthdate, customer.birthdate) && Objects.equals(country, customer.country) && Objects.equals(city, customer.city) && Objects.equals(postalCode, customer.postalCode) && Objects.equals(email, customer.email) && Objects.equals(login, customer.login) && Objects.equals(password, customer.password);
+        return customerId == customer.customerId && phoneNumber == customer.phoneNumber && Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName) && Objects.equals(birthdate, customer.birthdate) && Objects.equals(country, customer.country) && Objects.equals(city, customer.city) && Objects.equals(streetName, customer.streetName) && Objects.equals(postalCode, customer.postalCode) && Objects.equals(email, customer.email) && Objects.equals(login, customer.login) && Objects.equals(password, customer.password) && Objects.equals(complaints, customer.complaints);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerId, firstName, lastName, birthdate, country, city, postalCode, email, phoneNumber, login, password);
+        return Objects.hash(customerId, firstName, lastName, birthdate, country, city, streetName, postalCode, email, phoneNumber, login, password, complaints);
     }
 
     @Override
@@ -191,11 +194,13 @@ public class Customer {
                 ", birthdate=" + birthdate +
                 ", country='" + country + '\'' +
                 ", city='" + city + '\'' +
+                ", streetName='" + streetName + '\'' +
                 ", postalCode='" + postalCode + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber=" + phoneNumber +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
+                ", complaints=" + complaints +
                 '}';
     }
 }

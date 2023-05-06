@@ -1,6 +1,6 @@
 package com.planner.travelplanner.domain.dto;
 
-import com.planner.travelplanner.domain.Complaints;
+import com.planner.travelplanner.domain.Complaint;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -26,9 +26,9 @@ public class CustomerDTOGet {
     private String email;
 
     private int phoneNumber;
-    private List<Complaints> complaints;
+    private List<Complaint> complaints;
 
-    public CustomerDTOGet(long customerId, String firstName, String lastName, LocalDate birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, List<Complaints> complaints) {
+    public CustomerDTOGet(long customerId, String firstName, String lastName, LocalDate birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, List<Complaint> complaints) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -74,7 +74,7 @@ public class CustomerDTOGet {
         return postalCode;
     }
 
-    public List<Complaints> getComplaints() {
+    public List<Complaint> getComplaints() {
         return complaints;
     }
 

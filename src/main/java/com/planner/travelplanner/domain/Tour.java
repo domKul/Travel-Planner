@@ -1,9 +1,6 @@
 package com.planner.travelplanner.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 
@@ -13,11 +10,11 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tours")
-public class Tours {
+public class Tour {
 
     @Id
-    @GeneratedValue
-    private long toursId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long tourId;
     @NotNull
     private String tourName;
     @NotNull
@@ -29,11 +26,11 @@ public class Tours {
     @NotNull
     private BigDecimal tourPrice;
 
-    public Tours() {
+    public Tour() {
     }
 
-    public Tours(long toursId, String tourName, String tourDescription, LocalDate startDate, LocalDate endDate, BigDecimal tourPrice) {
-        this.toursId = toursId;
+    public Tour(long tourId, String tourName, String tourDescription, LocalDate startDate, LocalDate endDate, BigDecimal tourPrice) {
+        this.tourId = tourId;
         this.tourName = tourName;
         this.tourDescription = tourDescription;
         this.startDate = startDate;
@@ -41,12 +38,12 @@ public class Tours {
         this.tourPrice = tourPrice;
     }
 
-    public long getToursId() {
-        return toursId;
+    public long getTourId() {
+        return tourId;
     }
 
-    public void setToursId(long toursId) {
-        this.toursId = toursId;
+    public void setTourId(long tourId) {
+        this.tourId = tourId;
     }
 
     public String getTourName() {
@@ -93,19 +90,19 @@ public class Tours {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Tours tours = (Tours) o;
-        return toursId == tours.toursId && Objects.equals(tourName, tours.tourName) && Objects.equals(tourDescription, tours.tourDescription) && Objects.equals(startDate, tours.startDate) && Objects.equals(endDate, tours.endDate) && Objects.equals(tourPrice, tours.tourPrice);
+        Tour tour = (Tour) o;
+        return tourId == tour.tourId && Objects.equals(tourName, tour.tourName) && Objects.equals(tourDescription, tour.tourDescription) && Objects.equals(startDate, tour.startDate) && Objects.equals(endDate, tour.endDate) && Objects.equals(tourPrice, tour.tourPrice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(toursId, tourName, tourDescription, startDate, endDate, tourPrice);
+        return Objects.hash(tourId, tourName, tourDescription, startDate, endDate, tourPrice);
     }
 
     @Override
     public String toString() {
-        return "Tours{" +
-                "toursId=" + toursId +
+        return "Tour{" +
+                "toursId=" + tourId +
                 ", tourName='" + tourName + '\'' +
                 ", tourDescription='" + tourDescription + '\'' +
                 ", startDate=" + startDate +
