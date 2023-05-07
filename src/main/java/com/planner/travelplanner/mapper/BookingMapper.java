@@ -1,10 +1,7 @@
 package com.planner.travelplanner.mapper;
 
 import com.planner.travelplanner.domain.Booking;
-import com.planner.travelplanner.domain.Customer;
 import com.planner.travelplanner.domain.dto.BookingDTO;
-import com.planner.travelplanner.domain.dto.CustomerDTO;
-import com.planner.travelplanner.domain.dto.CustomerDTOGet;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,15 +10,16 @@ import java.util.List;
 public class BookingMapper {
 
     public Booking mapToBooking(BookingDTO bookingDTO){
-        return new Booking(bookingDTO.getBookingId(),
+        return new Booking(IdType.EMPTY_ID.getId(),
                 bookingDTO.getStartDate(),
                 bookingDTO.getEndDate(),
                 bookingDTO.getCustomer(),
                 bookingDTO.getTour(),
-                bookingDTO.getHotel());
+                bookingDTO.getHotel()
+                );
     }
-    public BookingDTO mapToCustomerDTO(Booking booking){
-        return new BookingDTO(booking.getBookingId(),
+    public BookingDTO mapToBookingDTO(Booking booking){
+        return new BookingDTO(
                 booking.getStartDate(),
                 booking.getEndDate(),
                 booking.getCustomer(),
@@ -31,7 +29,7 @@ public class BookingMapper {
 
     public List<BookingDTO> mapToDTOList(final List<Booking>bookings){
         return bookings.stream()
-                .map(this::mapToCustomerDTO)
+                .map(this::mapToBookingDTO)
                 .toList();
     }
 

@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface BokingRepository extends CrudRepository<Booking,Long> {
+public interface BookingRepository extends CrudRepository<Booking,Long> {
 
     List<Booking>findAll();
 }

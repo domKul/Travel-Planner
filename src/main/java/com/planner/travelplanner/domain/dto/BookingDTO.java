@@ -1,19 +1,21 @@
 package com.planner.travelplanner.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.planner.travelplanner.domain.Customer;
 import com.planner.travelplanner.domain.Hotel;
 import com.planner.travelplanner.domain.Tour;
 
 import java.time.LocalDate;
 
+@JsonIgnoreProperties({"customer", "hotel", "tour"})
 public class BookingDTO {
-
-
-    private long bookingId;
 
     private LocalDate startDate;
 
     private LocalDate endDate;
+
 
     private Customer customer;
 
@@ -21,8 +23,7 @@ public class BookingDTO {
 
     private Hotel hotel;
 
-    public BookingDTO(long bookingId, LocalDate startDate, LocalDate endDate, Customer customer, Tour tour, Hotel hotel) {
-        this.bookingId = bookingId;
+    public BookingDTO( LocalDate startDate, LocalDate endDate, Customer customer, Tour tour, Hotel hotel) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.customer = customer;
@@ -30,9 +31,7 @@ public class BookingDTO {
         this.hotel = hotel;
     }
 
-    public long getBookingId() {
-        return bookingId;
-    }
+
 
     public LocalDate getStartDate() {
         return startDate;
