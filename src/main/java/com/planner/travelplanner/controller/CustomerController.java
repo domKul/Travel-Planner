@@ -43,7 +43,7 @@ public class CustomerController {
 
     @DeleteMapping(value = "{customerId}")
     public ResponseEntity<Void>deleteCustomer(@PathVariable long customerId)throws CustomerNotFoundException{
-        customerService.deleteCustomer(customerId);
+        customerService.deleteCustomerById(customerId);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 }

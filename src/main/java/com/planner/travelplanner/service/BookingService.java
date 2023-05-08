@@ -4,9 +4,10 @@ import com.planner.travelplanner.domain.Booking;
 import com.planner.travelplanner.domain.Customer;
 import com.planner.travelplanner.domain.Hotel;
 import com.planner.travelplanner.domain.Tour;
-import com.planner.travelplanner.domain.dto.BookingDTO;
-import com.planner.travelplanner.domain.dto.BookingDTOCreate;
-import com.planner.travelplanner.domain.dto.CustomerDTO;
+import com.planner.travelplanner.domain.dto.booking.BookingDTO;
+import com.planner.travelplanner.domain.dto.booking.BookingDTOCreate;
+import com.planner.travelplanner.domain.dto.booking.BookingDTOGet;
+import com.planner.travelplanner.domain.dto.booking.BookingDTOModify;
 import com.planner.travelplanner.domain.exception.BookingNotFoundException;
 import com.planner.travelplanner.domain.exception.CustomerNotFoundException;
 import com.planner.travelplanner.domain.exception.HotelNotFoundException;
@@ -16,10 +17,10 @@ import com.planner.travelplanner.repository.BookingRepository;
 import com.planner.travelplanner.repository.CustomerRepository;
 import com.planner.travelplanner.repository.HotelRepository;
 import com.planner.travelplanner.repository.TourRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookingService {
@@ -38,7 +39,7 @@ public class BookingService {
         this.tourRepository = tourRepository;
     }
 
-    public Booking addBooking(final BookingDTOCreate bookingDTOCreate)throws CustomerNotFoundException{
+    public Booking addBooking(final BookingDTOCreate bookingDTOCreate)throws BookingNotFoundException{
         Customer findCustomer = customerRepository.findById(bookingDTOCreate.getCustomerId())
                 .orElseThrow(CustomerNotFoundException::new);
         Hotel findHotel = hotelRepository.findById(bookingDTOCreate.getHotelId())
@@ -55,25 +56,33 @@ public class BookingService {
         return bookingRepository.save(booking);
     }
 
-    public List<BookingDTO> showAllBookings(){
-        return bookingMapper.mapToDTOList(bookingRepository.findAll());
+    public List<BookingDTOGet> showAllBookings(){
+        return bookingMapper.mapToDTOListGet(bookingRepository.findAll());
     }
 
-    public BookingDTO showBookingById(final long bookingId)throws BookingNotFoundException {
+    public BookingDTOGet showBookingById(final long bookingId)throws BookingNotFoundException {
         if (bookingRepository.existsById(bookingId)){
-            return bookingMapper.mapToBookingDTO(bookingRepository.findById(bookingId).get());
+            return bookingMapper.mapToBookingDTOGet(bookingRepository.findById(bookingId).get());
         }else {
             throw  new BookingNotFoundException();
         }
     }
 
-    public BookingDTO modifyBooking(final long bookingId, final BookingDTO bookingDTO)throws BookingNotFoundException {
-        if (bookingRepository.existsById(bookingId)){
-            Booking getBooking = bookingMapper.mapToBooking(bookingDTO);
-            Booking update = bookingRepository.save(getBooking);
-            return bookingMapper.mapToBookingDTO(update);
+    public BookingDTO modifyBooking(final long bookingId, final BookingDTOCreate bookingDTOCreate) throws BookingNotFoundException {
+        if (bookingRepository.existsById(bookingId)) {
+            Booking booking = bookingMapper.mapToBookingForUpdate(bookingId, bookingDTOCreate);
+            Booking saveUpdatedBooking = bookingRepository.save(booking);
+            return bookingMapper.mapToBookingDTO(saveUpdatedBooking);
+        } else {
+            throw new BookingNotFoundException();
+        }
+    }
+    public void deleteBookingById(final long bookingId) throws BookingNotFoundException{
+        Optional<Booking> booking = bookingRepository.findById(bookingId);
+        if (booking.isPresent()){
+            bookingRepository.deleteById(bookingId);
         }else {
-            throw  new BookingNotFoundException();
+            throw new BookingNotFoundException();
         }
     }
 

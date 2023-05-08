@@ -57,7 +57,7 @@ public class CustomerService {
         }
     }
 
-    public void deleteCustomer(final long customerId) throws CustomerNotFoundException{
+    public void deleteCustomerById(final long customerId) throws CustomerNotFoundException{
         Optional<Customer>customer = customerRepository.findById(customerId);
         if (customer.isPresent()){
             customerRepository.deleteById(customerId);

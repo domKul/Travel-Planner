@@ -1,4 +1,4 @@
-package com.planner.travelplanner.domain.dto;
+package com.planner.travelplanner.domain.dto.booking;
 
 import java.time.LocalDate;
 
@@ -6,7 +6,6 @@ public class BookingDTOCreate {
     private LocalDate startDate;
 
     private LocalDate endDate;
-
 
     private long customerId;
 

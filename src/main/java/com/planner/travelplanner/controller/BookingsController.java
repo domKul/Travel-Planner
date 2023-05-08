@@ -1,8 +1,10 @@
 package com.planner.travelplanner.controller;
 
 
-import com.planner.travelplanner.domain.dto.BookingDTO;
-import com.planner.travelplanner.domain.dto.BookingDTOCreate;
+import com.planner.travelplanner.domain.dto.booking.BookingDTO;
+import com.planner.travelplanner.domain.dto.booking.BookingDTOCreate;
+import com.planner.travelplanner.domain.dto.booking.BookingDTOGet;
+import com.planner.travelplanner.domain.dto.booking.BookingDTOModify;
 import com.planner.travelplanner.service.BookingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,23 +29,24 @@ public class BookingsController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<BookingDTO>>getAllBookings(){
+    public ResponseEntity<List<BookingDTOGet>>getAllBookings(){
         return ResponseEntity.ok(bookingService.showAllBookings());
     }
 
-    @GetMapping(value = "bookingId")
-    public ResponseEntity<BookingDTO>getBookingById(@PathVariable Long bookingId){
+    @GetMapping(value = "{bookingId}")
+    public ResponseEntity<BookingDTOGet>getBookingById(@PathVariable Long bookingId){
         return ResponseEntity.ok(bookingService.showBookingById(bookingId));
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BookingDTO>updateBooking(@RequestParam Long bookingId, @RequestBody BookingDTO bookingDTO){
-        return ResponseEntity.ok(bookingService.modifyBooking(bookingId, bookingDTO));
+    public ResponseEntity<BookingDTO>updateBooking(@RequestParam Long bookingId, @RequestBody BookingDTOCreate bookingDTOCreate){
+        return ResponseEntity.ok(bookingService.modifyBooking(bookingId, bookingDTOCreate));
     }
 
-    @DeleteMapping
+    @DeleteMapping(value = "{bookingId}")
     public ResponseEntity<Void>deleteBooking(@PathVariable Long bookingId){
-        return ResponseEntity.ok().build();
+        bookingService.deleteBookingById(bookingId);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
 }

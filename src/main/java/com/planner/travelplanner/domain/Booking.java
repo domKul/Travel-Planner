@@ -1,8 +1,9 @@
 package com.planner.travelplanner.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.lang.Nullable;
 
 import java.time.LocalDate;
@@ -16,30 +17,27 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long bookingId;
 
-    @NotNull
+
     private LocalDate startDate;
-    @NotNull
+
     private LocalDate endDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
-    @NotNull
     private Customer customer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tours_id")
-    @Nullable
     private Tour tour;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "hotel_id")
-    @Nullable
     private Hotel hotel;
 
     public Booking() {
     }
 
-    public Booking(long bookingId, LocalDate startDate, LocalDate endDate, Customer customer, @Nullable Tour tour, @Nullable Hotel hotel) {
+    public Booking(long bookingId, LocalDate startDate, LocalDate endDate, Customer customer,  Tour tour,  Hotel hotel) {
         this.bookingId = bookingId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -47,6 +45,12 @@ public class Booking {
         this.tour = tour;
         this.hotel = hotel;
     }
+
+    public Booking(long id, LocalDate startDate, LocalDate endDate, long customerId, long tourId, long hotelId) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
 
     public long getBookingId() {
         return bookingId;
@@ -80,21 +84,21 @@ public class Booking {
         this.customer = customer;
     }
 
-    @Nullable
+
     public Tour getTours() {
         return tour;
     }
 
-    public void setTours(@Nullable Tour tour) {
+    public void setTours( Tour tour) {
         this.tour = tour;
     }
 
-    @Nullable
+
     public Hotel getHotels() {
         return hotel;
     }
 
-    public void setHotels(@Nullable Hotel hotel) {
+    public void setHotels( Hotel hotel) {
         this.hotel = hotel;
     }
 

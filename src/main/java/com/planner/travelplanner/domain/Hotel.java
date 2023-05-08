@@ -14,24 +14,24 @@ public class Hotel {
     private Long hotelId;
 
 
-    private String name;
+    private String hotelName;
 
 
-    private String address;
+    private String hotelAddress;
 
     private BigDecimal hotelPrice;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "room_id")
     private Room room;
 
     public Hotel() {
     }
 
-    public Hotel(Long hotelId, String name, String address, BigDecimal hotelPrice, Room room) {
+    public Hotel(Long hotelId, String hotelName, String hotelAddress, BigDecimal hotelPrice, Room room) {
         this.hotelId = hotelId;
-        this.name = name;
-        this.address = address;
+        this.hotelName = hotelName;
+        this.hotelAddress = hotelAddress;
         this.hotelPrice = hotelPrice;
         this.room = room;
     }
@@ -44,20 +44,20 @@ public class Hotel {
         this.hotelId = hotelId;
     }
 
-    public String getName() {
-        return name;
+    public String getHotelName() {
+        return hotelName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
     }
 
-    public String getAddress() {
-        return address;
+    public String getHotelAddress() {
+        return hotelAddress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setHotelAddress(String hotelAddress) {
+        this.hotelAddress = hotelAddress;
     }
 
     public BigDecimal getHotelPrice() {
@@ -81,20 +81,20 @@ public class Hotel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Hotel hotel = (Hotel) o;
-        return Objects.equals(hotelId, hotel.hotelId) && Objects.equals(name, hotel.name) && Objects.equals(address, hotel.address) && Objects.equals(hotelPrice, hotel.hotelPrice) && Objects.equals(room, hotel.room);
+        return Objects.equals(hotelId, hotel.hotelId) && Objects.equals(hotelName, hotel.hotelName) && Objects.equals(hotelAddress, hotel.hotelAddress) && Objects.equals(hotelPrice, hotel.hotelPrice) && Objects.equals(room, hotel.room);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hotelId, name, address, hotelPrice, room);
+        return Objects.hash(hotelId, hotelName, hotelAddress, hotelPrice, room);
     }
 
     @Override
     public String toString() {
         return "Hotel{" +
                 "hotelId=" + hotelId +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
+                ", name='" + hotelName + '\'' +
+                ", address='" + hotelAddress + '\'' +
                 ", hotelPrice=" + hotelPrice +
                 ", room=" + room +
                 '}';

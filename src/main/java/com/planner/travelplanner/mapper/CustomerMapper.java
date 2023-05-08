@@ -24,7 +24,7 @@ public class CustomerMapper {
                 customerDTO.getPhoneNumber(),
                 customerDTO.getLogin(),
                 customerDTO.getPassword(),
-                null);
+                null,null);
     }
     public Customer mapToCustomerForUpdate(final long customerId, CustomerDTO customerDTO){
         return new Customer(customerId,
@@ -39,7 +39,7 @@ public class CustomerMapper {
                 customerDTO.getPhoneNumber(),
                 customerDTO.getLogin(),
                 customerDTO.getPassword(),
-                null);
+                null,null);
     }
 
     public CustomerDTO mapToCustomerDTO(Customer customer){

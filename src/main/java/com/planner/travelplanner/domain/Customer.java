@@ -1,7 +1,9 @@
 package com.planner.travelplanner.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -41,12 +43,17 @@ public class Customer {
     private String password;
 
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Complaint> complaints;
+
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<Booking>  bookings;
 
     public Customer() {
     }
 
-    public Customer(long customerId, String firstName, String lastName, LocalDate birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, String login, String password, List<Complaint> complaints) {
+    public Customer(long customerId, String firstName, String lastName, LocalDate birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, String login, String password, List<Complaint> complaints, List<Booking> bookings) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -60,8 +67,8 @@ public class Customer {
         this.login = login;
         this.password = password;
         this.complaints = complaints;
+        this.bookings = bookings;
     }
-
 
     public Customer(long customerId, String firstName, String lastName, LocalDate birthdate, String country, String city, String streetName, String email, int phoneNumber, String login, String password) {
     }
@@ -172,18 +179,25 @@ public class Customer {
         this.password = password;
     }
 
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return customerId == customer.customerId && phoneNumber == customer.phoneNumber && Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName) && Objects.equals(birthdate, customer.birthdate) && Objects.equals(country, customer.country) && Objects.equals(city, customer.city) && Objects.equals(streetName, customer.streetName) && Objects.equals(postalCode, customer.postalCode) && Objects.equals(email, customer.email) && Objects.equals(login, customer.login) && Objects.equals(password, customer.password) && Objects.equals(complaints, customer.complaints);
+        return customerId == customer.customerId && phoneNumber == customer.phoneNumber && Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName) && Objects.equals(birthdate, customer.birthdate) && Objects.equals(country, customer.country) && Objects.equals(city, customer.city) && Objects.equals(streetName, customer.streetName) && Objects.equals(postalCode, customer.postalCode) && Objects.equals(email, customer.email) && Objects.equals(login, customer.login) && Objects.equals(password, customer.password) && Objects.equals(complaints, customer.complaints) && Objects.equals(bookings, customer.bookings);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerId, firstName, lastName, birthdate, country, city, streetName, postalCode, email, phoneNumber, login, password, complaints);
+        return Objects.hash(customerId, firstName, lastName, birthdate, country, city, streetName, postalCode, email, phoneNumber, login, password, complaints, bookings);
     }
 
     @Override
@@ -202,6 +216,7 @@ public class Customer {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", complaints=" + complaints +
+                ", bookings=" + bookings +
                 '}';
     }
 }

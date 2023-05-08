@@ -4,9 +4,6 @@ import java.time.LocalDate;
 
 public class CustomerDTO {
 
-
-
-
     private String firstName;
 
     private String lastName;

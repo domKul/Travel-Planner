@@ -1,5 +1,6 @@
 package com.planner.travelplanner.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -25,6 +26,10 @@ public class Tour {
     private LocalDate endDate;
     @NotNull
     private BigDecimal tourPrice;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Booking booking;
+
 
     public Tour() {
     }
@@ -86,28 +91,37 @@ public class Tour {
         this.tourPrice = tourPrice;
     }
 
+    public Booking getBooking() {
+        return booking;
+    }
+
+    public void setBooking(Booking booking) {
+        this.booking = booking;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tour tour = (Tour) o;
-        return tourId == tour.tourId && Objects.equals(tourName, tour.tourName) && Objects.equals(tourDescription, tour.tourDescription) && Objects.equals(startDate, tour.startDate) && Objects.equals(endDate, tour.endDate) && Objects.equals(tourPrice, tour.tourPrice);
+        return tourId == tour.tourId && Objects.equals(tourName, tour.tourName) && Objects.equals(tourDescription, tour.tourDescription) && Objects.equals(startDate, tour.startDate) && Objects.equals(endDate, tour.endDate) && Objects.equals(tourPrice, tour.tourPrice) && Objects.equals(booking, tour.booking);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(tourId, tourName, tourDescription, startDate, endDate, tourPrice);
+        return Objects.hash(tourId, tourName, tourDescription, startDate, endDate, tourPrice, booking);
     }
 
     @Override
     public String toString() {
         return "Tour{" +
-                "toursId=" + tourId +
+                "tourId=" + tourId +
                 ", tourName='" + tourName + '\'' +
                 ", tourDescription='" + tourDescription + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", tourPrice=" + tourPrice +
+                ", booking=" + booking +
                 '}';
     }
 }

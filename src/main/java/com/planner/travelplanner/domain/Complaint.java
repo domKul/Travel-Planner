@@ -1,5 +1,6 @@
 package com.planner.travelplanner.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -21,8 +22,9 @@ public class Complaint {
     @NotNull
     private String status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
+    @JsonBackReference
     private Customer customer;
 
     public Complaint() {
