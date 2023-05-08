@@ -13,11 +13,11 @@ import com.planner.travelplanner.repository.BookingRepository;
 import com.planner.travelplanner.repository.CustomerRepository;
 import com.planner.travelplanner.repository.HotelRepository;
 import com.planner.travelplanner.repository.TourRepository;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Service
+@Component
 public class BookingMapper {
     private final BookingRepository bookingRepository;
     private final CustomerRepository customerRepository;

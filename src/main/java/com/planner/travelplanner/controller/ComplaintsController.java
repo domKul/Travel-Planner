@@ -1,6 +1,6 @@
 package com.planner.travelplanner.controller;
 
-import com.planner.travelplanner.domain.dto.ComplaintsDTO;
+import com.planner.travelplanner.domain.dto.ComplaintDTO;
 import com.planner.travelplanner.domain.dto.HotelsDTO;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +17,12 @@ public class ComplaintsController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addComplaints(@RequestBody ComplaintsDTO complaintsDTO){
+    public ResponseEntity<Void> addComplaints(@RequestBody ComplaintDTO complaintDTO){
         return  ResponseEntity.ok().build();
     }
 
     @GetMapping()
-    public ResponseEntity<List<ComplaintsDTO>>getAllComplaints(){
+    public ResponseEntity<List<ComplaintDTO>>getAllComplaints(){
         return ResponseEntity.ok(Collections.emptyList());
     }
 
@@ -32,7 +32,7 @@ public class ComplaintsController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ComplaintsDTO>updateComplaints(@RequestBody ComplaintsDTO complaintsDTO){
+    public ResponseEntity<ComplaintDTO>updateComplaints(@RequestBody ComplaintDTO complaintDTO){
         return ResponseEntity.ok(null);
     }
 

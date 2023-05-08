@@ -2,6 +2,7 @@ package com.planner.travelplanner.domain.dto.booking;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Date;
 
 public class BookingDTOGet {
 
@@ -13,7 +14,7 @@ public class BookingDTOGet {
 
     private String customerLastName;
 
-    private LocalDate birthDate;
+    private Date birthDate;
 
     private String country;
 
@@ -48,7 +49,7 @@ public class BookingDTOGet {
 
     private BigDecimal hotelPrice;
 
-    public BookingDTOGet(LocalDate bookTime, long customerId, String customerFirstName, String customerLastName, LocalDate birthDate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, String login, long tourId, String tourName, String tourDescription, LocalDate tourStartDate, LocalDate tourEndDate, BigDecimal tourPrice, long hotelId, String name, String address, BigDecimal hotelPrice) {
+    public BookingDTOGet(LocalDate bookTime, long customerId, String customerFirstName, String customerLastName, Date birthDate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, String login, long tourId, String tourName, String tourDescription, LocalDate tourStartDate, LocalDate tourEndDate, BigDecimal tourPrice, long hotelId, String name, String address, BigDecimal hotelPrice) {
         this.bookTime = bookTime;
         this.customerId = customerId;
         this.customerFirstName = customerFirstName;
@@ -90,7 +91,7 @@ public class BookingDTOGet {
         return customerLastName;
     }
 
-    public LocalDate getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 

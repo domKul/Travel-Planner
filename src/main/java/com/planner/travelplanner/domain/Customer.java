@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,7 +24,7 @@ public class Customer {
     @NotNull
     private String lastName;
     @NotNull
-    private LocalDate birthdate;
+    private Date birthdate;
     @NotNull
     private String country;
     @NotNull
@@ -43,7 +44,6 @@ public class Customer {
     private String password;
 
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Complaint> complaints;
 
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
@@ -53,7 +53,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(long customerId, String firstName, String lastName, LocalDate birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, String login, String password, List<Complaint> complaints, List<Booking> bookings) {
+    public Customer(long customerId, String firstName, String lastName, Date birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, String login, String password, List<Complaint> complaints, List<Booking> bookings) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -70,7 +70,7 @@ public class Customer {
         this.bookings = bookings;
     }
 
-    public Customer(long customerId, String firstName, String lastName, LocalDate birthdate, String country, String city, String streetName, String email, int phoneNumber, String login, String password) {
+    public Customer(long customerId, String firstName, String lastName, Date birthdate, String country, String city, String streetName, String email, int phoneNumber, String login, String password) {
     }
 
 
@@ -99,11 +99,11 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public LocalDate getBirthdate() {
+    public Date getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(LocalDate birthdate) {
+    public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
 

@@ -1,6 +1,7 @@
 package com.planner.travelplanner.domain.dto;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class CustomerDTO {
 
@@ -8,7 +9,7 @@ public class CustomerDTO {
 
     private String lastName;
 
-    private LocalDate birthdate;
+    private Date birthdate;
 
     private String country;
 
@@ -25,7 +26,7 @@ public class CustomerDTO {
 
     private String password;
 
-    public CustomerDTO( String firstName, String lastName, LocalDate birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, String login, String password) {
+    public CustomerDTO( String firstName, String lastName, Date birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, String login, String password) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -50,7 +51,7 @@ public class CustomerDTO {
         return lastName;
     }
 
-    public LocalDate getBirthdate() {
+    public Date getBirthdate() {
         return birthdate;
     }
 

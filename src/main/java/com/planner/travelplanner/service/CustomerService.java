@@ -33,13 +33,6 @@ public class CustomerService {
         return customerMapper.mapToDTOList(customerRepository.findAll());
     }
 
-//    public CustomerDTOGet showCustomer(final long customerId)throws CustomerNotFoundException {
-//        if (customerRepository.existsById(customerId)){
-//            return customerMapper.mapToCustomerDTOGet(customerRepository.findById(customerId).get());
-//        }else{
-//            throw  new CustomerNotFoundException();
-//        }
-//    }
     public CustomerDTOGet showCustomerGet(final long customerId)throws CustomerNotFoundException {
         if (customerRepository.existsById(customerId)){
             return customerMapper.mapToCustomerDTOGet(customerRepository.findById(customerId).get());

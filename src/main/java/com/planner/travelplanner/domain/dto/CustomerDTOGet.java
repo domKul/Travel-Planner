@@ -3,6 +3,7 @@ package com.planner.travelplanner.domain.dto;
 import com.planner.travelplanner.domain.Complaint;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class CustomerDTOGet {
@@ -13,7 +14,7 @@ public class CustomerDTOGet {
 
     private String lastName;
 
-    private LocalDate birthdate;
+    private Date birthdate;
 
     private String country;
 
@@ -28,7 +29,7 @@ public class CustomerDTOGet {
     private int phoneNumber;
     private List<Complaint> complaints;
 
-    public CustomerDTOGet(long customerId, String firstName, String lastName, LocalDate birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, List<Complaint> complaints) {
+    public CustomerDTOGet(long customerId, String firstName, String lastName, Date birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, List<Complaint> complaints) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -54,7 +55,7 @@ public class CustomerDTOGet {
         return lastName;
     }
 
-    public LocalDate getBirthdate() {
+    public Date getBirthdate() {
         return birthdate;
     }
 

@@ -3,11 +3,11 @@ package com.planner.travelplanner.mapper;
 import com.planner.travelplanner.domain.Customer;
 import com.planner.travelplanner.domain.dto.CustomerDTO;
 import com.planner.travelplanner.domain.dto.CustomerDTOGet;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Service
+@Component
 public class CustomerMapper {
 
 
