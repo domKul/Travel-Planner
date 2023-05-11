@@ -28,8 +28,6 @@ public class BookingDTOGet {
 
     private int phoneNumber;
 
-    private String login;
-
     private long tourId;
 
     private String tourName;
@@ -49,7 +47,7 @@ public class BookingDTOGet {
 
     private BigDecimal hotelPrice;
 
-    public BookingDTOGet(LocalDate bookTime, long customerId, String customerFirstName, String customerLastName, Date birthDate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, String login, long tourId, String tourName, String tourDescription, LocalDate tourStartDate, LocalDate tourEndDate, BigDecimal tourPrice, long hotelId, String name, String address, BigDecimal hotelPrice) {
+    public BookingDTOGet(LocalDate bookTime, long customerId, String customerFirstName, String customerLastName, Date birthDate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, long tourId, String tourName, String tourDescription, LocalDate tourStartDate, LocalDate tourEndDate, BigDecimal tourPrice, long hotelId, String name, String address, BigDecimal hotelPrice) {
         this.bookTime = bookTime;
         this.customerId = customerId;
         this.customerFirstName = customerFirstName;
@@ -61,7 +59,6 @@ public class BookingDTOGet {
         this.postalCode = postalCode;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.login = login;
         this.tourId = tourId;
         this.tourName = tourName;
         this.tourDescription = tourDescription;
@@ -117,10 +114,6 @@ public class BookingDTOGet {
 
     public int getPhoneNumber() {
         return phoneNumber;
-    }
-
-    public String getLogin() {
-        return login;
     }
 
     public long getTourId() {

@@ -4,7 +4,6 @@ package com.planner.travelplanner.controller;
 import com.planner.travelplanner.domain.dto.booking.BookingDTO;
 import com.planner.travelplanner.domain.dto.booking.BookingDTOCreate;
 import com.planner.travelplanner.domain.dto.booking.BookingDTOGet;
-import com.planner.travelplanner.domain.dto.booking.BookingDTOModify;
 import com.planner.travelplanner.service.BookingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

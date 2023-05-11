@@ -1,12 +1,13 @@
 package com.planner.travelplanner.repository;
 
-import com.planner.travelplanner.domain.Booking;
+import com.planner.travelplanner.domain.Complaint;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
 @Repository
-public interface BookingRepository extends CrudRepository<Booking,Long> {
-    List<Booking>findAll();
+public interface ComplaintRepository extends CrudRepository<Complaint,Long> {
+    List<Complaint>findAll();
+
+
 }

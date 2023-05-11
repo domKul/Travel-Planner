@@ -1,6 +1,6 @@
 package com.planner.travelplanner.controller;
 
-import com.planner.travelplanner.domain.dto.HotelsDTO;
+import com.planner.travelplanner.domain.dto.customer.LocationDTO;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,26 +11,24 @@ import java.util.List;
 @RestController
 @RequestMapping("v1/hotels")
 public class HotelsController {
-    public HotelsController() {
-    }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addHotel(@RequestBody HotelsDTO hotelsDTO){
+    public ResponseEntity<Void> addHotel(@RequestBody LocationDTO locationDTO){
         return  ResponseEntity.ok().build();
     }
 
     @GetMapping()
-    public ResponseEntity<List<HotelsDTO>>getAllHotels(){
+    public ResponseEntity<List<LocationDTO>>getAllHotels(){
         return ResponseEntity.ok(Collections.emptyList());
     }
 
     @GetMapping(value = "hotelId")
-    public ResponseEntity<HotelsDTO>getHotelById(@PathVariable Long hotelId){
+    public ResponseEntity<LocationDTO>getHotelById(@PathVariable Long hotelId){
         return ResponseEntity.ok(null);
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HotelsDTO>updateHotel(@RequestBody HotelsDTO hotelsDTO){
+    public ResponseEntity<LocationDTO>updateHotel(@RequestBody LocationDTO locationDTO){
         return ResponseEntity.ok(null);
     }
 
