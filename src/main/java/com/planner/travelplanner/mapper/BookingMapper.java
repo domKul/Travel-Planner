@@ -4,6 +4,7 @@ import com.planner.travelplanner.domain.Booking;
 import com.planner.travelplanner.domain.dto.booking.BookingDTO;
 import com.planner.travelplanner.domain.dto.booking.BookingDTOCreate;
 import com.planner.travelplanner.domain.dto.booking.BookingDTOGet;
+import com.planner.travelplanner.domain.dto.booking.BookingDTOModify;
 import com.planner.travelplanner.domain.exception.BookingNotFoundException;
 import com.planner.travelplanner.domain.exception.CustomerNotFoundException;
 import com.planner.travelplanner.domain.exception.HotelNotFoundException;
@@ -32,6 +33,15 @@ public class BookingMapper {
 
 
 
+    public Booking mapToBooking(BookingDTO bookingDTO){
+        return new Booking(IdType.EMPTY_ID.getId(),
+                bookingDTO.getStartDate(),
+                bookingDTO.getEndDate(),
+                bookingDTO.getCustomer(),
+                bookingDTO.getTour(),
+                bookingDTO.getHotel()
+                );
+    }
 
     public BookingDTO mapToBookingDTO(Booking booking){
         return new BookingDTO(
@@ -40,6 +50,22 @@ public class BookingMapper {
                 booking.getCustomer(),
                 booking.getTours(),
                 booking.getHotels());
+    }
+    public BookingDTOModify mapToBookingDTOModify(Booking booking){
+        return new BookingDTOModify(booking.getBookingId(),
+                booking.getTours().getTourId(),
+                booking.getHotels().getHotelId(),
+                booking.getStartDate(),
+                booking.getEndDate()
+                );
+    }
+    public BookingDTOCreate mapToBookingDTOCreate(Booking booking){
+        return new BookingDTOCreate(
+                booking.getStartDate(),
+                booking.getEndDate(),
+                booking.getCustomer().getCustomerId(),
+                booking.getTours().getTourId(),
+                booking.getHotels().getHotelId());
     }
     public BookingDTOGet mapToBookingDTOGet(Booking booking){
         return new BookingDTOGet(
@@ -54,6 +80,7 @@ public class BookingMapper {
                 booking.getCustomer().getPostalCode(),
                 booking.getCustomer().getEmail(),
                 booking.getCustomer().getPhoneNumber(),
+                booking.getCustomer().getLogin(),
                 booking.getTours().getTourId(),
                 booking.getTours().getTourName(),
                 booking.getTours().getTourDescription(),

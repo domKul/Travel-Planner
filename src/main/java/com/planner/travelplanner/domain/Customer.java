@@ -1,18 +1,19 @@
 package com.planner.travelplanner.domain;
 
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "customers_list")
-@JsonIgnoreProperties({"bookings","complaints"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "customerId")
 public class Customer {
 
     @Id
@@ -31,15 +32,18 @@ public class Customer {
 
     @NotNull
     private String streetName;
-    @NotNull(groups = Customer.class)
+    @NotNull
     private String postalCode;
 
     private String email;
     @NotNull
     private int phoneNumber;
+    @NotNull
+    private String login;
+    @NotNull
+    private String password;
 
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
     private List<Complaint> complaints;
 
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
@@ -49,7 +53,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(long customerId, String firstName, String lastName, Date birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, List<Complaint> complaints, List<Booking> bookings) {
+    public Customer(long customerId, String firstName, String lastName, Date birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, String login, String password, List<Complaint> complaints, List<Booking> bookings) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -60,10 +64,14 @@ public class Customer {
         this.postalCode = postalCode;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.login = login;
+        this.password = password;
         this.complaints = complaints;
         this.bookings = bookings;
     }
 
+    public Customer(long customerId, String firstName, String lastName, Date birthdate, String country, String city, String streetName, String email, int phoneNumber, String login, String password) {
+    }
 
 
 
@@ -155,6 +163,22 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public List<Booking> getBookings() {
         return bookings;
     }
@@ -168,12 +192,12 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return customerId == customer.customerId && phoneNumber == customer.phoneNumber && Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName) && Objects.equals(birthdate, customer.birthdate) && Objects.equals(country, customer.country) && Objects.equals(city, customer.city) && Objects.equals(streetName, customer.streetName) && Objects.equals(postalCode, customer.postalCode) && Objects.equals(email, customer.email) && Objects.equals(complaints, customer.complaints) && Objects.equals(bookings, customer.bookings);
+        return customerId == customer.customerId && phoneNumber == customer.phoneNumber && Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName) && Objects.equals(birthdate, customer.birthdate) && Objects.equals(country, customer.country) && Objects.equals(city, customer.city) && Objects.equals(streetName, customer.streetName) && Objects.equals(postalCode, customer.postalCode) && Objects.equals(email, customer.email) && Objects.equals(login, customer.login) && Objects.equals(password, customer.password) && Objects.equals(complaints, customer.complaints) && Objects.equals(bookings, customer.bookings);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerId, firstName, lastName, birthdate, country, city, streetName, postalCode, email, phoneNumber, complaints, bookings);
+        return Objects.hash(customerId, firstName, lastName, birthdate, country, city, streetName, postalCode, email, phoneNumber, login, password, complaints, bookings);
     }
 
     @Override
@@ -189,6 +213,8 @@ public class Customer {
                 ", postalCode='" + postalCode + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber=" + phoneNumber +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
                 ", complaints=" + complaints +
                 ", bookings=" + bookings +
                 '}';

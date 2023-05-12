@@ -1,11 +1,15 @@
-package com.planner.travelplanner.domain.dto.complaint;
+package com.planner.travelplanner.domain.dto;
 
 import com.planner.travelplanner.domain.Customer;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
-public class ComplaintDTOCreate {
+public class ComplaintDTO {
 
+
+    private Long complaintId;
 
     private String title;
 
@@ -14,18 +18,20 @@ public class ComplaintDTOCreate {
     private LocalDateTime complaintDate;
 
     private String status;
-    private long customerId;
 
-    public ComplaintDTOCreate(String title, String description, LocalDateTime complaintDate, String status, long customerId) {
+    private Customer customer;
+
+    public ComplaintDTO(Long complaintId, String title, String description, LocalDateTime complaintDate, String status, Customer customer) {
+        this.complaintId = complaintId;
         this.title = title;
         this.description = description;
         this.complaintDate = complaintDate;
         this.status = status;
-        this.customerId = customerId;
+        this.customer = customer;
     }
 
-    public long getCustomer() {
-        return customerId;
+    public Long getComplaintId() {
+        return complaintId;
     }
 
     public String getTitle() {
@@ -44,8 +50,7 @@ public class ComplaintDTOCreate {
         return status;
     }
 
-
-    public long getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 }

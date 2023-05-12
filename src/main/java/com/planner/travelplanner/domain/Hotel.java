@@ -2,7 +2,6 @@ package com.planner.travelplanner.domain;
 
 import jakarta.persistence.*;
 
-import javax.xml.transform.Result;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -100,6 +99,4 @@ public class Hotel {
                 ", room=" + room +
                 '}';
     }
-
-
 }

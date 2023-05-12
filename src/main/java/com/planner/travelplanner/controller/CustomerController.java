@@ -1,7 +1,8 @@
 package com.planner.travelplanner.controller;
 
-import com.planner.travelplanner.domain.dto.customer.CustomerDTO;
-import com.planner.travelplanner.domain.dto.customer.CustomerDTOGet;
+import com.planner.travelplanner.domain.dto.CustomerDTO;
+import com.planner.travelplanner.domain.dto.CustomerDTOGet;
+import com.planner.travelplanner.domain.exception.CustomerNotFoundException;
 import com.planner.travelplanner.service.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,8 +32,8 @@ public class CustomerController {
     }
 
     @GetMapping(value = "{customerId}")
-    public ResponseEntity<CustomerDTOGet>getTourById(@PathVariable long customerId){
-        return ResponseEntity.ok(customerService.showCustomerGetById(customerId));
+    public ResponseEntity<CustomerDTOGet>getTourById(@PathVariable long customerId)throws CustomerNotFoundException {
+        return ResponseEntity.ok(customerService.showCustomerGet(customerId));
     }
 
     @PutMapping(value = "{customerId}",consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -41,7 +42,7 @@ public class CustomerController {
     }
 
     @DeleteMapping(value = "{customerId}")
-    public ResponseEntity<Void>deleteCustomer(@PathVariable long customerId){
+    public ResponseEntity<Void>deleteCustomer(@PathVariable long customerId)throws CustomerNotFoundException{
         customerService.deleteCustomerById(customerId);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }

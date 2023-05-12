@@ -4,9 +4,9 @@ public enum IdType {
 
      EMPTY_ID(0L);
 
-    private final Long id;
+    private final long id;
 
-    IdType(Long id) {
+    IdType(long id) {
         this.id = id;
     }
 

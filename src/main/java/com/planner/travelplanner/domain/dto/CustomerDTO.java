@@ -1,14 +1,9 @@
-package com.planner.travelplanner.domain.dto.customer;
-
-import com.planner.travelplanner.domain.Complaint;
+package com.planner.travelplanner.domain.dto;
 
 import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
 
-public class CustomerDTOGet {
-
-    private long customerId;
+public class CustomerDTO {
 
     private String firstName;
 
@@ -21,16 +16,18 @@ public class CustomerDTOGet {
     private String city;
 
     private String streetName;
-
     private String postalCode;
 
     private String email;
 
     private int phoneNumber;
-    private List<Complaint> complaints;
 
-    public CustomerDTOGet(long customerId, String firstName, String lastName, Date birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, List<Complaint> complaints) {
-        this.customerId = customerId;
+    private String login;
+
+    private String password;
+
+    public CustomerDTO( String firstName, String lastName, Date birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, String login, String password) {
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthdate = birthdate;
@@ -40,12 +37,11 @@ public class CustomerDTOGet {
         this.postalCode = postalCode;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.complaints = complaints;
+        this.login = login;
+        this.password = password;
     }
 
-    public long getCustomerId() {
-        return customerId;
-    }
+
 
     public String getFirstName() {
         return firstName;
@@ -75,15 +71,19 @@ public class CustomerDTOGet {
         return postalCode;
     }
 
-    public List<Complaint> getComplaints() {
-        return complaints;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public int getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }
