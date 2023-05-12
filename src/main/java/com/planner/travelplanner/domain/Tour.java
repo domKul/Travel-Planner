@@ -1,9 +1,7 @@
 package com.planner.travelplanner.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

@@ -1,40 +1,35 @@
 package com.planner.travelplanner.domain.dto.booking;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class BookingDTOCreate {
-    private LocalDate startDate;
+    private Date startDate;
 
-    private LocalDate endDate;
+    private Date endDate;
 
     private long customerId;
 
-    private long tourId;
+
 
     private long hotelId;
 
-    public BookingDTOCreate(LocalDate startDate, LocalDate endDate, long customerId, long tourId, long hotelId) {
+    public BookingDTOCreate(Date startDate, Date endDate, long customerId, long hotelId) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.customerId = customerId;
-        this.tourId = tourId;
         this.hotelId = hotelId;
     }
 
-    public LocalDate getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public LocalDate getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
     public long getCustomerId() {
         return customerId;
-    }
-
-    public long getTourId() {
-        return tourId;
     }
 
     public long getHotelId() {

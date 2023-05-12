@@ -2,7 +2,6 @@ package com.planner.travelplanner.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -13,17 +12,19 @@ public class Complaint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long complaintId;
-    @NotNull
-    private String title;
-    @NotNull
-    private String description;
-    @NotNull
-    private LocalDateTime complaintDate;
-    @NotNull
-    private String status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id")
+    private String title;
+
+    private String description;
+
+    private LocalDateTime complaintDate;
+    private String status;
+    @Column(name = "customer_id")
+    private long customerId;
+
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
+    @JsonBackReference
     private Customer customer;
 
     public Complaint() {
@@ -36,6 +37,15 @@ public class Complaint {
         this.complaintDate = complaintDate;
         this.status = status;
         this.customer = customer;
+    }
+
+    public Complaint(long complaintId, String title, String description, LocalDateTime complaintDate, String status, long customerId) {
+        this.complaintId = complaintId;
+        this.title = title;
+        this.description = description;
+        this.complaintDate = complaintDate;
+        this.status = status;
+        this.customerId = customerId;
     }
 
     public Long getComplaintId() {
@@ -86,6 +96,7 @@ public class Complaint {
         this.customer = customer;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -107,7 +118,7 @@ public class Complaint {
                 ", description='" + description + '\'' +
                 ", complaintDate=" + complaintDate +
                 ", status='" + status + '\'' +
-                ", customer=" + customer +
+                ", customer=" + customer.getCustomerId() +
                 '}';
     }
 }

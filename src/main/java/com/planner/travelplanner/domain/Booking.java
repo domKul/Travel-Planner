@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import org.springframework.lang.Nullable;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -18,38 +19,34 @@ public class Booking {
     private long bookingId;
 
 
-    private LocalDate startDate;
+    private Date startDate;
 
-    private LocalDate endDate;
+    private Date endDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "tours_id")
-    private Tour tour;
-
-    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
 
     public Booking() {
     }
 
-    public Booking(long bookingId, LocalDate startDate, LocalDate endDate, Customer customer,  Tour tour,  Hotel hotel) {
+    public Booking(long bookingId, Date startDate, Date endDate, Customer customer,  Hotel hotel) {
         this.bookingId = bookingId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.customer = customer;
-        this.tour = tour;
         this.hotel = hotel;
     }
 
-    public Booking(long id, LocalDate startDate, LocalDate endDate, long customerId, long tourId, long hotelId) {
+    public Booking(long id, Date startDate, Date endDate, long customerId, long tourId, long hotelId) {
         this.startDate = startDate;
         this.endDate = endDate;
     }
+
 
 
     public long getBookingId() {
@@ -60,19 +57,19 @@ public class Booking {
         this.bookingId = bookingId;
     }
 
-    public LocalDate getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
@@ -82,15 +79,6 @@ public class Booking {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-
-    public Tour getTours() {
-        return tour;
-    }
-
-    public void setTours( Tour tour) {
-        this.tour = tour;
     }
 
 
@@ -107,12 +95,12 @@ public class Booking {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Booking booking = (Booking) o;
-        return bookingId == booking.bookingId && Objects.equals(startDate, booking.startDate) && Objects.equals(endDate, booking.endDate) && Objects.equals(customer, booking.customer) && Objects.equals(tour, booking.tour) && Objects.equals(hotel, booking.hotel);
+        return bookingId == booking.bookingId && Objects.equals(startDate, booking.startDate) && Objects.equals(endDate, booking.endDate) && Objects.equals(customer, booking.customer) && Objects.equals(hotel, booking.hotel);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bookingId, startDate, endDate, customer, tour, hotel);
+        return Objects.hash(bookingId, startDate, endDate, customer, hotel);
     }
 
     @Override
@@ -122,7 +110,6 @@ public class Booking {
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", customer=" + customer +
-                ", tour=" + tour +
                 ", hotel=" + hotel +
                 '}';
     }

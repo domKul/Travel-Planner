@@ -1,49 +1,42 @@
 package com.planner.travelplanner.domain.dto.booking;
 
-import com.fasterxml.jackson.annotation.*;
 import com.planner.travelplanner.domain.Customer;
 import com.planner.travelplanner.domain.Hotel;
-import com.planner.travelplanner.domain.Tour;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 
 public class BookingDTO {
 
-    private LocalDate startDate;
+    private Date startDate;
 
-    private LocalDate endDate;
+    private Date endDate;
 
     private Customer customer;
 
-    private Tour tour;
+
 
     private Hotel hotel;
 
-    public BookingDTO( LocalDate startDate, LocalDate endDate, Customer customer, Tour tour, Hotel hotel) {
+    public BookingDTO(Date startDate, Date endDate, Customer customer, Hotel hotel) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.customer = customer;
-        this.tour = tour;
         this.hotel = hotel;
     }
 
 
 
-    public LocalDate getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public LocalDate getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
     public Customer getCustomer() {
         return customer;
-    }
-
-    public Tour getTour() {
-        return tour;
     }
 
     public Hotel getHotel() {

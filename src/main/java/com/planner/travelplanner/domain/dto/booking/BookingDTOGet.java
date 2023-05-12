@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class BookingDTOGet {
 
-    private LocalDate bookTime;
+    private Date bookTime;
 
     private long customerId;
 
@@ -25,31 +25,12 @@ public class BookingDTOGet {
     private String postalCode;
 
     private String email;
-
     private int phoneNumber;
-
-    private String login;
-
-    private long tourId;
-
-    private String tourName;
-
-    private String tourDescription;
-
-    private LocalDate tourStartDate;
-
-    private LocalDate tourEndDate;
-
     private BigDecimal tourPrice;
     private long hotelId;
+    private String hotelPrice;
 
-    private String name;
-
-    private String address;
-
-    private BigDecimal hotelPrice;
-
-    public BookingDTOGet(LocalDate bookTime, long customerId, String customerFirstName, String customerLastName, Date birthDate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, String login, long tourId, String tourName, String tourDescription, LocalDate tourStartDate, LocalDate tourEndDate, BigDecimal tourPrice, long hotelId, String name, String address, BigDecimal hotelPrice) {
+    public BookingDTOGet(Date bookTime, long customerId, String customerFirstName, String customerLastName, Date birthDate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, long hotelId) {
         this.bookTime = bookTime;
         this.customerId = customerId;
         this.customerFirstName = customerFirstName;
@@ -61,20 +42,13 @@ public class BookingDTOGet {
         this.postalCode = postalCode;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.login = login;
-        this.tourId = tourId;
-        this.tourName = tourName;
-        this.tourDescription = tourDescription;
-        this.tourStartDate = tourStartDate;
-        this.tourEndDate = tourEndDate;
-        this.tourPrice = tourPrice;
         this.hotelId = hotelId;
-        this.name = name;
-        this.address = address;
-        this.hotelPrice = hotelPrice;
+
     }
 
-    public LocalDate getBookTime() {
+
+
+    public Date getBookTime() {
         return bookTime;
     }
 
@@ -119,30 +93,6 @@ public class BookingDTOGet {
         return phoneNumber;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public long getTourId() {
-        return tourId;
-    }
-
-    public String getTourName() {
-        return tourName;
-    }
-
-    public String getTourDescription() {
-        return tourDescription;
-    }
-
-    public LocalDate getTourStartDate() {
-        return tourStartDate;
-    }
-
-    public LocalDate getTourEndDate() {
-        return tourEndDate;
-    }
-
     public BigDecimal getTourPrice() {
         return tourPrice;
     }
@@ -151,15 +101,7 @@ public class BookingDTOGet {
         return hotelId;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public BigDecimal getHotelPrice() {
+    public String getHotelPrice() {
         return hotelPrice;
     }
 }

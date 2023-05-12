@@ -1,9 +1,14 @@
-package com.planner.travelplanner.domain.dto;
+package com.planner.travelplanner.domain.dto.customer;
+
+import com.planner.travelplanner.domain.Complaint;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
-public class CustomerDTO {
+public class CustomerDTOGet {
+
+    private long customerId;
 
     private String firstName;
 
@@ -16,18 +21,16 @@ public class CustomerDTO {
     private String city;
 
     private String streetName;
+
     private String postalCode;
 
     private String email;
 
     private int phoneNumber;
+    private List<Complaint> complaints;
 
-    private String login;
-
-    private String password;
-
-    public CustomerDTO( String firstName, String lastName, Date birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, String login, String password) {
-
+    public CustomerDTOGet(long customerId, String firstName, String lastName, Date birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, List<Complaint> complaints) {
+        this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthdate = birthdate;
@@ -37,11 +40,12 @@ public class CustomerDTO {
         this.postalCode = postalCode;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.login = login;
-        this.password = password;
+        this.complaints = complaints;
     }
 
-
+    public long getCustomerId() {
+        return customerId;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -71,19 +75,15 @@ public class CustomerDTO {
         return postalCode;
     }
 
+    public List<Complaint> getComplaints() {
+        return complaints;
+    }
+
     public String getEmail() {
         return email;
     }
 
     public int getPhoneNumber() {
         return phoneNumber;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public String getPassword() {
-        return password;
     }
 }
