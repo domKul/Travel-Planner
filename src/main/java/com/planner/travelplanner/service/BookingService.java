@@ -3,14 +3,12 @@ package com.planner.travelplanner.service;
 import com.planner.travelplanner.domain.Booking;
 import com.planner.travelplanner.domain.Customer;
 import com.planner.travelplanner.domain.Hotel;
-import com.planner.travelplanner.domain.Tour;
 import com.planner.travelplanner.domain.dto.booking.BookingDTO;
 import com.planner.travelplanner.domain.dto.booking.BookingDTOCreate;
 import com.planner.travelplanner.domain.dto.booking.BookingDTOGet;
 import com.planner.travelplanner.domain.exception.BookingNotFoundException;
 import com.planner.travelplanner.domain.exception.CustomerNotFoundException;
 import com.planner.travelplanner.domain.exception.HotelNotFoundException;
-import com.planner.travelplanner.domain.exception.TourNotFoundException;
 import com.planner.travelplanner.mapper.BookingMapper;
 import com.planner.travelplanner.repository.BookingRepository;
 import com.planner.travelplanner.repository.CustomerRepository;
@@ -38,8 +36,9 @@ public class BookingService {
         this.hotelRepository = hotelRepository;
         this.tourRepository = tourRepository;
     }
+
     @Transactional
-    public Booking addBooking(final BookingDTOCreate bookingDTOCreate){
+    public Booking addBooking(final BookingDTOCreate bookingDTOCreate) {
         Customer findCustomer = customerRepository.findById(bookingDTOCreate.getCustomerId())
                 .orElseThrow(CustomerNotFoundException::new);
         Hotel findHotel = hotelRepository.findById(bookingDTOCreate.getHotelId())
@@ -53,17 +52,18 @@ public class BookingService {
         return bookingRepository.save(booking);
     }
 
-    public List<BookingDTOGet> showAllBookings(){
+    public List<BookingDTOGet> showAllBookings() {
         return bookingMapper.mapToDTOListGet(bookingRepository.findAll());
     }
 
     public BookingDTOGet showBookingById(final long bookingId) {
-        if (bookingRepository.existsById(bookingId)){
+        if (bookingRepository.existsById(bookingId)) {
             return bookingMapper.mapToBookingDTOGet(bookingRepository.findById(bookingId).get());
-        }else {
-            throw  new BookingNotFoundException();
+        } else {
+            throw new BookingNotFoundException();
         }
     }
+
     @Transactional
     public BookingDTO modifyBooking(final long bookingId, final BookingDTOCreate bookingDTOCreate) {
         if (bookingRepository.existsById(bookingId)) {
@@ -74,12 +74,13 @@ public class BookingService {
             throw new BookingNotFoundException();
         }
     }
+
     @Transactional
-    public void deleteBookingById(final long bookingId){
+    public void deleteBookingById(final long bookingId) {
         Optional<Booking> booking = bookingRepository.findById(bookingId);
-        if (booking.isPresent()){
+        if (booking.isPresent()) {
             bookingRepository.deleteById(bookingId);
-        }else {
+        } else {
             throw new BookingNotFoundException();
         }
     }

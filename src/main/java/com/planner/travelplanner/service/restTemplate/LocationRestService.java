@@ -22,7 +22,6 @@ public class LocationRestService {
     private final LocationService locationService;
 
 
-
     public LocationRestService(RestTemplateBuilder builder, LocationService locationService) {
         this.restTemplate = builder.build();
         this.locationService = locationService;
@@ -32,7 +31,7 @@ public class LocationRestService {
         return UriComponentsBuilder
                 .fromHttpUrl("https://booking-com.p.rapidapi.com/v1/hotels/locations")
                 .queryParam("name", name)
-                .queryParam("locale",locale)
+                .queryParam("locale", locale)
                 .build()
                 .encode()
                 .toUri();
@@ -52,15 +51,16 @@ public class LocationRestService {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         List<LocationDTO> locationDTOS = null;
         try {
-            locationDTOS = objectMapper.readValue(responseEntity.getBody(), new TypeReference<>() {});
+            locationDTOS = objectMapper.readValue(responseEntity.getBody(), new TypeReference<>() {
+            });
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        locationService.saveLocations(locationDTOS);
+        if (locationDTOS != null) {
+            locationService.saveLocations(locationDTOS);
+        }
         return null;
     }
-
-
 
 
 }

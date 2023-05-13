@@ -1,23 +1,28 @@
 package com.planner.travelplanner.repository;
 
+
 import com.planner.travelplanner.domain.Booking;
 import com.planner.travelplanner.domain.Customer;
 import com.planner.travelplanner.domain.Hotel;
 import com.planner.travelplanner.mapper.IdType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
 public class BookingTestSuite {
 
     @Autowired
     private BookingRepository bookingRepository;
     @Autowired
     private HotelRepository hotelRepository;
+
+
     @Autowired
     private CustomerRepository customerRepository;
 
@@ -29,17 +34,17 @@ public class BookingTestSuite {
     private Hotel hotel2 = null;
 
 
-    private void dataForTests(){
-        customer1 = new Customer(IdType.EMPTY_ID.getId(),"firstName1","lastName1",new Date(2000,2,11),"country","city","streetName","postalCode","email",1231231,new ArrayList<>(),null );
-        customer2 = new Customer(IdType.EMPTY_ID.getId(),"firstName2","lastName2",new Date(2000,2,11),"country","city","streetName","postalCode","email",1231231,new ArrayList<>(),null );
-        hotel1 = new Hotel(IdType.EMPTY_ID.getId(),1,null,null,null,null,null,null,null,null,null,null,null);
-        hotel2 = new Hotel(IdType.EMPTY_ID.getId(),1,null,null,null,null,null,null,null,null,null,null,null);
-        booking1 = new Booking(IdType.EMPTY_ID.getId(),new Date(2020,12,12),new Date(2020,12,12),null,null);
-        booking2 = new Booking(IdType.EMPTY_ID.getId(),new Date(2020,12,12),new Date(2020,12,12),null,null);
+    private void dataForTests() {
+        customer1 = new Customer(IdType.EMPTY_ID.getId(), "firstName1", "lastName1", new Date(2000, 2, 11), "country", "city", "streetName", "postalCode", "email", 1231231, new ArrayList<>(), null);
+        customer2 = new Customer(IdType.EMPTY_ID.getId(), "firstName2", "lastName2", new Date(2000, 2, 11), "country", "city", "streetName", "postalCode", "email", 1231231, new ArrayList<>(), null);
+        hotel1 = new Hotel(IdType.EMPTY_ID.getId(), 1, null, null, null, null, null, null, null, null, null, null, null);
+        hotel2 = new Hotel(IdType.EMPTY_ID.getId(), 1, null, null, null, null, null, null, null, null, null, null, null);
+        booking1 = new Booking(IdType.EMPTY_ID.getId(), new Date(2020, 12, 12), new Date(2020, 12, 12), null, null);
+        booking2 = new Booking(IdType.EMPTY_ID.getId(), new Date(2020, 12, 12), new Date(2020, 12, 12), null, null);
     }
 
     @Test
-    public void shoulCreateEmptyBooking(){
+    public void shoulCreateEmptyBooking() {
         //Given
         dataForTests();
 
@@ -48,7 +53,7 @@ public class BookingTestSuite {
         Booking saveBooking2 = bookingRepository.save(booking2);
 
         //Then
-        assertEquals(2,bookingRepository.count());
+        assertEquals(2, bookingRepository.count());
         assertNull(saveBooking2.getCustomer());
         assertNull(saveBooking1.getCustomer());
 
@@ -60,7 +65,7 @@ public class BookingTestSuite {
     }
 
     @Test
-    public void shouldDeleteBooking(){
+    public void shouldDeleteBooking() {
         //Given
         dataForTests();
 
@@ -78,7 +83,7 @@ public class BookingTestSuite {
     }
 
     @Test
-    public void shouldSaveAndRetrieveBookingById(){
+    public void shouldSaveAndRetrieveBookingById() {
         //Given
         dataForTests();
 
@@ -91,8 +96,8 @@ public class BookingTestSuite {
 
         //Then
         assertFalse(result);
-        assertEquals(getId1,saveBooking1.getBookingId());
-        assertEquals(getId2,saveBooking2.getBookingId());
+        assertEquals(getId1, saveBooking1.getBookingId());
+        assertEquals(getId2, saveBooking2.getBookingId());
 
         //CealnUp
         bookingRepository.deleteById(getId1);
@@ -100,7 +105,7 @@ public class BookingTestSuite {
     }
 
     @Test
-    public void shouldSaveAndRetrieveAllBookings(){
+    public void shouldSaveAndRetrieveAllBookings() {
         //Given
         dataForTests();
 
@@ -109,7 +114,7 @@ public class BookingTestSuite {
         Booking saveBooking2 = bookingRepository.save(booking2);
 
         //Then
-        assertEquals(2,bookingRepository.count());
+        assertEquals(2, bookingRepository.count());
 
         //CealnUp
         long getId1 = saveBooking1.getBookingId();
@@ -119,12 +124,12 @@ public class BookingTestSuite {
     }
 
     @Test
-    public void shoulModifyExistingBooking(){
+    public void shoulModifyExistingBooking() {
         //Given
         dataForTests();
         Customer saveCustomer1 = customerRepository.save(customer1);
-        Customer saveCustomer2 =customerRepository.save(customer2);
-        Hotel saveHotel1 =hotelRepository.save(hotel1);
+        Customer saveCustomer2 = customerRepository.save(customer2);
+        Hotel saveHotel1 = hotelRepository.save(hotel1);
         Hotel savedHotel2 = hotelRepository.save(hotel2);
         Booking saveBooking1 = bookingRepository.save(booking1);
         Booking saveBooking2 = bookingRepository.save(booking2);

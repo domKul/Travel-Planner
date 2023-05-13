@@ -4,9 +4,10 @@ import com.planner.travelplanner.domain.Hotel;
 import com.planner.travelplanner.mapper.IdType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+@SpringBootTest
 public class HotelTestSuite {
 
     @Autowired
@@ -92,9 +93,18 @@ public class HotelTestSuite {
         dataForTests();
 
         //When
-//        Hotel saveHotel1 = hotelRepository.save(hotel1);
-//        saveHotel1.setCheckinDate("2023.02.12");
+        Hotel saveHotel1 = hotelRepository.save(hotel1);
+        saveHotel1.setCheckinDate("2023.02.12");
+        saveHotel1.setCountryCode("64-000");
+        hotelRepository.save(saveHotel1);
 
+        //Then
+        assertEquals("2023.02.12",saveHotel1.getCheckinDate());
+        assertEquals("64-000",saveHotel1.getCountryCode());
+
+        //CleanUp
+        long getId = hotel1.getHotelId();
+        hotelRepository.deleteById(getId);
 
     }
 

@@ -1,12 +1,8 @@
 package com.planner.travelplanner.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import org.springframework.lang.Nullable;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -34,20 +30,13 @@ public class Booking {
     public Booking() {
     }
 
-    public Booking(long bookingId, Date startDate, Date endDate, Customer customer,  Hotel hotel) {
+    public Booking(long bookingId, Date startDate, Date endDate, Customer customer, Hotel hotel) {
         this.bookingId = bookingId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.customer = customer;
         this.hotel = hotel;
     }
-
-    public Booking(long id, Date startDate, Date endDate, long customerId, long tourId, long hotelId) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
-
-
 
     public long getBookingId() {
         return bookingId;
@@ -86,7 +75,7 @@ public class Booking {
         return hotel;
     }
 
-    public void setHotels( Hotel hotel) {
+    public void setHotels(Hotel hotel) {
         this.hotel = hotel;
     }
 

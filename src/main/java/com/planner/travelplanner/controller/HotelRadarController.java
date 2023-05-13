@@ -3,10 +3,7 @@ package com.planner.travelplanner.controller;
 import com.planner.travelplanner.domain.dto.hotel.HotelDTO;
 import com.planner.travelplanner.service.restTemplate.HotelRestService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("v1/hotel")
@@ -20,6 +17,7 @@ public class HotelRadarController {
 
 
     @GetMapping("/hotels")
+    @ResponseBody
     public ResponseEntity<HotelDTO> searchHotels(@RequestParam  String orderedby, @RequestParam int adults_number, @RequestParam String checkin_date,
                                                  @RequestParam String filter_by_currency, @RequestParam int dest_id,
                                                  @RequestParam String locale, @RequestParam String checkout_date, @RequestParam String units, @RequestParam int room_number, @RequestParam String dest_type) {

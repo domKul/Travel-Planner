@@ -7,7 +7,6 @@ import com.planner.travelplanner.domain.dto.booking.BookingDTOGet;
 import com.planner.travelplanner.domain.exception.BookingNotFoundException;
 import com.planner.travelplanner.domain.exception.CustomerNotFoundException;
 import com.planner.travelplanner.domain.exception.HotelNotFoundException;
-import com.planner.travelplanner.domain.exception.TourNotFoundException;
 import com.planner.travelplanner.repository.BookingRepository;
 import com.planner.travelplanner.repository.CustomerRepository;
 import com.planner.travelplanner.repository.HotelRepository;
