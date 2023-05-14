@@ -74,6 +74,7 @@ public class HotelRestService {
         for (Result hotelDTO : Objects.requireNonNull(responseEntity.getBody()).getResults()) {
             Hotel hotel = new Hotel();
             hotel.setIdName(hotelDTO.getId());
+
             hotel.setCountryCode(hotelDTO.getCountryCode());
             hotel.setCurrency(hotelDTO.getCurrency());
             hotel.setName(hotelDTO.getName());

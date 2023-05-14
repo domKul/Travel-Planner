@@ -15,7 +15,7 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class BookingTestSuite {
+public class BookingCrudTestSuite {
 
     @Autowired
     private BookingRepository bookingRepository;

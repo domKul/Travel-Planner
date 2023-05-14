@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
-public class HotelTestSuite {
+public class HotelCrudTestSuite {
 
     @Autowired
     private HotelRepository hotelRepository;
@@ -17,8 +17,8 @@ public class HotelTestSuite {
     private Hotel hotel2 = null;
 
     private void dataForTests(){
-        hotel1 = new Hotel(IdType.EMPTY_ID.getId(),IdType.EMPTY_ID.getId(),null,null,null);
-        hotel2 = new Hotel(IdType.EMPTY_ID.getId(),IdType.EMPTY_ID.getId(),null,null,null);
+        hotel1 = new Hotel(IdType.EMPTY_ID.getId(),IdType.EMPTY_ID.getId(),"null","null","null");
+        hotel2 = new Hotel(IdType.EMPTY_ID.getId(),IdType.EMPTY_ID.getId(),"null","null","null");
     }
 
     @Test
