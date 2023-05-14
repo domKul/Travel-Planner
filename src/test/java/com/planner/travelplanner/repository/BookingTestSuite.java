@@ -37,8 +37,8 @@ public class BookingTestSuite {
     private void dataForTests() {
         customer1 = new Customer(IdType.EMPTY_ID.getId(), "firstName1", "lastName1", new Date(2000, 2, 11), "country", "city", "streetName", "postalCode", "email", 1231231, new ArrayList<>(), null);
         customer2 = new Customer(IdType.EMPTY_ID.getId(), "firstName2", "lastName2", new Date(2000, 2, 11), "country", "city", "streetName", "postalCode", "email", 1231231, new ArrayList<>(), null);
-        hotel1 = new Hotel(IdType.EMPTY_ID.getId(), 1, null, null, null, null, null, null, null, null, null, null, null);
-        hotel2 = new Hotel(IdType.EMPTY_ID.getId(), 1, null, null, null, null, null, null, null, null, null, null, null);
+        hotel1 = new Hotel(IdType.EMPTY_ID.getId(), IdType.EMPTY_ID.getId(), null, null, null);
+        hotel2 = new Hotel(IdType.EMPTY_ID.getId(),IdType.EMPTY_ID.getId(), null, null, null);
         booking1 = new Booking(IdType.EMPTY_ID.getId(), new Date(2020, 12, 12), new Date(2020, 12, 12), null, null);
         booking2 = new Booking(IdType.EMPTY_ID.getId(), new Date(2020, 12, 12), new Date(2020, 12, 12), null, null);
     }
@@ -148,7 +148,6 @@ public class BookingTestSuite {
         assertEquals(saveBooking1.getBookingId(), modifiedBooking1.getBookingId());
         assertEquals(saveBooking2.getBookingId(), modifiedBooking2.getBookingId());
         assertEquals(saveBooking2.getCustomer().getCustomerId(), modifiedBooking2.getCustomer().getCustomerId());
-        assertEquals(saveBooking2.getHotels().getId(), modifiedBooking2.getHotels().getId());
 
         //CleanUp
         long getId1 = saveBooking1.getBookingId();

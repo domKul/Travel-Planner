@@ -11,7 +11,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "customers_list")
-@JsonIgnoreProperties({"bookings","complaints"})
+@JsonIgnoreProperties({"bookings", "complaints"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "customerId")
 public class Customer {
 
@@ -28,23 +28,22 @@ public class Customer {
     private String country;
     @NotNull
     private String city;
-
     @NotNull
-    private String streetName;
-    @NotNull(groups = Customer.class)
-    private String postalCode;
 
+    private String streetName;
+    @NotNull
+    private String postalCode;
+    @NotNull
     private String email;
     @NotNull
     private int phoneNumber;
-
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Complaint> complaints;
 
-    @OneToOne(mappedBy = "customer",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
     @JsonBackReference
-    private Booking  bookings;
+    private Booking bookings;
 
     public Customer() {
     }
@@ -63,8 +62,6 @@ public class Customer {
         this.complaints = complaints;
         this.bookings = bookings;
     }
-
-
 
 
     public long getCustomerId() {

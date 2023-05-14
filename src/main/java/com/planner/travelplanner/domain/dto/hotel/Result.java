@@ -10,7 +10,7 @@ import java.util.Map;
 public class Result {
 
     @JsonProperty("id")
-    private Integer id;
+    private long id;
     @JsonProperty("name")
     private String name;
     @JsonProperty("countryCode")
@@ -37,12 +37,12 @@ public class Result {
     private final Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
     @JsonProperty("id")
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
     @JsonProperty("id")
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 

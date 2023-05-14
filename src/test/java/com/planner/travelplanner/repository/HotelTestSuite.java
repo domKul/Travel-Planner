@@ -17,8 +17,8 @@ public class HotelTestSuite {
     private Hotel hotel2 = null;
 
     private void dataForTests(){
-        hotel1 = new Hotel(IdType.EMPTY_ID.getId(),1,null,null,null,null,null,null,null,null,null,null,null);
-        hotel2 = new Hotel(IdType.EMPTY_ID.getId(),2,null,null,null,null,null,null,null,null,null,null,null);
+        hotel1 = new Hotel(IdType.EMPTY_ID.getId(),IdType.EMPTY_ID.getId(),null,null,null);
+        hotel2 = new Hotel(IdType.EMPTY_ID.getId(),IdType.EMPTY_ID.getId(),null,null,null);
     }
 
     @Test
@@ -94,12 +94,12 @@ public class HotelTestSuite {
 
         //When
         Hotel saveHotel1 = hotelRepository.save(hotel1);
-        saveHotel1.setCheckinDate("2023.02.12");
+        saveHotel1.setCurrency("PLN");
         saveHotel1.setCountryCode("64-000");
         hotelRepository.save(saveHotel1);
 
         //Then
-        assertEquals("2023.02.12",saveHotel1.getCheckinDate());
+        assertEquals("PLN",saveHotel1.getCurrency());
         assertEquals("64-000",saveHotel1.getCountryCode());
 
         //CleanUp
