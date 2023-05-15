@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -41,14 +42,14 @@ public class Customer {
     @JsonManagedReference
     private List<Complaint> complaints;
 
-    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     @JsonBackReference
-    private Booking bookings;
+    private List<Booking> bookings;
 
     public Customer() {
     }
 
-    public Customer(long customerId, String firstName, String lastName, Date birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, List<Complaint> complaints, Booking bookings) {
+    public Customer(long customerId, String firstName, String lastName, Date birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, List<Complaint> complaints, List<Booking> bookings) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -60,7 +61,7 @@ public class Customer {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.complaints = complaints;
-        this.bookings = bookings;
+        this.bookings = new ArrayList<>();
     }
 
 
@@ -152,11 +153,11 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public Booking getBookings() {
+    public List<Booking> getBookings() {
         return bookings;
     }
 
-    public void setBookings(Booking bookings) {
+    public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
     }
 

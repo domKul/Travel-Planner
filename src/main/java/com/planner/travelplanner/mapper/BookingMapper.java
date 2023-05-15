@@ -2,11 +2,7 @@ package com.planner.travelplanner.mapper;
 
 import com.planner.travelplanner.domain.Booking;
 import com.planner.travelplanner.domain.dto.booking.BookingDTO;
-import com.planner.travelplanner.domain.dto.booking.BookingDTOCreate;
 import com.planner.travelplanner.domain.dto.booking.BookingDTOGet;
-import com.planner.travelplanner.domain.exception.BookingNotFoundException;
-import com.planner.travelplanner.domain.exception.CustomerNotFoundException;
-import com.planner.travelplanner.domain.exception.HotelNotFoundException;
 import com.planner.travelplanner.repository.BookingRepository;
 import com.planner.travelplanner.repository.CustomerRepository;
 import com.planner.travelplanner.repository.HotelRepository;
@@ -39,38 +35,27 @@ public class BookingMapper {
                 booking.getCustomer(),
                 booking.getHotels());
     }
-    public BookingDTOGet mapToBookingDTOGet(Booking booking){
-        return new BookingDTOGet(
-                booking.getStartDate(),
-                booking.getCustomer().getCustomerId(),
-                booking.getCustomer().getFirstName(),
-                booking.getCustomer().getLastName(),
-                booking.getCustomer().getBirthdate(),
-                booking.getCustomer().getCountry(),
-                booking.getCustomer().getCity(),
-                booking.getCustomer().getStreetName(),
-                booking.getCustomer().getPostalCode(),
-                booking.getCustomer().getEmail(),
-                booking.getCustomer().getPhoneNumber(),
-                booking.getHotels().getHotelId());
+    public BookingDTOGet mapToBookingDTOGet(Booking booking) {
+        return new BookingDTOGet.Builder()
+                .bookTime(booking.getStartDate())
+                .customerId(booking.getCustomer().getCustomerId())
+                .customerFirstName(booking.getCustomer().getFirstName())
+                .customerLastName(booking.getCustomer().getLastName())
+                .birthDate(booking.getCustomer().getBirthdate())
+                .country(booking.getCustomer().getCountry())
+                .city(booking.getCustomer().getCity())
+                .streetName(booking.getCustomer().getStreetName())
+                .postalCode(booking.getCustomer().getPostalCode())
+                .email(booking.getCustomer().getEmail())
+                .phoneNumber(booking.getCustomer().getPhoneNumber())
+                .hotelId(booking.getHotels().getHotelId())
+                .build();
     }
 
 
 
 
-    public Booking mapToBookingForUpdate(final long bookingId, BookingDTOCreate bookingDTOCreate) {
-        Booking booking = bookingRepository.findById(bookingId).orElseThrow(
-                BookingNotFoundException::new);
-        if (booking != null) {
-            booking.setStartDate(bookingDTOCreate.getStartDate());
-            booking.setEndDate(bookingDTOCreate.getEndDate());
-            booking.setCustomer(customerRepository.findById(bookingDTOCreate.getCustomerId()).orElseThrow(CustomerNotFoundException::new));
-            booking.setHotels(hotelRepository.findById(bookingDTOCreate.getHotelId()).orElseThrow(HotelNotFoundException::new));
-            return booking;
-        } else {
-            throw new BookingNotFoundException();
-        }
-    }
+
     public List<BookingDTOGet> mapToDTOListGet(final List<Booking>bookings){
         return bookings.stream()
                 .map(this::mapToBookingDTOGet)

@@ -48,6 +48,7 @@ public class Complaint {
         this.customerId = customerId;
     }
 
+
     public Long getComplaintId() {
         return complaintId;
     }

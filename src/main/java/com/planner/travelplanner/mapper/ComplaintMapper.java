@@ -3,7 +3,6 @@ package com.planner.travelplanner.mapper;
 import com.planner.travelplanner.domain.Complaint;
 import com.planner.travelplanner.domain.dto.complaint.ComplaintDTO;
 import com.planner.travelplanner.domain.dto.complaint.ComplaintDTOCreate;
-import com.planner.travelplanner.repository.ComplaintRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.List;
 @Component
 public class ComplaintMapper {
 
-    public Complaint mapToComplaintCreate(final ComplaintDTOCreate complaintDTOCreate){
+    public Complaint mapFromComplaintCreate(final ComplaintDTOCreate complaintDTOCreate){
         return new Complaint(IdType.EMPTY_ID.getId(),
                 complaintDTOCreate.getTitle(),
                 complaintDTOCreate.getDescription(),

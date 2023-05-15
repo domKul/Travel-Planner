@@ -30,10 +30,10 @@ public class HotelRestService {
         this.hotelApiConfig = hotelApiConfig;
     }
 
-    private URI urlBuilder(String orderedby, int adults_number, String checkin_date,
-                           String filter_by_currency, int dest_id,
-                           String locale, String checkout_date, String units,
-                           int room_number, String dest_type) {
+    public URI urlBuilder(String orderedby, int adults_number, String checkin_date,
+                          String filter_by_currency, int dest_id,
+                          String locale, String checkout_date, String units,
+                          int room_number, String dest_type) {
         return UriComponentsBuilder
                 .fromHttpUrl("https://booking-com.p.rapidapi.com/v2/hotels/search")
                 .queryParam("order_by", orderedby)

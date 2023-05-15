@@ -116,14 +116,15 @@ public class CustomerCrudTestSuite {
         Customer savedCustomer1 = customerRepository.save(customer1);
         Customer savedCustomer2 = customerRepository.save(customer2);
         savedCustomer1.setFirstName("UpdatedFirstName");
-        savedCustomer1.setBookings(booking1);
-        savedCustomer2.setBookings(booking2);
+        savedCustomer1.getBookings().add(booking1);
+        savedCustomer1.getBookings().add(booking2);
+
 
         Long getId1 = savedCustomer1.getCustomerId();
         Long getId2 = savedCustomer2.getCustomerId();
 
         //Then
-        assertEquals(booking1.getBookingId(), savedCustomer1.getBookings().getBookingId());
+        assertEquals(booking1.getBookingId(), savedCustomer1.getBookings().get(0).getBookingId());
         assertEquals("UpdatedFirstName", savedCustomer1.getFirstName());
         assertEquals("firstName2", savedCustomer2.getFirstName());
 

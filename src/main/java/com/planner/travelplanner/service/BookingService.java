@@ -67,7 +67,7 @@ public class BookingService {
     @Transactional
     public BookingDTO modifyBooking(final long bookingId, final BookingDTOCreate bookingDTOCreate) {
         if (bookingRepository.existsById(bookingId)) {
-            Booking booking = bookingMapper.mapToBookingForUpdate(bookingId, bookingDTOCreate);
+            Booking booking = mapToBookingForUpdate(bookingId, bookingDTOCreate);
             Booking saveUpdatedBooking = bookingRepository.save(booking);
             return bookingMapper.mapToBookingDTO(saveUpdatedBooking);
         } else {
@@ -80,6 +80,19 @@ public class BookingService {
         Optional<Booking> booking = bookingRepository.findById(bookingId);
         if (booking.isPresent()) {
             bookingRepository.deleteById(bookingId);
+        } else {
+            throw new BookingNotFoundException();
+        }
+    }
+    public Booking mapToBookingForUpdate(final long bookingId, BookingDTOCreate bookingDTOCreate) {
+        Booking booking = bookingRepository.findById(bookingId).orElseThrow(
+                BookingNotFoundException::new);
+        if (booking != null) {
+            booking.setStartDate(bookingDTOCreate.getStartDate());
+            booking.setEndDate(bookingDTOCreate.getEndDate());
+            booking.setCustomer(customerRepository.findById(bookingDTOCreate.getCustomerId()).orElseThrow(CustomerNotFoundException::new));
+            booking.setHotels(hotelRepository.findById(bookingDTOCreate.getHotelId()).orElseThrow(HotelNotFoundException::new));
+            return booking;
         } else {
             throw new BookingNotFoundException();
         }

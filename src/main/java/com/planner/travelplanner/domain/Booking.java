@@ -19,7 +19,7 @@ public class Booking {
 
     private Date endDate;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
