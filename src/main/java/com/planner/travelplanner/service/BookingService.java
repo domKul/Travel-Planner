@@ -13,7 +13,6 @@ import com.planner.travelplanner.mapper.BookingMapper;
 import com.planner.travelplanner.repository.BookingRepository;
 import com.planner.travelplanner.repository.CustomerRepository;
 import com.planner.travelplanner.repository.HotelRepository;
-import com.planner.travelplanner.repository.TourRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -27,14 +26,12 @@ public class BookingService {
     private final BookingMapper bookingMapper;
     private final CustomerRepository customerRepository;
     private final HotelRepository hotelRepository;
-    private final TourRepository tourRepository;
 
-    public BookingService(BookingRepository bookingRepository, BookingMapper bookingMapper, CustomerRepository customerRepository, HotelRepository hotelRepository, TourRepository tourRepository) {
+    public BookingService(BookingRepository bookingRepository, BookingMapper bookingMapper, CustomerRepository customerRepository, HotelRepository hotelRepository) {
         this.bookingRepository = bookingRepository;
         this.bookingMapper = bookingMapper;
         this.customerRepository = customerRepository;
         this.hotelRepository = hotelRepository;
-        this.tourRepository = tourRepository;
     }
 
     @Transactional

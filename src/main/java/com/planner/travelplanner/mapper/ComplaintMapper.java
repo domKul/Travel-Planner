@@ -10,13 +10,13 @@ import java.util.List;
 @Component
 public class ComplaintMapper {
 
-    public Complaint mapFromComplaintCreate(final ComplaintDTOCreate complaintDTOCreate){
-        return new Complaint(IdType.EMPTY_ID.getId(),
+    public Complaint mapFromComplaintCreate(long customerId, final ComplaintDTOCreate complaintDTOCreate){
+        return new Complaint(complaintDTOCreate.getCustomer(),
                 complaintDTOCreate.getTitle(),
                 complaintDTOCreate.getDescription(),
                 complaintDTOCreate.getComplaintDate(),
                 complaintDTOCreate.getStatus(),
-                complaintDTOCreate.getCustomerId());
+                customerId);
     }
 
     public ComplaintDTO mapToComplaintDTO(final Complaint complaint){

@@ -25,16 +25,20 @@ public class Hotel {
     @JsonProperty("currency")
     private String currency;
 
+    @JsonProperty("value")
+    private int HotelPrice;
+
 
     public Hotel() {
     }
 
-    public Hotel(long hotelId, long idName, String name, String countryCode, String currency) {
+    public Hotel(long hotelId, long idName, String name, String countryCode, String currency, int hotelPrice) {
         this.hotelId = hotelId;
         this.idName = idName;
         this.name = name;
         this.countryCode = countryCode;
         this.currency = currency;
+        this.HotelPrice = hotelPrice;
     }
 
     public long getHotelId() {
@@ -70,7 +74,6 @@ public class Hotel {
     }
 
 
-
     public String getCurrency() {
         return currency;
     }
@@ -79,21 +82,25 @@ public class Hotel {
         this.currency = currency;
     }
 
+    public int getHotelPrice() {
+        return HotelPrice;
+    }
 
-
-
+    public void setHotelPrice(int hotelPrice) {
+        HotelPrice = hotelPrice;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Hotel hotel = (Hotel) o;
-        return hotelId == hotel.hotelId && Objects.equals(idName, hotel.idName) && Objects.equals(name, hotel.name) && Objects.equals(countryCode, hotel.countryCode) && Objects.equals(currency, hotel.currency);
+        return hotelId == hotel.hotelId && idName == hotel.idName && HotelPrice == hotel.HotelPrice && Objects.equals(name, hotel.name) && Objects.equals(countryCode, hotel.countryCode) && Objects.equals(currency, hotel.currency);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hotelId, idName, name, countryCode, currency);
+        return Objects.hash(hotelId, idName, name, countryCode, currency, HotelPrice);
     }
 
     @Override
@@ -104,6 +111,7 @@ public class Hotel {
                 ", name='" + name + '\'' +
                 ", countryCode='" + countryCode + '\'' +
                 ", currency='" + currency + '\'' +
+                ", HotelPrice=" + HotelPrice +
                 '}';
     }
 }

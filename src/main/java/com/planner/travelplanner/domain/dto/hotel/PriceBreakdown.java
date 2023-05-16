@@ -10,7 +10,7 @@ import java.util.Map;
         "grossPrice",
         "excludedPrice"
 })
-public class PriceBreakdownDTO {
+public class PriceBreakdown {
 
 
     @JsonProperty("grossPrice")

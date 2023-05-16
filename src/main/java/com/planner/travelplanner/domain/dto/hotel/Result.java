@@ -2,7 +2,6 @@ package com.planner.travelplanner.domain.dto.hotel;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.planner.travelplanner.domain.PriceBreakdown;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -19,6 +18,9 @@ public class Result {
     private PriceBreakdown priceBreakdown;
     @JsonProperty("currency")
     private String currency;
+
+    @JsonProperty("value")
+    private int hotelPrice;
     @JsonProperty("checkin")
     private Checkin checkin;
     @JsonProperty("checkout")
@@ -85,6 +87,14 @@ public class Result {
     @JsonProperty("currency")
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public int getHotelPrice() {
+        return hotelPrice;
+    }
+
+    public void setHotelPrice(int hotelPrice) {
+        this.hotelPrice = hotelPrice;
     }
 
     @JsonProperty("checkin")

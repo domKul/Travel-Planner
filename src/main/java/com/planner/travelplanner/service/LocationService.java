@@ -1,13 +1,14 @@
 package com.planner.travelplanner.service;
 
 import com.planner.travelplanner.domain.Location;
-import com.planner.travelplanner.domain.dto.LocationDTO;
+import com.planner.travelplanner.domain.dto.location.LocationDTO;
+import com.planner.travelplanner.domain.exception.LocationNotFoundException;
 import com.planner.travelplanner.mapper.LocationMapper;
 import com.planner.travelplanner.repository.LocationRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 public class LocationService {
@@ -21,9 +22,24 @@ public class LocationService {
     }
 
     public void saveLocations(List<LocationDTO> locationDTOs) {
-        List<Location> locations = locationDTOs.stream()
-                .map(locationMapper::mapToLocation)
-                .collect(Collectors.toList());
+        List<Location> locations = locationMapper.mapToLocationListFromDTO(locationDTOs);
         locationRepository.saveAll(locations);
+    }
+
+    public void deleteLocation(long locationId) {
+        Optional<Location> findById = locationRepository.findById(locationId);
+        if (findById.isPresent()){
+            locationRepository.deleteById(locationId);
+        }else {
+            throw new LocationNotFoundException();
+        }
+    }
+
+    public LocationDTO getLocationById(long locationId) {
+        if (locationRepository.existsById(locationId)){
+           return locationMapper.mapToLocationDTO(locationRepository.findById(locationId).get());
+        }else {
+            throw new LocationNotFoundException();
+        }
     }
 }

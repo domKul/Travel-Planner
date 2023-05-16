@@ -26,48 +26,50 @@ public class ComplaintService {
         this.customerRepository = customerRepository;
         this.complaintMapper = complaintMapper;
     }
-    @Transactional
-    public Complaint createComplaint(final long customerId, final ComplaintDTOCreate complaintDTOCreate){
-        if (customerRepository.existsById(customerId)){
-        Complaint complaint = complaintMapper.mapFromComplaintCreate(complaintDTOCreate);
 
-        return complaintRepository.save(complaint);
-        }else {
+    @Transactional
+    public Complaint createComplaint(final long customerId, final ComplaintDTOCreate complaintDTOCreate) {
+        if (customerRepository.existsById(customerId)) {
+            Complaint complaint = complaintMapper.mapFromComplaintCreate(customerId, complaintDTOCreate);
+            return complaintRepository.save(complaint);
+        } else {
             throw new CustomerNotFoundException();
         }
     }
-    public List<ComplaintDTO>showAllComplaints(){
+
+    public List<ComplaintDTO> showAllComplaints() {
         return complaintMapper.mapToListDTO(complaintRepository.findAll());
     }
 
-    public ComplaintDTO showComplaintById(final long complaintId){
-        if (complaintRepository.existsById(complaintId)){
+    public ComplaintDTO showComplaintById(final long complaintId) {
+        if (complaintRepository.existsById(complaintId)) {
             return complaintMapper.mapToComplaintDTOFormShow(complaintRepository.findById(complaintId).get());
-        }else {
-            throw new ComplaintNotFoundException();
-        }
-    }
-    @Transactional
-    public ComplaintDTO modifyComplaintStatus(final long complaintId, final ComplaintDTOUpdate complaintDTOUpdate){
-        Complaint complaint = complaintRepository.findById(complaintId).orElseThrow(
-                ComplaintNotFoundException::new);
-        if (complaint != null){
-            complaint.setComplaintId(complaintId);
-                complaint.setTitle(complaintDTOUpdate.getTitle());
-                complaint.setStatus(complaintDTOUpdate.getStatus());
-                complaint.setDescription(complaintDTOUpdate.getDescription());
-            Complaint update = complaintRepository.save(complaint);
-            return complaintMapper.mapToComplaintDTO(update);
-        }else {
+        } else {
             throw new ComplaintNotFoundException();
         }
     }
 
-    public void deleteComplainByID(final long complaintId){
+    @Transactional
+    public ComplaintDTO modifyComplaintStatus(final long complaintId, final ComplaintDTOUpdate complaintDTOUpdate) {
+        Complaint complaint = complaintRepository.findById(complaintId).orElseThrow(
+                ComplaintNotFoundException::new);
+        if (complaint != null) {
+            complaint.setComplaintId(complaintId);
+            complaint.setTitle(complaintDTOUpdate.getTitle());
+            complaint.setStatus(complaintDTOUpdate.getStatus());
+            complaint.setDescription(complaintDTOUpdate.getDescription());
+            Complaint update = complaintRepository.save(complaint);
+            return complaintMapper.mapToComplaintDTO(update);
+        } else {
+            throw new ComplaintNotFoundException();
+        }
+    }
+
+    @Transactional
+    public void deleteComplainByID(final long complaintId) {
         Complaint findComplaint = complaintRepository.findById(complaintId).orElseThrow(ComplaintNotFoundException::new);
         complaintRepository.deleteById(findComplaint.getComplaintId());
     }
-
 
 
 }

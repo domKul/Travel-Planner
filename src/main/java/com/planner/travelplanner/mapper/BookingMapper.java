@@ -6,7 +6,6 @@ import com.planner.travelplanner.domain.dto.booking.BookingDTOGet;
 import com.planner.travelplanner.repository.BookingRepository;
 import com.planner.travelplanner.repository.CustomerRepository;
 import com.planner.travelplanner.repository.HotelRepository;
-import com.planner.travelplanner.repository.TourRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,13 +14,11 @@ import java.util.List;
 public class BookingMapper {
     private final BookingRepository bookingRepository;
     private final CustomerRepository customerRepository;
-    private final TourRepository tourRepository;
     private final HotelRepository hotelRepository;
 
-    public BookingMapper(BookingRepository bookingRepository, CustomerRepository customerRepository, TourRepository tourRepository, HotelRepository hotelRepository) {
+    public BookingMapper(BookingRepository bookingRepository, CustomerRepository customerRepository, HotelRepository hotelRepository) {
         this.bookingRepository = bookingRepository;
         this.customerRepository = customerRepository;
-        this.tourRepository = tourRepository;
         this.hotelRepository = hotelRepository;
     }
 

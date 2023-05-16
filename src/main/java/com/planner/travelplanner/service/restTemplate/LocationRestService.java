@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.planner.travelplanner.domain.dto.LocationDTO;
+import com.planner.travelplanner.domain.dto.location.LocationDTO;
 import com.planner.travelplanner.service.LocationService;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;

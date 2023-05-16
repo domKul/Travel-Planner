@@ -1,6 +1,6 @@
 package com.planner.travelplanner.controller;
 
-import com.planner.travelplanner.domain.dto.LocationDTO;
+import com.planner.travelplanner.domain.dto.location.LocationDTO;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

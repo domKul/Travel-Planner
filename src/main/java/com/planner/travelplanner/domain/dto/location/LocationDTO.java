@@ -1,4 +1,4 @@
-package com.planner.travelplanner.domain.dto;
+package com.planner.travelplanner.domain.dto.location;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

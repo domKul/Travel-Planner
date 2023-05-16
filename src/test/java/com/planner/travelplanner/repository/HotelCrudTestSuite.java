@@ -17,8 +17,8 @@ public class HotelCrudTestSuite {
     private Hotel hotel2 = null;
 
     private void dataForTests(){
-        hotel1 = new Hotel(IdType.EMPTY_ID.getId(),IdType.EMPTY_ID.getId(),"null","null","null");
-        hotel2 = new Hotel(IdType.EMPTY_ID.getId(),IdType.EMPTY_ID.getId(),"null","null","null");
+        hotel1 = new Hotel(IdType.EMPTY_ID.getId(),IdType.EMPTY_ID.getId(),"null","null","null", 233);
+        hotel2 = new Hotel(IdType.EMPTY_ID.getId(),IdType.EMPTY_ID.getId(),"null","null","null", 2233);
     }
 
     @Test

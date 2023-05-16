@@ -74,10 +74,12 @@ public class HotelRestService {
         for (Result hotelDTO : Objects.requireNonNull(responseEntity.getBody()).getResults()) {
             Hotel hotel = new Hotel();
             hotel.setIdName(hotelDTO.getId());
-
             hotel.setCountryCode(hotelDTO.getCountryCode());
             hotel.setCurrency(hotelDTO.getCurrency());
             hotel.setName(hotelDTO.getName());
+            if (hotelDTO.getPriceBreakdown() != null) {
+                hotel.setHotelPrice(hotelDTO.getPriceBreakdown().getGrossPrice().getValue());
+            }
             hotels.add(hotel);
         }
         hotelRepository.saveAll(hotels);
@@ -94,7 +96,6 @@ public class HotelRestService {
                 filter_by_currency,  dest_id,
                 locale,  checkout_date,  units,  room_number,  dest_type).toString();
        return restTemplate.exchange(url, HttpMethod.GET, entity, HotelDTO.class);
-
     }
 
 }

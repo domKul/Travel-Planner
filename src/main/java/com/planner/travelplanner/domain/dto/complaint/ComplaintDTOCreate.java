@@ -1,7 +1,5 @@
 package com.planner.travelplanner.domain.dto.complaint;
 
-import com.planner.travelplanner.domain.Customer;
-
 import java.time.LocalDateTime;
 
 public class ComplaintDTOCreate {
@@ -19,7 +17,7 @@ public class ComplaintDTOCreate {
     public ComplaintDTOCreate(String title, String description, LocalDateTime complaintDate, String status, long customerId) {
         this.title = title;
         this.description = description;
-        this.complaintDate = complaintDate;
+        this.complaintDate = LocalDateTime.now();
         this.status = status;
         this.customerId = customerId;
     }

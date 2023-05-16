@@ -12,6 +12,8 @@ public class Complaint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long complaintId;
+    @Column(name = "customer_Id")
+    private long customerId;
 
     private String title;
 
@@ -19,11 +21,8 @@ public class Complaint {
 
     private LocalDateTime complaintDate;
     private String status;
-    @Column(name = "customer_id")
-    private long customerId;
 
     @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
     @JsonBackReference
     private Customer customer;
 

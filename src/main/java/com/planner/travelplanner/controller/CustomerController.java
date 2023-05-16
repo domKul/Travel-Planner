@@ -25,7 +25,7 @@ public class CustomerController {
         return  ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping()
+    @GetMapping("getCustomers")
     public ResponseEntity<List<CustomerDTOGet>>getAllCustomers(){
         return ResponseEntity.ok(customerService.showAllCustomers());
     }

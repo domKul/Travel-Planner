@@ -30,4 +30,9 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleComplaintNotFoundException(ComplaintNotFoundException complaintNotFoundException) {
         return new ResponseEntity<>("Complaint with given Id not found", HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(LocationNotFoundException.class)
+    public ResponseEntity<Object> handleLocationNotFoundException(LocationNotFoundException locationNotFoundException) {
+        return new ResponseEntity<>("Location with given Id not found in DB", HttpStatus.BAD_REQUEST);
+    }
+
 }
