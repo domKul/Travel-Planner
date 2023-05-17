@@ -1,24 +1,28 @@
 package com.planner.travelplanner.domain.dto.customer;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 public class CustomerDTO {
-
+@JsonProperty("firstName")
     private String firstName;
-
+    @JsonProperty("lastName")
     private String lastName;
-
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "UTC")
     private Date birthdate;
-
+    @JsonProperty("country")
     private String country;
-
+    @JsonProperty("city")
     private String city;
-
+    @JsonProperty("streetName")
     private String streetName;
+    @JsonProperty("postalCode")
     private String postalCode;
-
+    @JsonProperty("email")
     private String email;
-
+    @JsonProperty("phoneNumber")
     private int phoneNumber;
 
 
@@ -74,5 +78,6 @@ public class CustomerDTO {
     public int getPhoneNumber() {
         return phoneNumber;
     }
+
 
 }

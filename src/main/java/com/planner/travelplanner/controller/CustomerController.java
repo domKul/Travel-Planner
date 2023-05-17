@@ -31,7 +31,7 @@ public class CustomerController {
     }
 
     @GetMapping(value = "{customerId}")
-    public ResponseEntity<CustomerDTOGet>getTourById(@PathVariable long customerId){
+    public ResponseEntity<CustomerDTOGet>getCustomerById(@PathVariable long customerId){
         return ResponseEntity.ok(customerService.showCustomerGetById(customerId));
     }
 
@@ -45,4 +45,5 @@ public class CustomerController {
         customerService.deleteCustomerById(customerId);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
+
 }

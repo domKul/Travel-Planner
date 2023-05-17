@@ -22,10 +22,6 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleHotelNotFoundException(HotelNotFoundException hotelNotFoundException) {
         return new ResponseEntity<>("Hotel with given Id not found", HttpStatus.BAD_REQUEST);
     }
-    @ExceptionHandler(TourNotFoundException.class)
-    public ResponseEntity<Object> handleTourNotFoundException(TourNotFoundException tourNotFoundException) {
-        return new ResponseEntity<>("Tour with given Id not found", HttpStatus.BAD_REQUEST);
-    }
     @ExceptionHandler(ComplaintNotFoundException.class)
     public ResponseEntity<Object> handleComplaintNotFoundException(ComplaintNotFoundException complaintNotFoundException) {
         return new ResponseEntity<>("Complaint with given Id not found", HttpStatus.BAD_REQUEST);
