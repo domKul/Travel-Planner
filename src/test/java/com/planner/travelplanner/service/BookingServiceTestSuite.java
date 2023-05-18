@@ -10,6 +10,7 @@ import com.planner.travelplanner.domain.exception.BookingNotFoundException;
 import com.planner.travelplanner.repository.BookingRepository;
 import com.planner.travelplanner.repository.CustomerRepository;
 import com.planner.travelplanner.repository.HotelRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -48,6 +49,10 @@ public class BookingServiceTestSuite {
         customerRepository.deleteAll();
         hotelRepository.deleteAll();
         bookingRepository.deleteAll();
+    }
+    @BeforeEach
+    public void clear(){
+        clearData();
     }
 
     @Test

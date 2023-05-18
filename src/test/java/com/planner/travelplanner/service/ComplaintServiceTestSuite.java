@@ -10,6 +10,7 @@ import com.planner.travelplanner.domain.exception.CustomerNotFoundException;
 import com.planner.travelplanner.mapper.IdType;
 import com.planner.travelplanner.repository.ComplaintRepository;
 import com.planner.travelplanner.repository.CustomerRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -45,6 +46,13 @@ public class ComplaintServiceTestSuite {
         complaintDTOUpdate = new ComplaintDTOUpdate("update", "update", null, "status");
 
 
+    }
+    private void clearData(){
+        customerRepository.deleteAll();
+    }
+    @BeforeEach
+    public void clear(){
+        clearData();
     }
 
     @Test

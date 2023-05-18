@@ -5,6 +5,7 @@ import com.planner.travelplanner.domain.dto.customer.CustomerDTO;
 import com.planner.travelplanner.domain.dto.customer.CustomerDTOGet;
 import com.planner.travelplanner.domain.exception.CustomerNotFoundException;
 import com.planner.travelplanner.repository.CustomerRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,6 +35,14 @@ public class CustomerServiceTestSuite {
         customer2 = new Customer(1, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231, new ArrayList<>(), null);
         customerDTO1 = new CustomerDTO("firstNameDTO", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231);
         customerDTO2 = new CustomerDTO("firstNameDTO", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231);
+    }
+    private void clearData(){
+        customerRepository.deleteAll();
+
+    }
+    @BeforeEach
+    public void clear(){
+        clearData();
     }
 
 
