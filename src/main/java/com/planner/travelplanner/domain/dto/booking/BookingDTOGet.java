@@ -20,7 +20,7 @@ public class BookingDTOGet {
     private long hotelId;
     private String hotelPrice;
 
-    private BookingDTOGet(Builder builder) {
+    public BookingDTOGet(Builder builder) {
         this.bookTime = builder.bookTime;
         this.customerId = builder.customerId;
         this.customerFirstName = builder.customerFirstName;

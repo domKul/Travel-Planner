@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.planner.travelplanner.domain.dto.location.LocationDTO;
 import com.planner.travelplanner.service.LocationService;
+import jakarta.transaction.Transactional;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class LocationRestService {
                 .toUri();
     }
 
-
+@Transactional
     public ResponseEntity<Void> searchLocations(String name, String locale) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

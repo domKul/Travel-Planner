@@ -35,4 +35,32 @@ public class BookingDTOCreate {
     public long getHotelId() {
         return hotelId;
     }
+
+    public static class Builder{
+        private Date startDate;
+        private Date endDate;
+        private long customerId;
+        private long hotelId;
+
+        public Builder startDate(Date startDate) {
+            this.startDate = startDate;
+            return this;
+        }
+        public Builder endDate(Date endDate){
+            this.endDate = endDate;
+            return this;
+        }
+        public Builder customerId(long customerId){
+            this.customerId=customerId;
+            return this;
+        }
+        public Builder hotelId(long hotelId){
+            this.hotelId = hotelId;
+            return this;
+        }
+        public BookingDTOCreate build(){
+            return new BookingDTOCreate(startDate,endDate,customerId,hotelId);
+        }
+    }
+
 }

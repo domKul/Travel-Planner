@@ -31,12 +31,12 @@ public class UserCountScheduler {
         System.out.println("Dodano informację o liczbie użytkowników: " + userCount + " - " + LocalDate.now());
     }
 
-    private int getUserCountFromDatabase() {
+    int getUserCountFromDatabase() {
         String sql = "SELECT COUNT(*) FROM customers_list";
         return jdbcTemplate.queryForObject(sql, Integer.class);
     }
 
-    private void saveUserCountToDatabase(int userCount, LocalDate date) {
+    void saveUserCountToDatabase(int userCount, LocalDate date) {
         String sql = "INSERT INTO user_count (user_count, date) VALUES (?, ?)";
         jdbcTemplate.update(sql, userCount, date);
     }

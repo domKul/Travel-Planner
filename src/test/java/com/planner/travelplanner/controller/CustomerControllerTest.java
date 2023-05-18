@@ -24,6 +24,7 @@ import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -124,6 +125,22 @@ public class CustomerControllerTest {
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(customerDTO)))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    void shouldDeleteCustomerFromDB() throws Exception {
+        // Given
+        long customerId = 1L;
+        CustomerDTO customerDTO = new CustomerDTO("newFirstName", "newLastName", new Date(), "newAddress", "newCity", "newState", "newCountry", "newEmail", 123456789);
+        Customer updatedCustomer = new Customer(customerId, "newFirstName", "newLastName", new Date(), "newAddress", "newCity", "newState", "newCountry", "newEmail", 123456789, new ArrayList<>(), new ArrayList<>());
+        given(customerService.saveCustomer(customerDTO)).willReturn(updatedCustomer);
+
+        // When
+        mockMvc.perform(delete("/v1/customers/{id}", customerId))
+                .andExpect(status().isAccepted());
+
+        // Then
+        verify(customerService).deleteCustomerById(updatedCustomer.getCustomerId());
     }
 
 
