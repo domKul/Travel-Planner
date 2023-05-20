@@ -1,39 +1,34 @@
 package com.planner.travelplanner.controller;
 
-import com.planner.travelplanner.domain.dto.location.LocationDTO;
-import org.springframework.http.MediaType;
+import com.planner.travelplanner.domain.dto.hotel.HotelDTOForGet;
+import com.planner.travelplanner.service.HotelService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 
 @RestController
 @RequestMapping("v1/hotels")
 public class HotelsController {
+    private final HotelService hotelService;
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addHotel(@RequestBody LocationDTO locationDTO){
-        return  ResponseEntity.ok().build();
+    public HotelsController(HotelService hotelService) {
+        this.hotelService = hotelService;
     }
 
     @GetMapping()
-    public ResponseEntity<List<LocationDTO>>getAllHotels(){
-        return ResponseEntity.ok(Collections.emptyList());
+    public ResponseEntity<List<HotelDTOForGet>>getAllHotelsFromDB(){
+        return ResponseEntity.ok(hotelService.getAllHotelsInDB());
     }
 
-    @GetMapping(value = "hotelId")
-    public ResponseEntity<LocationDTO>getHotelById(@PathVariable Long hotelId){
-        return ResponseEntity.ok(null);
+    @GetMapping(value = "{hotelId}")
+    public ResponseEntity<HotelDTOForGet>getHotelById(@PathVariable Long hotelId){
+        return ResponseEntity.ok(hotelService.getHotelById(hotelId));
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<LocationDTO>updateHotel(@RequestBody LocationDTO locationDTO){
-        return ResponseEntity.ok(null);
-    }
-
-    @DeleteMapping
+    @DeleteMapping(value = "{hotelId}")
     public ResponseEntity<Void>deleteHotel(@PathVariable Long hotelId){
+        hotelService.deleteHotelById(hotelId);
         return ResponseEntity.ok().build();
     }
 }
