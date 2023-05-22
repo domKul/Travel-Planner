@@ -9,8 +9,6 @@ public class BookingDTOCreate {
 
     private long customerId;
 
-
-
     private long hotelId;
 
     public BookingDTOCreate(Date startDate, Date endDate, long customerId, long hotelId) {

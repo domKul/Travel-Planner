@@ -1,6 +1,5 @@
 package com.planner.travelplanner.domain.dto.booking;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class BookingDTOGet {
@@ -16,8 +15,10 @@ public class BookingDTOGet {
     private String postalCode;
     private String email;
     private int phoneNumber;
-    private BigDecimal tourPrice;
+    private String hotelName;
     private long hotelId;
+    private Date startBooking;
+    private Date endBooking;
     private String hotelPrice;
 
     public BookingDTOGet(Builder builder) {
@@ -33,11 +34,35 @@ public class BookingDTOGet {
         this.email = builder.email;
         this.phoneNumber = builder.phoneNumber;
         this.hotelId = builder.hotelId;
+        this.hotelName = builder.hotelName;
+        this.startBooking = builder.startBooking;
+        this.endBooking = builder.endBooking;
         this.hotelPrice = builder.hotelPrice;
     }
 
+
     public Date getBookTime() {
         return bookTime;
+    }
+
+    public String getHotelName() {
+        return hotelName;
+    }
+
+    public Date getStartBooking() {
+        return startBooking;
+    }
+
+    public void setStartBooking(Date startBooking) {
+        this.startBooking = startBooking;
+    }
+
+    public Date getEndBooking() {
+        return endBooking;
+    }
+
+    public void setEndBooking(Date endBooking) {
+        this.endBooking = endBooking;
     }
 
     public long getCustomerId() {
@@ -79,11 +104,6 @@ public class BookingDTOGet {
     public int getPhoneNumber() {
         return phoneNumber;
     }
-
-    public BigDecimal getTourPrice() {
-        return tourPrice;
-    }
-
     public long getHotelId() {
         return hotelId;
     }
@@ -105,10 +125,32 @@ public class BookingDTOGet {
         private String email;
         private int phoneNumber;
         private long hotelId;
+        private String hotelName;
         private String hotelPrice;
+        private Date startBooking;
+        private Date endBooking;
+
+        public Builder startBooking(Date startBooking){
+            this.startBooking = startBooking;
+            return this;
+        }
+        public Builder endBooking(Date endBooking){
+            this.endBooking = endBooking;
+            return  this;
+        }
 
         public Builder bookTime(Date bookTime) {
             this.bookTime = bookTime;
+            return this;
+        }
+
+        public Builder hotelName(String hotelName){
+            this.hotelName = hotelName;
+            return this;
+        }
+
+        public Builder hotelPrice(String hotelPrice) {
+            this.hotelPrice = hotelPrice;
             return this;
         }
 

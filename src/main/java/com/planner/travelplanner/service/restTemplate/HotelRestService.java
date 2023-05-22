@@ -72,12 +72,16 @@ public class HotelRestService {
         List<Hotel> hotels = new ArrayList<>();
 
         for (Result hotelDTO : Objects.requireNonNull(responseEntity.getBody()).getResults()) {
+            if (hotelRepository.existsByName(hotelDTO.getName())) {
+                continue;
+            }
+
             Hotel hotel = new Hotel();
             hotel.setIdName(hotelDTO.getId());
             hotel.setCountryCode(hotelDTO.getCountryCode());
-            hotel.setCurrency(hotelDTO.getCurrency());
             hotel.setName(hotelDTO.getName());
             if (hotelDTO.getPriceBreakdown() != null) {
+                hotel.setCurrency(hotelDTO.getPriceBreakdown().getGrossPrice().getCurrency());
                 hotel.setHotelPrice(hotelDTO.getPriceBreakdown().getGrossPrice().getValue());
             }
             hotels.add(hotel);

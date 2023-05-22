@@ -8,4 +8,6 @@ import java.util.List;
 @Repository
 public interface HotelRepository extends CrudRepository<Hotel,Long> {
     List<Hotel>findAll();
+
+    boolean existsByName(String name);
 }

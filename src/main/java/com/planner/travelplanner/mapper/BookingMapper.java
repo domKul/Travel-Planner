@@ -22,9 +22,6 @@ public class BookingMapper {
         this.hotelRepository = hotelRepository;
     }
 
-
-
-
     public BookingDTO mapToBookingDTO(Booking booking){
         return new BookingDTO(
                 booking.getStartDate(),
@@ -46,12 +43,13 @@ public class BookingMapper {
                 .email(booking.getCustomer().getEmail())
                 .phoneNumber(booking.getCustomer().getPhoneNumber())
                 .hotelId(booking.getHotels().getHotelId())
+                .hotelName(booking.getHotels().getName())
+                .hotelId(booking.getHotels().getIdName())
+                .startBooking(booking.getStartDate())
+                .endBooking(booking.getEndDate())
+                .hotelPrice(String.valueOf(booking.getHotels().getHotelPrice()))
                 .build();
     }
-
-
-
-
 
     public List<BookingDTOGet> mapToDTOListGet(final List<Booking>bookings){
         return bookings.stream()
