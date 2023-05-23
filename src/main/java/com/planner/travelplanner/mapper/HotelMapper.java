@@ -8,7 +8,7 @@ import java.util.List;
 
 @Component
 public class HotelMapper {
-    public HotelDTOForGet mapToHotelResultDTO(Hotel hotel){
+    public HotelDTOForGet mapToHotelResultDTO(Hotel hotel) {
         return new HotelDTOForGet(hotel.getHotelId(),
                 hotel.getIdName(),
                 hotel.getName(),
@@ -17,7 +17,7 @@ public class HotelMapper {
                 hotel.getHotelPrice());
     }
 
-    public List<HotelDTOForGet> hotelResultDTOList(final List<Hotel>hotels){
+    public List<HotelDTOForGet> hotelResultDTOList(final List<Hotel> hotels) {
         return hotels.stream()
                 .map(this::mapToHotelResultDTO)
                 .toList();

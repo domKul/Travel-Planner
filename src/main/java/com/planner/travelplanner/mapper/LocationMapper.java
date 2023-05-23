@@ -9,7 +9,7 @@ import java.util.List;
 @Component
 public class LocationMapper {
 
-    public Location mapToLocation(LocationDTO locationDTO){
+    public Location mapToLocation(LocationDTO locationDTO) {
         return new Location(IdType.EMPTY_ID.getId(),
                 locationDTO.getLabel(),
                 locationDTO.getDest_id(),
@@ -19,7 +19,8 @@ public class LocationMapper {
                 locationDTO.getHotels(),
                 locationDTO.getTimezone());
     }
-    public LocationDTO mapToLocationDTO(Location location){
+
+    public LocationDTO mapToLocationDTO(Location location) {
         return new LocationDTO(
                 location.getLabel(),
                 location.getRegion(),
@@ -30,6 +31,11 @@ public class LocationMapper {
                 location.getTimezone());
     }
 
+    public List<LocationDTO> mapToLocationListDTO(List<Location> location) {
+        return location.stream()
+                .map(this::mapToLocationDTO)
+                .toList();
+    }
 
     public List<Location> mapToLocationListFromDTO(List<LocationDTO> locationDTOs) {
         return locationDTOs.stream()

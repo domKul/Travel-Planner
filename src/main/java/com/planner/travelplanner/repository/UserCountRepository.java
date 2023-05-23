@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface UserCountRepository extends CrudRepository<UserCount,Long> {
+public interface UserCountRepository extends CrudRepository<UserCount, Long> {
 
-    List<UserCount>findAll();
+    List<UserCount> findAll();
 }

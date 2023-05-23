@@ -11,23 +11,23 @@ import java.util.List;
 
 @Component
 public class UserCountScheduler {
-    private List<Integer> userCounts;
+    private final List<Integer> userCounts;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
 
     public UserCountScheduler() {
         this.userCounts = new ArrayList<>();
     }
 
+
     @Scheduled(cron = "0 0 0 * * *")
-   // @Scheduled(fixedDelay = 1000)
+    // @Scheduled(fixedDelay = 1000)
     public void addUserCount() {
         int userCount = getUserCountFromDatabase();
         userCounts.add(userCount);
-
         saveUserCountToDatabase(userCount, LocalDate.now());
-
         System.out.println("Dodano informację o liczbie użytkowników: " + userCount + " - " + LocalDate.now());
     }
 

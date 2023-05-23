@@ -22,7 +22,7 @@ public class Complaint {
     private LocalDateTime complaintDate;
     private String status;
 
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonBackReference
     private Customer customer;
 

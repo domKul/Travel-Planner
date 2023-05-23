@@ -1,23 +1,21 @@
 package com.planner.travelplanner.domain.dto.complaint;
 
-import com.planner.travelplanner.domain.Customer;
-
 import java.time.LocalDateTime;
 
 public class ComplaintDTO {
 
 
-    private Long complaintId;
+    private final Long complaintId;
 
-    private String title;
+    private final String title;
 
-    private String description;
+    private final String description;
 
-    private LocalDateTime complaintDate;
+    private final LocalDateTime complaintDate;
 
-    private String status;
+    private final String status;
 
-    private long customer;
+    private final long customer;
 
     public ComplaintDTO(Long complaintId, String title, String description, LocalDateTime complaintDate, String status, long customerId) {
         this.complaintId = complaintId;

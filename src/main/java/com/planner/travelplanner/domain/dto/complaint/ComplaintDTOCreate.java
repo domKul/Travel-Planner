@@ -5,14 +5,14 @@ import java.time.LocalDateTime;
 public class ComplaintDTOCreate {
 
 
-    private String title;
+    private final String title;
 
-    private String description;
+    private final String description;
 
-    private LocalDateTime complaintDate;
+    private final LocalDateTime complaintDate;
 
-    private String status;
-    private long customerId;
+    private final String status;
+    private final long customerId;
 
     public ComplaintDTOCreate(String title, String description, LocalDateTime complaintDate, String status, long customerId) {
         this.title = title;

@@ -36,16 +36,20 @@ public class BookingService {
 
     @Transactional
     public Booking addBooking(final BookingDTOCreate bookingDTOCreate) {
-        Customer findCustomer = customerRepository.findById(bookingDTOCreate.getCustomerId())
-                .orElseThrow(CustomerNotFoundException::new);
-        Hotel findHotel = hotelRepository.findById(bookingDTOCreate.getHotelId())
-                .orElseThrow(HotelNotFoundException::new);
-
         Booking booking = new Booking();
-        booking.setCustomer(findCustomer);
-        booking.setStartDate(bookingDTOCreate.getStartDate());
-        booking.setEndDate(bookingDTOCreate.getEndDate());
-        booking.setHotels(findHotel);
+
+        if (bookingDTOCreate != null) {
+            Customer findCustomer = customerRepository.findById(bookingDTOCreate.getCustomerId())
+                    .orElseThrow(CustomerNotFoundException::new);
+            Hotel findHotel = hotelRepository.findById(bookingDTOCreate.getHotelId())
+                    .orElseThrow(HotelNotFoundException::new);
+
+            booking.setCustomer(findCustomer);
+            booking.setStartDate(bookingDTOCreate.getStartDate());
+            booking.setEndDate(bookingDTOCreate.getEndDate());
+            booking.setHotels(findHotel);
+        }
+
         return bookingRepository.save(booking);
     }
 
@@ -81,6 +85,7 @@ public class BookingService {
             throw new BookingNotFoundException();
         }
     }
+
     public Booking mapToBookingForUpdate(final long bookingId, BookingDTOCreate bookingDTOCreate) {
         Booking booking = bookingRepository.findById(bookingId).orElseThrow(
                 BookingNotFoundException::new);

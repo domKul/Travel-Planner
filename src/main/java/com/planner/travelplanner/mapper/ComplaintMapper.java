@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 public class ComplaintMapper {
 
-    public Complaint mapFromComplaintCreate(long customerId, final ComplaintDTOCreate complaintDTOCreate){
+    public Complaint mapFromComplaintCreate(long customerId, final ComplaintDTOCreate complaintDTOCreate) {
         return new Complaint(complaintDTOCreate.getCustomer(),
                 complaintDTOCreate.getTitle(),
                 complaintDTOCreate.getDescription(),
@@ -19,16 +19,7 @@ public class ComplaintMapper {
                 customerId);
     }
 
-    public ComplaintDTO mapToComplaintDTO(final Complaint complaint){
-        return new ComplaintDTO(
-                complaint.getComplaintId(),
-                complaint.getTitle(),
-                complaint.getDescription(),
-                complaint.getComplaintDate(),
-                complaint.getStatus(),
-                complaint.getComplaintId());
-    }
-    public ComplaintDTO mapToComplaintDTOFormShow(final Complaint complaint){
+    public ComplaintDTO mapToComplaintDTO(final Complaint complaint) {
         return new ComplaintDTO(
                 complaint.getComplaintId(),
                 complaint.getTitle(),
@@ -38,7 +29,17 @@ public class ComplaintMapper {
                 complaint.getComplaintId());
     }
 
-    public List<ComplaintDTO> mapToListDTO(final List<Complaint>complaints){
+    public ComplaintDTO mapToComplaintDTOFormShow(final Complaint complaint) {
+        return new ComplaintDTO(
+                complaint.getComplaintId(),
+                complaint.getTitle(),
+                complaint.getDescription(),
+                complaint.getComplaintDate(),
+                complaint.getStatus(),
+                complaint.getComplaintId());
+    }
+
+    public List<ComplaintDTO> mapToListDTO(final List<Complaint> complaints) {
         return complaints.stream()
                 .map(this::mapToComplaintDTOFormShow)
                 .toList();

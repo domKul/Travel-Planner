@@ -21,28 +21,28 @@ public class ComplaintController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addComplaints(@RequestParam Long customerId,@RequestBody ComplaintDTOCreate complaintDTOCreate){
-        complaintService.createComplaint(customerId,complaintDTOCreate);
-        return  ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<Void> addComplaints(@RequestParam Long customerId, @RequestBody ComplaintDTOCreate complaintDTOCreate) {
+        complaintService.createComplaint(customerId, complaintDTOCreate);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping()
-    public ResponseEntity<List<ComplaintDTO>>getAllComplaints(){
+    public ResponseEntity<List<ComplaintDTO>> getAllComplaints() {
         return ResponseEntity.ok(complaintService.showAllComplaints());
     }
 
     @GetMapping(value = "{complaintId}")
-    public ResponseEntity<ComplaintDTO>getComplaintsById(@PathVariable Long complaintId){
+    public ResponseEntity<ComplaintDTO> getComplaintsById(@PathVariable Long complaintId) {
         return ResponseEntity.ok(complaintService.showComplaintById(complaintId));
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ComplaintDTO> updateComplaintsStatus(@RequestParam long complaintId,@RequestBody ComplaintDTOUpdate complaintDTOUpdate){
-        return ResponseEntity.ok(complaintService.modifyComplaintStatus(complaintId,complaintDTOUpdate));
+    public ResponseEntity<ComplaintDTO> updateComplaintsStatus(@RequestParam long complaintId, @RequestBody ComplaintDTOUpdate complaintDTOUpdate) {
+        return ResponseEntity.ok(complaintService.modifyComplaintStatus(complaintId, complaintDTOUpdate));
     }
 
     @DeleteMapping(value = "{coplaintId}")
-    public ResponseEntity<Void>deleteComplaints(@PathVariable Long coplaintId){
+    public ResponseEntity<Void> deleteComplaints(@PathVariable Long coplaintId) {
         complaintService.deleteComplainByID(coplaintId);
         return ResponseEntity.ok().build();
     }

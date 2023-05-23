@@ -3,13 +3,13 @@ package com.planner.travelplanner.domain.dto.booking;
 import java.util.Date;
 
 public class BookingDTOCreate {
-    private Date startDate;
+    private final Date startDate;
 
-    private Date endDate;
+    private final Date endDate;
 
-    private long customerId;
+    private final long customerId;
 
-    private long hotelId;
+    private final long hotelId;
 
     public BookingDTOCreate(Date startDate, Date endDate, long customerId, long hotelId) {
         this.startDate = startDate;
@@ -34,7 +34,7 @@ public class BookingDTOCreate {
         return hotelId;
     }
 
-    public static class Builder{
+    public static class Builder {
         private Date startDate;
         private Date endDate;
         private long customerId;
@@ -44,20 +44,24 @@ public class BookingDTOCreate {
             this.startDate = startDate;
             return this;
         }
-        public Builder endDate(Date endDate){
+
+        public Builder endDate(Date endDate) {
             this.endDate = endDate;
             return this;
         }
-        public Builder customerId(long customerId){
-            this.customerId=customerId;
+
+        public Builder customerId(long customerId) {
+            this.customerId = customerId;
             return this;
         }
-        public Builder hotelId(long hotelId){
+
+        public Builder hotelId(long hotelId) {
             this.hotelId = hotelId;
             return this;
         }
-        public BookingDTOCreate build(){
-            return new BookingDTOCreate(startDate,endDate,customerId,hotelId);
+
+        public BookingDTOCreate build() {
+            return new BookingDTOCreate(startDate, endDate, customerId, hotelId);
         }
     }
 

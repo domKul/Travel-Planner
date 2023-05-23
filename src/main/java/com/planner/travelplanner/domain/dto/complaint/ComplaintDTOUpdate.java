@@ -1,20 +1,17 @@
 package com.planner.travelplanner.domain.dto.complaint;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.planner.travelplanner.domain.Customer;
-
 import java.time.LocalDateTime;
 
 public class ComplaintDTOUpdate {
 
 
-    private String title;
+    private final String title;
 
-    private String description;
+    private final String description;
 
-    private LocalDateTime complaintDate;
+    private final LocalDateTime complaintDate;
 
-    private String status;
+    private final String status;
 
 
     public ComplaintDTOUpdate(String title, String description, LocalDateTime complaintDate, String status) {

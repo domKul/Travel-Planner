@@ -20,28 +20,28 @@ public class CustomerController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addCustomer(@RequestBody CustomerDTO customerDTO){
+    public ResponseEntity<Void> addCustomer(@RequestBody CustomerDTO customerDTO) {
         customerService.saveCustomer(customerDTO);
-        return  ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("getCustomers")
-    public ResponseEntity<List<CustomerDTOGet>>getAllCustomers(){
+    public ResponseEntity<List<CustomerDTOGet>> getAllCustomers() {
         return ResponseEntity.ok(customerService.showAllCustomers());
     }
 
     @GetMapping(value = "{customerId}")
-    public ResponseEntity<CustomerDTOGet>getCustomerById(@PathVariable long customerId){
+    public ResponseEntity<CustomerDTOGet> getCustomerById(@PathVariable long customerId) {
         return ResponseEntity.ok(customerService.showCustomerGetById(customerId));
     }
 
-    @PutMapping(value = "{customerId}",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CustomerDTO>updateCustomer(@PathVariable long customerId, @RequestBody CustomerDTO customerDTO){
-        return ResponseEntity.ok(customerService.updateCustomer(customerId,customerDTO));
+    @PutMapping(value = "{customerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CustomerDTO> updateCustomer(@PathVariable long customerId, @RequestBody CustomerDTO customerDTO) {
+        return ResponseEntity.ok(customerService.updateCustomer(customerId, customerDTO));
     }
 
     @DeleteMapping(value = "{customerId}")
-    public ResponseEntity<Void>deleteCustomer(@PathVariable long customerId){
+    public ResponseEntity<Void> deleteCustomer(@PathVariable long customerId) {
         customerService.deleteCustomerById(customerId);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }

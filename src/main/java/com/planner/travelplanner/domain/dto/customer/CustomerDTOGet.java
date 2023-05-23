@@ -2,32 +2,31 @@ package com.planner.travelplanner.domain.dto.customer;
 
 import com.planner.travelplanner.domain.Complaint;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 public class CustomerDTOGet {
 
-    private long customerId;
+    private final long customerId;
 
-    private String firstName;
+    private final String firstName;
 
-    private String lastName;
+    private final String lastName;
 
-    private Date birthdate;
+    private final Date birthdate;
 
-    private String country;
+    private final String country;
 
-    private String city;
+    private final String city;
 
-    private String streetName;
+    private final String streetName;
 
-    private String postalCode;
+    private final String postalCode;
 
-    private String email;
+    private final String email;
 
-    private int phoneNumber;
-    private List<Complaint> complaints;
+    private final int phoneNumber;
+    private final List<Complaint> complaints;
 
     public CustomerDTOGet(long customerId, String firstName, String lastName, Date birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, List<Complaint> complaints) {
         this.customerId = customerId;

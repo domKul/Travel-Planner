@@ -87,14 +87,17 @@ public class LocationDTO {
     public void setCountry(String country) {
         this.country = country;
     }
+
     @JsonProperty("hotels")
     public Integer getHotels() {
         return hotels;
     }
+
     @JsonProperty("dest_id")
     public String getDest_id() {
         return dest_id;
     }
+
     @JsonProperty("timezone")
     public String getTimezone() {
         return timezone;

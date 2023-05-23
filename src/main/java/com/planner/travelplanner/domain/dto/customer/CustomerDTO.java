@@ -6,12 +6,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 
 public class CustomerDTO {
-@JsonProperty("firstName")
+    @JsonProperty("firstName")
     private String firstName;
     @JsonProperty("lastName")
     private String lastName;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "UTC")
-    private Date birthdate;
+    private final Date birthdate;
     @JsonProperty("country")
     private String country;
     @JsonProperty("city")
@@ -26,7 +26,7 @@ public class CustomerDTO {
     private int phoneNumber;
 
 
-    public CustomerDTO( String firstName, String lastName, Date birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber) {
+    public CustomerDTO(String firstName, String lastName, Date birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,8 +39,6 @@ public class CustomerDTO {
         this.phoneNumber = phoneNumber;
 
     }
-
-
 
 
     public String getFirstName() {

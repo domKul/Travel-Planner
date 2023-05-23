@@ -14,10 +14,12 @@ public class GrossPriceDTO {
     private String currency;
     @JsonProperty("value")
     private int value;
+
     @JsonProperty("currency")
     public String getCurrency() {
         return currency;
     }
+
     @JsonProperty("value")
     public int getValue() {
         return value;

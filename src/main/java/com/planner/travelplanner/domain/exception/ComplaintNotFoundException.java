@@ -1,4 +1,4 @@
 package com.planner.travelplanner.domain.exception;
 
-public class ComplaintNotFoundException extends RuntimeException{
+public class ComplaintNotFoundException extends RuntimeException {
 }

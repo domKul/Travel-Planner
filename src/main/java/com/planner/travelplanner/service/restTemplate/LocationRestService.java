@@ -38,7 +38,7 @@ public class LocationRestService {
                 .toUri();
     }
 
-@Transactional
+    @Transactional
     public ResponseEntity<Void> searchLocations(String name, String locale) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

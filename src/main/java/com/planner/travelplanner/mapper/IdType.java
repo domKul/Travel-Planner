@@ -2,7 +2,7 @@ package com.planner.travelplanner.mapper;
 
 public enum IdType {
 
-     EMPTY_ID(0L);
+    EMPTY_ID(0L);
 
     private final Long id;
 

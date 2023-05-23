@@ -8,15 +8,14 @@ import java.util.Date;
 
 public class BookingDTO {
 
-    private Date startDate;
+    private final Date startDate;
 
-    private Date endDate;
+    private final Date endDate;
 
-    private Customer customer;
+    private final Customer customer;
 
 
-
-    private Hotel hotel;
+    private final Hotel hotel;
 
     public BookingDTO(Date startDate, Date endDate, Customer customer, Hotel hotel) {
         this.startDate = startDate;
@@ -24,7 +23,6 @@ public class BookingDTO {
         this.customer = customer;
         this.hotel = hotel;
     }
-
 
 
     public Date getStartDate() {

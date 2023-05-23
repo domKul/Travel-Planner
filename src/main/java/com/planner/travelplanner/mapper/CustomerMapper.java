@@ -11,7 +11,7 @@ import java.util.List;
 public class CustomerMapper {
 
 
-    public Customer mapToCustomer(CustomerDTO customerDTO){
+    public Customer mapToCustomer(CustomerDTO customerDTO) {
         return new Customer(IdType.EMPTY_ID.getId(),
                 customerDTO.getFirstName(),
                 customerDTO.getLastName(),
@@ -22,23 +22,24 @@ public class CustomerMapper {
                 customerDTO.getPostalCode(),
                 customerDTO.getEmail(),
                 customerDTO.getPhoneNumber(),
-                null,null);
+                null, null);
     }
-        public Customer mapToCustomerForUpdate(final long customerId, CustomerDTO customerDTO){
-            return new Customer(customerId,
-                    customerDTO.getFirstName(),
-                    customerDTO.getLastName(),
-                    customerDTO.getBirthdate(),
-                    customerDTO.getCountry(),
-                    customerDTO.getCity(),
-                    customerDTO.getStreetName(),
-                    customerDTO.getPostalCode(),
-                    customerDTO.getEmail(),
-                    customerDTO.getPhoneNumber(),
-                    null,null);
-        }
 
-    public CustomerDTO mapToCustomerDTO(Customer customer){
+    public Customer mapToCustomerForUpdate(final long customerId, CustomerDTO customerDTO) {
+        return new Customer(customerId,
+                customerDTO.getFirstName(),
+                customerDTO.getLastName(),
+                customerDTO.getBirthdate(),
+                customerDTO.getCountry(),
+                customerDTO.getCity(),
+                customerDTO.getStreetName(),
+                customerDTO.getPostalCode(),
+                customerDTO.getEmail(),
+                customerDTO.getPhoneNumber(),
+                null, null);
+    }
+
+    public CustomerDTO mapToCustomerDTO(Customer customer) {
         return new CustomerDTO(
                 customer.getFirstName(),
                 customer.getLastName(),
@@ -51,7 +52,7 @@ public class CustomerMapper {
                 customer.getPhoneNumber());
     }
 
-    public CustomerDTOGet mapToCustomerDTOGet(Customer customer){
+    public CustomerDTOGet mapToCustomerDTOGet(Customer customer) {
         return new CustomerDTOGet(customer.getCustomerId(),
                 customer.getFirstName(),
                 customer.getLastName(),
@@ -65,7 +66,7 @@ public class CustomerMapper {
                 customer.getComplaints());
     }
 
-    public List<CustomerDTOGet>mapToDTOList(final List<Customer>customers){
+    public List<CustomerDTOGet> mapToDTOList(final List<Customer> customers) {
         return customers.stream()
                 .map(this::mapToCustomerDTOGet)
                 .toList();

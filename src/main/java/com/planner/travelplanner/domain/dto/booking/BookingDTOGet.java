@@ -4,24 +4,28 @@ import java.util.Date;
 
 public class BookingDTOGet {
 
-    private Date bookTime;
-    private long customerId;
-    private String customerFirstName;
-    private String customerLastName;
-    private Date birthDate;
-    private String country;
-    private String city;
-    private String streetName;
-    private String postalCode;
-    private String email;
-    private int phoneNumber;
-    private String hotelName;
-    private long hotelId;
+    private long bookingId;
+    private final Date bookTime;
+    private final long customerId;
+    private final String customerFirstName;
+    private final String customerLastName;
+    private final Date birthDate;
+    private final String country;
+    private final String city;
+    private final String streetName;
+    private final String postalCode;
+    private final String email;
+    private final int phoneNumber;
+    private final String hotelName;
+    private final long hotelId;
     private Date startBooking;
     private Date endBooking;
-    private String hotelPrice;
+    private final String hotelPrice;
+
+    private String currency;
 
     public BookingDTOGet(Builder builder) {
+        this.bookingId = builder.bookingId;
         this.bookTime = builder.bookTime;
         this.customerId = builder.customerId;
         this.customerFirstName = builder.customerFirstName;
@@ -38,8 +42,24 @@ public class BookingDTOGet {
         this.startBooking = builder.startBooking;
         this.endBooking = builder.endBooking;
         this.hotelPrice = builder.hotelPrice;
+        this.currency = builder.currency;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public long getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(long bookingId) {
+        this.bookingId = bookingId;
+    }
 
     public Date getBookTime() {
         return bookTime;
@@ -104,6 +124,7 @@ public class BookingDTOGet {
     public int getPhoneNumber() {
         return phoneNumber;
     }
+
     public long getHotelId() {
         return hotelId;
     }
@@ -113,6 +134,7 @@ public class BookingDTOGet {
     }
 
     public static class Builder {
+        private long bookingId;
         private Date bookTime;
         private long customerId;
         private String customerFirstName;
@@ -129,14 +151,25 @@ public class BookingDTOGet {
         private String hotelPrice;
         private Date startBooking;
         private Date endBooking;
+        private String currency;
+        public Builder currency(String currency){
+            this.currency = currency;
+            return this;
+        }
 
-        public Builder startBooking(Date startBooking){
+        public Builder bookingId(long bookingId) {
+            this.bookingId = bookingId;
+            return this;
+        }
+
+        public Builder startBooking(Date startBooking) {
             this.startBooking = startBooking;
             return this;
         }
-        public Builder endBooking(Date endBooking){
+
+        public Builder endBooking(Date endBooking) {
             this.endBooking = endBooking;
-            return  this;
+            return this;
         }
 
         public Builder bookTime(Date bookTime) {
@@ -144,7 +177,7 @@ public class BookingDTOGet {
             return this;
         }
 
-        public Builder hotelName(String hotelName){
+        public Builder hotelName(String hotelName) {
             this.hotelName = hotelName;
             return this;
         }
@@ -198,14 +231,17 @@ public class BookingDTOGet {
             this.email = email;
             return this;
         }
+
         public Builder phoneNumber(int phoneNumber) {
             this.phoneNumber = phoneNumber;
             return this;
         }
+
         public Builder hotelId(long hotelId) {
             this.hotelId = hotelId;
             return this;
         }
+
         public BookingDTOGet build() {
             return new BookingDTOGet(this);
         }

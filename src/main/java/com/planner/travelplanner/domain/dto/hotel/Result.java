@@ -8,6 +8,8 @@ import java.util.Map;
 
 public class Result {
 
+    @JsonIgnore
+    private final Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
     @JsonProperty("id")
     private long id;
     @JsonProperty("name")
@@ -18,7 +20,6 @@ public class Result {
     private PriceBreakdown priceBreakdown;
     @JsonProperty("currency")
     private String currency;
-
     @JsonProperty("value")
     private int hotelPrice;
     @JsonProperty("checkin")
@@ -35,8 +36,6 @@ public class Result {
     private Integer ufi;
     @JsonProperty("wishlistName")
     private String wishlistName;
-    @JsonIgnore
-    private final Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
     @JsonProperty("id")
     public long getId() {

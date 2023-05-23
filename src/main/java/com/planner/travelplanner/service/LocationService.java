@@ -28,17 +28,20 @@ public class LocationService {
 
     public void deleteLocation(long locationId) {
         Optional<Location> findById = locationRepository.findById(locationId);
-        if (findById.isPresent()){
+        if (findById.isPresent()) {
             locationRepository.deleteById(locationId);
-        }else {
+        } else {
             throw new LocationNotFoundException();
         }
     }
+    public List<LocationDTO> getLocationsFromDB(){
+        return locationMapper.mapToLocationListDTO(locationRepository.findAll());
+    }
 
     public LocationDTO getLocationById(long locationId) {
-        if (locationRepository.existsById(locationId)){
-           return locationMapper.mapToLocationDTO(locationRepository.findById(locationId).get());
-        }else {
+        if (locationRepository.existsById(locationId)) {
+            return locationMapper.mapToLocationDTO(locationRepository.findById(locationId).get());
+        } else {
             throw new LocationNotFoundException();
         }
     }

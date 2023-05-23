@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class HotelService {
     private final HotelMapper hotelMapper;
@@ -17,22 +18,24 @@ public class HotelService {
         this.hotelMapper = hotelMapper;
         this.hotelRepository = hotelRepository;
     }
+
     @Transactional
-    public void deleteHotelById(long hotelId){
-        if (hotelRepository.existsById(hotelId)){
+    public void deleteHotelById(long hotelId) {
+        if (hotelRepository.existsById(hotelId)) {
             hotelRepository.deleteById(hotelId);
-        }else {
+        } else {
             throw new HotelNotFoundException();
         }
     }
 
-    public List<HotelDTOForGet> getAllHotelsInDB(){
+    public List<HotelDTOForGet> getAllHotelsInDB() {
         return hotelMapper.hotelResultDTOList(hotelRepository.findAll());
     }
-    public HotelDTOForGet getHotelById(long hotelId){
-        if (hotelRepository.existsById(hotelId)){
+
+    public HotelDTOForGet getHotelById(long hotelId) {
+        if (hotelRepository.existsById(hotelId)) {
             return hotelMapper.mapToHotelResultDTO(hotelRepository.findById(hotelId).get());
-        }else {
+        } else {
             throw new HotelNotFoundException();
         }
     }

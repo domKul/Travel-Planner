@@ -16,7 +16,7 @@ public class PriceBreakdown {
     @JsonProperty("grossPrice")
     private GrossPriceDTO grossPrice;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
 
     @JsonProperty("grossPrice")

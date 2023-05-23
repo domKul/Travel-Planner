@@ -51,7 +51,7 @@ public class HotelRestService {
                 .toUri();
     }
 
-    private  HttpHeaders header(){
+    private HttpHeaders header() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("X-RapidAPI-Key", hotelApiConfig.getApiKey());
@@ -60,14 +60,14 @@ public class HotelRestService {
     }
 
     public ResponseEntity<HotelDTO> searchHotelWithSaveToData(String orderedby, int adults_number, String checkin_date,
-                                                 String filter_by_currency, int dest_id,
-                                                 String locale, String checkout_date, String units,
-                                                 int room_number, String dest_type) {
+                                                              String filter_by_currency, int dest_id,
+                                                              String locale, String checkout_date, String units,
+                                                              int room_number, String dest_type) {
 
         HttpEntity<String> entity = new HttpEntity<>("parameters", header());
-        String url = urlBuilder( orderedby,  adults_number,  checkin_date,
-                filter_by_currency,  dest_id,
-                locale,  checkout_date,  units,  room_number,  dest_type).toString();
+        String url = urlBuilder(orderedby, adults_number, checkin_date,
+                filter_by_currency, dest_id,
+                locale, checkout_date, units, room_number, dest_type).toString();
         ResponseEntity<HotelDTO> responseEntity = restTemplate.exchange(url, HttpMethod.GET, entity, HotelDTO.class);
         List<Hotel> hotels = new ArrayList<>();
 
@@ -91,15 +91,15 @@ public class HotelRestService {
     }
 
     public ResponseEntity<HotelDTO> searchHotel(String orderedby, int adults_number, String checkin_date,
-                                String filter_by_currency, int dest_id,
-                                String locale, String checkout_date, String units,
-                                int room_number, String dest_type) {
+                                                String filter_by_currency, int dest_id,
+                                                String locale, String checkout_date, String units,
+                                                int room_number, String dest_type) {
 
         HttpEntity<String> entity = new HttpEntity<>("parameters", header());
-        String url = urlBuilder( orderedby,  adults_number,  checkin_date,
-                filter_by_currency,  dest_id,
-                locale,  checkout_date,  units,  room_number,  dest_type).toString();
-       return restTemplate.exchange(url, HttpMethod.GET, entity, HotelDTO.class);
+        String url = urlBuilder(orderedby, adults_number, checkin_date,
+                filter_by_currency, dest_id,
+                locale, checkout_date, units, room_number, dest_type).toString();
+        return restTemplate.exchange(url, HttpMethod.GET, entity, HotelDTO.class);
     }
 
 }

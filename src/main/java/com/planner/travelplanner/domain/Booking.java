@@ -16,10 +16,10 @@ public class Booking {
 
 
     private Date startDate;
-
+    @Column(name = "end_date")
     private Date endDate;
 
-    @ManyToOne (fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 

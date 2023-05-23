@@ -1,4 +1,4 @@
 package com.planner.travelplanner.domain.exception;
 
-public class BookingNotFoundException extends RuntimeException{
+public class BookingNotFoundException extends RuntimeException {
 }
