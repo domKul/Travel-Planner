@@ -1,6 +1,5 @@
 package com.planner.travelplanner.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -12,8 +11,6 @@ public class Complaint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long complaintId;
-    @Column(name = "customer_Id")
-    private long customerId;
 
     private String title;
 
@@ -22,14 +19,15 @@ public class Complaint {
     private LocalDateTime complaintDate;
     private String status;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonBackReference
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     public Complaint() {
     }
 
-    public Complaint(Long complaintId, String title, String description, LocalDateTime complaintDate, String status, Customer customer) {
+    public Complaint(long complaintId, String title, String description, LocalDateTime complaintDate, String status, Customer customer) {
         this.complaintId = complaintId;
         this.title = title;
         this.description = description;
@@ -44,8 +42,8 @@ public class Complaint {
         this.description = description;
         this.complaintDate = complaintDate;
         this.status = status;
-        this.customerId = customerId;
     }
+
 
 
     public Long getComplaintId() {

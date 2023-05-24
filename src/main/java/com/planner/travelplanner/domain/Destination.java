@@ -6,11 +6,11 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "hotels")
-public class Hotel {
+@Table(name = "destination")
+public class Destination {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long hotelId;
+    private long destinationId;
 
     @JsonProperty("id")
     private long idName;
@@ -29,11 +29,11 @@ public class Hotel {
     private int HotelPrice;
 
 
-    public Hotel() {
+    public Destination() {
     }
 
-    public Hotel(long hotelId, long idName, String name, String countryCode, String currency, int hotelPrice) {
-        this.hotelId = hotelId;
+    public Destination(long hotelId, long idName, String name, String countryCode, String currency, int hotelPrice) {
+        this.destinationId = hotelId;
         this.idName = idName;
         this.name = name;
         this.countryCode = countryCode;
@@ -41,12 +41,12 @@ public class Hotel {
         this.HotelPrice = hotelPrice;
     }
 
-    public long getHotelId() {
-        return hotelId;
+    public long getDestinationId() {
+        return destinationId;
     }
 
-    public void setHotelId(long hotelId) {
-        this.hotelId = hotelId;
+    public void setDestinationId(long destinationId) {
+        this.destinationId = destinationId;
     }
 
     public long getIdName() {
@@ -94,19 +94,19 @@ public class Hotel {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Hotel hotel = (Hotel) o;
-        return hotelId == hotel.hotelId && idName == hotel.idName && HotelPrice == hotel.HotelPrice && Objects.equals(name, hotel.name) && Objects.equals(countryCode, hotel.countryCode) && Objects.equals(currency, hotel.currency);
+        Destination destination = (Destination) o;
+        return destinationId == destination.destinationId && idName == destination.idName && HotelPrice == destination.HotelPrice && Objects.equals(name, destination.name) && Objects.equals(countryCode, destination.countryCode) && Objects.equals(currency, destination.currency);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hotelId, idName, name, countryCode, currency, HotelPrice);
+        return Objects.hash(destinationId, idName, name, countryCode, currency, HotelPrice);
     }
 
     @Override
     public String toString() {
-        return "Hotel{" +
-                "hotelId=" + hotelId +
+        return "Destination{" +
+                "destinationId=" + destinationId +
                 ", idName=" + idName +
                 ", name='" + name + '\'' +
                 ", countryCode='" + countryCode + '\'' +

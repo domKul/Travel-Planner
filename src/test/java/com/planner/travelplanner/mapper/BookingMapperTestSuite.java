@@ -2,7 +2,7 @@ package com.planner.travelplanner.mapper;
 
 import com.planner.travelplanner.domain.Booking;
 import com.planner.travelplanner.domain.Customer;
-import com.planner.travelplanner.domain.Hotel;
+import com.planner.travelplanner.domain.Destination;
 import com.planner.travelplanner.domain.dto.booking.BookingDTO;
 import com.planner.travelplanner.domain.dto.booking.BookingDTOGet;
 import org.junit.jupiter.api.Test;
@@ -25,12 +25,12 @@ public class BookingMapperTestSuite {
     private Booking booking;
 
     private Customer customer;
-    private Hotel hotel;
+    private Destination destination;
 
     private void dataForTests(){
         customer = new Customer(1, "firstName", "lastName", new Date(2020,02,02), "string","string", "string", "string", "string", 1231231, new ArrayList<>(), new ArrayList<>());
-        hotel = new Hotel();
-        booking = new Booking(1l,new Date(2020,12,12),new Date(2020,12,13),customer,hotel);
+        destination = new Destination();
+        booking = new Booking(1l,new Date(2020,12,12),new Date(2020,12,13),customer, destination);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class BookingMapperTestSuite {
         //When
         assertEquals(booking.getCustomer().getFirstName(),mapToDTOGET.getCustomerFirstName());
         assertEquals(booking.getCustomer().getLastName(),mapToDTOGET.getCustomerLastName());
-        assertEquals(booking.getHotels().getHotelId(),mapToDTOGET.getHotelId());
+        assertEquals(booking.getHotels().getDestinationId(),mapToDTOGET.getHotelId());
     }
 
     @Test

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HotelApiConfig {
+public class DestinationApiConfig {
 
     @Value("f243aef89dmshe81c48fa6dfb27ep142049jsne19c66e2bb54")
     private String apiKey;

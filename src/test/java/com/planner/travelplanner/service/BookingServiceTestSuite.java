@@ -2,14 +2,14 @@ package com.planner.travelplanner.service;
 
 import com.planner.travelplanner.domain.Booking;
 import com.planner.travelplanner.domain.Customer;
-import com.planner.travelplanner.domain.Hotel;
+import com.planner.travelplanner.domain.Destination;
 import com.planner.travelplanner.domain.dto.booking.BookingDTO;
 import com.planner.travelplanner.domain.dto.booking.BookingDTOCreate;
 import com.planner.travelplanner.domain.dto.booking.BookingDTOGet;
 import com.planner.travelplanner.domain.exception.BookingNotFoundException;
 import com.planner.travelplanner.repository.BookingRepository;
 import com.planner.travelplanner.repository.CustomerRepository;
-import com.planner.travelplanner.repository.HotelRepository;
+import com.planner.travelplanner.repository.DestinationRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,22 +32,22 @@ public class BookingServiceTestSuite {
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
-    private HotelRepository hotelRepository;
+    private DestinationRepository destinationRepository;
     private Booking booking;
 
     private Customer customer;
-    private Hotel hotel;
+    private Destination destination;
 
     private void dataForTests() {
         customer = new Customer(1, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231, new ArrayList<>(), new ArrayList<>());
-        hotel = new Hotel();
-        booking = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), customer, hotel);
+        destination = new Destination();
+        booking = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), customer, destination);
     }
 
 
     private void clearData(){
         customerRepository.deleteAll();
-        hotelRepository.deleteAll();
+        destinationRepository.deleteAll();
         bookingRepository.deleteAll();
     }
     @BeforeEach
@@ -61,19 +61,19 @@ public class BookingServiceTestSuite {
         clearData();
         dataForTests();
         Customer saveCustomer = customerRepository.save(customer);
-        Hotel savedHotel = hotelRepository.save(hotel);
-        bookingDTOCreate = new BookingDTOCreate(new Date(2020, 12, 12), new Date(2020, 12, 13), saveCustomer.getCustomerId(), hotel.getHotelId());
+        Destination savedDestination = destinationRepository.save(destination);
+        bookingDTOCreate = new BookingDTOCreate(new Date(2020, 12, 12), new Date(2020, 12, 13), saveCustomer.getCustomerId(), destination.getDestinationId());
 
         //When
         Booking creatingBooking = bookingService.addBooking(bookingDTOCreate);
 
         //Then
         assertEquals(booking.getStartDate(), creatingBooking.getStartDate());
-        assertEquals(booking.getHotels().getHotelId(), creatingBooking.getHotels().getHotelId());
+        assertEquals(booking.getHotels().getDestinationId(), creatingBooking.getHotels().getDestinationId());
 
         //CleanUp
         customerRepository.deleteById(saveCustomer.getCustomerId());
-        hotelRepository.deleteById(savedHotel.getHotelId());
+        destinationRepository.deleteById(savedDestination.getDestinationId());
         bookingRepository.deleteById(creatingBooking.getBookingId());
     }
 
@@ -83,13 +83,13 @@ public class BookingServiceTestSuite {
         clearData();
         dataForTests();
         Customer saveCustomer = customerRepository.save(customer);
-        Hotel savedHotel = hotelRepository.save(hotel);
-        bookingDTOCreate = new BookingDTOCreate(new Date(2020, 12, 12), new Date(2020, 12, 13), saveCustomer.getCustomerId(), hotel.getHotelId());
+        Destination savedDestination = destinationRepository.save(destination);
+        bookingDTOCreate = new BookingDTOCreate(new Date(2020, 12, 12), new Date(2020, 12, 13), saveCustomer.getCustomerId(), destination.getDestinationId());
         Booking creatingBooking = bookingService.addBooking(bookingDTOCreate);
 
 
         //When
-        BookingDTO modify = bookingService.modifyBooking(creatingBooking.getBookingId(), new BookingDTOCreate(new Date(2022, 12, 12), new Date(2020, 12, 13), saveCustomer.getCustomerId(), hotel.getHotelId()));
+        BookingDTO modify = bookingService.modifyBooking(creatingBooking.getBookingId(), new BookingDTOCreate(new Date(2022, 12, 12), new Date(2020, 12, 13), saveCustomer.getCustomerId(), destination.getDestinationId()));
 
         //Then
         assertEquals(creatingBooking.getCustomer().getCustomerId(), modify.getCustomer().getCustomerId());
@@ -97,7 +97,7 @@ public class BookingServiceTestSuite {
 
         //CleanUp
         customerRepository.deleteById(saveCustomer.getCustomerId());
-        hotelRepository.deleteById(savedHotel.getHotelId());
+        destinationRepository.deleteById(savedDestination.getDestinationId());
         bookingRepository.deleteById(creatingBooking.getBookingId());
     }
 
@@ -107,8 +107,8 @@ public class BookingServiceTestSuite {
         clearData();
         dataForTests();
         Customer savedCustomer = customerRepository.save(customer);
-        Hotel savedHotel = hotelRepository.save(hotel);
-        BookingDTOCreate bookingDTOCreate = new BookingDTOCreate(new Date(2020, 12, 12), new Date(2020, 12, 13), savedCustomer.getCustomerId(), savedHotel.getHotelId());
+        Destination savedDestination = destinationRepository.save(destination);
+        BookingDTOCreate bookingDTOCreate = new BookingDTOCreate(new Date(2020, 12, 12), new Date(2020, 12, 13), savedCustomer.getCustomerId(), savedDestination.getDestinationId());
         Booking createdBooking = bookingService.addBooking(bookingDTOCreate);
 
         // When
@@ -129,8 +129,8 @@ public class BookingServiceTestSuite {
         clearData();
         dataForTests();
         Customer savedCustomer = customerRepository.save(customer);
-        Hotel savedHotel = hotelRepository.save(hotel);
-        BookingDTOCreate bookingDTOCreate = new BookingDTOCreate(new Date(2020, 12, 12), new Date(2020, 12, 13), savedCustomer.getCustomerId(), savedHotel.getHotelId());
+        Destination savedDestination = destinationRepository.save(destination);
+        BookingDTOCreate bookingDTOCreate = new BookingDTOCreate(new Date(2020, 12, 12), new Date(2020, 12, 13), savedCustomer.getCustomerId(), savedDestination.getDestinationId());
         Booking createdBooking1 = bookingService.addBooking(bookingDTOCreate);
 
         // When

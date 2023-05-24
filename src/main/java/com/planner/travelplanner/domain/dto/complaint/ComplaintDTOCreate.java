@@ -46,4 +46,5 @@ public class ComplaintDTOCreate {
     public long getCustomerId() {
         return customerId;
     }
+
 }

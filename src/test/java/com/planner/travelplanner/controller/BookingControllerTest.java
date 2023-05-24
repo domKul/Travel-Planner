@@ -3,7 +3,7 @@ package com.planner.travelplanner.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.planner.travelplanner.domain.Booking;
 import com.planner.travelplanner.domain.Customer;
-import com.planner.travelplanner.domain.Hotel;
+import com.planner.travelplanner.domain.Destination;
 import com.planner.travelplanner.domain.dto.booking.BookingDTOCreate;
 import com.planner.travelplanner.domain.dto.booking.BookingDTOGet;
 import com.planner.travelplanner.service.BookingService;
@@ -85,9 +85,9 @@ public class BookingControllerTest {
     void shouldsaveBooking() throws Exception{
         //Given
         Customer  customer = new Customer(1, "firstName", "lastName", Calendar.getInstance().getTime(), "string", "string", "string", "string", "string", 1231231, new ArrayList<>(), null);
-        Hotel hotel = new Hotel();
+        Destination destination = new Destination();
         BookingDTOCreate create = new BookingDTOCreate.Builder().build();
-        Booking booking = new Booking(1L,new Date(),new Date(),customer,hotel);
+        Booking booking = new Booking(1L,new Date(),new Date(),customer, destination);
 
         when(bookingService.addBooking(create)).thenReturn(booking);
 

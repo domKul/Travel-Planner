@@ -3,7 +3,7 @@ package com.planner.travelplanner.repository;
 
 import com.planner.travelplanner.domain.Booking;
 import com.planner.travelplanner.domain.Customer;
-import com.planner.travelplanner.domain.Hotel;
+import com.planner.travelplanner.domain.Destination;
 import com.planner.travelplanner.mapper.IdType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class BookingCrudTestSuite {
     @Autowired
     private BookingRepository bookingRepository;
     @Autowired
-    private HotelRepository hotelRepository;
+    private DestinationRepository destinationRepository;
 
 
     @Autowired
@@ -30,15 +30,15 @@ public class BookingCrudTestSuite {
     private Customer customer2 = null;
     private Booking booking1 = null;
     private Booking booking2 = null;
-    private Hotel hotel1 = null;
-    private Hotel hotel2 = null;
+    private Destination destination1 = null;
+    private Destination destination2 = null;
 
 
     private void dataForTests() {
         customer1 = new Customer(IdType.EMPTY_ID.getId(), "firstName1", "lastName1", new Date(2000, 2, 11), "country", "city", "streetName", "postalCode", "email", 1231231, new ArrayList<>(), null);
         customer2 = new Customer(IdType.EMPTY_ID.getId(), "firstName2", "lastName2", new Date(2000, 2, 11), "country", "city", "streetName", "postalCode", "email", 1231231, new ArrayList<>(), null);
-        hotel1 = new Hotel(IdType.EMPTY_ID.getId(), IdType.EMPTY_ID.getId(), null, null, null, 231);
-        hotel2 = new Hotel(IdType.EMPTY_ID.getId(),IdType.EMPTY_ID.getId(), null, null, null, 1231);
+        destination1 = new Destination(IdType.EMPTY_ID.getId(), IdType.EMPTY_ID.getId(), null, null, null, 231);
+        destination2 = new Destination(IdType.EMPTY_ID.getId(),IdType.EMPTY_ID.getId(), null, null, null, 1231);
         booking1 = new Booking(IdType.EMPTY_ID.getId(), new Date(2020, 12, 12), new Date(2020, 12, 12), null, null);
         booking2 = new Booking(IdType.EMPTY_ID.getId(), new Date(2020, 12, 12), new Date(2020, 12, 12), null, null);
     }
@@ -129,22 +129,22 @@ public class BookingCrudTestSuite {
         dataForTests();
         Customer saveCustomer1 = customerRepository.save(customer1);
         Customer saveCustomer2 = customerRepository.save(customer2);
-        Hotel saveHotel1 = hotelRepository.save(hotel1);
-        Hotel savedHotel2 = hotelRepository.save(hotel2);
+        Destination saveDestination1 = destinationRepository.save(destination1);
+        Destination savedDestination2 = destinationRepository.save(destination2);
         Booking saveBooking1 = bookingRepository.save(booking1);
         Booking saveBooking2 = bookingRepository.save(booking2);
 
         //When
-        saveBooking1.setHotels(hotel1);
+        saveBooking1.setHotels(destination1);
         saveBooking1.setCustomer(customer1);
         Booking modifiedBooking1 = bookingRepository.save(saveBooking1);
-        saveBooking2.setHotels(hotel2);
+        saveBooking2.setHotels(destination2);
         saveBooking2.setCustomer(customer2);
         Booking modifiedBooking2 = bookingRepository.save(saveBooking2);
 
         // Then
         assertEquals(customer1.getFirstName(), modifiedBooking1.getCustomer().getFirstName());
-        assertEquals(hotel1.getName(), modifiedBooking1.getHotels().getName());
+        assertEquals(destination1.getName(), modifiedBooking1.getHotels().getName());
         assertEquals(saveBooking1.getBookingId(), modifiedBooking1.getBookingId());
         assertEquals(saveBooking2.getBookingId(), modifiedBooking2.getBookingId());
         assertEquals(saveBooking2.getCustomer().getCustomerId(), modifiedBooking2.getCustomer().getCustomerId());
@@ -154,13 +154,13 @@ public class BookingCrudTestSuite {
         long getId2 = saveBooking2.getBookingId();
         long getId3 = saveCustomer1.getCustomerId();
         long getId4 = saveCustomer2.getCustomerId();
-        long getId5 = saveHotel1.getHotelId();
-        long getId6 = savedHotel2.getHotelId();
+        long getId5 = saveDestination1.getDestinationId();
+        long getId6 = savedDestination2.getDestinationId();
         bookingRepository.deleteById(getId1);
         bookingRepository.deleteById(getId2);
         customerRepository.deleteById(getId3);
         customerRepository.deleteById(getId4);
-        hotelRepository.deleteById(getId5);
-        hotelRepository.deleteById(getId6);
+        destinationRepository.deleteById(getId5);
+        destinationRepository.deleteById(getId6);
     }
 }

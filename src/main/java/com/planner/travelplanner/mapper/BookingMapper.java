@@ -5,7 +5,7 @@ import com.planner.travelplanner.domain.dto.booking.BookingDTO;
 import com.planner.travelplanner.domain.dto.booking.BookingDTOGet;
 import com.planner.travelplanner.repository.BookingRepository;
 import com.planner.travelplanner.repository.CustomerRepository;
-import com.planner.travelplanner.repository.HotelRepository;
+import com.planner.travelplanner.repository.DestinationRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,12 +14,12 @@ import java.util.List;
 public class BookingMapper {
     private final BookingRepository bookingRepository;
     private final CustomerRepository customerRepository;
-    private final HotelRepository hotelRepository;
+    private final DestinationRepository destinationRepository;
 
-    public BookingMapper(BookingRepository bookingRepository, CustomerRepository customerRepository, HotelRepository hotelRepository) {
+    public BookingMapper(BookingRepository bookingRepository, CustomerRepository customerRepository, DestinationRepository destinationRepository) {
         this.bookingRepository = bookingRepository;
         this.customerRepository = customerRepository;
-        this.hotelRepository = hotelRepository;
+        this.destinationRepository = destinationRepository;
     }
 
     public BookingDTO mapToBookingDTO(Booking booking) {
@@ -44,7 +44,7 @@ public class BookingMapper {
                 .postalCode(booking.getCustomer().getPostalCode())
                 .email(booking.getCustomer().getEmail())
                 .phoneNumber(booking.getCustomer().getPhoneNumber())
-                .hotelId(booking.getHotels().getHotelId())
+                .hotelId(booking.getHotels().getDestinationId())
                 .hotelName(booking.getHotels().getName())
                 .hotelId(booking.getHotels().getIdName())
                 .startBooking(booking.getStartDate())

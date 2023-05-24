@@ -38,8 +38,7 @@ public class Customer {
     private String email;
     @NotNull
     private int phoneNumber;
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "customer")
     private List<Complaint> complaints;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)

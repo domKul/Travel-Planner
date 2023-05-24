@@ -1,14 +1,14 @@
 package com.planner.travelplanner.repository;
 
-import com.planner.travelplanner.domain.Hotel;
+import com.planner.travelplanner.domain.Destination;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface HotelRepository extends CrudRepository<Hotel, Long> {
-    List<Hotel> findAll();
+public interface DestinationRepository extends CrudRepository<Destination, Long> {
+    List<Destination> findAll();
 
     boolean existsByName(String name);
 }

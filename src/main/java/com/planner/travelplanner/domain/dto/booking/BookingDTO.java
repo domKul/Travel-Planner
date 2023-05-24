@@ -1,7 +1,7 @@
 package com.planner.travelplanner.domain.dto.booking;
 
 import com.planner.travelplanner.domain.Customer;
-import com.planner.travelplanner.domain.Hotel;
+import com.planner.travelplanner.domain.Destination;
 
 import java.util.Date;
 
@@ -15,13 +15,13 @@ public class BookingDTO {
     private final Customer customer;
 
 
-    private final Hotel hotel;
+    private final Destination destination;
 
-    public BookingDTO(Date startDate, Date endDate, Customer customer, Hotel hotel) {
+    public BookingDTO(Date startDate, Date endDate, Customer customer, Destination destination) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.customer = customer;
-        this.hotel = hotel;
+        this.destination = destination;
     }
 
 
@@ -37,7 +37,7 @@ public class BookingDTO {
         return customer;
     }
 
-    public Hotel getHotel() {
-        return hotel;
+    public Destination getHotel() {
+        return destination;
     }
 }

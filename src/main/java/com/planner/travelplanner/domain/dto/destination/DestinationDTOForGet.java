@@ -1,8 +1,8 @@
-package com.planner.travelplanner.domain.dto.hotel;
+package com.planner.travelplanner.domain.dto.destination;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class HotelDTOForGet {
+public class DestinationDTOForGet {
     @JsonProperty("hotelId")
     private long hotelId;
 
@@ -22,7 +22,7 @@ public class HotelDTOForGet {
     @JsonProperty("value")
     private int HotelPrice;
 
-    public HotelDTOForGet(long hotelId, long idName, String name, String countryCode, String currency, int hotelPrice) {
+    public DestinationDTOForGet(long hotelId, long idName, String name, String countryCode, String currency, int hotelPrice) {
         this.hotelId = hotelId;
         this.idName = idName;
         this.name = name;

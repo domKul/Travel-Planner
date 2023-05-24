@@ -1,10 +1,10 @@
-package com.planner.travelplanner.domain.dto.hotel;
+package com.planner.travelplanner.domain.dto.destination;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class HotelDTO {
+public class DestinationlDTO {
 
     @JsonProperty("results")
     private List<Result> results;

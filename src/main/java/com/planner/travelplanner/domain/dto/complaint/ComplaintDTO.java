@@ -15,7 +15,7 @@ public class ComplaintDTO {
 
     private final String status;
 
-    private final long customer;
+    private final long customerId;
 
     public ComplaintDTO(Long complaintId, String title, String description, LocalDateTime complaintDate, String status, long customerId) {
         this.complaintId = complaintId;
@@ -23,7 +23,7 @@ public class ComplaintDTO {
         this.description = description;
         this.complaintDate = complaintDate;
         this.status = status;
-        this.customer = customerId;
+        this.customerId = customerId;
     }
 
     public Long getComplaintId() {
@@ -46,7 +46,8 @@ public class ComplaintDTO {
         return status;
     }
 
-    public long getCustomer() {
-        return customer;
+    public long getCustomerId() {
+        return customerId;
     }
+
 }

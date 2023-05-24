@@ -24,18 +24,18 @@ public class Booking {
     private Customer customer;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "hotel_id")
-    private Hotel hotel;
+    @JoinColumn(name = "destination_id")
+    private Destination destination;
 
     public Booking() {
     }
 
-    public Booking(long bookingId, Date startDate, Date endDate, Customer customer, Hotel hotel) {
+    public Booking(long bookingId, Date startDate, Date endDate, Customer customer, Destination destination) {
         this.bookingId = bookingId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.customer = customer;
-        this.hotel = hotel;
+        this.destination = destination;
     }
 
     public long getBookingId() {
@@ -71,12 +71,12 @@ public class Booking {
     }
 
 
-    public Hotel getHotels() {
-        return hotel;
+    public Destination getHotels() {
+        return destination;
     }
 
-    public void setHotels(Hotel hotel) {
-        this.hotel = hotel;
+    public void setHotels(Destination destination) {
+        this.destination = destination;
     }
 
     @Override
@@ -84,12 +84,12 @@ public class Booking {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Booking booking = (Booking) o;
-        return bookingId == booking.bookingId && Objects.equals(startDate, booking.startDate) && Objects.equals(endDate, booking.endDate) && Objects.equals(customer, booking.customer) && Objects.equals(hotel, booking.hotel);
+        return bookingId == booking.bookingId && Objects.equals(startDate, booking.startDate) && Objects.equals(endDate, booking.endDate) && Objects.equals(customer, booking.customer) && Objects.equals(destination, booking.destination);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bookingId, startDate, endDate, customer, hotel);
+        return Objects.hash(bookingId, startDate, endDate, customer, destination);
     }
 
     @Override
@@ -99,7 +99,7 @@ public class Booking {
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", customer=" + customer +
-                ", hotel=" + hotel +
+                ", destination=" + destination +
                 '}';
     }
 }
