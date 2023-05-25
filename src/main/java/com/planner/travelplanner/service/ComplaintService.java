@@ -30,7 +30,7 @@ public class ComplaintService {
     @Transactional
     public Complaint createComplaint(final long customerId, final ComplaintDTOCreate complaintDTOCreate) {
         if (customerRepository.existsById(customerId)) {
-            Complaint complaint = complaintMapper.mapFromComplaintCreate(customerId, complaintDTOCreate);
+            Complaint complaint = ComplaintMapper.mapFromComplaintCreate(customerId, complaintDTOCreate);
             return complaintRepository.save(complaint);
         } else {
             throw new CustomerNotFoundException();

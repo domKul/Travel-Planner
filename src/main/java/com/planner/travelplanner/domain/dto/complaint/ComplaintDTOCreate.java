@@ -12,7 +12,7 @@ public class ComplaintDTOCreate {
     private final LocalDateTime complaintDate;
 
     private final String status;
-    private final long customerId;
+    private final Long customerId;
 
     public ComplaintDTOCreate(String title, String description, LocalDateTime complaintDate, String status, long customerId) {
         this.title = title;

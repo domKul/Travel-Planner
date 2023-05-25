@@ -47,7 +47,7 @@ public class BookingService {
             booking.setCustomer(findCustomer);
             booking.setStartDate(bookingDTOCreate.getStartDate());
             booking.setEndDate(bookingDTOCreate.getEndDate());
-            booking.setHotels(findDestination);
+            booking.setDestinations(findDestination);
         }
 
         return bookingRepository.save(booking);
@@ -93,7 +93,7 @@ public class BookingService {
             booking.setStartDate(bookingDTOCreate.getStartDate());
             booking.setEndDate(bookingDTOCreate.getEndDate());
             booking.setCustomer(customerRepository.findById(bookingDTOCreate.getCustomerId()).orElseThrow(CustomerNotFoundException::new));
-            booking.setHotels(destinationRepository.findById(bookingDTOCreate.getHotelId()).orElseThrow(HotelNotFoundException::new));
+            booking.setDestinations(destinationRepository.findById(bookingDTOCreate.getHotelId()).orElseThrow(HotelNotFoundException::new));
             return booking;
         } else {
             throw new BookingNotFoundException();

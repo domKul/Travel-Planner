@@ -7,9 +7,9 @@ public class BookingDTOCreate {
 
     private final Date endDate;
 
-    private final long customerId;
+    private final Long customerId;
 
-    private final long hotelId;
+    private final Long hotelId;
 
     public BookingDTOCreate(Date startDate, Date endDate, long customerId, long hotelId) {
         this.startDate = startDate;

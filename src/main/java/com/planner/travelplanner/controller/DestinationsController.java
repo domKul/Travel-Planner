@@ -18,17 +18,17 @@ public class DestinationsController {
 
     @GetMapping()
     public ResponseEntity<List<DestinationDTOForGet>> getAllDestinationsFromDB() {
-        return ResponseEntity.ok(destinationService.getAllHotelsInDB());
+        return ResponseEntity.ok(destinationService.getAllDestinationsInDB());
     }
 
     @GetMapping(value = "{destinationId}")
-    public ResponseEntity<DestinationDTOForGet> getDestinationById(@PathVariable Long destinationId) {
-        return ResponseEntity.ok(destinationService.getHotelById(destinationId));
+    public ResponseEntity<DestinationDTOForGet> getDestinationById(@PathVariable long destinationId) {
+        return ResponseEntity.ok(destinationService.getDestinationById(destinationId));
     }
 
     @DeleteMapping(value = "{destinationId}")
-    public ResponseEntity<Void> deleteDestination(@PathVariable Long destinationId) {
-        destinationService.deleteHotelById(destinationId);
+    public ResponseEntity<Void> deleteDestination(@PathVariable long destinationId) {
+        destinationService.deleteDestinationById(destinationId);
         return ResponseEntity.ok().build();
     }
 }

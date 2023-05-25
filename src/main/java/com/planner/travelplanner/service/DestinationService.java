@@ -20,7 +20,7 @@ public class DestinationService {
     }
 
     @Transactional
-    public void deleteHotelById(long hotelId) {
+    public void deleteDestinationById(long hotelId) {
         if (destinationRepository.existsById(hotelId)) {
             destinationRepository.deleteById(hotelId);
         } else {
@@ -28,11 +28,11 @@ public class DestinationService {
         }
     }
 
-    public List<DestinationDTOForGet> getAllHotelsInDB() {
+    public List<DestinationDTOForGet> getAllDestinationsInDB() {
         return destinationMapper.hotelResultDTOList(destinationRepository.findAll());
     }
 
-    public DestinationDTOForGet getHotelById(long hotelId) {
+    public DestinationDTOForGet getDestinationById(long hotelId) {
         if (destinationRepository.existsById(hotelId)) {
             return destinationMapper.mapToDestinationResultDTO(destinationRepository.findById(hotelId).get());
         } else {

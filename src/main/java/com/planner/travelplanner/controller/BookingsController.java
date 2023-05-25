@@ -33,17 +33,17 @@ public class BookingsController {
     }
 
     @GetMapping(value = "{bookingId}")
-    public ResponseEntity<BookingDTOGet> getBookingById(@PathVariable Long bookingId) {
+    public ResponseEntity<BookingDTOGet> getBookingById(@PathVariable long bookingId) {
         return ResponseEntity.ok(bookingService.showBookingById(bookingId));
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BookingDTO> updateBooking(@RequestParam Long bookingId, @RequestBody BookingDTOCreate bookingDTOCreate) {
+    public ResponseEntity<BookingDTO> updateBooking(@RequestParam long bookingId, @RequestBody BookingDTOCreate bookingDTOCreate) {
         return ResponseEntity.ok(bookingService.modifyBooking(bookingId, bookingDTOCreate));
     }
 
     @DeleteMapping(value = "{bookingId}")
-    public ResponseEntity<Void> deleteBooking(@PathVariable Long bookingId) {
+    public ResponseEntity<Void> deleteBooking(@PathVariable long bookingId) {
         bookingService.deleteBookingById(bookingId);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }

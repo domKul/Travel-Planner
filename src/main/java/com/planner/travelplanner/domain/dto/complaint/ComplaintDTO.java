@@ -15,7 +15,7 @@ public class ComplaintDTO {
 
     private final String status;
 
-    private final long customerId;
+    private final Long customerId;
 
     public ComplaintDTO(Long complaintId, String title, String description, LocalDateTime complaintDate, String status, long customerId) {
         this.complaintId = complaintId;

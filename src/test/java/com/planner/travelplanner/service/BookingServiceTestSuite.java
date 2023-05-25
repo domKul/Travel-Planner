@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -34,14 +35,16 @@ public class BookingServiceTestSuite {
     @Autowired
     private DestinationRepository destinationRepository;
     private Booking booking;
+    private Booking booking2;
 
     private Customer customer;
     private Destination destination;
 
     private void dataForTests() {
-        customer = new Customer(1, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231, new ArrayList<>(), new ArrayList<>());
+        customer = new Customer(0, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231, new ArrayList<>(), new ArrayList<>());
         destination = new Destination();
         booking = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), customer, destination);
+        booking2 = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), customer, destination);
     }
 
 
@@ -69,7 +72,7 @@ public class BookingServiceTestSuite {
 
         //Then
         assertEquals(booking.getStartDate(), creatingBooking.getStartDate());
-        assertEquals(booking.getHotels().getDestinationId(), creatingBooking.getHotels().getDestinationId());
+        assertEquals(booking.getDestinations().getDestinationId(), creatingBooking.getDestinations().getDestinationId());
 
         //CleanUp
         customerRepository.deleteById(saveCustomer.getCustomerId());
@@ -138,6 +141,30 @@ public class BookingServiceTestSuite {
 
         // Then
         assertEquals(booking.getCustomer().getFirstName(), bookingDTO.getCustomerFirstName());
+    }
+
+    @Test
+    public void shouldShowAllBookings(){
+        //Given
+        dataForTests();
+        destinationRepository.save(destination);
+        customerRepository.save(customer);
+        Booking saveBooking1 =bookingRepository.save(booking);
+        saveBooking1.setDestinations(destination);
+        Booking saveBooking2 =  bookingRepository.save(booking);
+        saveBooking2.setDestinations(destination);
+
+
+        //Whne
+        List<BookingDTOGet> findAllList = bookingService.showAllBookings();
+
+        //Then
+        assertEquals(2,findAllList.size());
+
+        //CleanUp
+        bookingRepository.deleteAll();
+        destinationRepository.deleteAll();
+        customerRepository.deleteAll();
     }
 
     @Test

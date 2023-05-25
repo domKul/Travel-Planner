@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class DestinationDTOForGet {
     @JsonProperty("hotelId")
-    private long hotelId;
+    private Long hotelId;
 
     @JsonProperty("id")
-    private long idName;
+    private Long idName;
 
     @JsonProperty("name")
     private String name;

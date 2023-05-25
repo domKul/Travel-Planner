@@ -27,7 +27,7 @@ public class BookingMapper {
                 booking.getStartDate(),
                 booking.getEndDate(),
                 booking.getCustomer(),
-                booking.getHotels());
+                booking.getDestinations());
     }
 
     public BookingDTOGet mapToBookingDTOGet(Booking booking) {
@@ -44,13 +44,13 @@ public class BookingMapper {
                 .postalCode(booking.getCustomer().getPostalCode())
                 .email(booking.getCustomer().getEmail())
                 .phoneNumber(booking.getCustomer().getPhoneNumber())
-                .hotelId(booking.getHotels().getDestinationId())
-                .hotelName(booking.getHotels().getName())
-                .hotelId(booking.getHotels().getIdName())
+                .hotelId(booking.getDestinations().getDestinationId())
+                .hotelName(booking.getDestinations().getName())
+                .hotelId(booking.getDestinations().getIdName())
                 .startBooking(booking.getStartDate())
                 .endBooking(booking.getEndDate())
-                .hotelPrice(String.valueOf(booking.getHotels().getHotelPrice()))
-                .currency(booking.getHotels().getCurrency())
+                .hotelPrice(String.valueOf(booking.getDestinations().getHotelPrice()))
+                .currency(booking.getDestinations().getCurrency())
                 .build();
     }
 

@@ -12,7 +12,7 @@ public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long bookingId;
+    private Long bookingId;
 
 
     private Date startDate;
@@ -71,11 +71,11 @@ public class Booking {
     }
 
 
-    public Destination getHotels() {
+    public Destination getDestinations() {
         return destination;
     }
 
-    public void setHotels(Destination destination) {
+    public void setDestinations(Destination destination) {
         this.destination = destination;
     }
 

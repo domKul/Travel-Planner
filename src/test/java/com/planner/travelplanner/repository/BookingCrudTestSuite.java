@@ -135,16 +135,16 @@ public class BookingCrudTestSuite {
         Booking saveBooking2 = bookingRepository.save(booking2);
 
         //When
-        saveBooking1.setHotels(destination1);
+        saveBooking1.setDestinations(destination1);
         saveBooking1.setCustomer(customer1);
         Booking modifiedBooking1 = bookingRepository.save(saveBooking1);
-        saveBooking2.setHotels(destination2);
+        saveBooking2.setDestinations(destination2);
         saveBooking2.setCustomer(customer2);
         Booking modifiedBooking2 = bookingRepository.save(saveBooking2);
 
         // Then
         assertEquals(customer1.getFirstName(), modifiedBooking1.getCustomer().getFirstName());
-        assertEquals(destination1.getName(), modifiedBooking1.getHotels().getName());
+        assertEquals(destination1.getName(), modifiedBooking1.getDestinations().getName());
         assertEquals(saveBooking1.getBookingId(), modifiedBooking1.getBookingId());
         assertEquals(saveBooking2.getBookingId(), modifiedBooking2.getBookingId());
         assertEquals(saveBooking2.getCustomer().getCustomerId(), modifiedBooking2.getCustomer().getCustomerId());

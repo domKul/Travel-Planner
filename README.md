@@ -13,3 +13,4 @@ To run the APi:
 - Creating traveler - done
 - Creating Booking - done
 - Creating complaint about tour in progress
+- For this moment all test work only with empty Database.

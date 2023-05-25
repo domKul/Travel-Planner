@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,10 +37,11 @@ public class ComplaintServiceTestSuite {
     private Complaint complaint;
     private ComplaintDTOCreate complaintDTOCreate;
     private CustomerDTO customerDTO;
-    private ComplaintDTO complaintDTO;
+    private Customer customer;
     private ComplaintDTOUpdate complaintDTOUpdate;
 
     public void dataForTests() {
+        customer = new Customer(IdType.EMPTY_ID.getId(), "firstName1", "lastName1", new Date(2000, 2, 11), "country", "city", "streetName", "postalCode", "email", 1231231, new ArrayList<>(), null);
         customerDTO = new CustomerDTO( "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231);
         complaint = new Complaint(1L, "title", "descritpion", null, "status", new Customer());
         complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", null, "status", IdType.EMPTY_ID.getId());
@@ -167,6 +169,7 @@ public class ComplaintServiceTestSuite {
 
         //When
         Complaint create1 = complaintService.createComplaint(cusId, complaintDTOCreate);
+        create1.setCustomer(customer);
         List<ComplaintDTO> findOne =  complaintService.showAllComplaints();
         complaintService.deleteComplainByID(create1.getComplaintId());
 

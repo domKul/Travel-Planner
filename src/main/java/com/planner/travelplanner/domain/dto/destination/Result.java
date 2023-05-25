@@ -11,7 +11,7 @@ public class Result {
     @JsonIgnore
     private final Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
     @JsonProperty("id")
-    private long id;
+    private Long id;
     @JsonProperty("name")
     private String name;
     @JsonProperty("countryCode")

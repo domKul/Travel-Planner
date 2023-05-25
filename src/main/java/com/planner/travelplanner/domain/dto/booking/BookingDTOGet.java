@@ -4,9 +4,9 @@ import java.util.Date;
 
 public class BookingDTOGet {
 
-    private long bookingId;
+    private Long bookingId;
     private final Date bookTime;
-    private final long customerId;
+    private final Long customerId;
     private final String customerFirstName;
     private final String customerLastName;
     private final Date birthDate;

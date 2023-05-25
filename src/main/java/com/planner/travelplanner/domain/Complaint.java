@@ -1,5 +1,6 @@
 package com.planner.travelplanner.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -18,10 +19,9 @@ public class Complaint {
 
     private LocalDateTime complaintDate;
     private String status;
-
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
+    @JsonBackReference
     private Customer customer;
 
     public Complaint() {

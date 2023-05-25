@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Destination {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long destinationId;
+    private Long destinationId;
 
     @JsonProperty("id")
     private long idName;

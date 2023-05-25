@@ -7,7 +7,7 @@ import java.util.List;
 
 public class CustomerDTOGet {
 
-    private final long customerId;
+    private final Long customerId;
 
     private final String firstName;
 

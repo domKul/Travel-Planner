@@ -44,7 +44,7 @@ public class BookingMapperTestSuite {
         //When
         assertEquals(booking.getCustomer().getFirstName(),mapToDTOGET.getCustomerFirstName());
         assertEquals(booking.getCustomer().getLastName(),mapToDTOGET.getCustomerLastName());
-        assertEquals(booking.getHotels().getDestinationId(),mapToDTOGET.getHotelId());
+        assertEquals(booking.getDestinations().getDestinationId(),mapToDTOGET.getHotelId());
     }
 
     @Test
