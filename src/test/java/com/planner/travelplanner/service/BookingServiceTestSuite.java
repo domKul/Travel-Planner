@@ -41,10 +41,10 @@ public class BookingServiceTestSuite {
     private Destination destination;
 
     private void dataForTests() {
-        customer = new Customer(0, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231, new ArrayList<>(), new ArrayList<>());
+        customer = new Customer(1L, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231, new ArrayList<>(), new ArrayList<>());
         destination = new Destination();
-        booking = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), customer, destination);
-        booking2 = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), customer, destination);
+        booking = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), null, null);
+        booking2 = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), null, null);
     }
 
 
@@ -65,14 +65,14 @@ public class BookingServiceTestSuite {
         dataForTests();
         Customer saveCustomer = customerRepository.save(customer);
         Destination savedDestination = destinationRepository.save(destination);
-        bookingDTOCreate = new BookingDTOCreate(new Date(2020, 12, 12), new Date(2020, 12, 13), saveCustomer.getCustomerId(), destination.getDestinationId());
+        bookingDTOCreate = new BookingDTOCreate(new Date(2020, 12, 12), new Date(2020, 12, 13), saveCustomer.getCustomerId(), savedDestination.getDestinationId());
 
         //When
         Booking creatingBooking = bookingService.addBooking(bookingDTOCreate);
 
         //Then
         assertEquals(booking.getStartDate(), creatingBooking.getStartDate());
-        assertEquals(booking.getDestinations().getDestinationId(), creatingBooking.getDestinations().getDestinationId());
+        assertEquals(savedDestination.getDestinationId(), creatingBooking.getDestinations().getDestinationId());
 
         //CleanUp
         customerRepository.deleteById(saveCustomer.getCustomerId());
@@ -140,19 +140,19 @@ public class BookingServiceTestSuite {
         BookingDTOGet bookingDTO = bookingService.showBookingById(createdBooking1.getBookingId());
 
         // Then
-        assertEquals(booking.getCustomer().getFirstName(), bookingDTO.getCustomerFirstName());
+        assertEquals(savedCustomer.getFirstName(), bookingDTO.getCustomerFirstName());
     }
 
     @Test
     public void shouldShowAllBookings(){
         //Given
         dataForTests();
-        destinationRepository.save(destination);
-        customerRepository.save(customer);
-        Booking saveBooking1 =bookingRepository.save(booking);
-        saveBooking1.setDestinations(destination);
-        Booking saveBooking2 =  bookingRepository.save(booking);
-        saveBooking2.setDestinations(destination);
+        Destination savedDes =destinationRepository.save(destination);
+        Customer savedCustomer = customerRepository.save(customer);
+        booking.setCustomer(savedCustomer);
+        booking.setDestinations(savedDes);
+        bookingRepository.save(booking);
+        bookingRepository.save(booking);
 
 
         //Whne

@@ -125,7 +125,7 @@ public class BookingDTOGet {
         return phoneNumber;
     }
 
-    public long getHotelId() {
+    public long getDestinationId() {
         return hotelId;
     }
 

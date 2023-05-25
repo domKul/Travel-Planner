@@ -4,6 +4,7 @@ import com.planner.travelplanner.domain.Booking;
 import com.planner.travelplanner.domain.Complaint;
 import com.planner.travelplanner.domain.Customer;
 import com.planner.travelplanner.mapper.IdType;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,6 +37,12 @@ public class CustomerCrudTestSuite {
         booking2 = new Booking(IdType.EMPTY_ID.getId(), new Date(2020, 12, 12), new Date(2020, 12, 12), null, null);
         complaint1 = new Complaint(IdType.EMPTY_ID.getId(), "title1", "description1", LocalDateTime.now(), "status1", null);
         complaint2 = new Complaint(IdType.EMPTY_ID.getId(), "title2", "description2", LocalDateTime.now(), "status2", null);
+    }
+
+    @BeforeEach()
+    public void deleteData(){
+        customerRepository.deleteAll();
+
     }
 
     @Test

@@ -5,12 +5,14 @@ import com.planner.travelplanner.domain.Booking;
 import com.planner.travelplanner.domain.Customer;
 import com.planner.travelplanner.domain.Destination;
 import com.planner.travelplanner.mapper.IdType;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,8 +23,6 @@ public class BookingCrudTestSuite {
     private BookingRepository bookingRepository;
     @Autowired
     private DestinationRepository destinationRepository;
-
-
     @Autowired
     private CustomerRepository customerRepository;
 
@@ -39,8 +39,15 @@ public class BookingCrudTestSuite {
         customer2 = new Customer(IdType.EMPTY_ID.getId(), "firstName2", "lastName2", new Date(2000, 2, 11), "country", "city", "streetName", "postalCode", "email", 1231231, new ArrayList<>(), null);
         destination1 = new Destination(IdType.EMPTY_ID.getId(), IdType.EMPTY_ID.getId(), null, null, null, 231);
         destination2 = new Destination(IdType.EMPTY_ID.getId(),IdType.EMPTY_ID.getId(), null, null, null, 1231);
-        booking1 = new Booking(IdType.EMPTY_ID.getId(), new Date(2020, 12, 12), new Date(2020, 12, 12), null, null);
-        booking2 = new Booking(IdType.EMPTY_ID.getId(), new Date(2020, 12, 12), new Date(2020, 12, 12), null, null);
+        booking1 = new Booking(IdType.EMPTY_ID.getId(), new Date(2020, 12, 12), new Date(2020, 01, 12), null, null);
+        booking2 = new Booking(IdType.EMPTY_ID.getId(), new Date(2020, 12, 12), new Date(2020, 07, 12), null, null);
+    }
+
+    @BeforeEach
+    public void deleteDAta(){
+        bookingRepository.deleteAll();
+        customerRepository.deleteAll();
+        destinationRepository.deleteAll();
     }
 
     @Test
@@ -84,22 +91,30 @@ public class BookingCrudTestSuite {
 
     @Test
     public void shouldSaveAndRetrieveBookingById() {
-        //Given
+        // Given
         dataForTests();
-
-        //When
+        Customer saveCustomer1 = customerRepository.save(customer1);
+        Customer saveCustomer2 = customerRepository.save(customer2);
+        booking1.setCustomer(saveCustomer1);
+        booking2.setCustomer(saveCustomer2);
         Booking saveBooking1 = bookingRepository.save(booking1);
         Booking saveBooking2 = bookingRepository.save(booking2);
-        long getId1 = booking1.getBookingId();
+
+        // When
+        long getId1 = saveBooking1.getBookingId();
         long getId2 = saveBooking2.getBookingId();
-        boolean result = booking1.equals(booking2);
+        Optional<Booking> bookingId1 = bookingRepository.findById(getId1);
+        Optional<Booking> bookingId2 = bookingRepository.findById(getId2);
 
-        //Then
-        assertFalse(result);
-        assertEquals(getId1, saveBooking1.getBookingId());
-        assertEquals(getId2, saveBooking2.getBookingId());
+        // Then
+        assertTrue(bookingId1.isPresent());
+        assertTrue(bookingId2.isPresent());
 
-        //CealnUp
+
+        assertEquals(booking1.getCustomer().getFirstName(), bookingId1.get().getCustomer().getFirstName());
+        assertEquals(booking2.getCustomer().getFirstName(), bookingId2.get().getCustomer().getFirstName());
+
+        // CleanUp
         bookingRepository.deleteById(getId1);
         bookingRepository.deleteById(getId2);
     }
@@ -135,11 +150,11 @@ public class BookingCrudTestSuite {
         Booking saveBooking2 = bookingRepository.save(booking2);
 
         //When
-        saveBooking1.setDestinations(destination1);
-        saveBooking1.setCustomer(customer1);
+        saveBooking1.setDestinations(saveDestination1);
+        saveBooking1.setCustomer(saveCustomer1);
         Booking modifiedBooking1 = bookingRepository.save(saveBooking1);
-        saveBooking2.setDestinations(destination2);
-        saveBooking2.setCustomer(customer2);
+        saveBooking2.setDestinations(savedDestination2);
+        saveBooking2.setCustomer(saveCustomer2);
         Booking modifiedBooking2 = bookingRepository.save(saveBooking2);
 
         // Then

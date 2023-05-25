@@ -2,9 +2,12 @@ package com.planner.travelplanner.repository;
 
 import com.planner.travelplanner.domain.Destination;
 import com.planner.travelplanner.mapper.IdType;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
@@ -19,6 +22,11 @@ public class DestinationCrudTestSuite {
     private void dataForTests(){
         destination1 = new Destination(IdType.EMPTY_ID.getId(),IdType.EMPTY_ID.getId(),"null","null","null", 233);
         destination2 = new Destination(IdType.EMPTY_ID.getId(),IdType.EMPTY_ID.getId(),"null","null","null", 2233);
+    }
+
+    @BeforeEach
+    public void deleteData(){
+        destinationRepository.deleteAll();
     }
 
     @Test
@@ -67,22 +75,26 @@ public class DestinationCrudTestSuite {
     }
 
     @Test
-    public void shouldFindHotelById(){
-        //Given
+    public void shouldFindDestinationById() {
+        // Given
         dataForTests();
 
-        //When
+        // When
         Destination saveDestination1 = destinationRepository.save(destination1);
         Destination saveDestination2 = destinationRepository.save(destination2);
-
         long getId1 = saveDestination1.getDestinationId();
         long getId2 = saveDestination2.getDestinationId();
 
-        //Then
-        assertEquals(destination1.getDestinationId(),getId1);
-        assertEquals(destination2.getDestinationId(),getId2);
+        // Then
+        Optional<Destination> retrievedDestination1 = destinationRepository.findById(getId1);
+        Optional<Destination> retrievedDestination2 = destinationRepository.findById(getId2);
 
-        //CleanUp
+        assertTrue(retrievedDestination1.isPresent());
+        assertTrue(retrievedDestination2.isPresent());
+        assertEquals(destination1.getName(), retrievedDestination1.get().getName());
+        assertEquals(destination2.getName(), retrievedDestination2.get().getName());
+
+        // CleanUp
         destinationRepository.deleteById(getId1);
         destinationRepository.deleteById(getId2);
     }
