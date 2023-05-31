@@ -14,7 +14,7 @@ public class DestinationMapper {
                 destination.getName(),
                 destination.getCountryCode(),
                 destination.getCurrency(),
-                destination.getHotelPrice());
+                destination.getDestinationPrice());
     }
 
     public List<DestinationDTOForGet> hotelResultDTOList(final List<Destination> destinations) {

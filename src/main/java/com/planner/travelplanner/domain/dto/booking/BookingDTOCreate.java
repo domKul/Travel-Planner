@@ -9,13 +9,13 @@ public class BookingDTOCreate {
 
     private final Long customerId;
 
-    private final Long hotelId;
+    private final Long destinationId;
 
-    public BookingDTOCreate(Date startDate, Date endDate, long customerId, long hotelId) {
+    public BookingDTOCreate(Date startDate, Date endDate, long customerId, long destinationId) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.customerId = customerId;
-        this.hotelId = hotelId;
+        this.destinationId = destinationId;
     }
 
     public Date getStartDate() {
@@ -30,15 +30,15 @@ public class BookingDTOCreate {
         return customerId;
     }
 
-    public long getHotelId() {
-        return hotelId;
+    public long getDestinationId() {
+        return destinationId;
     }
 
     public static class Builder {
         private Date startDate;
         private Date endDate;
         private long customerId;
-        private long hotelId;
+        private long destinationId;
 
         public Builder startDate(Date startDate) {
             this.startDate = startDate;
@@ -55,13 +55,13 @@ public class BookingDTOCreate {
             return this;
         }
 
-        public Builder hotelId(long hotelId) {
-            this.hotelId = hotelId;
+        public Builder destinationId(long destinationId) {
+            this.destinationId = destinationId;
             return this;
         }
 
         public BookingDTOCreate build() {
-            return new BookingDTOCreate(startDate, endDate, customerId, hotelId);
+            return new BookingDTOCreate(startDate, endDate, customerId, destinationId);
         }
     }
 

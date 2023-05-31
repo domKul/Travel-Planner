@@ -26,19 +26,19 @@ public class Destination {
     private String currency;
 
     @JsonProperty("value")
-    private int HotelPrice;
+    private int destinationPrice;
 
 
     public Destination() {
     }
 
-    public Destination(long hotelId, long idName, String name, String countryCode, String currency, int hotelPrice) {
+    public Destination(long hotelId, long idName, String name, String countryCode, String currency, int destinationPrice) {
         this.destinationId = hotelId;
         this.idName = idName;
         this.name = name;
         this.countryCode = countryCode;
         this.currency = currency;
-        this.HotelPrice = hotelPrice;
+        this.destinationPrice = destinationPrice;
     }
 
     public long getDestinationId() {
@@ -82,12 +82,12 @@ public class Destination {
         this.currency = currency;
     }
 
-    public int getHotelPrice() {
-        return HotelPrice;
+    public int getDestinationPrice() {
+        return destinationPrice;
     }
 
-    public void setHotelPrice(int hotelPrice) {
-        HotelPrice = hotelPrice;
+    public void setDestinationPrice(int destinationPrice) {
+        this.destinationPrice = destinationPrice;
     }
 
     @Override
@@ -95,12 +95,12 @@ public class Destination {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Destination destination = (Destination) o;
-        return destinationId == destination.destinationId && idName == destination.idName && HotelPrice == destination.HotelPrice && Objects.equals(name, destination.name) && Objects.equals(countryCode, destination.countryCode) && Objects.equals(currency, destination.currency);
+        return Objects.equals(destinationId, destination.destinationId) && idName == destination.idName && destinationPrice == destination.destinationPrice && Objects.equals(name, destination.name) && Objects.equals(countryCode, destination.countryCode) && Objects.equals(currency, destination.currency);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(destinationId, idName, name, countryCode, currency, HotelPrice);
+        return Objects.hash(destinationId, idName, name, countryCode, currency, destinationPrice);
     }
 
     @Override
@@ -111,7 +111,7 @@ public class Destination {
                 ", name='" + name + '\'' +
                 ", countryCode='" + countryCode + '\'' +
                 ", currency='" + currency + '\'' +
-                ", HotelPrice=" + HotelPrice +
+                ", destinationPrice=" + destinationPrice +
                 '}';
     }
 }

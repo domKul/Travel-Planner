@@ -82,7 +82,7 @@ public class DestinationRestService {
             destination.setName(hotelDTO.getName());
             if (hotelDTO.getPriceBreakdown() != null) {
                 destination.setCurrency(hotelDTO.getPriceBreakdown().getGrossPrice().getCurrency());
-                destination.setHotelPrice(hotelDTO.getPriceBreakdown().getGrossPrice().getValue());
+                destination.setDestinationPrice(hotelDTO.getPriceBreakdown().getGrossPrice().getValue());
             }
             destinations.add(destination);
         }

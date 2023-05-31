@@ -21,8 +21,6 @@ public class ExpiredBookingsRemoveScheduler {
     public void performRemoveExpiredBookings() {
         Date currentDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
         List<Booking> expiredBookings = bookingRepository.findExpiredBookings(currentDate);
-        for (Booking booking : expiredBookings) {
-            bookingRepository.delete(booking);
-        }
+        bookingRepository.deleteAll(expiredBookings);
     }
 }

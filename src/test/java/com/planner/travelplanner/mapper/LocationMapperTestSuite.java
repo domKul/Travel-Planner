@@ -76,7 +76,7 @@ public class LocationMapperTestSuite {
     @Test
     public void shouldMapToLocationDTO(){
         //Given
-        location = new Location(IdType.EMPTY_ID.getId(), "label","123","region","name","country",12,null);
+        location = new Location( IdType.EMPTY_ID.getId(), "string","string","123","region","name","country",12,"null");
 
         //When
         LocationDTO mappingToDto = locationMapper.mapToLocationDTO(location);

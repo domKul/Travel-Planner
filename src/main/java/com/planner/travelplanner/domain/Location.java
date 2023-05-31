@@ -14,6 +14,8 @@ public class Location {
 
     @JsonProperty("dest_id")
     private String dest_id;
+    @JsonProperty("dest_type")
+    private String destination_type;
     @JsonProperty("region")
     private String region;
     @JsonProperty("name")
@@ -21,17 +23,18 @@ public class Location {
     @JsonProperty("country")
     private String country;
     @JsonProperty("hotels")
-    private Integer hotels;
+    private int hotels;
     @JsonProperty("timezone")
     private String timezone;
 
     public Location() {
     }
 
-    public Location(long locationId, String label, String dest_id, String region, String name, String country, Integer hotels, String timezone) {
+    public Location(long locationId, String label, String dest_id,String destination_type, String region, String name, String country, int hotels, String timezone) {
         this.locationId = locationId;
         this.label = label;
         this.dest_id = dest_id;
+        this.destination_type = destination_type;
         this.region = region;
         this.name = name;
         this.country = country;
@@ -93,5 +96,13 @@ public class Location {
 
     public void setDest_id(String dest_id) {
         this.dest_id = dest_id;
+    }
+
+    public String getDestination_type() {
+        return destination_type;
+    }
+
+    public void setDestination_type(String destination_type) {
+        this.destination_type = destination_type;
     }
 }

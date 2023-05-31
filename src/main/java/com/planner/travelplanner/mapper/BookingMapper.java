@@ -49,7 +49,7 @@ public class BookingMapper {
                 .hotelId(booking.getDestinations().getIdName())
                 .startBooking(booking.getStartDate())
                 .endBooking(booking.getEndDate())
-                .hotelPrice(String.valueOf(booking.getDestinations().getHotelPrice()))
+                .hotelPrice(String.valueOf(booking.getDestinations().getDestinationPrice()))
                 .currency(booking.getDestinations().getCurrency())
                 .build();
     }
