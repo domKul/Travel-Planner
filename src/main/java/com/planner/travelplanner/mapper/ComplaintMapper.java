@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class ComplaintMapper {
 
-    public static Complaint mapFromComplaintCreate(long customerId, final ComplaintDTOCreate complaintDTOCreate) {
+    public static Complaint mapFromComplaintCreate( final ComplaintDTOCreate complaintDTOCreate) {
         Complaint complaint = new Complaint();
         complaint.setComplaintId(IdType.EMPTY_ID.getId());
         complaint.setTitle(complaintDTOCreate.getTitle());
@@ -20,9 +20,8 @@ public class ComplaintMapper {
         complaint.setStatus(complaintDTOCreate.getStatus());
 
         Customer customer = new Customer();
-        customer.setCustomerId(customerId);
+        customer.setCustomerId(complaintDTOCreate.getCustomerId());
         complaint.setCustomer(customer);
-
         return complaint;
     }
 

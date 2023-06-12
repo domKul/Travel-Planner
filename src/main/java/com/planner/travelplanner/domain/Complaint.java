@@ -35,14 +35,23 @@ public class Complaint {
         this.status = status;
         this.customer = customer;
     }
-
     public Complaint(long complaintId, String title, String description, LocalDateTime complaintDate, String status, long customerId) {
         this.complaintId = complaintId;
         this.title = title;
         this.description = description;
         this.complaintDate = complaintDate;
         this.status = status;
+        this.customer = new Customer();
+        this.customer.setCustomerId(customerId);
     }
+
+//    public Complaint(long complaintId, String title, String description, LocalDateTime complaintDate, String status, long customerId) {
+//        this.complaintId = complaintId;
+//        this.title = title;
+//        this.description = description;
+//        this.complaintDate = complaintDate;
+//        this.status = status;
+//    }
 
 
 

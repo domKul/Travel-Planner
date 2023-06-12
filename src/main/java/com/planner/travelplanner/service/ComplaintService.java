@@ -28,9 +28,9 @@ public class ComplaintService {
     }
 
     @Transactional
-    public Complaint createComplaint(final long customerId, final ComplaintDTOCreate complaintDTOCreate) {
-        if (customerRepository.existsById(customerId)) {
-            Complaint complaint = ComplaintMapper.mapFromComplaintCreate(customerId, complaintDTOCreate);
+    public Complaint createComplaint(final ComplaintDTOCreate complaintDTOCreate) {
+        if (customerRepository.existsById(complaintDTOCreate.getCustomerId())) {
+            Complaint complaint = ComplaintMapper.mapFromComplaintCreate( complaintDTOCreate);
             return complaintRepository.save(complaint);
         } else {
             throw new CustomerNotFoundException();

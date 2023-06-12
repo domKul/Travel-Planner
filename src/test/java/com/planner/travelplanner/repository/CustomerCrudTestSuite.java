@@ -35,8 +35,8 @@ public class CustomerCrudTestSuite {
         customer2 = new Customer(IdType.EMPTY_ID.getId(), "firstName2", "lastName2", new Date(2000, 2, 11), "country", "city", "streetName", "postalCode", "email", 1231231, new ArrayList<>(), null);
         booking1 = new Booking(IdType.EMPTY_ID.getId(), new Date(2020, 12, 12), new Date(2020, 12, 12), null, null);
         booking2 = new Booking(IdType.EMPTY_ID.getId(), new Date(2020, 12, 12), new Date(2020, 12, 12), null, null);
-        complaint1 = new Complaint(IdType.EMPTY_ID.getId(), "title1", "description1", LocalDateTime.now(), "status1", null);
-        complaint2 = new Complaint(IdType.EMPTY_ID.getId(), "title2", "description2", LocalDateTime.now(), "status2", null);
+        complaint1 = new Complaint(IdType.EMPTY_ID.getId(), "title1", "description1", LocalDateTime.now(), "status1", 1);
+        complaint2 = new Complaint(IdType.EMPTY_ID.getId(), "title2", "description2", LocalDateTime.now(), "status2", 2);
     }
 
     @BeforeEach()

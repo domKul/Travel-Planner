@@ -21,8 +21,8 @@ public class ComplaintController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addComplaints(@RequestParam long customerId, @RequestBody ComplaintDTOCreate complaintDTOCreate) {
-        complaintService.createComplaint(customerId, complaintDTOCreate);
+    public ResponseEntity<Void> addComplaints( @RequestBody ComplaintDTOCreate complaintDTOCreate) {
+        complaintService.createComplaint( complaintDTOCreate);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

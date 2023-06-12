@@ -54,7 +54,7 @@ public class ComplaintMapperTestSuite {
         dataForTests();
 
         //When
-        Complaint mappingFromDTO = complaintMapper.mapFromComplaintCreate(customer.getCustomerId(),complaintDTOCreate);
+        Complaint mappingFromDTO = ComplaintMapper.mapFromComplaintCreate(complaintDTOCreate);
 
         //Then
         assertEquals(Complaint.class,mappingFromDTO.getClass());
@@ -69,7 +69,7 @@ public class ComplaintMapperTestSuite {
         dataForTests();
 
         //When
-        Complaint mappingFromDTO = complaintMapper.mapFromComplaintCreate(customer.getCustomerId(), complaintDTOCreate);
+        Complaint mappingFromDTO = complaintMapper.mapFromComplaintCreate(complaintDTOCreate);
 
         //Then
         assertEquals(Complaint.class,mappingFromDTO.getClass());
