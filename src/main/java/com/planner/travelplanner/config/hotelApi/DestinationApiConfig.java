@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class DestinationApiConfig {
 
-    @Value("f243aef89dmshe81c48fa6dfb27ep142049jsne19c66e2bb54")
+    @Value("${booking.api.key}")
     private String apiKey;
-    @Value("booking-com.p.rapidapi.com")
+    @Value("${booking.api.host}")
     private String apiHost;
 
     public String getApiKey() {
