@@ -12,9 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 public class DestinationRestTemplateTestSuite {
 
-   @Autowired
-   private DestinationRestService destinationRestService;
-
+    @Autowired
+    private DestinationRestService destinationRestService;
 
 
     @Test

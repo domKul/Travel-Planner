@@ -26,17 +26,17 @@ public class ComplaintMapperTestSuite {
     private Customer customer;
     private ComplaintDTO complaintDTO;
 
-    private void dataForTests(){
+    private void dataForTests() {
         LocalDateTime complaintDate = LocalDateTime.of(2023, 5, 15, 12, 0);
-        customer = new Customer(0, "firstName", "lastName", new Date(2020,02,02), "string","string", "string", "string", "string", 1231231, new ArrayList<>(), new ArrayList<>());
-        complaint1 = new Complaint(1,"title1","description1",complaintDate,"test1", customer.getCustomerId());
-        complaint2 = new Complaint(1,"title2","description2",complaintDate,"test2", customer.getCustomerId());
-        complaintDTO = new ComplaintDTO(1L,"title2","description2",complaintDate,"test2", 1L);
-        complaintDTOCreate = new ComplaintDTOCreate("title2","description2",complaintDate,"test2", 1L);
+        customer = new Customer(0, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231, new ArrayList<>(), new ArrayList<>());
+        complaint1 = new Complaint(1, "title1", "description1", complaintDate, "test1", customer.getCustomerId());
+        complaint2 = new Complaint(1, "title2", "description2", complaintDate, "test2", customer.getCustomerId());
+        complaintDTO = new ComplaintDTO(1L, "title2", "description2", complaintDate, "test2", 1L);
+        complaintDTOCreate = new ComplaintDTOCreate("title2", "description2", complaintDate, "test2", 1L);
     }
 
     @Test
-    public void shouldMpToComplaintDTO(){
+    public void shouldMpToComplaintDTO() {
         //Given
         dataForTests();
 
@@ -44,12 +44,12 @@ public class ComplaintMapperTestSuite {
         ComplaintDTO mapping = complaintMapper.mapToComplaintDTO(complaint1);
 
         //Then
-        assertEquals(complaint1.getDescription(),mapping.getDescription());
+        assertEquals(complaint1.getDescription(), mapping.getDescription());
 
     }
 
     @Test
-    public void shouldMapToComplaintCreate(){
+    public void shouldMapToComplaintCreate() {
         //Give
         dataForTests();
 
@@ -57,29 +57,29 @@ public class ComplaintMapperTestSuite {
         Complaint mappingFromDTO = ComplaintMapper.mapFromComplaintCreate(complaintDTOCreate);
 
         //Then
-        assertEquals(Complaint.class,mappingFromDTO.getClass());
-        assertEquals(complaintDTOCreate.getComplaintDate(),mappingFromDTO.getComplaintDate());
-        assertEquals(complaintDTOCreate.getTitle(),mappingFromDTO.getTitle());
-        assertEquals(complaintDTOCreate.getStatus(),mappingFromDTO.getStatus());
+        assertEquals(Complaint.class, mappingFromDTO.getClass());
+        assertEquals(complaintDTOCreate.getComplaintDate(), mappingFromDTO.getComplaintDate());
+        assertEquals(complaintDTOCreate.getTitle(), mappingFromDTO.getTitle());
+        assertEquals(complaintDTOCreate.getStatus(), mappingFromDTO.getStatus());
     }
 
     @Test
-    public void shouldMapToComplaintDTO(){
+    public void shouldMapToComplaintDTO() {
         //Give
         dataForTests();
 
         //When
-        Complaint mappingFromDTO = complaintMapper.mapFromComplaintCreate(complaintDTOCreate);
+        Complaint mappingFromDTO = ComplaintMapper.mapFromComplaintCreate(complaintDTOCreate);
 
         //Then
-        assertEquals(Complaint.class,mappingFromDTO.getClass());
-        assertEquals(complaintDTOCreate.getComplaintDate(),mappingFromDTO.getComplaintDate());
-        assertEquals(complaintDTOCreate.getTitle(),mappingFromDTO.getTitle());
-        assertEquals(complaintDTOCreate.getStatus(),mappingFromDTO.getStatus());
+        assertEquals(Complaint.class, mappingFromDTO.getClass());
+        assertEquals(complaintDTOCreate.getComplaintDate(), mappingFromDTO.getComplaintDate());
+        assertEquals(complaintDTOCreate.getTitle(), mappingFromDTO.getTitle());
+        assertEquals(complaintDTOCreate.getStatus(), mappingFromDTO.getStatus());
     }
 
     @Test
-    public void shoudlMapToComplaintDTOFormShow(){
+    public void shoudlMapToComplaintDTOFormShow() {
         //Given
         dataForTests();
         complaint1.setCustomer(customer);
@@ -88,14 +88,14 @@ public class ComplaintMapperTestSuite {
         ComplaintDTO mapping = complaintMapper.mapToComplaintDTOFormShow(complaint1);
 
         //When
-        assertEquals(ComplaintDTO.class,mapping.getClass());
-        assertEquals(complaint1.getTitle(),mapping.getTitle());
-        assertEquals(complaint1.getDescription(),mapping.getDescription());
-        assertEquals(complaint1.getStatus(),mapping.getStatus());
+        assertEquals(ComplaintDTO.class, mapping.getClass());
+        assertEquals(complaint1.getTitle(), mapping.getTitle());
+        assertEquals(complaint1.getDescription(), mapping.getDescription());
+        assertEquals(complaint1.getStatus(), mapping.getStatus());
     }
 
     @Test
-    public void shouldMapToListDTO(){
+    public void shouldMapToListDTO() {
         //GIven
         dataForTests();
         customer.getComplaints().add(complaint1);
@@ -108,9 +108,9 @@ public class ComplaintMapperTestSuite {
         List<ComplaintDTO> mappinglistToDTO = complaintMapper.mapToListDTO(customer.getComplaints());
 
         //Then
-        assertEquals(2,mappinglistToDTO.size());
-        assertEquals(complaint1.getTitle(),mappinglistToDTO.get(0).getTitle());
-        assertEquals(complaint1.getDescription(),mappinglistToDTO.get(0).getDescription());
+        assertEquals(2, mappinglistToDTO.size());
+        assertEquals(complaint1.getTitle(), mappinglistToDTO.get(0).getTitle());
+        assertEquals(complaint1.getDescription(), mappinglistToDTO.get(0).getDescription());
     }
 
 

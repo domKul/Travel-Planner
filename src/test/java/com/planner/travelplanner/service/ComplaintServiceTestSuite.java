@@ -42,17 +42,19 @@ public class ComplaintServiceTestSuite {
 
     public void dataForTests() {
         customer = new Customer(IdType.EMPTY_ID.getId(), "firstName1", "lastName1", new Date(2000, 2, 11), "country", "city", "streetName", "postalCode", "email", 1231231, new ArrayList<>(), null);
-        customerDTO = new CustomerDTO( "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231);
+        customerDTO = new CustomerDTO("firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231);
         complaint = new Complaint(1L, "title", "descritpion", null, "status", 1);
         complaintDTOUpdate = new ComplaintDTOUpdate("update", "update", null, "status");
 
 
     }
-    private void clearData(){
+
+    private void clearData() {
         customerRepository.deleteAll();
     }
+
     @BeforeEach
-    public void clear(){
+    public void clear() {
         clearData();
     }
 
@@ -60,13 +62,13 @@ public class ComplaintServiceTestSuite {
     public void shouldCreateComplaint() {
         //Given
         dataForTests();
-        Customer savedCustomer =customerService.saveCustomer(customerDTO);
+        Customer savedCustomer = customerService.saveCustomer(customerDTO);
         complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", null, "status", savedCustomer.getCustomerId());
         long cusId = savedCustomer.getCustomerId();
 
         //When
         Complaint create1 = complaintService.createComplaint(complaintDTOCreate);
-        Complaint create2 =complaintService.createComplaint(complaintDTOCreate);
+        Complaint create2 = complaintService.createComplaint(complaintDTOCreate);
         List<Complaint> listOfComplaints = complaintRepository.findAll();
 
         //Then
@@ -74,8 +76,8 @@ public class ComplaintServiceTestSuite {
         assertEquals("titledto", listOfComplaints.get(1).getTitle());
 
         //CleanUp
-        long complId1 =create1.getComplaintId();
-        long complId2 =create2.getComplaintId();
+        long complId1 = create1.getComplaintId();
+        long complId2 = create2.getComplaintId();
         customerRepository.deleteById(cusId);
         complaintRepository.deleteById(complId1);
         complaintRepository.deleteById(complId2);
@@ -86,7 +88,7 @@ public class ComplaintServiceTestSuite {
     public void shouldThrowCustomerNotFoundOnWrongId() {
         //Given
         dataForTests();
-        complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", null, "status",IdType.EMPTY_ID.getId());
+        complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", null, "status", IdType.EMPTY_ID.getId());
 
 
         //When & Then
@@ -96,36 +98,36 @@ public class ComplaintServiceTestSuite {
     }
 
     @Test
-    public void shouldShowAllComplaints(){
+    public void shouldShowAllComplaints() {
         //Given
         dataForTests();
-        Customer savedCustomer =customerService.saveCustomer(customerDTO);
+        Customer savedCustomer = customerService.saveCustomer(customerDTO);
         complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", null, "status", savedCustomer.getCustomerId());
         long cusId = savedCustomer.getCustomerId();
 
         //When
-        List<ComplaintDTO>emptyList =  complaintService.showAllComplaints();
-        Complaint create1 = complaintService.createComplaint( complaintDTOCreate);
-        Complaint create2 =complaintService.createComplaint( complaintDTOCreate);
-        List<ComplaintDTO>allComplaints =  complaintService.showAllComplaints();
+        List<ComplaintDTO> emptyList = complaintService.showAllComplaints();
+        Complaint create1 = complaintService.createComplaint(complaintDTOCreate);
+        Complaint create2 = complaintService.createComplaint(complaintDTOCreate);
+        List<ComplaintDTO> allComplaints = complaintService.showAllComplaints();
 
         //Thne
-        assertEquals(0,emptyList.size());
-        assertEquals(2,allComplaints.size());
+        assertEquals(0, emptyList.size());
+        assertEquals(2, allComplaints.size());
 
         //CleanUp
-        long complId1 =create1.getComplaintId();
-        long complId2 =create2.getComplaintId();
+        long complId1 = create1.getComplaintId();
+        long complId2 = create2.getComplaintId();
         customerRepository.deleteById(cusId);
         complaintRepository.deleteById(complId1);
         complaintRepository.deleteById(complId2);
     }
 
     @Test
-    public void shouldShowComplaintsByID(){
+    public void shouldShowComplaintsByID() {
         //Given
         dataForTests();
-        Customer savedCustomer =customerService.saveCustomer(customerDTO);
+        Customer savedCustomer = customerService.saveCustomer(customerDTO);
         complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", null, "status", savedCustomer.getCustomerId());
         long cusId = savedCustomer.getCustomerId();
 
@@ -135,56 +137,56 @@ public class ComplaintServiceTestSuite {
         ComplaintDTO findingComplaint = complaintService.showComplaintById(create1.getComplaintId());
 
         //Thne
-        assertEquals(complaintDTOCreate.getTitle(),findingComplaint.getTitle());
+        assertEquals(complaintDTOCreate.getTitle(), findingComplaint.getTitle());
 
 
         //CleanUp
-        long complId1 =create1.getComplaintId();
+        long complId1 = create1.getComplaintId();
         customerRepository.deleteById(cusId);
         complaintRepository.deleteById(complId1);
     }
 
     @Test
-    public void shouldModifyExistingComplaint(){
+    public void shouldModifyExistingComplaint() {
         //Given
         dataForTests();
-        Customer savedCustomer =customerService.saveCustomer(customerDTO);
+        Customer savedCustomer = customerService.saveCustomer(customerDTO);
         complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", null, "status", savedCustomer.getCustomerId());
         long cusId = savedCustomer.getCustomerId();
 
         //When
-        Complaint create1 = complaintService.createComplaint( complaintDTOCreate);
-        ComplaintDTO update = complaintService.modifyComplaintStatus(create1.getComplaintId(),complaintDTOUpdate);
+        Complaint create1 = complaintService.createComplaint(complaintDTOCreate);
+        ComplaintDTO update = complaintService.modifyComplaintStatus(create1.getComplaintId(), complaintDTOUpdate);
 
         //Then
-        assertEquals(create1.getComplaintId(),update.getComplaintId());
+        assertEquals(create1.getComplaintId(), update.getComplaintId());
 
         //CleanUp
-        long complId1 =create1.getComplaintId();
+        long complId1 = create1.getComplaintId();
         customerRepository.deleteById(cusId);
         complaintRepository.deleteById(complId1);
     }
 
     @Test
-    public void shouldDeleteComplaintsByID(){
+    public void shouldDeleteComplaintsByID() {
         //Given
         dataForTests();
-        Customer savedCustomer =customerService.saveCustomer(customerDTO);
+        Customer savedCustomer = customerService.saveCustomer(customerDTO);
         complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", null, "status", savedCustomer.getCustomerId());
         long cusId = savedCustomer.getCustomerId();
 
         //When
-        Complaint create1 = complaintService.createComplaint( complaintDTOCreate);
+        Complaint create1 = complaintService.createComplaint(complaintDTOCreate);
         create1.setCustomer(customer);
-        List<ComplaintDTO> findOne =  complaintService.showAllComplaints();
+        List<ComplaintDTO> findOne = complaintService.showAllComplaints();
         complaintService.deleteComplainByID(create1.getComplaintId());
 
         //Thne
-        assertEquals(1,findOne.size());
-        assertEquals(0,complaintService.showAllComplaints().size());
+        assertEquals(1, findOne.size());
+        assertEquals(0, complaintService.showAllComplaints().size());
 
         //CleanUp
-        long complId1 =create1.getComplaintId();
+        long complId1 = create1.getComplaintId();
         customerRepository.deleteById(cusId);
         complaintRepository.deleteById(complId1);
     }

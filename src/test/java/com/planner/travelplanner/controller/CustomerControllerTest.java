@@ -109,6 +109,7 @@ public class CustomerControllerTest {
                 .andExpect(jsonPath("$.customerId").value(customerget.getCustomerId()))
                 .andExpect(jsonPath("$.firstName").value(customerget.getFirstName()));
     }
+
     @Test
     void shouldUpdateCustomer() throws Exception {
         // Given
@@ -121,7 +122,7 @@ public class CustomerControllerTest {
 
 
         // When & Then
-        mockMvc.perform(put("/v1/customers/"+ updatedCustomer.getCustomerId())
+        mockMvc.perform(put("/v1/customers/" + updatedCustomer.getCustomerId())
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(customerDTO)))
                 .andExpect(status().isOk());
@@ -142,8 +143,6 @@ public class CustomerControllerTest {
         // Then
         verify(customerService).deleteCustomerById(updatedCustomer.getCustomerId());
     }
-
-
 
 
 }

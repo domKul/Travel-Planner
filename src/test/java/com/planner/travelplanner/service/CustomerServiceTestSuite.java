@@ -36,12 +36,14 @@ public class CustomerServiceTestSuite {
         customerDTO1 = new CustomerDTO("firstNameDTO", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231);
         customerDTO2 = new CustomerDTO("firstNameDTO", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231);
     }
-    private void clearData(){
+
+    private void clearData() {
         customerRepository.deleteAll();
 
     }
+
     @BeforeEach
-    public void clear(){
+    public void clear() {
         clearData();
     }
 

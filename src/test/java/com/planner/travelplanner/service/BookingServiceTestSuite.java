@@ -48,13 +48,14 @@ public class BookingServiceTestSuite {
     }
 
 
-    private void clearData(){
+    private void clearData() {
         customerRepository.deleteAll();
         destinationRepository.deleteAll();
         bookingRepository.deleteAll();
     }
+
     @BeforeEach
-    public void clear(){
+    public void clear() {
         clearData();
     }
 
@@ -144,10 +145,10 @@ public class BookingServiceTestSuite {
     }
 
     @Test
-    public void shouldShowAllBookings(){
+    public void shouldShowAllBookings() {
         //Given
         dataForTests();
-        Destination savedDes =destinationRepository.save(destination);
+        Destination savedDes = destinationRepository.save(destination);
         Customer savedCustomer = customerRepository.save(customer);
         booking.setCustomer(savedCustomer);
         booking.setDestinations(savedDes);
@@ -159,7 +160,7 @@ public class BookingServiceTestSuite {
         List<BookingDTOGet> findAllList = bookingService.showAllBookings();
 
         //Then
-        assertEquals(2,findAllList.size());
+        assertEquals(2, findAllList.size());
 
         //CleanUp
         bookingRepository.deleteAll();

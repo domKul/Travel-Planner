@@ -40,7 +40,7 @@ public class CustomerCrudTestSuite {
     }
 
     @BeforeEach()
-    public void deleteData(){
+    public void deleteData() {
         customerRepository.deleteAll();
 
     }

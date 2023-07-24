@@ -26,9 +26,9 @@ public class BookingMapperTestSuite {
     private BookingMapper bookingMapper;
     @Autowired
     private BookingRepository bookingRepository;
-@Autowired
+    @Autowired
     private CustomerRepository customerRepository;
-@Autowired
+    @Autowired
     private DestinationRepository destinationRepository;
 
     private Booking booking1;
@@ -37,18 +37,18 @@ public class BookingMapperTestSuite {
     private Customer customer;
     private Destination destination;
 
-    private void dataForTests(){
-        customer = new Customer(1L, "firstName", "lastName", new Date(2020,02,02), "string","string", "string", "string", "string", 1231231, new ArrayList<>(), new ArrayList<>());
+    private void dataForTests() {
+        customer = new Customer(1L, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231, new ArrayList<>(), new ArrayList<>());
         destination = new Destination();
-        booking1 = new Booking(1L,new Date(2020,12,12),new Date(2020,12,13),null, null);
-        booking2 = new Booking(1L,new Date(2020,12,12),new Date(2020,12,13),null, null);
+        booking1 = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), null, null);
+        booking2 = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), null, null);
     }
 
     @Test
-    public void shouldMapToBookingDTOGet(){
+    public void shouldMapToBookingDTOGet() {
         //Given
         dataForTests();
-        Customer saveCustomer =customerRepository.save(customer);
+        Customer saveCustomer = customerRepository.save(customer);
         Destination saveDestination = destinationRepository.save(destination);
         booking2.setDestinations(saveDestination);
         booking2.setCustomer(saveCustomer);
@@ -59,13 +59,13 @@ public class BookingMapperTestSuite {
         BookingDTOGet mapToDTOGET = bookingMapper.mapToBookingDTOGet(saveBooking);
 
         //When
-        assertEquals(booking2.getCustomer().getFirstName(),mapToDTOGET.getCustomerFirstName());
-        assertEquals(booking2.getCustomer().getLastName(),mapToDTOGET.getCustomerLastName());
-        assertEquals(booking2.getCustomer().getCustomerId(),mapToDTOGET.getCustomerId());
+        assertEquals(booking2.getCustomer().getFirstName(), mapToDTOGET.getCustomerFirstName());
+        assertEquals(booking2.getCustomer().getLastName(), mapToDTOGET.getCustomerLastName());
+        assertEquals(booking2.getCustomer().getCustomerId(), mapToDTOGET.getCustomerId());
     }
 
     @Test
-    public void shouldMapToDTOListGet(){
+    public void shouldMapToDTOListGet() {
         //Given
         dataForTests();
         Destination saveDest = destinationRepository.save(destination);
@@ -76,19 +76,19 @@ public class BookingMapperTestSuite {
         booking1.setCustomer(saveCustomer);
         Booking saveBooking1 = bookingRepository.save(booking1);
         Booking saveBooking2 = bookingRepository.save(booking2);
-        List<Booking>listOfBookings = List.of(saveBooking1,saveBooking2);
+        List<Booking> listOfBookings = List.of(saveBooking1, saveBooking2);
 
 
         //When
-        List<BookingDTOGet>mappinglist = bookingMapper.mapToDTOListGet(listOfBookings);
+        List<BookingDTOGet> mappinglist = bookingMapper.mapToDTOListGet(listOfBookings);
 
         //Then
         assertFalse(mappinglist.isEmpty());
-        assertEquals(listOfBookings.get(0).getCustomer().getFirstName(),mappinglist.get(0).getCustomerFirstName());
+        assertEquals(listOfBookings.get(0).getCustomer().getFirstName(), mappinglist.get(0).getCustomerFirstName());
     }
 
     @Test
-    public void shouldMapToBookingDTO(){
+    public void shouldMapToBookingDTO() {
         //Given
         dataForTests();
         Customer saveCustomer = customerRepository.save(customer);
@@ -99,6 +99,6 @@ public class BookingMapperTestSuite {
         BookingDTO mappingDTO = bookingMapper.mapToBookingDTO(save);
 
         //Then
-        assertEquals(booking2.getCustomer().getFirstName(),mappingDTO.getCustomer().getFirstName());
+        assertEquals(booking2.getCustomer().getFirstName(), mappingDTO.getCustomer().getFirstName());
     }
 }

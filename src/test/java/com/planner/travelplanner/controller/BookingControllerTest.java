@@ -25,7 +25,7 @@ import java.util.Date;
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -68,7 +68,7 @@ public class BookingControllerTest {
     @Test
     void shouldGetALLBooking() throws Exception {
         //Given
-        List<BookingDTOGet>bookingDTOGetList = List.of(
+        List<BookingDTOGet> bookingDTOGetList = List.of(
                 new BookingDTOGet.Builder().build(),
                 new BookingDTOGet.Builder().build());
 
@@ -82,12 +82,12 @@ public class BookingControllerTest {
     }
 
     @Test
-    void shouldsaveBooking() throws Exception{
+    void shouldSaveBooking() throws Exception {
         //Given
-        Customer  customer = new Customer(1, "firstName", "lastName", Calendar.getInstance().getTime(), "string", "string", "string", "string", "string", 1231231, new ArrayList<>(), null);
+        Customer customer = new Customer(1, "firstName", "lastName", Calendar.getInstance().getTime(), "string", "string", "string", "string", "string", 1231231, new ArrayList<>(), null);
         Destination destination = new Destination();
         BookingDTOCreate create = new BookingDTOCreate.Builder().build();
-        Booking booking = new Booking(1L,new Date(),new Date(),customer, destination);
+        Booking booking = new Booking(1L, new Date(), new Date(), customer, destination);
 
         when(bookingService.addBooking(create)).thenReturn(booking);
 

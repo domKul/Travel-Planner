@@ -16,7 +16,7 @@ public class LocationServiceTestSuite {
     private Location location1;
     private Location location2;
 
-    public void dataForTest(){
+    public void dataForTest() {
         location1 = new Location();
         location2 = new Location();
 

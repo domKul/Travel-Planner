@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 public class DestinationCrudTestSuite {
 
@@ -19,18 +20,18 @@ public class DestinationCrudTestSuite {
     private Destination destination1 = null;
     private Destination destination2 = null;
 
-    private void dataForTests(){
-        destination1 = new Destination(IdType.EMPTY_ID.getId(),IdType.EMPTY_ID.getId(),"null","null","null", 233);
-        destination2 = new Destination(IdType.EMPTY_ID.getId(),IdType.EMPTY_ID.getId(),"null","null","null", 2233);
+    private void dataForTests() {
+        destination1 = new Destination(IdType.EMPTY_ID.getId(), IdType.EMPTY_ID.getId(), "null", "null", "null", 233);
+        destination2 = new Destination(IdType.EMPTY_ID.getId(), IdType.EMPTY_ID.getId(), "null", "null", "null", 2233);
     }
 
     @BeforeEach
-    public void deleteData(){
+    public void deleteData() {
         destinationRepository.deleteAll();
     }
 
     @Test
-    public void shouldCreteAndSaveHotel(){
+    public void shouldCreteAndSaveHotel() {
         //Given
         dataForTests();
 
@@ -52,7 +53,7 @@ public class DestinationCrudTestSuite {
     }
 
     @Test
-    public void shouldDeleteHotelById(){
+    public void shouldDeleteHotelById() {
         //Given
         dataForTests();
 
@@ -100,7 +101,7 @@ public class DestinationCrudTestSuite {
     }
 
     @Test
-    public void shouldModifyHotel(){
+    public void shouldModifyHotel() {
         //Given
         dataForTests();
 

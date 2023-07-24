@@ -22,7 +22,7 @@ public class LocationMapperTestSuite {
     private Location location;
 
     @Test
-    public void shouldMapToLocation(){
+    public void shouldMapToLocation() {
         //Given
         locationDTO1 = new LocationDTO();
         locationDTO1.setCountry("test");
@@ -35,14 +35,15 @@ public class LocationMapperTestSuite {
         Location mapping = locationMapper.mapToLocation(locationDTO1);
 
         //Then
-        assertEquals("test",mapping.getCountry());
-        assertEquals(locationDTO1.getHotels(),mapping.getHotels());
-        assertEquals(locationDTO1.getRegion(),mapping.getRegion());
-        assertEquals(locationDTO1.getTimezone(),mapping.getTimezone());
-        assertEquals(locationDTO1.getName(),mapping.getName());
+        assertEquals("test", mapping.getCountry());
+        assertEquals(locationDTO1.getHotels(), mapping.getHotels());
+        assertEquals(locationDTO1.getRegion(), mapping.getRegion());
+        assertEquals(locationDTO1.getTimezone(), mapping.getTimezone());
+        assertEquals(locationDTO1.getName(), mapping.getName());
     }
+
     @Test
-    public void shouldMapToLocationList(){
+    public void shouldMapToLocationList() {
         //Given
         locationDTO1 = new LocationDTO();
         locationDTO1.setCountry("test1");
@@ -56,8 +57,7 @@ public class LocationMapperTestSuite {
         locationDTO2.setName("test2");
         locationDTO2.setRegion("test");
 
-        List<LocationDTO>dtoList= Arrays.asList(locationDTO1,locationDTO2);
-
+        List<LocationDTO> dtoList = Arrays.asList(locationDTO1, locationDTO2);
 
 
         //When
@@ -74,19 +74,18 @@ public class LocationMapperTestSuite {
     }
 
     @Test
-    public void shouldMapToLocationDTO(){
+    public void shouldMapToLocationDTO() {
         //Given
-        location = new Location( IdType.EMPTY_ID.getId(), "string","string","123","region","name","country",12,"null");
+        location = new Location(IdType.EMPTY_ID.getId(), "string", "string", "123", "region", "name", "country", 12, "null");
 
         //When
         LocationDTO mappingToDto = locationMapper.mapToLocationDTO(location);
 
         //Then
-        assertEquals(location.getLabel(),mappingToDto.getLabel());
-        assertEquals(location.getDest_id(),mappingToDto.getDest_id());
-        assertEquals(location.getTimezone(),mappingToDto.getTimezone());
+        assertEquals(location.getLabel(), mappingToDto.getLabel());
+        assertEquals(location.getDest_id(), mappingToDto.getDest_id());
+        assertEquals(location.getTimezone(), mappingToDto.getTimezone());
     }
-
 
 
 }
