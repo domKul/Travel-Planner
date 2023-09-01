@@ -14,3 +14,11 @@ To run the APi:
 - Creating Booking - done
 - Creating complaint about tour in progress
 - For this moment all test work only with empty Database.
+
+### List of endpoints
+ [Endpoints documentation  - Swagger](http://localhost:8080/swagger-ui/index.html)
+
+###### This project was build with:
+###### java 17
+###### Spring version 3.0.6
+###### Junit version 4.13.1 for tests
