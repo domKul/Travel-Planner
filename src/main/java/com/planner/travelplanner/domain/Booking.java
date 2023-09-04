@@ -84,7 +84,11 @@ public class Booking {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Booking booking = (Booking) o;
-        return bookingId == booking.bookingId && Objects.equals(startDate, booking.startDate) && Objects.equals(endDate, booking.endDate) && Objects.equals(customer, booking.customer) && Objects.equals(destination, booking.destination);
+        return
+                Objects.equals(startDate, booking.startDate) &&
+                Objects.equals(endDate, booking.endDate) &&
+                Objects.equals(customer, booking.customer) &&
+                Objects.equals(destination, booking.destination);
     }
 
     @Override

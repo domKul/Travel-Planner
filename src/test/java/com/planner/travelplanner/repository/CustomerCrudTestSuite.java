@@ -58,6 +58,8 @@ public class CustomerCrudTestSuite {
         //Then
         assertEquals(1, customerRepository.count());
         assertNotNull(customer1);
+        assertEquals(customer1,createCustomer);
+        assertEquals(customer1.getFirstName(), createCustomer.getFirstName());
         assertEquals("firstName1", createCustomer.getFirstName());
         assertEquals(customer1.getComplaints().size(), createCustomer.getComplaints().size());
 

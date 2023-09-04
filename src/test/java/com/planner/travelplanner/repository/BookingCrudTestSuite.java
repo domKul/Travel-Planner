@@ -61,6 +61,8 @@ public class BookingCrudTestSuite {
 
         //Then
         assertEquals(2, bookingRepository.count());
+        assertEquals(booking1,saveBooking1);
+        assertEquals(booking2,saveBooking2);
         assertNull(saveBooking2.getCustomer());
         assertNull(saveBooking1.getCustomer());
 

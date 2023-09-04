@@ -108,69 +108,62 @@ public class Customer {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
 
     public String getStreetName() {
         return streetName;
     }
 
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
-    }
 
     public List<Complaint> getComplaints() {
         return complaints;
     }
 
-    public void setComplaints(List<Complaint> complaints) {
-        this.complaints = complaints;
-    }
 
     public String getPostalCode() {
         return postalCode;
     }
 
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public int getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
+
 
     public List<Booking> getBookings() {
         return bookings;
     }
 
-    public void setBookings(List<Booking> bookings) {
-        this.bookings = bookings;
-    }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return customerId == customer.customerId && phoneNumber == customer.phoneNumber && Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName) && Objects.equals(birthdate, customer.birthdate) && Objects.equals(country, customer.country) && Objects.equals(city, customer.city) && Objects.equals(streetName, customer.streetName) && Objects.equals(postalCode, customer.postalCode) && Objects.equals(email, customer.email) && Objects.equals(complaints, customer.complaints) && Objects.equals(bookings, customer.bookings);
+        return  phoneNumber == customer.phoneNumber &&
+                Objects.equals(firstName, customer.firstName) &&
+                Objects.equals(lastName, customer.lastName) &&
+                Objects.equals(birthdate, customer.birthdate) &&
+                Objects.equals(country, customer.country) &&
+                Objects.equals(city, customer.city) &&
+                Objects.equals(streetName, customer.streetName) &&
+                Objects.equals(postalCode, customer.postalCode) &&
+                Objects.equals(email, customer.email) &&
+                Objects.equals(complaints, customer.complaints) &&
+                Objects.equals(bookings, customer.bookings);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerId, firstName, lastName, birthdate, country, city, streetName, postalCode, email, phoneNumber, complaints, bookings);
+        return Objects.hash(customerId, firstName, lastName, birthdate,
+                country, city, streetName, postalCode, email,
+                phoneNumber, complaints, bookings);
     }
 
     @Override

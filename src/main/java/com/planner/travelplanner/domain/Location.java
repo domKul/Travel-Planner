@@ -46,17 +46,11 @@ public class Location {
         return label;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
-    }
 
     public String getRegion() {
         return region;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
-    }
 
     public String getName() {
         return name;
@@ -78,31 +72,19 @@ public class Location {
         return hotels;
     }
 
-    public void setHotels(Integer hotels) {
-        this.hotels = hotels;
-    }
 
     public String getTimezone() {
         return timezone;
     }
 
-    public void setTimezone(String timezone) {
-        this.timezone = timezone;
-    }
 
     public String getDest_id() {
         return dest_id;
     }
 
-    public void setDest_id(String dest_id) {
-        this.dest_id = dest_id;
-    }
 
     public String getDestination_type() {
         return destination_type;
     }
 
-    public void setDestination_type(String destination_type) {
-        this.destination_type = destination_type;
-    }
 }
