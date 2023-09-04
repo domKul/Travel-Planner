@@ -22,3 +22,4 @@ To run the APi:
 ###### java 17
 ###### Spring version 3.0.6
 ###### Junit version 4.13.1 for tests
+###### Tests with Coverage : Class 78%, Method 61%
