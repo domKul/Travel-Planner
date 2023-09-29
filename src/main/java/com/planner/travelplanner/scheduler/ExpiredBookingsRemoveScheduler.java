@@ -2,7 +2,6 @@ package com.planner.travelplanner.scheduler;
 
 import com.planner.travelplanner.domain.Booking;
 import com.planner.travelplanner.repository.BookingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -14,8 +13,11 @@ import java.util.List;
 @Component
 public class ExpiredBookingsRemoveScheduler {
 
-    @Autowired
-    private BookingRepository bookingRepository;
+    private final BookingRepository bookingRepository;
+
+    public ExpiredBookingsRemoveScheduler(BookingRepository bookingRepository) {
+        this.bookingRepository = bookingRepository;
+    }
 
     @Scheduled(fixedRate = 3600000)
     public void performRemoveExpiredBookings() {

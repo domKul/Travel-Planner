@@ -8,11 +8,11 @@ To run the APi:
 
 
 - Functions:
-- Searching Location for future visit  in progress
-- Searching Hotels based on locations  in progress
+- Searching Location for future visit  
+- Searching Hotels based on locations 
 - Creating traveler - done
 - Creating Booking - done
-- Creating complaint about tour in progress
+- Creating complaint about tour
 - For this moment all test work only with empty Database.
 
 ### List of endpoints
