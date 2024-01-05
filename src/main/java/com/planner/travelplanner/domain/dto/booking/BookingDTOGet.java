@@ -21,7 +21,6 @@ public class BookingDTOGet {
     private Date startBooking;
     private Date endBooking;
     private final String hotelPrice;
-
     private String currency;
 
     public BookingDTOGet(Builder builder) {

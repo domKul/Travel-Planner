@@ -11,13 +11,10 @@ public class UserCount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private int userCount;
-
     private LocalDate date;
 
     public UserCount() {
-
     }
 
     public UserCount(int userCount, LocalDate date) {

@@ -25,14 +25,12 @@ public class BookingCrudTestSuite {
     private DestinationRepository destinationRepository;
     @Autowired
     private CustomerRepository customerRepository;
-
-    private Customer customer1 = null;
-    private Customer customer2 = null;
-    private Booking booking1 = null;
-    private Booking booking2 = null;
-    private Destination destination1 = null;
-    private Destination destination2 = null;
-
+    private Customer customer1;
+    private Customer customer2;
+    private Booking booking1;
+    private Booking booking2;
+    private Destination destination1;
+    private Destination destination2;
 
     private void dataForTests() {
         customer1 = new Customer(IdType.EMPTY_ID.getId(), "firstName1", "lastName1", new Date(2000, 2, 11), "country", "city", "streetName", "postalCode", "email", 1231231, new ArrayList<>(), null);
@@ -54,18 +52,15 @@ public class BookingCrudTestSuite {
     public void shoulCreateEmptyBooking() {
         //Given
         dataForTests();
-
         //When
         Booking saveBooking1 = bookingRepository.save(booking1);
         Booking saveBooking2 = bookingRepository.save(booking2);
-
         //Then
         assertEquals(2, bookingRepository.count());
         assertEquals(booking1,saveBooking1);
         assertEquals(booking2,saveBooking2);
         assertNull(saveBooking2.getCustomer());
         assertNull(saveBooking1.getCustomer());
-
         //CleanUp
         long getId1 = saveBooking1.getBookingId();
         long getId2 = saveBooking2.getBookingId();
@@ -77,7 +72,6 @@ public class BookingCrudTestSuite {
     public void shouldDeleteBooking() {
         //Given
         dataForTests();
-
         //When
         Booking saveBooking1 = bookingRepository.save(booking1);
         Booking saveBooking2 = bookingRepository.save(booking2);
@@ -85,7 +79,6 @@ public class BookingCrudTestSuite {
         long getId2 = saveBooking2.getBookingId();
         bookingRepository.deleteById(getId1);
         bookingRepository.deleteById(getId2);
-
         //Then
         assertFalse(bookingRepository.existsById(getId1));
         assertFalse(bookingRepository.existsById(getId2));
@@ -101,21 +94,16 @@ public class BookingCrudTestSuite {
         booking2.setCustomer(saveCustomer2);
         Booking saveBooking1 = bookingRepository.save(booking1);
         Booking saveBooking2 = bookingRepository.save(booking2);
-
         // When
         long getId1 = saveBooking1.getBookingId();
         long getId2 = saveBooking2.getBookingId();
         Optional<Booking> bookingId1 = bookingRepository.findById(getId1);
         Optional<Booking> bookingId2 = bookingRepository.findById(getId2);
-
         // Then
         assertTrue(bookingId1.isPresent());
         assertTrue(bookingId2.isPresent());
-
-
         assertEquals(booking1.getCustomer().getFirstName(), bookingId1.get().getCustomer().getFirstName());
         assertEquals(booking2.getCustomer().getFirstName(), bookingId2.get().getCustomer().getFirstName());
-
         // CleanUp
         bookingRepository.deleteById(getId1);
         bookingRepository.deleteById(getId2);
@@ -125,14 +113,11 @@ public class BookingCrudTestSuite {
     public void shouldSaveAndRetrieveAllBookings() {
         //Given
         dataForTests();
-
         //When
         Booking saveBooking1 = bookingRepository.save(booking1);
         Booking saveBooking2 = bookingRepository.save(booking2);
-
         //Then
         assertEquals(2, bookingRepository.count());
-
         //CealnUp
         long getId1 = saveBooking1.getBookingId();
         long getId2 = saveBooking2.getBookingId();
@@ -150,7 +135,6 @@ public class BookingCrudTestSuite {
         Destination savedDestination2 = destinationRepository.save(destination2);
         Booking saveBooking1 = bookingRepository.save(booking1);
         Booking saveBooking2 = bookingRepository.save(booking2);
-
         //When
         saveBooking1.setDestinations(saveDestination1);
         saveBooking1.setCustomer(saveCustomer1);
@@ -158,14 +142,12 @@ public class BookingCrudTestSuite {
         saveBooking2.setDestinations(savedDestination2);
         saveBooking2.setCustomer(saveCustomer2);
         Booking modifiedBooking2 = bookingRepository.save(saveBooking2);
-
         // Then
         assertEquals(customer1.getFirstName(), modifiedBooking1.getCustomer().getFirstName());
         assertEquals(destination1.getName(), modifiedBooking1.getDestinations().getName());
         assertEquals(saveBooking1.getBookingId(), modifiedBooking1.getBookingId());
         assertEquals(saveBooking2.getBookingId(), modifiedBooking2.getBookingId());
         assertEquals(saveBooking2.getCustomer().getCustomerId(), modifiedBooking2.getCustomer().getCustomerId());
-
         //CleanUp
         long getId1 = saveBooking1.getBookingId();
         long getId2 = saveBooking2.getBookingId();

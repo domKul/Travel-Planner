@@ -24,6 +24,4 @@ public class GrossPriceDTO {
     public int getValue() {
         return value;
     }
-
-
 }

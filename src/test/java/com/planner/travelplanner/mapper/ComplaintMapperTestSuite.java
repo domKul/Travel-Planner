@@ -17,9 +17,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class ComplaintMapperTestSuite {
+
     @Autowired
     private ComplaintMapper complaintMapper;
-
     private Complaint complaint1;
     private Complaint complaint2;
     private ComplaintDTOCreate complaintDTOCreate;
@@ -39,23 +39,18 @@ public class ComplaintMapperTestSuite {
     public void shouldMpToComplaintDTO() {
         //Given
         dataForTests();
-
         //When
         ComplaintDTO mapping = complaintMapper.mapToComplaintDTO(complaint1);
-
         //Then
         assertEquals(complaint1.getDescription(), mapping.getDescription());
-
     }
 
     @Test
     public void shouldMapToComplaintCreate() {
         //Give
         dataForTests();
-
         //When
         Complaint mappingFromDTO = ComplaintMapper.mapFromComplaintCreate(complaintDTOCreate);
-
         //Then
         assertEquals(Complaint.class, mappingFromDTO.getClass());
         assertEquals(complaintDTOCreate.getComplaintDate(), mappingFromDTO.getComplaintDate());
@@ -67,10 +62,8 @@ public class ComplaintMapperTestSuite {
     public void shouldMapToComplaintDTO() {
         //Give
         dataForTests();
-
         //When
         Complaint mappingFromDTO = ComplaintMapper.mapFromComplaintCreate(complaintDTOCreate);
-
         //Then
         assertEquals(Complaint.class, mappingFromDTO.getClass());
         assertEquals(complaintDTOCreate.getComplaintDate(), mappingFromDTO.getComplaintDate());
@@ -83,10 +76,8 @@ public class ComplaintMapperTestSuite {
         //Given
         dataForTests();
         complaint1.setCustomer(customer);
-
         //When
         ComplaintDTO mapping = complaintMapper.mapToComplaintDTOFormShow(complaint1);
-
         //When
         assertEquals(ComplaintDTO.class, mapping.getClass());
         assertEquals(complaint1.getTitle(), mapping.getTitle());
@@ -102,16 +93,11 @@ public class ComplaintMapperTestSuite {
         complaint1.setCustomer(customer);
         customer.getComplaints().add(complaint2);
         complaint2.setCustomer(customer);
-
-
         //When
         List<ComplaintDTO> mappinglistToDTO = complaintMapper.mapToListDTO(customer.getComplaints());
-
         //Then
         assertEquals(2, mappinglistToDTO.size());
         assertEquals(complaint1.getTitle(), mappinglistToDTO.get(0).getTitle());
         assertEquals(complaint1.getDescription(), mappinglistToDTO.get(0).getDescription());
     }
-
-
 }

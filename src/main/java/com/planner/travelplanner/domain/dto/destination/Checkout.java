@@ -19,5 +19,4 @@ public class Checkout {
     public String getFromTime() {
         return fromTime;
     }
-
 }

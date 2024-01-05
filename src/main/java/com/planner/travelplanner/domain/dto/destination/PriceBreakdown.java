@@ -12,7 +12,6 @@ import java.util.Map;
 })
 public class PriceBreakdown {
 
-
     @JsonProperty("grossPrice")
     private GrossPriceDTO grossPrice;
     @JsonIgnore
@@ -38,5 +37,4 @@ public class PriceBreakdown {
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
-
 }

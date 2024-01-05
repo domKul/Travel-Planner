@@ -16,7 +16,6 @@ public class LocationMapperTestSuite {
 
     @Autowired
     private LocationMapper locationMapper;
-
     private LocationDTO locationDTO1;
     private LocationDTO locationDTO2;
     private Location location;
@@ -29,11 +28,8 @@ public class LocationMapperTestSuite {
         locationDTO1.setLabel("test");
         locationDTO1.setName("test");
         locationDTO1.setRegion("test");
-
-
         //When
         Location mapping = locationMapper.mapToLocation(locationDTO1);
-
         //Then
         assertEquals("test", mapping.getCountry());
         assertEquals(locationDTO1.getHotels(), mapping.getHotels());
@@ -50,19 +46,14 @@ public class LocationMapperTestSuite {
         locationDTO1.setLabel("test1");
         locationDTO1.setName("test1");
         locationDTO1.setRegion("test1");
-
         locationDTO2 = new LocationDTO();
         locationDTO2.setCountry("test2");
         locationDTO2.setLabel("test2");
         locationDTO2.setName("test2");
         locationDTO2.setRegion("test");
-
         List<LocationDTO> dtoList = Arrays.asList(locationDTO1, locationDTO2);
-
-
         //When
         List<Location> mapping = locationMapper.mapToLocationListFromDTO(dtoList);
-
         //Then
         assertEquals(2, mapping.size());
         assertEquals("test2", mapping.get(1).getCountry());
@@ -77,15 +68,11 @@ public class LocationMapperTestSuite {
     public void shouldMapToLocationDTO() {
         //Given
         location = new Location(IdType.EMPTY_ID.getId(), "string", "string", "123", "region", "name", "country", 12, "null");
-
         //When
         LocationDTO mappingToDto = locationMapper.mapToLocationDTO(location);
-
         //Then
         assertEquals(location.getLabel(), mappingToDto.getLabel());
         assertEquals(location.getDest_id(), mappingToDto.getDest_id());
         assertEquals(location.getTimezone(), mappingToDto.getTimezone());
     }
-
-
 }

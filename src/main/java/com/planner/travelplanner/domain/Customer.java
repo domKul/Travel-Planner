@@ -30,7 +30,6 @@ public class Customer {
     @NotNull
     private String city;
     @NotNull
-
     private String streetName;
     @NotNull
     private String postalCode;
@@ -40,7 +39,6 @@ public class Customer {
     private int phoneNumber;
     @OneToMany(mappedBy = "customer")
     private List<Complaint> complaints;
-
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<Booking> bookings;
@@ -62,7 +60,6 @@ public class Customer {
         this.complaints = complaints;
         this.bookings = new ArrayList<>();
     }
-
 
     public long getCustomerId() {
         return customerId;
@@ -108,38 +105,29 @@ public class Customer {
         return city;
     }
 
-
     public String getStreetName() {
         return streetName;
     }
-
 
     public List<Complaint> getComplaints() {
         return complaints;
     }
 
-
     public String getPostalCode() {
         return postalCode;
     }
-
 
     public String getEmail() {
         return email;
     }
 
-
     public int getPhoneNumber() {
         return phoneNumber;
     }
 
-
-
     public List<Booking> getBookings() {
         return bookings;
     }
-
-
 
     @Override
     public boolean equals(Object o) {

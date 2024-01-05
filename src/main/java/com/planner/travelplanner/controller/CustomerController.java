@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("v1/customers")
 public class CustomerController {
+
     private final CustomerService customerService;
 
     public CustomerController(CustomerService customerService) {
@@ -45,5 +46,4 @@ public class CustomerController {
         customerService.deleteCustomerById(customerId);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
-
 }

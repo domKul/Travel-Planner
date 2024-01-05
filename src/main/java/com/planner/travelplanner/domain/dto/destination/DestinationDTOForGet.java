@@ -5,20 +5,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class DestinationDTOForGet {
     @JsonProperty("hotelId")
     private Long hotelId;
-
     @JsonProperty("id")
     private Long idName;
-
     @JsonProperty("name")
     private String name;
-
     @JsonProperty("countryCode")
     private String countryCode;
-
-
     @JsonProperty("currency")
     private String currency;
-
     @JsonProperty("value")
     private int HotelPrice;
 

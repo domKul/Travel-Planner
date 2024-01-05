@@ -8,26 +8,20 @@ import java.util.Objects;
 @Entity
 @Table(name = "destination")
 public class Destination {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long destinationId;
-
     @JsonProperty("id")
     private long idName;
-
     @JsonProperty("name")
     private String name;
-
     @JsonProperty("countryCode")
     private String countryCode;
-
-
     @JsonProperty("currency")
     private String currency;
-
     @JsonProperty("value")
     private int destinationPrice;
-
 
     public Destination() {
     }
@@ -43,10 +37,6 @@ public class Destination {
 
     public long getDestinationId() {
         return destinationId;
-    }
-
-    public void setDestinationId(long destinationId) {
-        this.destinationId = destinationId;
     }
 
     public long getIdName() {
@@ -72,7 +62,6 @@ public class Destination {
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
     }
-
 
     public String getCurrency() {
         return currency;

@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("v1/complaints")
 public class ComplaintController {
+
     private final ComplaintService complaintService;
 
     public ComplaintController(ComplaintService complaintService) {

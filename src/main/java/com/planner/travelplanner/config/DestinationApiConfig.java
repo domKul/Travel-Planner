@@ -1,4 +1,4 @@
-package com.planner.travelplanner.config.hotelApi;
+package com.planner.travelplanner.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

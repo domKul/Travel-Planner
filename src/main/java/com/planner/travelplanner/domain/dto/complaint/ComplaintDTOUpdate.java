@@ -4,15 +4,10 @@ import java.time.LocalDateTime;
 
 public class ComplaintDTOUpdate {
 
-
     private final String title;
-
     private final String description;
-
     private final LocalDateTime complaintDate;
-
     private final String status;
-
 
     public ComplaintDTOUpdate(String title, String description, LocalDateTime complaintDate, String status) {
         this.title = title;

@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("v1/destinations")
 public class DestinationsController {
+
     private final DestinationService destinationService;
 
     public DestinationsController(DestinationService destinationService) {

@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class LocationServiceTestSuite {
+
     @Autowired
     private LocationMapper locationMapper;
     @Autowired
@@ -19,6 +20,5 @@ public class LocationServiceTestSuite {
     public void dataForTest() {
         location1 = new Location();
         location2 = new Location();
-
     }
 }

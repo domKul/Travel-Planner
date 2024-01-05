@@ -9,14 +9,12 @@ import java.util.Objects;
 @Entity
 @Table(name = "complaints")
 public class Complaint {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long complaintId;
-
     private String title;
-
     private String description;
-
     private LocalDateTime complaintDate;
     private String status;
     @ManyToOne(fetch = FetchType.EAGER)
@@ -102,7 +100,6 @@ public class Complaint {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-
 
     @Override
     public boolean equals(Object o) {

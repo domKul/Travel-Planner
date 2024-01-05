@@ -37,13 +37,10 @@ public class CustomerControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
     @MockBean
     private CustomerService customerService;
-
     @Autowired
     private ObjectMapper objectMapper;
-
     @Autowired
     private CustomerController customerController;
 
@@ -52,7 +49,6 @@ public class CustomerControllerTest {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/");
         viewResolver.setSuffix(".jsp");
-
         mockMvc = MockMvcBuilders.standaloneSetup(customerController)
                 .setViewResolvers(viewResolver)
                 .setMessageConverters(new MappingJackson2HttpMessageConverter(objectMapper))
@@ -66,9 +62,7 @@ public class CustomerControllerTest {
                 new CustomerDTOGet(1L, "firstName", "lastName", new Date(2020, 2, 2), "string", "string", "string", "string", "string", 1231231, new ArrayList<>()),
                 new CustomerDTOGet(2L, "firstName", "lastName", new Date(2020, 2, 2), "string", "string", "string", "string", "string", 1231231, new ArrayList<>())
         );
-
         given(customerService.showAllCustomers()).willReturn(customers);
-
         // When & Then
         mockMvc.perform(get("/v1/customers/getCustomers")
                         .contentType(MediaType.APPLICATION_JSON))
@@ -83,9 +77,7 @@ public class CustomerControllerTest {
         // Given
         CustomerDTO customerDTO = new CustomerDTO("string", "string", new Date(), "string", "string", "string", "string", "string", 123);
         Customer customer = new Customer(1L, "string", "string", new Date(), "string", "string", "string", "string", "string", 123, new ArrayList<>(), new ArrayList<>());
-
         given(customerService.saveCustomer(any(CustomerDTO.class))).willReturn(customer);
-
         // When & Then
         mockMvc.perform(post("/v1/customers")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -101,7 +93,6 @@ public class CustomerControllerTest {
         CustomerDTOGet customerget = new CustomerDTOGet(1L, "string", "string", new Date(), "string", "string", "string", "string", "string", 123, new ArrayList<>());
         given(customerService.saveCustomer(customerDTO)).willReturn(customer);
         given(customerService.showCustomerGetById(customerget.getCustomerId())).willReturn(customerget);
-
         // When & Then
         mockMvc.perform(get("/v1/customers/" + customerget.getCustomerId())
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -119,8 +110,6 @@ public class CustomerControllerTest {
         CustomerDTO updatedCustomerDTO = new CustomerDTO("newFirstName", "newLastName", new Date(), "newAddress", "newCity", "newState", "newCountry", "newEmail", 123456789);
         given(customerService.saveCustomer(customerDTO)).willReturn(updatedCustomer);
         given(customerService.updateCustomer(customerId, customerDTO)).willReturn(updatedCustomerDTO);
-
-
         // When & Then
         mockMvc.perform(put("/v1/customers/" + updatedCustomer.getCustomerId())
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -135,14 +124,10 @@ public class CustomerControllerTest {
         CustomerDTO customerDTO = new CustomerDTO("newFirstName", "newLastName", new Date(), "newAddress", "newCity", "newState", "newCountry", "newEmail", 123456789);
         Customer updatedCustomer = new Customer(customerId, "newFirstName", "newLastName", new Date(), "newAddress", "newCity", "newState", "newCountry", "newEmail", 123456789, new ArrayList<>(), new ArrayList<>());
         given(customerService.saveCustomer(customerDTO)).willReturn(updatedCustomer);
-
         // When
         mockMvc.perform(delete("/v1/customers/{id}", customerId))
                 .andExpect(status().isAccepted());
-
         // Then
         verify(customerService).deleteCustomerById(updatedCustomer.getCustomerId());
     }
-
-
 }

@@ -15,7 +15,6 @@ import static org.mockito.Mockito.*;
 public class UserCountSchedulerTest {
     @Mock
     private JdbcTemplate jdbcTemplate;
-
     @InjectMocks
     private UserCountScheduler userCountScheduler;
 
@@ -29,10 +28,8 @@ public class UserCountSchedulerTest {
         //Given
         int expectedUserCount = 10;
         when(jdbcTemplate.queryForObject(anyString(), eq(Integer.class))).thenReturn(expectedUserCount);
-
         //When
         int actualUserCount = userCountScheduler.getUserCountFromDatabase();
-
         // Then
         assertEquals(expectedUserCount, actualUserCount);
     }

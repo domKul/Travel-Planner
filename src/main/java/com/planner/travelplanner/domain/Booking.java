@@ -13,16 +13,12 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookingId;
-
-
     private Date startDate;
     @Column(name = "end_date")
     private Date endDate;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private Customer customer;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "destination_id")
     private Destination destination;
@@ -40,10 +36,6 @@ public class Booking {
 
     public long getBookingId() {
         return bookingId;
-    }
-
-    public void setBookingId(long bookingId) {
-        this.bookingId = bookingId;
     }
 
     public Date getStartDate() {
@@ -70,7 +62,6 @@ public class Booking {
         this.customer = customer;
     }
 
-
     public Destination getDestinations() {
         return destination;
     }
@@ -84,8 +75,7 @@ public class Booking {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Booking booking = (Booking) o;
-        return
-                Objects.equals(startDate, booking.startDate) &&
+        return  Objects.equals(startDate, booking.startDate) &&
                 Objects.equals(endDate, booking.endDate) &&
                 Objects.equals(customer, booking.customer) &&
                 Objects.equals(destination, booking.destination);

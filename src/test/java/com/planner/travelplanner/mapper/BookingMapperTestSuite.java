@@ -30,10 +30,8 @@ public class BookingMapperTestSuite {
     private CustomerRepository customerRepository;
     @Autowired
     private DestinationRepository destinationRepository;
-
     private Booking booking1;
     private Booking booking2;
-
     private Customer customer;
     private Destination destination;
 
@@ -53,11 +51,8 @@ public class BookingMapperTestSuite {
         booking2.setDestinations(saveDestination);
         booking2.setCustomer(saveCustomer);
         Booking saveBooking = bookingRepository.save(booking2);
-
-
         //When
         BookingDTOGet mapToDTOGET = bookingMapper.mapToBookingDTOGet(saveBooking);
-
         //When
         assertEquals(booking2.getCustomer().getFirstName(), mapToDTOGET.getCustomerFirstName());
         assertEquals(booking2.getCustomer().getLastName(), mapToDTOGET.getCustomerLastName());
@@ -77,11 +72,8 @@ public class BookingMapperTestSuite {
         Booking saveBooking1 = bookingRepository.save(booking1);
         Booking saveBooking2 = bookingRepository.save(booking2);
         List<Booking> listOfBookings = List.of(saveBooking1, saveBooking2);
-
-
         //When
         List<BookingDTOGet> mappinglist = bookingMapper.mapToDTOListGet(listOfBookings);
-
         //Then
         assertFalse(mappinglist.isEmpty());
         assertEquals(listOfBookings.get(0).getCustomer().getFirstName(), mappinglist.get(0).getCustomerFirstName());
@@ -94,10 +86,8 @@ public class BookingMapperTestSuite {
         Customer saveCustomer = customerRepository.save(customer);
         booking2.setCustomer(saveCustomer);
         Booking save = bookingRepository.save(booking2);
-
         //When
         BookingDTO mappingDTO = bookingMapper.mapToBookingDTO(save);
-
         //Then
         assertEquals(booking2.getCustomer().getFirstName(), mappingDTO.getCustomer().getFirstName());
     }

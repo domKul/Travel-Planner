@@ -37,13 +37,10 @@ public class BookingControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
     @MockBean
     private BookingService bookingService;
-
     @Autowired
     private ObjectMapper objectMapper;
-
     @Autowired
     private BookingsController bookingsController;
 
@@ -52,7 +49,6 @@ public class BookingControllerTest {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/");
         viewResolver.setSuffix(".jsp");
-
         mockMvc = MockMvcBuilders.standaloneSetup(bookingsController)
                 .setViewResolvers(viewResolver)
                 .setMessageConverters(new MappingJackson2HttpMessageConverter(objectMapper))
@@ -73,7 +69,6 @@ public class BookingControllerTest {
                 new BookingDTOGet.Builder().build());
 
         given(bookingService.showAllBookings()).willReturn(bookingDTOGetList);
-
         // When & Then
         mockMvc.perform(get("/v1/bookings")
                         .contentType(MediaType.APPLICATION_JSON))
@@ -88,16 +83,11 @@ public class BookingControllerTest {
         Destination destination = new Destination();
         BookingDTOCreate create = new BookingDTOCreate.Builder().build();
         Booking booking = new Booking(1L, new Date(), new Date(), customer, destination);
-
         when(bookingService.addBooking(create)).thenReturn(booking);
-
-
         // When & Then
         mockMvc.perform(post("/v1/bookings")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(create)))
                 .andExpect(status().isCreated());
     }
-
-
 }

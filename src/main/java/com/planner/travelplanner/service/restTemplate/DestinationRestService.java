@@ -1,6 +1,6 @@
 package com.planner.travelplanner.service.restTemplate;
 
-import com.planner.travelplanner.config.hotelApi.DestinationApiConfig;
+import com.planner.travelplanner.config.DestinationApiConfig;
 import com.planner.travelplanner.domain.Destination;
 import com.planner.travelplanner.domain.dto.destination.DestinationlDTO;
 import com.planner.travelplanner.domain.dto.destination.Result;

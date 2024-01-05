@@ -8,23 +8,14 @@ import java.util.List;
 public class CustomerDTOGet {
 
     private final Long customerId;
-
     private final String firstName;
-
     private final String lastName;
-
     private final Date birthdate;
-
     private final String country;
-
     private final String city;
-
     private final String streetName;
-
     private final String postalCode;
-
     private final String email;
-
     private final int phoneNumber;
     private final List<Complaint> complaints;
 

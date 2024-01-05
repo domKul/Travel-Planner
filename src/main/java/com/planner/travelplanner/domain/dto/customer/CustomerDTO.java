@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 
 public class CustomerDTO {
+
     @JsonProperty("firstName")
     private String firstName;
     @JsonProperty("lastName")
@@ -24,7 +25,6 @@ public class CustomerDTO {
     private String email;
     @JsonProperty("phoneNumber")
     private int phoneNumber;
-
 
     public CustomerDTO(String firstName, String lastName, Date birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber) {
 
@@ -76,6 +76,4 @@ public class CustomerDTO {
     public int getPhoneNumber() {
         return phoneNumber;
     }
-
-
 }

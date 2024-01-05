@@ -9,12 +9,8 @@ import java.util.Date;
 public class BookingDTO {
 
     private final Date startDate;
-
     private final Date endDate;
-
     private final Customer customer;
-
-
     private final Destination destination;
 
     public BookingDTO(Date startDate, Date endDate, Customer customer, Destination destination) {
@@ -23,7 +19,6 @@ public class BookingDTO {
         this.customer = customer;
         this.destination = destination;
     }
-
 
     public Date getStartDate() {
         return startDate;

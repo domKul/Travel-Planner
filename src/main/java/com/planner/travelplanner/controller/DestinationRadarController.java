@@ -15,7 +15,6 @@ public class DestinationRadarController {
         this.destinationRestService = destinationRestService;
     }
 
-
     @GetMapping("/destinationSave")
     @ResponseBody
     public ResponseEntity<DestinationlDTO> searchHotelsSave(@RequestParam String orderedby, @RequestParam int adults_number, @RequestParam String checkin_date,
@@ -35,6 +34,4 @@ public class DestinationRadarController {
                 filter_by_currency, dest_id,
                 locale, checkout_date, units, room_number, dest_type);
     }
-
-
 }

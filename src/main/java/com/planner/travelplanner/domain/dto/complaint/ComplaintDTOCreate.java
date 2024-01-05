@@ -4,13 +4,9 @@ import java.time.LocalDateTime;
 
 public class ComplaintDTOCreate {
 
-
     private final String title;
-
     private final String description;
-
     private final LocalDateTime complaintDate;
-
     private final String status;
     private final Long customerId;
 
@@ -46,5 +42,4 @@ public class ComplaintDTOCreate {
     public long getCustomerId() {
         return customerId;
     }
-
 }

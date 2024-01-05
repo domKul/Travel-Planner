@@ -19,10 +19,8 @@ public class CustomerMapperTestSuite {
 
     @Autowired
     private CustomerMapper customerMapper;
-
     private Customer customer;
     private Customer customer2;
-
     private CustomerDTO customerDTO;
 
     public void customerTestData() {
@@ -35,11 +33,9 @@ public class CustomerMapperTestSuite {
     public void shouldMapCustomerToCustomerDTO() {
         //Given
         customerTestData();
-
         //When
         CustomerDTO mappingToDTO1 = customerMapper.mapToCustomerDTO(customer);
         CustomerDTO mappingToDTO2 = customerMapper.mapToCustomerDTO(customer2);
-
         //Then
         assertNotEquals(mappingToDTO1, mappingToDTO2);
         assertEquals(customer.getFirstName(), mappingToDTO1.getFirstName());
@@ -51,38 +47,31 @@ public class CustomerMapperTestSuite {
     public void shouldMapFromCustomerDTOToCustomer() {
         //Given
         customerTestData();
-
         //When
         Customer mapCustomerFromDTO = customerMapper.mapToCustomer(customerDTO);
-
         //Then
         assertEquals(customerDTO.getFirstName(), mapCustomerFromDTO.getFirstName());
         assertEquals(customerDTO.getLastName(), mapCustomerFromDTO.getLastName());
         assertEquals(customerDTO.getFirstName(), mapCustomerFromDTO.getFirstName());
-
     }
 
     @Test
     public void shouldMapToCustomerForUpdate() {
         //Given
         customerTestData();
-
         //When
-        Customer maptForUpdate = customerMapper.mapToCustomerForUpdate(customer.getCustomerId(), customerDTO);
-
+        Customer mapForUpdate = customerMapper.mapToCustomerForUpdate(customer.getCustomerId(), customerDTO);
         //Then
-        assertEquals(customerDTO.getFirstName(), maptForUpdate.getFirstName());
-        assertEquals(customerDTO.getBirthdate(), maptForUpdate.getBirthdate());
+        assertEquals(customerDTO.getFirstName(), mapForUpdate.getFirstName());
+        assertEquals(customerDTO.getBirthdate(), mapForUpdate.getBirthdate());
     }
 
     @Test
     public void shouldMapToCustomerDTOGet() {
         //Given
         customerTestData();
-
         //When
         CustomerDTOGet mapToCustomerDTOGet = customerMapper.mapToCustomerDTOGet(customer);
-
         //Then
         assertEquals(customer.getCustomerId(), mapToCustomerDTOGet.getCustomerId());
         assertEquals(customer.getPhoneNumber(), mapToCustomerDTOGet.getPhoneNumber());
@@ -93,13 +82,11 @@ public class CustomerMapperTestSuite {
     public void shouldMapListOfCustomerToDTO() {
         //Given
         customerTestData();
-
         //When
         List<Customer> customersList = new ArrayList<>();
         customersList.add(customer);
         customersList.add(customer2);
         List<CustomerDTOGet> mapListToDTO = customerMapper.mapToDTOList(customersList);
-
         //Then
         assertEquals(customer.getCustomerId(), mapListToDTO.get(0).getCustomerId());
         assertEquals(customersList.size(), mapListToDTO.size());
@@ -107,6 +94,4 @@ public class CustomerMapperTestSuite {
         assertEquals(customer.getCity(), mapListToDTO.get(0).getCity());
         assertEquals(customer2.getCustomerId(), mapListToDTO.get(1).getCustomerId());
     }
-
-
 }

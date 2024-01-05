@@ -15,7 +15,6 @@ public class LocationController {
     private final LocationRestService locationRestService;
     private final LocationService locationService;
 
-
     public LocationController(LocationRestService locationRestService, LocationService locationService) {
         this.locationRestService = locationRestService;
         this.locationService = locationService;
@@ -36,5 +35,4 @@ public class LocationController {
     public ResponseEntity<LocationDTO> findLocationFromDataBaseById(long locationId) {
         return ResponseEntity.ok(locationService.getLocationById(locationId));
     }
-
 }

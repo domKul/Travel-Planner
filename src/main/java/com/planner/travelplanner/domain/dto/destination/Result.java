@@ -57,7 +57,6 @@ public class Result {
         this.name = name;
     }
 
-
     @JsonProperty("countryCode")
     public String getCountryCode() {
         return countryCode;
@@ -165,6 +164,4 @@ public class Result {
     public void setWishlistName(String wishlistName) {
         this.wishlistName = wishlistName;
     }
-
-
 }

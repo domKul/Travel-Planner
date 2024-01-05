@@ -21,14 +21,12 @@ public class CustomerCrudTestSuite {
 
     @Autowired
     private CustomerRepository customerRepository;
-
-    private Customer customer1 = null;
-    private Customer customer2 = null;
-    private Booking booking1 = null;
-    private Booking booking2 = null;
-    private Complaint complaint2 = null;
-    private Complaint complaint1 = null;
-
+    private Customer customer1;
+    private Customer customer2;
+    private Booking booking1;
+    private Booking booking2;
+    private Complaint complaint2;
+    private Complaint complaint1;
 
     private void dataForTests() {
         customer1 = new Customer(IdType.EMPTY_ID.getId(), "firstName1", "lastName1", new Date(2000, 2, 11), "country", "city", "streetName", "postalCode", "email", 1231231, new ArrayList<>(), null);
@@ -42,19 +40,15 @@ public class CustomerCrudTestSuite {
     @BeforeEach()
     public void deleteData() {
         customerRepository.deleteAll();
-
     }
 
     @Test
     public void shouldCreateCustomer() {
         //Given
         dataForTests();
-
         //When
         Customer createCustomer = customerRepository.save(customer1);
-
         Long getId1 = createCustomer.getCustomerId();
-
         //Then
         assertEquals(1, customerRepository.count());
         assertNotNull(customer1);
@@ -62,55 +56,42 @@ public class CustomerCrudTestSuite {
         assertEquals(customer1.getFirstName(), createCustomer.getFirstName());
         assertEquals("firstName1", createCustomer.getFirstName());
         assertEquals(customer1.getComplaints().size(), createCustomer.getComplaints().size());
-
         //CleanUp
         customerRepository.deleteById(getId1);
     }
 
     @Test
     public void shouldDeleteCustomerById() {
-
         //Given
         dataForTests();
-
         //When
         Customer newCustomer1 = customerRepository.save(customer1);
         Customer newCustomer2 = customerRepository.save(customer2);
         customerRepository.deleteById(newCustomer2.getCustomerId());
-
         Long getId1 = newCustomer1.getCustomerId();
         Long getId2 = newCustomer2.getCustomerId();
-
         //Then
         assertEquals(1, customerRepository.count());
         assertEquals("firstName1", newCustomer1.getFirstName());
-
         //CleanUp
         customerRepository.deleteById(getId1);
         customerRepository.deleteById(getId2);
-
     }
 
     @Test
     public void shouldFinaAllCustomers() {
         //Given
         dataForTests();
-
         //When
         Customer newCustomer1 = customerRepository.save(customer1);
         Customer newCustomer2 = customerRepository.save(customer2);
         List<Customer> findAll = customerRepository.findAll();
-
         Long getId1 = newCustomer1.getCustomerId();
         Long getId2 = newCustomer2.getCustomerId();
-
         boolean result = getId1.equals(getId2);
-
-
         //Then
         assertFalse(result);
         assertEquals(2, findAll.size());
-
         //CleanUp
         customerRepository.deleteById(getId1);
         customerRepository.deleteById(getId2);
@@ -120,23 +101,18 @@ public class CustomerCrudTestSuite {
     public void shouldModifyCustomer() {
         //Given
         dataForTests();
-
         //When
         Customer savedCustomer1 = customerRepository.save(customer1);
         Customer savedCustomer2 = customerRepository.save(customer2);
         savedCustomer1.setFirstName("UpdatedFirstName");
         savedCustomer1.getBookings().add(booking1);
         savedCustomer1.getBookings().add(booking2);
-
-
         Long getId1 = savedCustomer1.getCustomerId();
         Long getId2 = savedCustomer2.getCustomerId();
-
         //Then
         assertEquals(booking1.getBookingId(), savedCustomer1.getBookings().get(0).getBookingId());
         assertEquals("UpdatedFirstName", savedCustomer1.getFirstName());
         assertEquals("firstName2", savedCustomer2.getFirstName());
-
         //CleanUp
         customerRepository.deleteById(getId1);
         customerRepository.deleteById(getId2);
@@ -146,24 +122,19 @@ public class CustomerCrudTestSuite {
     public void shouldModifyCustomerByAddingComplaints() {
         //Given
         dataForTests();
-
         //When
         Customer savedCustomer1 = customerRepository.save(customer1);
         Customer savedCustomer2 = customerRepository.save(customer2);
         savedCustomer1.setFirstName("UpdatedFirstName");
         savedCustomer1.getComplaints().add(complaint1);
         savedCustomer2.getComplaints().add(complaint2);
-
-
         Long getId1 = savedCustomer1.getCustomerId();
         Long getId2 = savedCustomer2.getCustomerId();
-
         //Then
         assertEquals(1, savedCustomer1.getComplaints().size());
         assertEquals(1, savedCustomer2.getComplaints().size());
         assertEquals("UpdatedFirstName", savedCustomer1.getFirstName());
         assertEquals("firstName2", savedCustomer2.getFirstName());
-
         //CleanUp
         customerRepository.deleteById(getId1);
         customerRepository.deleteById(getId2);

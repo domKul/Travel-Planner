@@ -17,6 +17,4 @@ public class GrossPrice {
     public int getValue() {
         return value;
     }
-
-
 }

@@ -22,17 +22,14 @@ public class LocationDTO {
     private String label;
     @JsonProperty("region")
     private String region;
-
     @JsonProperty("dest_id")
     private String dest_id;
-
     @JsonProperty("dest_type")
     private String destination_type;
     @JsonProperty("name")
     private String name;
     @JsonProperty("country")
     private String country;
-
     @JsonProperty("hotels")
     private int hotels;
     @JsonProperty("timezone")
@@ -106,6 +103,7 @@ public class LocationDTO {
     public String getTimezone() {
         return timezone;
     }
+
     @JsonProperty("dest_type")
     public String getDestination_type() {
         return destination_type;

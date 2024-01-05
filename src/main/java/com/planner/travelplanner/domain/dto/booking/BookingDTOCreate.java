@@ -3,12 +3,10 @@ package com.planner.travelplanner.domain.dto.booking;
 import java.util.Date;
 
 public class BookingDTOCreate {
+
     private final Date startDate;
-
     private final Date endDate;
-
     private final Long customerId;
-
     private final Long destinationId;
 
     public BookingDTOCreate(Date startDate, Date endDate, long customerId, long destinationId) {
@@ -64,5 +62,4 @@ public class BookingDTOCreate {
             return new BookingDTOCreate(startDate, endDate, customerId, destinationId);
         }
     }
-
 }

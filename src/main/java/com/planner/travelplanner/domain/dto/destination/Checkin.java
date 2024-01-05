@@ -19,6 +19,4 @@ public class Checkin {
     public String getUntilTime() {
         return untilTime;
     }
-
-
 }

@@ -18,5 +18,4 @@ public class DestinationlDTO {
     public void setResults(List<Result> results) {
         this.results = results;
     }
-
 }

@@ -6,12 +6,12 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "location")
 public class Location {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long locationId;
     @JsonProperty("label")
     private String label;
-
     @JsonProperty("dest_id")
     private String dest_id;
     @JsonProperty("dest_type")
@@ -46,11 +46,9 @@ public class Location {
         return label;
     }
 
-
     public String getRegion() {
         return region;
     }
-
 
     public String getName() {
         return name;
@@ -72,19 +70,15 @@ public class Location {
         return hotels;
     }
 
-
     public String getTimezone() {
         return timezone;
     }
-
 
     public String getDest_id() {
         return dest_id;
     }
 
-
     public String getDestination_type() {
         return destination_type;
     }
-
 }

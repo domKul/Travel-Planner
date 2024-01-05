@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("v1/bookings")
 public class BookingsController {
+
     private final BookingService bookingService;
 
     public BookingsController(BookingService bookingService) {
@@ -47,5 +48,4 @@ public class BookingsController {
         bookingService.deleteBookingById(bookingId);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
-
 }
