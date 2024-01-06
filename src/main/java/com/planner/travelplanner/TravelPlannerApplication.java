@@ -10,9 +10,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class TravelPlannerApplication {
 
     public static void main(String[] args) {
-
         SpringApplication.run(TravelPlannerApplication.class, args);
-
     }
-
 }
