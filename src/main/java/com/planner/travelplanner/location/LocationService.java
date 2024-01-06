@@ -5,10 +5,9 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-class LocationService {
+public class LocationService {
 
     private final LocationMapper locationMapper;
     private final LocationRepository locationRepository;
@@ -26,12 +25,8 @@ class LocationService {
 
     @Transactional
     public void deleteLocation(long locationId) {
-        Optional<Location> findById = locationRepository.findById(locationId);
-        if (findById.isPresent()) {
-            locationRepository.deleteById(locationId);
-        } else {
-            throw new LocationNotFoundException();
-        }
+        Location location = getLocation(locationId);
+        locationRepository.delete(location);
     }
 
     List<LocationDTO> getLocationsFromDB() {
@@ -39,10 +34,16 @@ class LocationService {
     }
 
     LocationDTO getLocationById(long locationId) {
-        if (locationRepository.existsById(locationId)) {
-            return locationMapper.mapToLocationDTO(locationRepository.findById(locationId).get());
-        } else {
+        boolean isExist = locationRepository.existsById(locationId);
+        if (!isExist){
             throw new LocationNotFoundException();
         }
+        return locationMapper.mapToLocationDTO(getLocation(locationId));
+
+    }
+
+    private Location getLocation(long locationId) {
+        return locationRepository.findById(locationId)
+                .orElseThrow(LocationNotFoundException::new);
     }
 }

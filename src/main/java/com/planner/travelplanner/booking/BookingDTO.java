@@ -6,33 +6,33 @@ import com.planner.travelplanner.destination.Destination;
 import java.util.Date;
 
 
-public class BookingDTO {
+class BookingDTO {
 
     private final Date startDate;
     private final Date endDate;
     private final Customer customer;
     private final Destination destination;
 
-    public BookingDTO(Date startDate, Date endDate, Customer customer, Destination destination) {
+    BookingDTO(Date startDate, Date endDate, Customer customer, Destination destination) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.customer = customer;
         this.destination = destination;
     }
 
-    public Date getStartDate() {
+    Date getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+     Date getEndDate() {
         return endDate;
     }
 
-    public Customer getCustomer() {
+    Customer getCustomer() {
         return customer;
     }
 
-    public Destination getHotel() {
+    Destination getHotel() {
         return destination;
     }
 }

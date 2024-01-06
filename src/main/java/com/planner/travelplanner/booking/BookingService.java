@@ -21,7 +21,7 @@ public class BookingService {
     private final CustomerRepository customerRepository;
     private final DestinationRepository destinationRepository;
 
-    public BookingService(BookingRepository bookingRepository, BookingMapper bookingMapper, CustomerRepository customerRepository, DestinationRepository destinationRepository) {
+    BookingService(BookingRepository bookingRepository, BookingMapper bookingMapper, CustomerRepository customerRepository, DestinationRepository destinationRepository) {
         this.bookingRepository = bookingRepository;
         this.bookingMapper = bookingMapper;
         this.customerRepository = customerRepository;
@@ -47,11 +47,11 @@ public class BookingService {
         return bookingRepository.save(booking);
     }
 
-    public List<BookingDTOGet> showAllBookings() {
+    List<BookingDTOGet> showAllBookings() {
         return bookingMapper.mapToDTOListGet(bookingRepository.findAll());
     }
 
-    public BookingDTOGet showBookingById(final long bookingId) {
+    BookingDTOGet showBookingById(final long bookingId) {
         if (bookingRepository.existsById(bookingId)) {
             return bookingMapper.mapToBookingDTOGet(bookingRepository.findById(bookingId).get());
         } else {
@@ -80,7 +80,7 @@ public class BookingService {
         }
     }
 
-    public Booking mapToBookingForUpdate(final long bookingId, BookingDTOCreate bookingDTOCreate) {
+    Booking mapToBookingForUpdate(final long bookingId, BookingDTOCreate bookingDTOCreate) {
         Booking booking = bookingRepository.findById(bookingId).orElseThrow(
                 BookingNotFoundException::new);
         if (booking != null) {

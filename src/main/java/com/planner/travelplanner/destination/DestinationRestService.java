@@ -24,13 +24,13 @@ class DestinationRestService {
         this.destinationApiConfig = destinationApiConfig;
     }
 
-    URI urlBuilder(String orderedby, int adults_number, String checkin_date,
-                          String filter_by_currency, int dest_id,
-                          String locale, String checkout_date, String units,
-                          int room_number, String dest_type) {
+    URI urlBuilder(String orderedBy, int adults_number, String checkin_date,
+                   String filter_by_currency, int dest_id,
+                   String locale, String checkout_date, String units,
+                   int room_number, String dest_type) {
         return UriComponentsBuilder
                 .fromHttpUrl("https://booking-com.p.rapidapi.com/v2/hotels/search")
-                .queryParam("order_by", orderedby)
+                .queryParam("order_by", orderedBy)
                 .queryParam("adults_number", adults_number)
                 .queryParam("checkin_date", checkin_date)
                 .queryParam("filter_by_currency", filter_by_currency)
@@ -53,13 +53,13 @@ class DestinationRestService {
         return headers;
     }
 
-    ResponseEntity<DestinationlDTO> searchHotelWithSaveToData(String orderedby, int adults_number, String checkin_date,
-                                                                     String filter_by_currency, int dest_id,
-                                                                     String locale, String checkout_date, String units,
-                                                                     int room_number, String dest_type) {
+    ResponseEntity<DestinationlDTO> searchHotelWithSaveToData(String orderedBy, int adults_number, String checkin_date,
+                                                              String filter_by_currency, int dest_id,
+                                                              String locale, String checkout_date, String units,
+                                                              int room_number, String dest_type) {
 
         HttpEntity<String> entity = new HttpEntity<>("parameters", header());
-        String url = urlBuilder(orderedby, adults_number, checkin_date,
+        String url = urlBuilder(orderedBy, adults_number, checkin_date,
                 filter_by_currency, dest_id,
                 locale, checkout_date, units, room_number, dest_type).toString();
         ResponseEntity<DestinationlDTO> responseEntity = restTemplate.exchange(url, HttpMethod.GET, entity, DestinationlDTO.class);
@@ -84,13 +84,12 @@ class DestinationRestService {
         return responseEntity;
     }
 
-    ResponseEntity<DestinationlDTO> searchHotel(String orderedby, int adults_number, String checkin_date,
-                                                       String filter_by_currency, int dest_id,
-                                                       String locale, String checkout_date, String units,
-                                                       int room_number, String dest_type) {
-
+    ResponseEntity<DestinationlDTO> searchHotel(String orderedBy, int adults_number, String checkin_date,
+                                                String filter_by_currency, int dest_id,
+                                                String locale, String checkout_date, String units,
+                                                int room_number, String dest_type) {
         HttpEntity<String> entity = new HttpEntity<>("parameters", header());
-        String url = urlBuilder(orderedby, adults_number, checkin_date,
+        String url = urlBuilder(orderedBy, adults_number, checkin_date,
                 filter_by_currency, dest_id,
                 locale, checkout_date, units, room_number, dest_type).toString();
         return restTemplate.exchange(url, HttpMethod.GET, entity, DestinationlDTO.class);

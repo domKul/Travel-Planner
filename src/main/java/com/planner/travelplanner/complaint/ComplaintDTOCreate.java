@@ -2,7 +2,7 @@ package com.planner.travelplanner.complaint;
 
 import java.time.LocalDateTime;
 
-public class ComplaintDTOCreate {
+class ComplaintDTOCreate {
 
     private final String title;
     private final String description;
@@ -10,7 +10,7 @@ public class ComplaintDTOCreate {
     private final String status;
     private final Long customerId;
 
-    public ComplaintDTOCreate(String title, String description, LocalDateTime complaintDate, String status, long customerId) {
+    ComplaintDTOCreate(String title, String description, LocalDateTime complaintDate, String status, long customerId) {
         this.title = title;
         this.description = description;
         this.complaintDate = LocalDateTime.now();
@@ -18,28 +18,28 @@ public class ComplaintDTOCreate {
         this.customerId = customerId;
     }
 
-    public long getCustomer() {
+    long getCustomer() {
         return customerId;
     }
 
-    public String getTitle() {
+    String getTitle() {
         return title;
     }
 
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 
-    public LocalDateTime getComplaintDate() {
+    LocalDateTime getComplaintDate() {
         return complaintDate;
     }
 
-    public String getStatus() {
+    String getStatus() {
         return status;
     }
 
 
-    public long getCustomerId() {
+    long getCustomerId() {
         return customerId;
     }
 }

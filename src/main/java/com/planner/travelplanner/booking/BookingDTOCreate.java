@@ -9,14 +9,14 @@ public class BookingDTOCreate {
     private final Long customerId;
     private final Long destinationId;
 
-    public BookingDTOCreate(Date startDate, Date endDate, long customerId, long destinationId) {
+    BookingDTOCreate(Date startDate, Date endDate, long customerId, long destinationId) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.customerId = customerId;
         this.destinationId = destinationId;
     }
 
-    public Date getStartDate() {
+    Date getStartDate() {
         return startDate;
     }
 
@@ -24,11 +24,11 @@ public class BookingDTOCreate {
         return endDate;
     }
 
-    public long getCustomerId() {
+    long getCustomerId() {
         return customerId;
     }
 
-    public long getDestinationId() {
+    long getDestinationId() {
         return destinationId;
     }
 

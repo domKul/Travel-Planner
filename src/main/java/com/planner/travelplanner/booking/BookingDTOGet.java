@@ -2,7 +2,7 @@ package com.planner.travelplanner.booking;
 
 import java.util.Date;
 
-public class BookingDTOGet {
+class BookingDTOGet {
 
     private Long bookingId;
     private final Date bookTime;
@@ -23,7 +23,7 @@ public class BookingDTOGet {
     private final String hotelPrice;
     private String currency;
 
-    public BookingDTOGet(Builder builder) {
+    BookingDTOGet(Builder builder) {
         this.bookingId = builder.bookingId;
         this.bookTime = builder.bookTime;
         this.customerId = builder.customerId;
@@ -44,91 +44,91 @@ public class BookingDTOGet {
         this.currency = builder.currency;
     }
 
-    public String getCurrency() {
+    String getCurrency() {
         return currency;
     }
 
-    public void setCurrency(String currency) {
+    void setCurrency(String currency) {
         this.currency = currency;
     }
 
-    public long getBookingId() {
+    long getBookingId() {
         return bookingId;
     }
 
-    public void setBookingId(long bookingId) {
+    void setBookingId(long bookingId) {
         this.bookingId = bookingId;
     }
 
-    public Date getBookTime() {
+    Date getBookTime() {
         return bookTime;
     }
 
-    public String getHotelName() {
+    String getHotelName() {
         return hotelName;
     }
 
-    public Date getStartBooking() {
+    Date getStartBooking() {
         return startBooking;
     }
 
-    public void setStartBooking(Date startBooking) {
+    void setStartBooking(Date startBooking) {
         this.startBooking = startBooking;
     }
 
-    public Date getEndBooking() {
+    Date getEndBooking() {
         return endBooking;
     }
 
-    public void setEndBooking(Date endBooking) {
+    void setEndBooking(Date endBooking) {
         this.endBooking = endBooking;
     }
 
-    public long getCustomerId() {
+    long getCustomerId() {
         return customerId;
     }
 
-    public String getCustomerFirstName() {
+    String getCustomerFirstName() {
         return customerFirstName;
     }
 
-    public String getCustomerLastName() {
+    String getCustomerLastName() {
         return customerLastName;
     }
 
-    public Date getBirthDate() {
+    Date getBirthDate() {
         return birthDate;
     }
 
-    public String getCountry() {
+    String getCountry() {
         return country;
     }
 
-    public String getCity() {
+    String getCity() {
         return city;
     }
 
-    public String getStreetName() {
+    String getStreetName() {
         return streetName;
     }
 
-    public String getPostalCode() {
+    String getPostalCode() {
         return postalCode;
     }
 
-    public String getEmail() {
+    String getEmail() {
         return email;
     }
 
-    public int getPhoneNumber() {
+    int getPhoneNumber() {
         return phoneNumber;
     }
 
-    public long getDestinationId() {
+    long getDestinationId() {
         return hotelId;
     }
 
-    public String getHotelPrice() {
+    String getHotelPrice() {
         return hotelPrice;
     }
 
@@ -151,7 +151,8 @@ public class BookingDTOGet {
         private Date startBooking;
         private Date endBooking;
         private String currency;
-        public Builder currency(String currency){
+
+        public Builder currency(String currency) {
             this.currency = currency;
             return this;
         }
