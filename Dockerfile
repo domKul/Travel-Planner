@@ -1,10 +1,17 @@
-## Etap 1: Budowanie aplikacji
 FROM gradle:7.3.3-jdk17 AS build
+
+WORKDIR /app
+
 COPY . .
-RUN gradlew build
+
+COPY gradlew .
+
+RUN ./gradlew build
 
 FROM openjdk:17-alpine
-WORKDIR /app
-COPY --from=build /app/target/backend-0.0.1-SNAPSHOT.jar ./demo.jar
+
+COPY --from=build /app/build/libs/*.jar app.jar
+
 EXPOSE 8080
-CMD ["java", "-jar", "demo-aws.jar"]
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
