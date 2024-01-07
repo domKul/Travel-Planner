@@ -6,7 +6,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-//@OpenAPIDefinition
+//@OpenAPIDefinitio
 public class TravelPlannerApplication {
 
     public static void main(String[] args) {
