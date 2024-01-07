@@ -1,23 +1,11 @@
 package com.planner.travelplanner.booking;
 
-import com.planner.travelplanner.customer.CustomerRepository;
-import com.planner.travelplanner.destination.DestinationRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 class BookingMapper {
-
-    private final BookingRepository bookingRepository;
-    private final CustomerRepository customerRepository;
-    private final DestinationRepository destinationRepository;
-
-    BookingMapper(BookingRepository bookingRepository, CustomerRepository customerRepository, DestinationRepository destinationRepository) {
-        this.bookingRepository = bookingRepository;
-        this.customerRepository = customerRepository;
-        this.destinationRepository = destinationRepository;
-    }
 
     BookingDTO mapToBookingDTO(Booking booking) {
         return new BookingDTO(

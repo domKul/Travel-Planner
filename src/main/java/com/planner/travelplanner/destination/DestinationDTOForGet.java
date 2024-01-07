@@ -14,7 +14,7 @@ class DestinationDTOForGet {
     @JsonProperty("currency")
     private String currency;
     @JsonProperty("value")
-    private int HotelPrice;
+    private int hotelPrice;
 
     DestinationDTOForGet(long hotelId, long idName, String name, String countryCode, String currency, int hotelPrice) {
         this.hotelId = hotelId;
@@ -22,7 +22,7 @@ class DestinationDTOForGet {
         this.name = name;
         this.countryCode = countryCode;
         this.currency = currency;
-        this.HotelPrice = hotelPrice;
+        this.hotelPrice = hotelPrice;
     }
 
     long getHotelId() {
@@ -46,6 +46,6 @@ class DestinationDTOForGet {
     }
 
     int getHotelPrice() {
-        return HotelPrice;
+        return hotelPrice;
     }
 }
