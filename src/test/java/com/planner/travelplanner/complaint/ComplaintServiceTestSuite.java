@@ -4,8 +4,8 @@ import com.planner.travelplanner.customer.Customer;
 import com.planner.travelplanner.customer.CustomerDTO;
 import com.planner.travelplanner.customer.CustomerRepository;
 import com.planner.travelplanner.customer.CustomerService;
-import com.planner.travelplanner.exception.CustomerNotFoundException;
 import com.planner.travelplanner.enums.IdType;
+import com.planner.travelplanner.exception.CustomerNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,9 @@ class ComplaintServiceTestSuite {
         complaintDTOUpdate = new ComplaintDTOUpdate("update", "update", null, "status");
     }
 
-    private void clearData() {
+    @BeforeEach
+    void clearData() {
+        complaintRepository.deleteAll();
         customerRepository.deleteAll();
     }
 
@@ -65,12 +67,7 @@ class ComplaintServiceTestSuite {
         //Then
         assertEquals("titledto", listOfComplaints.get(0).getTitle());
         assertEquals("titledto", listOfComplaints.get(1).getTitle());
-        //CleanUp
-        long complId1 = create1.getComplaintId();
-        long complId2 = create2.getComplaintId();
-        customerRepository.deleteById(cusId);
-        complaintRepository.deleteById(complId1);
-        complaintRepository.deleteById(complId2);
+
     }
 
     @Test
@@ -99,12 +96,6 @@ class ComplaintServiceTestSuite {
         //Then
         assertEquals(0, emptyList.size());
         assertEquals(2, allComplaints.size());
-        //CleanUp
-        long complId1 = create1.getComplaintId();
-        long complId2 = create2.getComplaintId();
-        customerRepository.deleteById(cusId);
-        complaintRepository.deleteById(complId1);
-        complaintRepository.deleteById(complId2);
     }
 
     @Test
@@ -119,10 +110,6 @@ class ComplaintServiceTestSuite {
         ComplaintDTO findingComplaint = complaintService.showComplaintById(create1.getComplaintId());
         //Thne
         assertEquals(complaintDTOCreate.getTitle(), findingComplaint.getTitle());
-        //CleanUp
-        long complId1 = create1.getComplaintId();
-        customerRepository.deleteById(cusId);
-        complaintRepository.deleteById(complId1);
     }
 
     @Test
@@ -137,10 +124,6 @@ class ComplaintServiceTestSuite {
         ComplaintDTO update = complaintService.modifyComplaintStatus(create1.getComplaintId(), complaintDTOUpdate);
         //Then
         assertEquals(create1.getComplaintId(), update.getComplaintId());
-        //CleanUp
-        long complId1 = create1.getComplaintId();
-        customerRepository.deleteById(cusId);
-        complaintRepository.deleteById(complId1);
     }
 
     @Test
@@ -158,9 +141,5 @@ class ComplaintServiceTestSuite {
         //Thne
         assertEquals(1, findOne.size());
         assertEquals(0, complaintService.showAllComplaints().size());
-        //CleanUp
-        long complId1 = create1.getComplaintId();
-        customerRepository.deleteById(cusId);
-        complaintRepository.deleteById(complId1);
     }
 }

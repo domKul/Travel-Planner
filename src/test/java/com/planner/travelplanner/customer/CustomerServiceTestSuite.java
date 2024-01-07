@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 class CustomerServiceTestSuite {
 
     @Autowired
@@ -32,7 +34,8 @@ class CustomerServiceTestSuite {
         customerDTO2 = new CustomerDTO("firstNameDTO", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231);
     }
 
-    private void clearData() {
+    @BeforeEach
+    void clearData() {
         customerRepository.deleteAll();
     }
 
@@ -51,11 +54,6 @@ class CustomerServiceTestSuite {
         List<Customer> cusList = customerRepository.findAll();
         //Then
         assertEquals(2, cusList.size());
-        //CLeanUp
-        long getId1 = saveCustomer1.getCustomerId();
-        long getId2 = saveCustomer2.getCustomerId();
-        customerRepository.deleteById(getId1);
-        customerRepository.deleteById(getId2);
     }
 
     @Test
@@ -87,15 +85,10 @@ class CustomerServiceTestSuite {
             customerService.deleteCustomerById(wrongID);
         });
         assertEquals(2, listOfCustomers.size());
-        //CleanUp
-        long getId1 = saveCustomer1.getCustomerId();
-        long getId2 = saveCustomer2.getCustomerId();
-        customerRepository.deleteById(getId1);
-        customerRepository.deleteById(getId2);
     }
 
     @Test
-    public void shouldShowAllCUstomers() {
+    public void shouldShowAllCustomers() {
         //Given
         dataForTests();
         Customer saveCustomer1 = customerService.saveCustomer(customerDTO1);
@@ -105,11 +98,6 @@ class CustomerServiceTestSuite {
         int expected = 2;
         //Then
         assertEquals(expected, cusList.size());
-        //CleanUp
-        long getId1 = saveCustomer1.getCustomerId();
-        long getId2 = saveCustomer2.getCustomerId();
-        customerService.deleteCustomerById(getId1);
-        customerService.deleteCustomerById(getId2);
     }
 
     @Test
@@ -126,8 +114,6 @@ class CustomerServiceTestSuite {
         // Then
         assertEquals("Jane", updatedCustomerDTO2.getFirstName());
         assertEquals("Smith", updatedCustomerDTO2.getLastName());
-        //CleanUp
-        customerRepository.deleteById(getId);
     }
 
     @Test
