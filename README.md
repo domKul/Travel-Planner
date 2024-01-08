@@ -1,5 +1,7 @@
 # Travel-Planner-BackEnd vacation planner
 
+### Travel-Planner is a application for finding new travel destinations/locations and planning your trips.
+
 ##### To run the APi hosted on `onrender.com`:
 - 1.You need to clone this and [Front-End](https://github.com/domKul/Travel-Planner-Vaadin-FrontEnd)
 - 2.Run it. Onrender.com is a free service, please wait a few minutes for the application to start.
