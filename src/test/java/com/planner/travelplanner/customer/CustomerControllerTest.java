@@ -72,7 +72,7 @@ class CustomerControllerTest {
     void shouldAddCustomer() throws Exception {
         // Given
         CustomerDTO customerDTO = new CustomerDTO("string", "string", new Date(), "string", "string", "string", "string", "string", 123);
-        Customer customer = new Customer(1L, "string", "string", new Date(), "string", "string", "string", "string", "string", 123, new ArrayList<>(), new ArrayList<>());
+        Customer customer = new Customer(1L, "string", "string", new Date(), "string", "string", "string", "string", "string", 123, new ArrayList<>());
         given(customerService.saveCustomer(any(CustomerDTO.class))).willReturn(customer);
         // When & Then
         mockMvc.perform(post("/v1/customers")
@@ -85,7 +85,7 @@ class CustomerControllerTest {
     void shouldFindCustomerByIdInDB() throws Exception {
         // Given
         CustomerDTO customerDTO = new CustomerDTO("string", "string", new Date(), "string", "string", "string", "string", "string", 123);
-        Customer customer = new Customer(1L, "string", "string", new Date(), "string", "string", "string", "string", "string", 123, new ArrayList<>(), new ArrayList<>());
+        Customer customer = new Customer(1L, "string", "string", new Date(), "string", "string", "string", "string", "string", 123, new ArrayList<>());
         CustomerDTOGet customerget = new CustomerDTOGet(1L, "string", "string", new Date(), "string", "string", "string", "string", "string", 123, new ArrayList<>());
         given(customerService.saveCustomer(customerDTO)).willReturn(customer);
         given(customerService.showCustomerGetById(customerget.getCustomerId())).willReturn(customerget);
@@ -102,7 +102,7 @@ class CustomerControllerTest {
         // Given
         long customerId = 1L;
         CustomerDTO customerDTO = new CustomerDTO("newFirstName", "newLastName", new Date(), "newAddress", "newCity", "newState", "newCountry", "newEmail", 123456789);
-        Customer updatedCustomer = new Customer(customerId, "newFirstName", "newLastName", new Date(), "newAddress", "newCity", "newState", "newCountry", "newEmail", 123456789, new ArrayList<>(), new ArrayList<>());
+        Customer updatedCustomer = new Customer(customerId, "newFirstName", "newLastName", new Date(), "newAddress", "newCity", "newState", "newCountry", "newEmail", 123456789, new ArrayList<>());
         CustomerDTO updatedCustomerDTO = new CustomerDTO("newFirstName", "newLastName", new Date(), "newAddress", "newCity", "newState", "newCountry", "newEmail", 123456789);
         given(customerService.saveCustomer(customerDTO)).willReturn(updatedCustomer);
         given(customerService.updateCustomer(customerId, customerDTO)).willReturn(updatedCustomerDTO);
@@ -118,7 +118,7 @@ class CustomerControllerTest {
         // Given
         long customerId = 1L;
         CustomerDTO customerDTO = new CustomerDTO("newFirstName", "newLastName", new Date(), "newAddress", "newCity", "newState", "newCountry", "newEmail", 123456789);
-        Customer updatedCustomer = new Customer(customerId, "newFirstName", "newLastName", new Date(), "newAddress", "newCity", "newState", "newCountry", "newEmail", 123456789, new ArrayList<>(), new ArrayList<>());
+        Customer updatedCustomer = new Customer(customerId, "newFirstName", "newLastName", new Date(), "newAddress", "newCity", "newState", "newCountry", "newEmail", 123456789, new ArrayList<>());
         given(customerService.saveCustomer(customerDTO)).willReturn(updatedCustomer);
         // When
         mockMvc.perform(delete("/v1/customers/{id}", customerId))

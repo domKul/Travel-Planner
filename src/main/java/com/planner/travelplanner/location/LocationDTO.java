@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "hotels",
         "nrHotels"
 })
-public class LocationDTO {
+class LocationDTO {
     @JsonProperty("label")
     private String label;
     @JsonProperty("region")

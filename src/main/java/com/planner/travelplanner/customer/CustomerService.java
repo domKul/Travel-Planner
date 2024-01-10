@@ -18,17 +18,22 @@ public class CustomerService {
         this.customerMapper = customerMapper;
     }
 
+    public Customer findCustomerOrThrow(long id){
+        return customerRepository.findById(id)
+                .orElseThrow(CustomerNotFoundException::new);
+    }
+
     @Transactional
     public Customer saveCustomer(final CustomerDTO customerDTO) {
         Customer customer = customerMapper.mapToCustomer(customerDTO);
         return customerRepository.save(customer);
     }
 
-    public List<CustomerDTOGet> showAllCustomers() {
+     List<CustomerDTOGet> showAllCustomers() {
         return customerMapper.mapToDTOList(customerRepository.findAll());
     }
 
-    public CustomerDTOGet showCustomerGetById(final long customerId) {
+     CustomerDTOGet showCustomerGetById(final long customerId) {
         if (customerRepository.existsById(customerId)) {
             return customerMapper.mapToCustomerDTOGet(customerRepository.findById(customerId).get());
         } else {

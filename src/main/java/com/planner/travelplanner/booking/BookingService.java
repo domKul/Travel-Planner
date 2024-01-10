@@ -1,12 +1,9 @@
 package com.planner.travelplanner.booking;
 
 import com.planner.travelplanner.customer.Customer;
-import com.planner.travelplanner.customer.CustomerRepository;
-import com.planner.travelplanner.destination.Destination;
-import com.planner.travelplanner.destination.DestinationRepository;
+import com.planner.travelplanner.customer.CustomerService;
+import com.planner.travelplanner.destination.DestinationService;
 import com.planner.travelplanner.exception.BookingNotFoundException;
-import com.planner.travelplanner.exception.CustomerNotFoundException;
-import com.planner.travelplanner.exception.HotelNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -18,31 +15,29 @@ public class BookingService {
 
     private final BookingRepository bookingRepository;
     private final BookingMapper bookingMapper;
-    private final CustomerRepository customerRepository;
-    private final DestinationRepository destinationRepository;
+    private final CustomerService customerService;
+    private final DestinationService destinationService;
 
-    BookingService(BookingRepository bookingRepository, BookingMapper bookingMapper, CustomerRepository customerRepository, DestinationRepository destinationRepository) {
+    BookingService(BookingRepository bookingRepository, BookingMapper bookingMapper,
+                    CustomerService customerService, DestinationService destinationService) {
         this.bookingRepository = bookingRepository;
         this.bookingMapper = bookingMapper;
-        this.customerRepository = customerRepository;
-        this.destinationRepository = destinationRepository;
+        this.customerService = customerService;
+        this.destinationService = destinationService;
     }
 
     @Transactional
     public Booking addBooking(final BookingDTOCreate bookingDTOCreate) {
-        Booking booking = new Booking();
-
-        if (bookingDTOCreate != null) {
-            Customer findCustomer = customerRepository.findById(bookingDTOCreate.getCustomerId())
-                    .orElseThrow(CustomerNotFoundException::new);
-            Destination findDestination = destinationRepository.findById(bookingDTOCreate.getDestinationId())
-                    .orElseThrow(HotelNotFoundException::new);
-
-            booking.setCustomer(findCustomer);
+        var booking = new Booking();
+        if (bookingDTOCreate == null) {
+            throw new BookingNotFoundException();
+        }
+        var customerOrThrow = customerService.findCustomerOrThrow(bookingDTOCreate.getCustomerId());
+        var destinationOrElseThrow = destinationService.getDestinationOrElseThrow(bookingDTOCreate.getDestinationId());
+        booking.setCustomer(customerOrThrow);
             booking.setStartDate(bookingDTOCreate.getStartDate());
             booking.setEndDate(bookingDTOCreate.getEndDate());
-            booking.setDestinations(findDestination);
-        }
+            booking.setDestinations(destinationOrElseThrow);
 
         return bookingRepository.save(booking);
     }
@@ -52,6 +47,7 @@ public class BookingService {
     }
 
     BookingDTOGet showBookingById(final long bookingId) {
+        bookingRepository.existsById(bookingId);
         if (bookingRepository.existsById(bookingId)) {
             return bookingMapper.mapToBookingDTOGet(bookingRepository.findById(bookingId).get());
         } else {
@@ -81,18 +77,17 @@ public class BookingService {
     }
 
     Booking mapToBookingForUpdate(final long bookingId, BookingDTOCreate bookingDTOCreate) {
-        Booking booking = bookingRepository.findById(bookingId).orElseThrow(
+        var booking = bookingRepository.findById(bookingId).orElseThrow(
                 BookingNotFoundException::new);
+        Customer customerOrThrow = customerService.findCustomerOrThrow(bookingDTOCreate.getCustomerId());
         if (booking != null) {
             booking.setStartDate(bookingDTOCreate.getStartDate());
             booking.setEndDate(bookingDTOCreate.getEndDate());
-            booking.setCustomer(customerRepository.findById(bookingDTOCreate.getCustomerId()).orElseThrow(CustomerNotFoundException::new));
-            booking.setDestinations(destinationRepository.findById(bookingDTOCreate.getDestinationId()).orElseThrow(HotelNotFoundException::new));
+            booking.setCustomer(customerOrThrow);
+            booking.setDestinations(destinationService.getDestinationOrElseThrow(bookingDTOCreate.getDestinationId()));
             return booking;
         } else {
             throw new BookingNotFoundException();
         }
     }
-
-
 }

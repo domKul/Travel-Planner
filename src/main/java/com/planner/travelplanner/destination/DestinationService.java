@@ -7,13 +7,18 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-class DestinationService {
+public class DestinationService {
     private final DestinationMapper destinationMapper;
     private final DestinationRepository destinationRepository;
 
     DestinationService(DestinationMapper destinationMapper, DestinationRepository destinationRepository) {
         this.destinationMapper = destinationMapper;
         this.destinationRepository = destinationRepository;
+    }
+
+    public Destination getDestinationOrElseThrow(long id){
+        return destinationRepository.findById(id)
+                .orElseThrow(HotelNotFoundException::new);
     }
 
     @Transactional

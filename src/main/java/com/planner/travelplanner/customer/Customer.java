@@ -10,10 +10,7 @@ import com.planner.travelplanner.complaint.Complaint;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "customers_list")
@@ -51,7 +48,9 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(long customerId, String firstName, String lastName, Date birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, List<Complaint> complaints, List<Booking> bookings) {
+    public Customer(long customerId, String firstName, String lastName,
+                    Date birthdate, String country, String city, String streetName, String postalCode,
+                    String email, int phoneNumber, List<Complaint> complaints) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -127,7 +126,7 @@ public class Customer {
     }
 
     public List<Booking> getBookings() {
-        return bookings;
+        return Collections.unmodifiableList(bookings);
     }
 
     @Override
