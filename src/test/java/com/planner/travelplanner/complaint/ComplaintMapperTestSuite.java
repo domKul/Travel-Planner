@@ -25,7 +25,7 @@ class ComplaintMapperTestSuite {
 
     private void dataForTests() {
         LocalDateTime complaintDate = LocalDateTime.of(2023, 5, 15, 12, 0);
-        customer = new Customer(0, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231, new ArrayList<>(), new ArrayList<>());
+        customer = new Customer(0, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231, new ArrayList<>());
         complaint1 = new Complaint(1, "title1", "description1", complaintDate, "test1", customer.getCustomerId());
         complaint2 = new Complaint(1, "title2", "description2", complaintDate, "test2", customer.getCustomerId());
         complaintDTO = new ComplaintDTO(1L, "title2", "description2", complaintDate, "test2", 1L);

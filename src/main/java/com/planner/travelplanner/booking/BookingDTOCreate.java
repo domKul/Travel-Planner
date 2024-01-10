@@ -2,7 +2,7 @@ package com.planner.travelplanner.booking;
 
 import java.util.Date;
 
-public class BookingDTOCreate {
+class BookingDTOCreate {
 
     private final Date startDate;
     private final Date endDate;

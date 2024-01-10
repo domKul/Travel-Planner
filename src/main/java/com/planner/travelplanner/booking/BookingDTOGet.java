@@ -2,7 +2,7 @@ package com.planner.travelplanner.booking;
 
 import java.util.Date;
 
-public class BookingDTOGet {
+class BookingDTOGet {
 
     private Long bookingId;
     private final Date bookTime;
