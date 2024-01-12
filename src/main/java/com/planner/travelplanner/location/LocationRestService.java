@@ -58,8 +58,6 @@ class LocationRestService {
         if (locationDTOS != null) {
             locationService.saveLocations(locationDTOS);
         }
-        return null;
+        return ResponseEntity.notFound().build();
     }
-
-
 }

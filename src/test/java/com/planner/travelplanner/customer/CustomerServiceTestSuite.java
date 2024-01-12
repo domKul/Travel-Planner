@@ -1,6 +1,6 @@
 package com.planner.travelplanner.customer;
 
-import com.planner.travelplanner.exception.CustomerNotFoundException;
+import com.planner.travelplanner.exception.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,7 +81,7 @@ class CustomerServiceTestSuite {
         List<Customer> listOfCustomers = customerRepository.findAll();
         //When
         long wrongID = 1231231L;
-        assertThrows(CustomerNotFoundException.class, () -> {
+        assertThrows(NotFoundException.class, () -> {
             customerService.deleteCustomerById(wrongID);
         });
         assertEquals(2, listOfCustomers.size());
@@ -122,7 +122,7 @@ class CustomerServiceTestSuite {
         long customerId = 1L;
         customerDTO1 = new CustomerDTO("Jane", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231);
         // When and Then
-        assertThrows(CustomerNotFoundException.class, () -> {
+        assertThrows(NotFoundException.class, () -> {
             customerService.updateCustomer(customerId, customerDTO1);
         });
     }
@@ -146,7 +146,7 @@ class CustomerServiceTestSuite {
         //Given
         long idToFind = 123123L;
         //When &Then
-        assertThrows(CustomerNotFoundException.class,
+        assertThrows(NotFoundException.class,
                 () -> {
                     customerService.showCustomerGetById(idToFind);
                 });

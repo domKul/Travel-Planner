@@ -97,7 +97,7 @@ public class Customer {
         return country;
     }
 
-    public void setCountry(String country) {
+     void setCountry(String country) {
         this.country = country;
     }
 

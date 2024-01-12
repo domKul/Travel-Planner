@@ -49,9 +49,9 @@ public class ComplaintService {
                 ComplaintNotFoundException::new);
         if (complaint != null) {
             complaint.setComplaintId(complaintId);
-            complaint.setTitle(complaintDTOUpdate.getTitle());
-            complaint.setStatus(complaintDTOUpdate.getStatus());
-            complaint.setDescription(complaintDTOUpdate.getDescription());
+            complaint.setTitle(complaintDTOUpdate.title());
+            complaint.setStatus(complaintDTOUpdate.status());
+            complaint.setDescription(complaintDTOUpdate.description());
             Complaint update = complaintRepository.save(complaint);
             return complaintMapper.mapToComplaintDTO(update);
         } else {

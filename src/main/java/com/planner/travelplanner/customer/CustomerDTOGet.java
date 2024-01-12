@@ -5,7 +5,7 @@ import com.planner.travelplanner.complaint.Complaint;
 import java.util.Date;
 import java.util.List;
 
-public class CustomerDTOGet {
+class CustomerDTOGet {
 
     private final Long customerId;
     private final String firstName;

@@ -28,8 +28,8 @@ class LocationController {
         return ResponseEntity.ok(locationService.getLocationsFromDB());
     }
 
-    @GetMapping("findById")
-    ResponseEntity<LocationDTO> findLocationFromDataBaseById(long locationId) {
+    @GetMapping("{locationId}")
+    ResponseEntity<LocationDTO> findLocationFromDataBaseById(@PathVariable long locationId) {
         return ResponseEntity.ok(locationService.getLocationById(locationId));
     }
 }

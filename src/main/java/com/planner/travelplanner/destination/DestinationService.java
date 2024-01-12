@@ -1,13 +1,14 @@
 package com.planner.travelplanner.destination;
 
-import com.planner.travelplanner.exception.HotelNotFoundException;
+import com.planner.travelplanner.jpa.AbstractRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class DestinationService {
+public class DestinationService extends AbstractRepository<DestinationRepository, Destination> {
     private final DestinationMapper destinationMapper;
     private final DestinationRepository destinationRepository;
 
@@ -15,30 +16,29 @@ public class DestinationService {
         this.destinationMapper = destinationMapper;
         this.destinationRepository = destinationRepository;
     }
-
-    public Destination getDestinationOrElseThrow(long id){
-        return destinationRepository.findById(id)
-                .orElseThrow(HotelNotFoundException::new);
+     void saveDestination(Destination destination){
+        destinationRepository.save(destination);
     }
 
     @Transactional
     public void deleteDestinationById(long hotelId) {
-        if (destinationRepository.existsById(hotelId)) {
-            destinationRepository.deleteById(hotelId);
-        } else {
-            throw new HotelNotFoundException();
-        }
+        Destination destinationOrElseThrow = getDestinationOrElseThrow(hotelId);
+        destinationRepository.delete(destinationOrElseThrow);
     }
 
     List<DestinationDTOForGet> getAllDestinationsInDB() {
-        return destinationMapper.hotelResultDTOList(destinationRepository.findAll());
+        List<Destination> all = destinationRepository.findAll();
+        if (!all.isEmpty()){
+        return destinationMapper.hotelResultDTOList(all);
+        }
+        return new ArrayList<>();
     }
 
     DestinationDTOForGet getDestinationById(long hotelId) {
-        if (destinationRepository.existsById(hotelId)) {
-            return destinationMapper.mapToDestinationResultDTO(destinationRepository.findById(hotelId).get());
-        } else {
-            throw new HotelNotFoundException();
-        }
+        Destination destinationOrElseThrow = getDestinationOrElseThrow(hotelId);
+        return destinationMapper.mapToDestinationResultDTO(destinationOrElseThrow);
+    }
+    public Destination getDestinationOrElseThrow(long id) {
+        return findEntity(destinationRepository, id);
     }
 }

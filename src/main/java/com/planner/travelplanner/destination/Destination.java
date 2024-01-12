@@ -43,7 +43,7 @@ public class Destination {
         return idName;
     }
 
-    public void setIdName(long idName) {
+     void setIdName(long idName) {
         this.idName = idName;
     }
 
@@ -51,7 +51,7 @@ public class Destination {
         return name;
     }
 
-    public void setName(String name) {
+     void setName(String name) {
         this.name = name;
     }
 
@@ -59,7 +59,7 @@ public class Destination {
         return countryCode;
     }
 
-    public void setCountryCode(String countryCode) {
+     void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
     }
 
@@ -67,7 +67,7 @@ public class Destination {
         return currency;
     }
 
-    public void setCurrency(String currency) {
+     void setCurrency(String currency) {
         this.currency = currency;
     }
 
@@ -75,7 +75,7 @@ public class Destination {
         return destinationPrice;
     }
 
-    public void setDestinationPrice(int destinationPrice) {
+     void setDestinationPrice(int destinationPrice) {
         this.destinationPrice = destinationPrice;
     }
 
