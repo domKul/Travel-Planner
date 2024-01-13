@@ -4,7 +4,7 @@ import com.planner.travelplanner.customer.Customer;
 import com.planner.travelplanner.customer.CustomerRepository;
 import com.planner.travelplanner.destination.Destination;
 import com.planner.travelplanner.destination.DestinationRepository;
-import com.planner.travelplanner.exception.BookingNotFoundException;
+import com.planner.travelplanner.exception.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -150,7 +150,7 @@ class BookingServiceTestSuite {
         clearData();
         long bookingId = 123;
         // When & Then
-        assertThrows(BookingNotFoundException.class, () -> {
+        assertThrows(NotFoundException.class, () -> {
             bookingService.showBookingById(bookingId);
         });
     }

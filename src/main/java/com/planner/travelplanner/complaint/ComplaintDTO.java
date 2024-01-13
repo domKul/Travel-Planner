@@ -2,7 +2,7 @@ package com.planner.travelplanner.complaint;
 
 import java.time.LocalDateTime;
 
-public class ComplaintDTO {
+class ComplaintDTO {
 
     private final Long complaintId;
     private final String title;

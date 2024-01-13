@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class LocationService extends AbstractRepository<LocationRepository, Location> {
 
     private final LocationMapper locationMapper;
@@ -21,8 +22,7 @@ public class LocationService extends AbstractRepository<LocationRepository, Loca
         this.locationRepository = locationRepository;
     }
 
-    @Transactional
-    public void saveLocations(List<LocationDTO> locationDTOs) {
+     void saveLocations(List<LocationDTO> locationDTOs) {
         if (locationDTOs.isEmpty()){
             throw new NotFoundException(ExceptionMessages.BODY_IS_NULL);
         }
@@ -35,8 +35,7 @@ public class LocationService extends AbstractRepository<LocationRepository, Loca
         }
     }
 
-    @Transactional
-    public void deleteLocation(long locationId) {
+     void deleteLocation(long locationId) {
         Location location = getLocation(locationId);
         LOGGER.info("Localization deleted");
         locationRepository.delete(location);

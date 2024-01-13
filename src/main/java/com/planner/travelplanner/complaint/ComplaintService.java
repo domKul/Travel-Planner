@@ -1,69 +1,64 @@
 package com.planner.travelplanner.complaint;
 
-import com.planner.travelplanner.customer.CustomerRepository;
-import com.planner.travelplanner.exception.ComplaintNotFoundException;
-import com.planner.travelplanner.exception.CustomerNotFoundException;
+import com.planner.travelplanner.customer.CustomerService;
+import com.planner.travelplanner.enums.ExceptionMessages;
+import com.planner.travelplanner.exception.NotFoundException;
+import com.planner.travelplanner.jpa.AbstractRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class ComplaintService {
+@Transactional
+public class ComplaintService extends AbstractRepository<ComplaintRepository, Complaint> {
 
     private final ComplaintRepository complaintRepository;
-    private final CustomerRepository customerRepository;
     private final ComplaintMapper complaintMapper;
+    private final CustomerService customerService;
 
-    public ComplaintService(ComplaintRepository complaintRepository, CustomerRepository customerRepository, ComplaintMapper complaintMapper) {
+    public ComplaintService(ComplaintRepository complaintRepository, ComplaintMapper complaintMapper, CustomerService customerService) {
         this.complaintRepository = complaintRepository;
-        this.customerRepository = customerRepository;
         this.complaintMapper = complaintMapper;
+        this.customerService = customerService;
     }
 
-    @Transactional
-    public Complaint createComplaint(final ComplaintDTOCreate complaintDTOCreate) {
-        if (customerRepository.existsById(complaintDTOCreate.getCustomerId())) {
-            Complaint complaint = ComplaintMapper.mapFromComplaintCreate( complaintDTOCreate);
-            return complaintRepository.save(complaint);
-        } else {
-            throw new CustomerNotFoundException();
+
+    Complaint createComplaint(final ComplaintDTOCreate complaintDTOCreate) {
+        if (!customerService.isCustomerExistById(complaintDTOCreate.getCustomerId())) {
+            throw new NotFoundException(ExceptionMessages.ENTITY_NOT_FOUND);
         }
+        Complaint complaint = ComplaintMapper.mapFromComplaintCreate(complaintDTOCreate);
+        return complaintRepository.save(complaint);
     }
 
-    public List<ComplaintDTO> showAllComplaints() {
+    List<ComplaintDTO> showAllComplaints() {
         return complaintMapper.mapToListDTO(complaintRepository.findAll());
     }
 
-    public ComplaintDTO showComplaintById(final long complaintId) {
-        if (complaintRepository.existsById(complaintId)) {
-            return complaintMapper.mapToComplaintDTOFormShow(complaintRepository.findById(complaintId).get());
-        } else {
-            throw new ComplaintNotFoundException();
-        }
+     ComplaintDTO showComplaintById(final long complaintId) {
+        Complaint entity = findEntity(complaintRepository, complaintId);
+        return complaintMapper.mapToComplaintDTO(entity);
     }
 
-    @Transactional
-    public ComplaintDTO modifyComplaintStatus(final long complaintId, final ComplaintDTOUpdate complaintDTOUpdate) {
-        Complaint complaint = complaintRepository.findById(complaintId).orElseThrow(
-                ComplaintNotFoundException::new);
-        if (complaint != null) {
-            complaint.setComplaintId(complaintId);
-            complaint.setTitle(complaintDTOUpdate.title());
-            complaint.setStatus(complaintDTOUpdate.status());
-            complaint.setDescription(complaintDTOUpdate.description());
-            Complaint update = complaintRepository.save(complaint);
+    ComplaintDTO putComplaintStatus(final long complaintId, final ComplaintDTOUpdate complaintDTOUpdate) {
+        return complaintRepository.findById(complaintId).map(comp -> {
+            Optional.ofNullable(complaintDTOUpdate.title())
+                    .ifPresent(comp::setTitle);
+            Optional.ofNullable(complaintDTOUpdate.description())
+                    .ifPresent(comp::setDescription);
+            Optional.ofNullable(complaintDTOUpdate.complaintDate())
+                    .ifPresent(comp::setComplaintDate);
+            Optional.ofNullable(complaintDTOUpdate.status())
+                    .ifPresent(comp::setStatus);
+            Complaint update = complaintRepository.save(comp);
             return complaintMapper.mapToComplaintDTO(update);
-        } else {
-            throw new ComplaintNotFoundException();
-        }
+        }).orElseThrow(() -> new NotFoundException(ExceptionMessages.ENTITY_NOT_FOUND));
     }
 
-    @Transactional
-    public void deleteComplainByID(final long complaintId) {
-        Complaint findComplaint = complaintRepository.findById(complaintId).orElseThrow(ComplaintNotFoundException::new);
-        complaintRepository.deleteById(findComplaint.getComplaintId());
+    void deleteComplainByID(final long complaintId) {
+        Complaint entity = findEntity(complaintRepository, complaintId);
+        complaintRepository.deleteById(entity.getComplaintId());
     }
-
-
 }

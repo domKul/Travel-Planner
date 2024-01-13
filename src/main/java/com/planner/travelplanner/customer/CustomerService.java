@@ -1,6 +1,5 @@
 package com.planner.travelplanner.customer;
 
-import com.planner.travelplanner.exception.CustomerNotFoundException;
 import com.planner.travelplanner.jpa.AbstractRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -9,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class CustomerService extends AbstractRepository<CustomerRepository, Customer> {
 
     private final CustomerRepository customerRepository;
@@ -20,8 +20,8 @@ public class CustomerService extends AbstractRepository<CustomerRepository, Cust
     }
 
 
-    @Transactional
-    public Customer saveCustomer(final CustomerDTO customerDTO) {
+
+     Customer saveCustomer(final CustomerDTO customerDTO) {
         Customer customer = customerMapper.mapToCustomer(customerDTO);
         return customerRepository.save(customer);
     }
@@ -34,14 +34,14 @@ public class CustomerService extends AbstractRepository<CustomerRepository, Cust
         return customerMapper.mapToDTOList(all);
     }
 
-    CustomerDTOGet showCustomerGetById(final long customerId) {
+     CustomerDTOGet showCustomerGetById(final long customerId) {
         Customer customerOrThrow = findCustomerOrThrow(customerId);
         return customerMapper.mapToCustomerDTOGet(customerOrThrow);
 
     }
 
-    @Transactional
-    public CustomerDTO updateCustomer(final long customerId, final CustomerDTO customerDTO) {
+
+     CustomerDTO updateCustomer(final long customerId, final CustomerDTO customerDTO) {
         Customer customerOrThrow = findCustomerOrThrow(customerId);
         Customer getCustomer = customerMapper.mapToCustomerForUpdate(customerOrThrow.getCustomerId(), customerDTO);
         Customer update = customerRepository.save(getCustomer);
@@ -50,14 +50,18 @@ public class CustomerService extends AbstractRepository<CustomerRepository, Cust
 
     }
 
-    @Transactional
-    public void deleteCustomerById(final long customerId) throws CustomerNotFoundException {
+
+     void deleteCustomerById(final long customerId) {
         Customer customerOrThrow = findCustomerOrThrow(customerId);
-        LOGGER.info("Customer deleted");
         customerRepository.deleteById(customerOrThrow.getCustomerId());
+        LOGGER.info("Customer deleted");
     }
 
     public Customer findCustomerOrThrow(long id) {
         return findEntity(customerRepository, id);
+    }
+
+    public boolean isCustomerExistById(long customerId){
+        return existEntityById(customerRepository,customerId);
     }
 }

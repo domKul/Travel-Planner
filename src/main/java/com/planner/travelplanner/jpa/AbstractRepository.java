@@ -16,4 +16,7 @@ public class AbstractRepository <R extends JpaRepository<EntityType,Long>, Entit
             return new NotFoundException(ExceptionMessages.ENTITY_NOT_FOUND);
         });
     }
+    protected boolean existEntityById(R repository, Long id) {
+        return repository.existsById(id);
+    }
 }
