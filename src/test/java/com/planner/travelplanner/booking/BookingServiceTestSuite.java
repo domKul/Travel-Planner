@@ -5,6 +5,7 @@ import com.planner.travelplanner.customer.CustomerRepository;
 import com.planner.travelplanner.destination.Destination;
 import com.planner.travelplanner.destination.DestinationRepository;
 import com.planner.travelplanner.exception.NotFoundException;
+import jakarta.mail.MessagingException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,7 @@ class BookingServiceTestSuite {
     }
 
     @Test
-    void shouldAddBooking() {
+    void shouldAddBooking() throws MessagingException {
         //Given
         clearData();
         dataForTests();
@@ -72,7 +73,7 @@ class BookingServiceTestSuite {
     }
 
     @Test
-    public void shouldModifyBooking() {
+    public void shouldModifyBooking() throws MessagingException {
         //Given
         clearData();
         dataForTests();
@@ -91,7 +92,7 @@ class BookingServiceTestSuite {
     }
 
     @Test
-    public void shouldDeleteBookingById() {
+    public void shouldDeleteBookingById() throws MessagingException {
         // Given
         clearData();
         dataForTests();
@@ -110,7 +111,7 @@ class BookingServiceTestSuite {
     }
 
     @Test
-    public void testShowBookingById() {
+    public void testShowBookingById() throws MessagingException {
         // Given
         clearData();
         dataForTests();

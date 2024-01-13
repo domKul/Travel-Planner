@@ -1,6 +1,7 @@
 package com.planner.travelplanner.booking;
 
 
+import jakarta.mail.MessagingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ class BookingsController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Void> addBooking(@RequestBody BookingDTOCreate bookingDTOCreate) {
+    ResponseEntity<Void> addBooking(@RequestBody BookingDTOCreate bookingDTOCreate) throws MessagingException {
         bookingService.addBooking(bookingDTOCreate);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

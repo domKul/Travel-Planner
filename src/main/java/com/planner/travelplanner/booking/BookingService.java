@@ -5,6 +5,8 @@ import com.planner.travelplanner.destination.DestinationService;
 import com.planner.travelplanner.enums.ExceptionMessages;
 import com.planner.travelplanner.exception.NotFoundException;
 import com.planner.travelplanner.jpa.AbstractRepository;
+import com.planner.travelplanner.sender.EmailSenderImpl;
+import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -20,17 +22,19 @@ public class BookingService extends AbstractRepository<BookingRepository,Booking
     private final BookingMapper bookingMapper;
     private final CustomerService customerService;
     private final DestinationService destinationService;
+    private final EmailSenderImpl emailSender;
 
     BookingService(BookingRepository bookingRepository, BookingMapper bookingMapper,
-                    CustomerService customerService, DestinationService destinationService) {
+                   CustomerService customerService, DestinationService destinationService, EmailSenderImpl emailSender) {
         this.bookingRepository = bookingRepository;
         this.bookingMapper = bookingMapper;
         this.customerService = customerService;
         this.destinationService = destinationService;
+        this.emailSender = emailSender;
     }
 
 
-    Booking addBooking(final BookingDTOCreate bookingDTOCreate) {
+    Booking addBooking(final BookingDTOCreate bookingDTOCreate) throws MessagingException {
         boolean isValid = Optional.ofNullable(bookingDTOCreate).isEmpty();
         if (isValid) {
             throw new NotFoundException(ExceptionMessages.BODY_IS_NULL);
@@ -42,6 +46,8 @@ public class BookingService extends AbstractRepository<BookingRepository,Booking
             booking.setStartDate(bookingDTOCreate.getStartDate());
             booking.setEndDate(bookingDTOCreate.getEndDate());
             booking.setDestinations(destinationOrElseThrow);
+        emailSender.sendEmail(customerOrThrow.getEmail(),booking);
+        LOGGER.info("Email was sent");
         return bookingRepository.save(booking);
     }
 
