@@ -2,16 +2,21 @@ package com.planner.travelplanner.booking;
 
 import com.planner.travelplanner.customer.Customer;
 import com.planner.travelplanner.customer.CustomerRepository;
+import com.planner.travelplanner.customer.CustomerService;
 import com.planner.travelplanner.destination.Destination;
 import com.planner.travelplanner.destination.DestinationRepository;
+import com.planner.travelplanner.destination.DestinationService;
 import com.planner.travelplanner.exception.NotFoundException;
+import com.planner.travelplanner.sender.EmailSenderImpl;
 import jakarta.mail.MessagingException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -29,17 +34,40 @@ class BookingServiceTestSuite {
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
+    private CustomerService customerService;
+    @Autowired
     private DestinationRepository destinationRepository;
+    @Autowired
+    private DestinationService destinationService;
+    @Autowired
+    private BookingMapper bookingMapper;
     private Booking booking;
     private Booking booking2;
     private Customer customer;
     private Destination destination;
 
     private void dataForTests() {
-        customer = new Customer(1L, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231, new ArrayList<>());
+        customer = new Customer(1L,
+                "firstName",
+                "lastName",
+                new Date(2020, 02, 02),
+                "string", "string",
+                "string",
+                "string",
+                "string@gmail.com",
+                1231231,
+                new ArrayList<>());
         destination = new Destination();
-        booking = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), null, null);
-        booking2 = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), null, null);
+        booking = new Booking(1L,
+                new Date(2020, Calendar.DECEMBER, 12),
+                new Date(2020, Calendar.DECEMBER, 13),
+                null,
+                null);
+        booking2 = new Booking(1L,
+                new Date(2020, Calendar.DECEMBER, 12),
+                new Date(2020, Calendar.DECEMBER, 13),
+                null,
+                null);
     }
 
     private void clearData() {
@@ -54,8 +82,10 @@ class BookingServiceTestSuite {
     }
 
     @Test
-    void shouldAddBooking() throws MessagingException {
+    void shouldAddBooking() {
         //Given
+        EmailSenderImpl emailSenderMock = Mockito.mock(EmailSenderImpl.class);
+
         clearData();
         dataForTests();
         Customer saveCustomer = customerRepository.save(customer);
@@ -73,7 +103,7 @@ class BookingServiceTestSuite {
     }
 
     @Test
-    public void shouldModifyBooking() throws MessagingException {
+    public void shouldModifyBooking() {
         //Given
         clearData();
         dataForTests();

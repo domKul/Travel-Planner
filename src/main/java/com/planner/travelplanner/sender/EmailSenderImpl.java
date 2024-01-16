@@ -17,7 +17,7 @@ public class EmailSenderImpl implements EmailSender{
 
     @Override
     public void sendEmail(String email,Booking booking) throws MessagingException {
-        String title =" travel plan";
+        String title =" Travel plan";
         createAndSendEmail(email,title,createContent(booking).toString());
     }
 
@@ -38,6 +38,19 @@ public class EmailSenderImpl implements EmailSender{
         content.append("End Date ");
         content.append(booking.getEndDate());
         content.append("\n");
+        content.append("Traveler first name and last name : \n");
+        content.append(booking.getCustomer().getFirstName());
+        content.append("\n");
+        content.append(booking.getCustomer().getLastName());
+        content.append("\n");
+        content.append("Destination info: \n");
+        content.append("Destination name: ").append(booking.getDestinations().getName());
+        content.append("\n");
+        content.append("Destination country: ").append(booking.getDestinations().getCountryCode());
+        content.append("\n");
+        content.append("Destination price: ").append(booking.getDestinations().getDestinationPrice()).append(booking.getDestinations().getCurrency());
+        content.append("\n");
+        content.append("Destination id: ").append(booking.getDestinations().getIdName());
         return content;
     }
 }
