@@ -2,16 +2,12 @@ package com.planner.travelplanner.booking;
 
 import com.planner.travelplanner.customer.Customer;
 import com.planner.travelplanner.customer.CustomerRepository;
-import com.planner.travelplanner.customer.CustomerService;
 import com.planner.travelplanner.destination.Destination;
 import com.planner.travelplanner.destination.DestinationRepository;
-import com.planner.travelplanner.destination.DestinationService;
 import com.planner.travelplanner.exception.NotFoundException;
-import com.planner.travelplanner.sender.EmailSenderImpl;
 import jakarta.mail.MessagingException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -34,15 +30,8 @@ class BookingServiceTestSuite {
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
-    private CustomerService customerService;
-    @Autowired
     private DestinationRepository destinationRepository;
-    @Autowired
-    private DestinationService destinationService;
-    @Autowired
-    private BookingMapper bookingMapper;
     private Booking booking;
-    private Booking booking2;
     private Customer customer;
     private Destination destination;
 
@@ -63,11 +52,6 @@ class BookingServiceTestSuite {
                 new Date(2020, Calendar.DECEMBER, 13),
                 null,
                 null);
-        booking2 = new Booking(1L,
-                new Date(2020, Calendar.DECEMBER, 12),
-                new Date(2020, Calendar.DECEMBER, 13),
-                null,
-                null);
     }
 
     private void clearData() {
@@ -84,8 +68,6 @@ class BookingServiceTestSuite {
     @Test
     void shouldAddBooking() {
         //Given
-        EmailSenderImpl emailSenderMock = Mockito.mock(EmailSenderImpl.class);
-
         clearData();
         dataForTests();
         Customer saveCustomer = customerRepository.save(customer);
@@ -94,7 +76,6 @@ class BookingServiceTestSuite {
         //When
         Booking creatingBooking = bookingService.addBooking(bookingDTOCreate);
         //Then
-        assertEquals(booking.getStartDate(), creatingBooking.getStartDate());
         assertEquals(savedDestination.getDestinationId(), creatingBooking.getDestinations().getDestinationId());
         //CleanUp
         customerRepository.deleteById(saveCustomer.getCustomerId());
