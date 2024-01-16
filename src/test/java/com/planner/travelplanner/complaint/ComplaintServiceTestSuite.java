@@ -5,7 +5,7 @@ import com.planner.travelplanner.customer.CustomerDTO;
 import com.planner.travelplanner.customer.CustomerRepository;
 import com.planner.travelplanner.customer.CustomerService;
 import com.planner.travelplanner.enums.IdType;
-import com.planner.travelplanner.exception.CustomerNotFoundException;
+import com.planner.travelplanner.exception.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +57,7 @@ class ComplaintServiceTestSuite {
     public void shouldCreateComplaint() {
         //Given
         dataForTests();
-        Customer savedCustomer = customerService.saveCustomer(customerDTO);
+        Customer savedCustomer = customerRepository.save(customer);
         complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", null, "status", savedCustomer.getCustomerId());
         long cusId = savedCustomer.getCustomerId();
         //When
@@ -76,7 +76,7 @@ class ComplaintServiceTestSuite {
         dataForTests();
         complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", null, "status", IdType.EMPTY_ID.getId());
         //When & Then
-        assertThrows(CustomerNotFoundException.class, () -> {
+        assertThrows(NotFoundException.class, () -> {
             complaintService.createComplaint(complaintDTOCreate);
         });
     }
@@ -85,7 +85,7 @@ class ComplaintServiceTestSuite {
     public void shouldShowAllComplaints() {
         //Given
         dataForTests();
-        Customer savedCustomer = customerService.saveCustomer(customerDTO);
+        Customer savedCustomer = customerRepository.save(customer);
         complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", null, "status", savedCustomer.getCustomerId());
         long cusId = savedCustomer.getCustomerId();
         //When
@@ -102,7 +102,7 @@ class ComplaintServiceTestSuite {
     public void shouldShowComplaintsByID() {
         //Given
         dataForTests();
-        Customer savedCustomer = customerService.saveCustomer(customerDTO);
+        Customer savedCustomer = customerRepository.save(customer);
         complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", null, "status", savedCustomer.getCustomerId());
         long cusId = savedCustomer.getCustomerId();
         //When
@@ -116,12 +116,12 @@ class ComplaintServiceTestSuite {
     public void shouldModifyExistingComplaint() {
         //Given
         dataForTests();
-        Customer savedCustomer = customerService.saveCustomer(customerDTO);
+        Customer savedCustomer = customerRepository.save(customer);
         complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", null, "status", savedCustomer.getCustomerId());
         long cusId = savedCustomer.getCustomerId();
         //When
         Complaint create1 = complaintService.createComplaint(complaintDTOCreate);
-        ComplaintDTO update = complaintService.modifyComplaintStatus(create1.getComplaintId(), complaintDTOUpdate);
+        ComplaintDTO update = complaintService.putComplaintStatus(create1.getComplaintId(), complaintDTOUpdate);
         //Then
         assertEquals(create1.getComplaintId(), update.getComplaintId());
     }
@@ -130,7 +130,7 @@ class ComplaintServiceTestSuite {
     public void shouldDeleteComplaintsByID() {
         //Given
         dataForTests();
-        Customer savedCustomer = customerService.saveCustomer(customerDTO);
+        Customer savedCustomer = customerRepository.save(customer);
         complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", null, "status", savedCustomer.getCustomerId());
         long cusId = savedCustomer.getCustomerId();
         //When

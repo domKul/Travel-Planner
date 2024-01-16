@@ -15,6 +15,7 @@ import java.net.URI;
 import java.util.List;
 
 @Service
+@Transactional
 class LocationRestService {
 
     private final RestTemplate restTemplate;
@@ -36,8 +37,7 @@ class LocationRestService {
                 .toUri();
     }
 
-    @Transactional
-    public ResponseEntity<Void> searchLocations(String name, String locale) {
+    ResponseEntity<Void> searchLocations(String name, String locale) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("X-RapidAPI-Key", "f243aef89dmshe81c48fa6dfb27ep142049jsne19c66e2bb54");
@@ -58,8 +58,6 @@ class LocationRestService {
         if (locationDTOS != null) {
             locationService.saveLocations(locationDTOS);
         }
-        return null;
+        return ResponseEntity.notFound().build();
     }
-
-
 }

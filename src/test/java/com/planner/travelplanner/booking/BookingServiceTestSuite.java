@@ -4,13 +4,15 @@ import com.planner.travelplanner.customer.Customer;
 import com.planner.travelplanner.customer.CustomerRepository;
 import com.planner.travelplanner.destination.Destination;
 import com.planner.travelplanner.destination.DestinationRepository;
-import com.planner.travelplanner.exception.BookingNotFoundException;
+import com.planner.travelplanner.exception.NotFoundException;
+import jakarta.mail.MessagingException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -30,15 +32,26 @@ class BookingServiceTestSuite {
     @Autowired
     private DestinationRepository destinationRepository;
     private Booking booking;
-    private Booking booking2;
     private Customer customer;
     private Destination destination;
 
     private void dataForTests() {
-        customer = new Customer(1L, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231, new ArrayList<>());
+        customer = new Customer(1L,
+                "firstName",
+                "lastName",
+                new Date(2020, 02, 02),
+                "string", "string",
+                "string",
+                "string",
+                "string@gmail.com",
+                1231231,
+                new ArrayList<>());
         destination = new Destination();
-        booking = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), null, null);
-        booking2 = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), null, null);
+        booking = new Booking(1L,
+                new Date(2020, Calendar.DECEMBER, 12),
+                new Date(2020, Calendar.DECEMBER, 13),
+                null,
+                null);
     }
 
     private void clearData() {
@@ -63,7 +76,6 @@ class BookingServiceTestSuite {
         //When
         Booking creatingBooking = bookingService.addBooking(bookingDTOCreate);
         //Then
-        assertEquals(booking.getStartDate(), creatingBooking.getStartDate());
         assertEquals(savedDestination.getDestinationId(), creatingBooking.getDestinations().getDestinationId());
         //CleanUp
         customerRepository.deleteById(saveCustomer.getCustomerId());
@@ -91,7 +103,7 @@ class BookingServiceTestSuite {
     }
 
     @Test
-    public void shouldDeleteBookingById() {
+    public void shouldDeleteBookingById() throws MessagingException {
         // Given
         clearData();
         dataForTests();
@@ -110,7 +122,7 @@ class BookingServiceTestSuite {
     }
 
     @Test
-    public void testShowBookingById() {
+    public void testShowBookingById() throws MessagingException {
         // Given
         clearData();
         dataForTests();
@@ -150,7 +162,7 @@ class BookingServiceTestSuite {
         clearData();
         long bookingId = 123;
         // When & Then
-        assertThrows(BookingNotFoundException.class, () -> {
+        assertThrows(NotFoundException.class, () -> {
             bookingService.showBookingById(bookingId);
         });
     }

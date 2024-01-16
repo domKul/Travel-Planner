@@ -1,14 +1,15 @@
 package com.planner.travelplanner.customer;
 
-import com.planner.travelplanner.exception.CustomerNotFoundException;
+import com.planner.travelplanner.jpa.AbstractRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class CustomerService {
+@Transactional
+public class CustomerService extends AbstractRepository<CustomerRepository, Customer> {
 
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
@@ -18,48 +19,49 @@ public class CustomerService {
         this.customerMapper = customerMapper;
     }
 
-    public Customer findCustomerOrThrow(long id){
-        return customerRepository.findById(id)
-                .orElseThrow(CustomerNotFoundException::new);
-    }
 
-    @Transactional
-    public Customer saveCustomer(final CustomerDTO customerDTO) {
+
+     Customer saveCustomer(final CustomerDTO customerDTO) {
         Customer customer = customerMapper.mapToCustomer(customerDTO);
         return customerRepository.save(customer);
     }
 
-     List<CustomerDTOGet> showAllCustomers() {
-        return customerMapper.mapToDTOList(customerRepository.findAll());
+    List<CustomerDTOGet> showAllCustomers() {
+        List<Customer> all = customerRepository.findAll();
+        if (all.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return customerMapper.mapToDTOList(all);
     }
 
      CustomerDTOGet showCustomerGetById(final long customerId) {
-        if (customerRepository.existsById(customerId)) {
-            return customerMapper.mapToCustomerDTOGet(customerRepository.findById(customerId).get());
-        } else {
-            throw new CustomerNotFoundException();
-        }
+        Customer customerOrThrow = findCustomerOrThrow(customerId);
+        return customerMapper.mapToCustomerDTOGet(customerOrThrow);
+
     }
 
-    @Transactional
-    public CustomerDTO updateCustomer(final long customerId, final CustomerDTO customerDTO) {
-        if (customerRepository.existsById(customerId)) {
-            Customer getCustomer = customerMapper.mapToCustomerForUpdate(customerId, customerDTO);
-            Customer update = customerRepository.save(getCustomer);
-            return customerMapper.mapToCustomerDTO(update);
-        } else {
-            throw new CustomerNotFoundException();
-        }
+
+     CustomerDTO updateCustomer(final long customerId, final CustomerDTO customerDTO) {
+        Customer customerOrThrow = findCustomerOrThrow(customerId);
+        Customer getCustomer = customerMapper.mapToCustomerForUpdate(customerOrThrow.getCustomerId(), customerDTO);
+        Customer update = customerRepository.save(getCustomer);
+        LOGGER.info("Customer updated");
+        return customerMapper.mapToCustomerDTO(update);
+
     }
 
-    @Transactional
-    public void deleteCustomerById(final long customerId) throws CustomerNotFoundException {
-        Optional<Customer> customer = customerRepository.findById(customerId);
-        if (customer.isPresent()) {
-            customerRepository.deleteById(customerId);
-        } else {
-            throw new CustomerNotFoundException();
-        }
+
+     void deleteCustomerById(final long customerId) {
+        Customer customerOrThrow = findCustomerOrThrow(customerId);
+        customerRepository.deleteById(customerOrThrow.getCustomerId());
+        LOGGER.info("Customer deleted");
     }
 
+    public Customer findCustomerOrThrow(long id) {
+        return findEntity(customerRepository, id);
+    }
+
+    public boolean isCustomerExistById(long customerId){
+        return existEntityById(customerRepository,customerId);
+    }
 }

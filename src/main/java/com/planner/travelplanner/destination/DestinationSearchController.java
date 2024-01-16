@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("v1/hotel")
-class DestinationRadarController {
+class DestinationSearchController {
 
     private final DestinationRestService destinationRestService;
 
-    DestinationRadarController(DestinationRestService destinationRestService) {
+    DestinationSearchController(DestinationRestService destinationRestService) {
         this.destinationRestService = destinationRestService;
     }
 

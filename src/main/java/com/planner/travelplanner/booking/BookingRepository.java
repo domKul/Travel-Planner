@@ -14,4 +14,6 @@ interface BookingRepository extends JpaRepository<Booking, Long> {
 
     @Query("SELECT b FROM Booking b WHERE b.endDate < :currentDate")
     List<Booking> findExpiredBookings(@Param("currentDate") Date currentDate);
+
+    boolean existsByDestination_DestinationIdAndCustomer_CustomerId(long destinationName,long customerId);
 }
