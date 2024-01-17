@@ -16,9 +16,4 @@ class UserCount {
 
     public UserCount() {
     }
-
-    UserCount(int userCount, LocalDate date) {
-        this.userCount = userCount;
-        this.date = date;
-    }
 }

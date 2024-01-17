@@ -39,7 +39,7 @@ class ComplaintMapperTestSuite {
         //When
         ComplaintDTO mapping = complaintMapper.mapToComplaintDTO(complaint1);
         //Then
-        assertEquals(complaint1.getDescription(), mapping.getDescription());
+        assertEquals(complaint1.getDescription(), mapping.description());
     }
 
     @Test
@@ -50,9 +50,9 @@ class ComplaintMapperTestSuite {
         Complaint mappingFromDTO = ComplaintMapper.mapFromComplaintCreate(complaintDTOCreate);
         //Then
         assertEquals(Complaint.class, mappingFromDTO.getClass());
-        assertEquals(complaintDTOCreate.getComplaintDate(), mappingFromDTO.getComplaintDate());
-        assertEquals(complaintDTOCreate.getTitle(), mappingFromDTO.getTitle());
-        assertEquals(complaintDTOCreate.getStatus(), mappingFromDTO.getStatus());
+        assertEquals(complaintDTOCreate.complaintDate(), mappingFromDTO.getComplaintDate());
+        assertEquals(complaintDTOCreate.title(), mappingFromDTO.getTitle());
+        assertEquals(complaintDTOCreate.status(), mappingFromDTO.getStatus());
     }
 
     @Test
@@ -63,9 +63,9 @@ class ComplaintMapperTestSuite {
         Complaint mappingFromDTO = ComplaintMapper.mapFromComplaintCreate(complaintDTOCreate);
         //Then
         assertEquals(Complaint.class, mappingFromDTO.getClass());
-        assertEquals(complaintDTOCreate.getComplaintDate(), mappingFromDTO.getComplaintDate());
-        assertEquals(complaintDTOCreate.getTitle(), mappingFromDTO.getTitle());
-        assertEquals(complaintDTOCreate.getStatus(), mappingFromDTO.getStatus());
+        assertEquals(complaintDTOCreate.complaintDate(), mappingFromDTO.getComplaintDate());
+        assertEquals(complaintDTOCreate.title(), mappingFromDTO.getTitle());
+        assertEquals(complaintDTOCreate.status(), mappingFromDTO.getStatus());
     }
 
     @Test
@@ -77,9 +77,9 @@ class ComplaintMapperTestSuite {
         ComplaintDTO mapping = complaintMapper.mapToComplaintDTOFormShow(complaint1);
         //When
         assertEquals(ComplaintDTO.class, mapping.getClass());
-        assertEquals(complaint1.getTitle(), mapping.getTitle());
-        assertEquals(complaint1.getDescription(), mapping.getDescription());
-        assertEquals(complaint1.getStatus(), mapping.getStatus());
+        assertEquals(complaint1.getTitle(), mapping.title());
+        assertEquals(complaint1.getDescription(), mapping.description());
+        assertEquals(complaint1.getStatus(), mapping.status());
     }
 
     @Test
@@ -94,7 +94,7 @@ class ComplaintMapperTestSuite {
         List<ComplaintDTO> mappinglistToDTO = complaintMapper.mapToListDTO(customer.getComplaints());
         //Then
         assertEquals(2, mappinglistToDTO.size());
-        assertEquals(complaint1.getTitle(), mappinglistToDTO.get(0).getTitle());
-        assertEquals(complaint1.getDescription(), mappinglistToDTO.get(0).getDescription());
+        assertEquals(complaint1.getTitle(), mappinglistToDTO.get(0).title());
+        assertEquals(complaint1.getDescription(), mappinglistToDTO.get(0).description());
     }
 }

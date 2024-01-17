@@ -88,13 +88,13 @@ class CustomerControllerTest {
         Customer customer = new Customer(1L, "string", "string", new Date(), "string", "string", "string", "string", "string", 123, new ArrayList<>());
         CustomerDTOGet customerget = new CustomerDTOGet(1L, "string", "string", new Date(), "string", "string", "string", "string", "string", 123, new ArrayList<>());
         given(customerService.saveCustomer(customerDTO)).willReturn(customer);
-        given(customerService.showCustomerGetById(customerget.getCustomerId())).willReturn(customerget);
+        given(customerService.showCustomerGetById(customerget.customerId())).willReturn(customerget);
         // When & Then
-        mockMvc.perform(get("/v1/customers/" + customerget.getCustomerId())
+        mockMvc.perform(get("/v1/customers/" + customerget.customerId())
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.customerId").value(customerget.getCustomerId()))
-                .andExpect(jsonPath("$.firstName").value(customerget.getFirstName()));
+                .andExpect(jsonPath("$.customerId").value(customerget.customerId()))
+                .andExpect(jsonPath("$.firstName").value(customerget.firstName()));
     }
 
     @Test

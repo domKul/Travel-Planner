@@ -9,19 +9,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "currency",
         "value"
 })
-class GrossPriceDTO {
-    @JsonProperty("currency")
-    private String currency;
-    @JsonProperty("value")
-    private int value;
-
-    @JsonProperty("currency")
-    String getCurrency() {
-        return currency;
-    }
-
-    @JsonProperty("value")
-    int getValue() {
-        return value;
-    }
+record GrossPriceDTO(
+        @JsonProperty("currency")
+        String currency,
+        @JsonProperty("value")
+        int value
+) {
 }

@@ -31,9 +31,11 @@ public class BookingService extends AbstractRepository<BookingRepository, Bookin
         this.customerService = customerService;
         this.destinationService = destinationService;
     }
+
     void addObserver(BookingObserver observer) {
         observers.add(observer);
     }
+
     private void notifyObservers(Booking booking) {
         for (BookingObserver observer : observers) {
             observer.notifyBookingAdded(booking);
@@ -42,10 +44,18 @@ public class BookingService extends AbstractRepository<BookingRepository, Bookin
 
     Booking addBooking(final BookingDTOCreate bookingDTOCreate) {
         boolean isValid = Optional.ofNullable(bookingDTOCreate).isEmpty();
-        if (isValid ) {
+        if (isValid) {
             throw new NotFoundException(ExceptionMessages.BODY_IS_NULL);
         }
         isDestinationExist(bookingDTOCreate);
+        var booking = createBooking(bookingDTOCreate);
+        LOGGER.info("Email sent");
+        Booking save = bookingRepository.save(booking);
+        notifyObservers(booking);
+        return save;
+    }
+
+    private Booking createBooking(BookingDTOCreate bookingDTOCreate) {
         var booking = new Booking();
         var customerOrThrow = customerService.findCustomerOrThrow(bookingDTOCreate.getCustomerId());
         var destinationOrElseThrow = destinationService.getDestinationOrElseThrow(bookingDTOCreate.getDestinationId());
@@ -53,16 +63,14 @@ public class BookingService extends AbstractRepository<BookingRepository, Bookin
         booking.setStartDate(bookingDTOCreate.getStartDate());
         booking.setEndDate(bookingDTOCreate.getEndDate());
         booking.setDestinations(destinationOrElseThrow);
-        notifyObservers(booking);
-        LOGGER.info("Email sent");
-        return bookingRepository.save(booking);
+        return booking;
     }
 
     private void isDestinationExist(BookingDTOCreate bookingDTOCreate) {
         boolean isExist = bookingRepository
                 .existsByDestination_DestinationIdAndCustomer_CustomerId(bookingDTOCreate
                         .getDestinationId(), bookingDTOCreate.getCustomerId());
-        if (isExist){
+        if (isExist) {
             throw new AlreadyExistException(ExceptionMessages.BOOKING_ALREADY_EXIST);
         }
     }
@@ -79,7 +87,6 @@ public class BookingService extends AbstractRepository<BookingRepository, Bookin
         var entity = findEntity(bookingRepository, bookingId);
         return bookingMapper.mapToBookingDTOGet(entity);
     }
-
 
     BookingDTO modifyBooking(final long bookingId, final BookingDTOCreate bookingDTOCreate) {
         if (bookingRepository.existsById(bookingId)) {

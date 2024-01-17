@@ -18,15 +18,14 @@ public class ComplaintService extends AbstractRepository<ComplaintRepository, Co
     private final ComplaintMapper complaintMapper;
     private final CustomerService customerService;
 
-    public ComplaintService(ComplaintRepository complaintRepository, ComplaintMapper complaintMapper, CustomerService customerService) {
+     ComplaintService(ComplaintRepository complaintRepository, ComplaintMapper complaintMapper, CustomerService customerService) {
         this.complaintRepository = complaintRepository;
         this.complaintMapper = complaintMapper;
         this.customerService = customerService;
     }
 
-
     Complaint createComplaint(final ComplaintDTOCreate complaintDTOCreate) {
-        if (!customerService.isCustomerExistById(complaintDTOCreate.getCustomerId())) {
+        if (!customerService.isCustomerExistById(complaintDTOCreate.customerId())) {
             throw new NotFoundException(ExceptionMessages.ENTITY_NOT_FOUND);
         }
         Complaint complaint = ComplaintMapper.mapFromComplaintCreate(complaintDTOCreate);

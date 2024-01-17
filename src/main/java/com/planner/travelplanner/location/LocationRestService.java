@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,16 +21,18 @@ class LocationRestService {
 
     private final RestTemplate restTemplate;
     private final LocationService locationService;
+    private final LocationApiConfig locationApiConfig;
+    private final String HTTP_URL="https://booking-com.p.rapidapi.com/v1/hotels/locations";
 
-
-    LocationRestService(RestTemplateBuilder builder, LocationService locationService) {
+    LocationRestService(RestTemplateBuilder builder, LocationService locationService, LocationApiConfig locationApiConfig) {
         this.restTemplate = builder.build();
         this.locationService = locationService;
+        this.locationApiConfig = locationApiConfig;
     }
 
     URI urlBuilder(String name, String locale) {
         return UriComponentsBuilder
-                .fromHttpUrl("https://booking-com.p.rapidapi.com/v1/hotels/locations")
+                .fromHttpUrl(HTTP_URL)
                 .queryParam("name", name)
                 .queryParam("locale", locale)
                 .build()
@@ -37,27 +40,31 @@ class LocationRestService {
                 .toUri();
     }
 
-    ResponseEntity<Void> searchLocations(String name, String locale) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("X-RapidAPI-Key", "f243aef89dmshe81c48fa6dfb27ep142049jsne19c66e2bb54");
-        headers.set("X-RapidAPI-Host", "booking-com.p.rapidapi.com");
+    void searchLocations(String name, String locale) {
+        HttpHeaders headers = createHttpHeaders();
 
         HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
         String url = urlBuilder(name, locale).toString();
         ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        List<LocationDTO> locationDTOS = null;
+        List<LocationDTO> locationDTOS = new ArrayList<>();
         try {
-            locationDTOS = objectMapper.readValue(responseEntity.getBody(), new TypeReference<>() {
-            });
+            locationDTOS = objectMapper.readValue(responseEntity.getBody(), new TypeReference<>() {});
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
         if (locationDTOS != null) {
             locationService.saveLocations(locationDTOS);
         }
-        return ResponseEntity.notFound().build();
+        ResponseEntity.notFound().build();
+    }
+
+    private HttpHeaders createHttpHeaders() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("X-RapidAPI-Key", locationApiConfig.getLocationApiKey());
+        headers.set("X-RapidAPI-Host", locationApiConfig.getLocationApiHost());
+        return headers;
     }
 }

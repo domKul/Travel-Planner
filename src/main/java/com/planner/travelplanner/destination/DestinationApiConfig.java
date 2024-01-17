@@ -7,15 +7,15 @@ import org.springframework.stereotype.Component;
 class DestinationApiConfig {
 
     @Value("${booking.api.key}")
-    private String apiKey;
+    private String destinationApiKey;
     @Value("${booking.api.host}")
-    private String apiHost;
+    private String destinationApiHost;
 
-    String getApiKey() {
-        return apiKey;
+    public String getDestinationApiKey() {
+        return destinationApiKey;
     }
 
-    String getApiHost() {
-        return apiHost;
+    public String getDestinationApiHost() {
+        return destinationApiHost;
     }
 }

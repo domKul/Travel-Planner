@@ -12,13 +12,13 @@ class ComplaintMapper {
     public static Complaint mapFromComplaintCreate( final ComplaintDTOCreate complaintDTOCreate) {
         Complaint complaint = new Complaint();
         complaint.setComplaintId(IdType.EMPTY_ID.getId());
-        complaint.setTitle(complaintDTOCreate.getTitle());
-        complaint.setDescription(complaintDTOCreate.getDescription());
-        complaint.setComplaintDate(complaintDTOCreate.getComplaintDate());
-        complaint.setStatus(complaintDTOCreate.getStatus());
+        complaint.setTitle(complaintDTOCreate.title());
+        complaint.setDescription(complaintDTOCreate.description());
+        complaint.setComplaintDate(complaintDTOCreate.complaintDate());
+        complaint.setStatus(complaintDTOCreate.status());
 
         Customer customer = new Customer();
-        customer.setCustomerId(complaintDTOCreate.getCustomerId());
+        customer.setCustomerId(complaintDTOCreate.customerId());
         complaint.setCustomer(customer);
         return complaint;
     }

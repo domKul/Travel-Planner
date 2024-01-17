@@ -70,9 +70,9 @@ class CustomerMapperTestSuite {
         //When
         CustomerDTOGet mapToCustomerDTOGet = customerMapper.mapToCustomerDTOGet(customer);
         //Then
-        assertEquals(customer.getCustomerId(), mapToCustomerDTOGet.getCustomerId());
-        assertEquals(customer.getPhoneNumber(), mapToCustomerDTOGet.getPhoneNumber());
-        assertEquals(customer.getEmail(), mapToCustomerDTOGet.getEmail());
+        assertEquals(customer.getCustomerId(), mapToCustomerDTOGet.customerId());
+        assertEquals(customer.getPhoneNumber(), mapToCustomerDTOGet.phoneNumber());
+        assertEquals(customer.getEmail(), mapToCustomerDTOGet.email());
     }
 
     @Test
@@ -85,10 +85,10 @@ class CustomerMapperTestSuite {
         customersList.add(customer2);
         List<CustomerDTOGet> mapListToDTO = customerMapper.mapToDTOList(customersList);
         //Then
-        assertEquals(customer.getCustomerId(), mapListToDTO.get(0).getCustomerId());
+        assertEquals(customer.getCustomerId(), mapListToDTO.get(0).customerId());
         assertEquals(customersList.size(), mapListToDTO.size());
-        assertEquals(customer.getComplaints(), mapListToDTO.get(0).getComplaints());
-        assertEquals(customer.getCity(), mapListToDTO.get(0).getCity());
-        assertEquals(customer2.getCustomerId(), mapListToDTO.get(1).getCustomerId());
+        assertEquals(customer.getComplaints(), mapListToDTO.get(0).complaints());
+        assertEquals(customer.getCity(), mapListToDTO.get(0).city());
+        assertEquals(customer2.getCustomerId(), mapListToDTO.get(1).customerId());
     }
 }

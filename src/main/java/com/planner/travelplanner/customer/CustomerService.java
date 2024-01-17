@@ -14,14 +14,12 @@ public class CustomerService extends AbstractRepository<CustomerRepository, Cust
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
 
-    public CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper) {
+    CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper) {
         this.customerRepository = customerRepository;
         this.customerMapper = customerMapper;
     }
 
-
-
-     Customer saveCustomer(final CustomerDTO customerDTO) {
+    Customer saveCustomer(final CustomerDTO customerDTO) {
         Customer customer = customerMapper.mapToCustomer(customerDTO);
         return customerRepository.save(customer);
     }
@@ -34,24 +32,20 @@ public class CustomerService extends AbstractRepository<CustomerRepository, Cust
         return customerMapper.mapToDTOList(all);
     }
 
-     CustomerDTOGet showCustomerGetById(final long customerId) {
+    CustomerDTOGet showCustomerGetById(final long customerId) {
         Customer customerOrThrow = findCustomerOrThrow(customerId);
         return customerMapper.mapToCustomerDTOGet(customerOrThrow);
-
     }
 
-
-     CustomerDTO updateCustomer(final long customerId, final CustomerDTO customerDTO) {
+    CustomerDTO updateCustomer(final long customerId, final CustomerDTO customerDTO) {
         Customer customerOrThrow = findCustomerOrThrow(customerId);
         Customer getCustomer = customerMapper.mapToCustomerForUpdate(customerOrThrow.getCustomerId(), customerDTO);
         Customer update = customerRepository.save(getCustomer);
         LOGGER.info("Customer updated");
         return customerMapper.mapToCustomerDTO(update);
-
     }
 
-
-     void deleteCustomerById(final long customerId) {
+    void deleteCustomerById(final long customerId) {
         Customer customerOrThrow = findCustomerOrThrow(customerId);
         customerRepository.deleteById(customerOrThrow.getCustomerId());
         LOGGER.info("Customer deleted");
@@ -61,7 +55,7 @@ public class CustomerService extends AbstractRepository<CustomerRepository, Cust
         return findEntity(customerRepository, id);
     }
 
-    public boolean isCustomerExistById(long customerId){
-        return existEntityById(customerRepository,customerId);
+    public boolean isCustomerExistById(long customerId) {
+        return existEntityById(customerRepository, customerId);
     }
 }

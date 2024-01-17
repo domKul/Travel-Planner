@@ -9,6 +9,7 @@ public class NotFoundException extends RuntimeException {
         this.exceptionMessages = exceptionMessages;
     }
 
+
     public ExceptionMessages getExceptionMessages() {
         return exceptionMessages;
     }

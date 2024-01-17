@@ -1,12 +1,18 @@
 package com.planner.travelplanner.booking;
 
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.Date;
 
 class BookingDTOCreate {
-
+    @Future
     private final Date startDate;
+    @Future
     private final Date endDate;
+    @NotNull
     private final Long customerId;
+    @NotNull(message = "cannot be null")
     private final Long destinationId;
 
     BookingDTOCreate(Date startDate, Date endDate, long customerId, long destinationId) {
@@ -58,7 +64,7 @@ class BookingDTOCreate {
             return this;
         }
 
-        public BookingDTOCreate build() {
+         BookingDTOCreate build() {
             return new BookingDTOCreate(startDate, endDate, customerId, destinationId);
         }
     }

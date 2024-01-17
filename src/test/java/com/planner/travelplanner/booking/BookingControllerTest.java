@@ -13,7 +13,6 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,9 +20,8 @@ import java.util.Date;
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -42,11 +40,7 @@ class BookingControllerTest {
 
     @BeforeEach
     void setup() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix("/WEB-INF/");
-        viewResolver.setSuffix(".jsp");
         mockMvc = MockMvcBuilders.standaloneSetup(bookingsController)
-                .setViewResolvers(viewResolver)
                 .setMessageConverters(new MappingJackson2HttpMessageConverter(objectMapper))
                 .build();
     }
@@ -79,11 +73,61 @@ class BookingControllerTest {
         Destination destination = new Destination();
         BookingDTOCreate create = new BookingDTOCreate.Builder().build();
         Booking booking = new Booking(1L, new Date(), new Date(), customer, destination);
-        when(bookingService.addBooking(create)).thenReturn(booking);
         // When & Then
         mockMvc.perform(post("/v1/bookings")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(create)))
                 .andExpect(status().isCreated());
     }
+
+    @Test
+    void shouldFindBookingByGivenId() throws Exception {
+        // Given
+        Customer customer = new Customer(1, "firstName", "lastName", Calendar.getInstance().getTime(), "string", "string", "string", "string", "string", 1231231, new ArrayList<>());
+        Destination destination = new Destination();
+        BookingDTOCreate create = new BookingDTOCreate.Builder().build();
+        Booking booking = new Booking(1L, new Date(), new Date(), customer, destination);
+        when(bookingService.showBookingById(booking.getBookingId())).thenReturn(new BookingDTOGet.Builder()
+                .bookingId(booking.getBookingId())
+                .bookTime(booking.getStartDate())
+                .customerId(booking.getCustomer().getCustomerId())
+                .customerFirstName(booking.getCustomer().getFirstName())
+                .customerLastName(booking.getCustomer().getLastName())
+                .birthDate(booking.getCustomer().getBirthdate())
+                .country(booking.getCustomer().getCountry())
+                .city(booking.getCustomer().getCity())
+                .streetName(booking.getCustomer().getStreetName())
+                .postalCode(booking.getCustomer().getPostalCode())
+                .email(booking.getCustomer().getEmail())
+                .hotelName(booking.getDestinations().getName())
+                .hotelId(booking.getDestinations().getIdName())
+                .startBooking(booking.getStartDate())
+                .endBooking(booking.getEndDate())
+                .hotelPrice(String.valueOf(booking.getDestinations().getDestinationPrice()))
+                .currency(booking.getDestinations().getCurrency())
+                .build());
+
+        // When
+        mockMvc.perform(get("/v1/bookings/{bookingId}", booking.getBookingId())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.customerId").value(customer.getCustomerId()))
+                .andExpect(jsonPath("$.email").value(customer.getEmail()));
+    }
+
+    @Test
+    void shouldDeleteBooking() throws Exception {
+        //Given
+        long bookingId = 1L;
+
+        //When
+        mockMvc.perform(delete("/v1/bookings/{bookingId}", bookingId))
+                .andExpect(status().isAccepted());
+
+        //Then
+        verify(bookingService,times(1)).deleteBookingById(bookingId);
+    }
+
+
+
 }

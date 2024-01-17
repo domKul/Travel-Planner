@@ -17,8 +17,10 @@ class DestinationRestService {
     private final RestTemplate restTemplate;
     private final DestinationRepository destinationRepository;
     private final DestinationApiConfig destinationApiConfig;
+    private final String URL ="https://booking-com.p.rapidapi.com/v2/hotels/search";
 
-    DestinationRestService(RestTemplateBuilder builder, DestinationRepository destinationRepository, DestinationApiConfig destinationApiConfig) {
+    DestinationRestService(RestTemplateBuilder builder, DestinationRepository destinationRepository,
+                           DestinationApiConfig destinationApiConfig) {
         this.restTemplate = builder.build();
         this.destinationRepository = destinationRepository;
         this.destinationApiConfig = destinationApiConfig;
@@ -29,7 +31,7 @@ class DestinationRestService {
                    String locale, String checkout_date, String units,
                    int room_number, String dest_type) {
         return UriComponentsBuilder
-                .fromHttpUrl("https://booking-com.p.rapidapi.com/v2/hotels/search")
+                .fromHttpUrl(URL)
                 .queryParam("order_by", orderedBy)
                 .queryParam("adults_number", adults_number)
                 .queryParam("checkin_date", checkin_date)
@@ -48,51 +50,62 @@ class DestinationRestService {
     private HttpHeaders header() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("X-RapidAPI-Key", destinationApiConfig.getApiKey());
-        headers.set("X-RapidAPI-Host", destinationApiConfig.getApiHost());
+        headers.set("X-RapidAPI-Key", destinationApiConfig.getDestinationApiKey());
+        headers.set("X-RapidAPI-Host", destinationApiConfig.getDestinationApiHost());
         return headers;
     }
 
-    ResponseEntity<DestinationlDTO> searchHotelWithSaveToData(String orderedBy, int adults_number, String checkin_date,
-                                                              String filter_by_currency, int dest_id,
-                                                              String locale, String checkout_date, String units,
-                                                              int room_number, String dest_type) {
+    DestinationDTO searchHotelWithSaveToData(String orderedBy,
+                                             int adults_number,
+                                             String checkin_date,
+                                             String filter_by_currency,
+                                             int dest_id,
+                                             String locale,
+                                             String checkout_date,
+                                             String units,
+                                             int room_number,
+                                             String dest_type) {
 
         HttpEntity<String> entity = new HttpEntity<>("parameters", header());
         String url = urlBuilder(orderedBy, adults_number, checkin_date,
                 filter_by_currency, dest_id,
                 locale, checkout_date, units, room_number, dest_type).toString();
-        ResponseEntity<DestinationlDTO> responseEntity = restTemplate.exchange(url, HttpMethod.GET, entity, DestinationlDTO.class);
+        ResponseEntity<DestinationDTO> responseEntity = restTemplate.exchange(url, HttpMethod.GET, entity, DestinationDTO.class);
         List<Destination> destinations = new ArrayList<>();
 
-        for (Result hotelDTO : Objects.requireNonNull(responseEntity.getBody()).getResults()) {
+        for (Result hotelDTO : Objects.requireNonNull(responseEntity.getBody()).results()) {
             if (destinationRepository.existsByName(hotelDTO.getName())) {
                 continue;
             }
 
-            Destination destination = new Destination();
-            destination.setIdName(hotelDTO.getId());
-            destination.setCountryCode(hotelDTO.getCountryCode());
-            destination.setName(hotelDTO.getName());
-            if (hotelDTO.getPriceBreakdown() != null) {
-                destination.setCurrency(hotelDTO.getPriceBreakdown().getGrossPrice().getCurrency());
-                destination.setDestinationPrice(hotelDTO.getPriceBreakdown().getGrossPrice().getValue());
-            }
+            Destination destination = createDestination(hotelDTO);
             destinations.add(destination);
         }
         destinationRepository.saveAll(destinations);
-        return responseEntity;
+        return responseEntity.getBody();
     }
 
-    ResponseEntity<DestinationlDTO> searchHotel(String orderedBy, int adults_number, String checkin_date,
-                                                String filter_by_currency, int dest_id,
-                                                String locale, String checkout_date, String units,
-                                                int room_number, String dest_type) {
+    private static Destination createDestination(Result hotelDTO) {
+        Destination destination = new Destination();
+        destination.setIdName(hotelDTO.getId());
+        destination.setCountryCode(hotelDTO.getCountryCode());
+        destination.setName(hotelDTO.getName());
+        if (hotelDTO.getPriceBreakdown() != null) {
+            destination.setCurrency(hotelDTO.getPriceBreakdown().getGrossPrice().currency());
+            destination.setDestinationPrice(hotelDTO.getPriceBreakdown().getGrossPrice().value());
+        }
+        return destination;
+    }
+
+    ResponseEntity<DestinationDTO> searchHotel(String orderedBy, int adults_number, String checkin_date,
+                                               String filter_by_currency, int dest_id,
+                                               String locale, String checkout_date, String units,
+                                               int room_number, String dest_type) {
         HttpEntity<String> entity = new HttpEntity<>("parameters", header());
         String url = urlBuilder(orderedBy, adults_number, checkin_date,
                 filter_by_currency, dest_id,
                 locale, checkout_date, units, room_number, dest_type).toString();
-        return restTemplate.exchange(url, HttpMethod.GET, entity, DestinationlDTO.class);
+        return restTemplate.exchange(url, HttpMethod.GET, entity, DestinationDTO.class);
     }
 
 }

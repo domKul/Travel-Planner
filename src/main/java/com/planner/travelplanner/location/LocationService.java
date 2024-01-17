@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class LocationService extends AbstractRepository<LocationRepository, Location> {
+class LocationService extends AbstractRepository<LocationRepository, Location> {
 
     private final LocationMapper locationMapper;
     private final LocationRepository locationRepository;

@@ -136,7 +136,7 @@ class CustomerServiceTestSuite {
         long getId = savedCustomer.getCustomerId();
         CustomerDTOGet findCustomer = customerService.showCustomerGetById(getId);
         //Then
-        assertEquals(customer.getFirstName(), findCustomer.getFirstName());
+        assertEquals(customer.getFirstName(), findCustomer.firstName());
         //CleanUp
         customerRepository.deleteById(getId);
     }

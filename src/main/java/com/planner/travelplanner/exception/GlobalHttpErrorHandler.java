@@ -13,4 +13,10 @@ class GlobalHttpErrorHandler{
         ErrorsMessages errorsMessages = new ErrorsMessages(notFoundException.getExceptionMessages().getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorsMessages);
     }
+
+    @ExceptionHandler(AlreadyExistException.class)
+    ResponseEntity<ErrorsMessages> handleAlreadyExistException(AlreadyExistException notFoundException) {
+        ErrorsMessages errorsMessages = new ErrorsMessages(notFoundException.getErrorsMessages().getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorsMessages);
+    }
 }

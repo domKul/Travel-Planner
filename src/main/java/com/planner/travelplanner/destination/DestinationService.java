@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class DestinationService extends AbstractRepository<DestinationRepository, Destination> {
     private final DestinationMapper destinationMapper;
     private final DestinationRepository destinationRepository;
@@ -20,18 +21,17 @@ public class DestinationService extends AbstractRepository<DestinationRepository
         destinationRepository.save(destination);
     }
 
-    @Transactional
-    public void deleteDestinationById(long hotelId) {
+     void deleteDestinationById(long hotelId) {
         Destination destinationOrElseThrow = getDestinationOrElseThrow(hotelId);
         destinationRepository.delete(destinationOrElseThrow);
     }
 
     List<DestinationDTOForGet> getAllDestinationsInDB() {
         List<Destination> all = destinationRepository.findAll();
-        if (!all.isEmpty()){
-        return destinationMapper.hotelResultDTOList(all);
-        }
+        if (all.isEmpty()){
         return new ArrayList<>();
+        }
+        return destinationMapper.hotelResultDTOList(all);
     }
 
     DestinationDTOForGet getDestinationById(long hotelId) {

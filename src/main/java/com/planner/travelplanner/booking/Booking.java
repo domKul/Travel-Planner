@@ -4,6 +4,7 @@ package com.planner.travelplanner.booking;
 import com.planner.travelplanner.customer.Customer;
 import com.planner.travelplanner.destination.Destination;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Future;
 
 import java.util.Date;
 import java.util.Objects;
@@ -15,8 +16,10 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookingId;
+    @Future(message = "wring data")
     private Date startDate;
     @Column(name = "end_date")
+    @Future
     private Date endDate;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")

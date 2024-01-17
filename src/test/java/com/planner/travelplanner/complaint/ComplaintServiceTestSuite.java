@@ -109,7 +109,7 @@ class ComplaintServiceTestSuite {
         Complaint create1 = complaintService.createComplaint(complaintDTOCreate);
         ComplaintDTO findingComplaint = complaintService.showComplaintById(create1.getComplaintId());
         //Thne
-        assertEquals(complaintDTOCreate.getTitle(), findingComplaint.getTitle());
+        assertEquals(complaintDTOCreate.title(), findingComplaint.title());
     }
 
     @Test
@@ -123,7 +123,7 @@ class ComplaintServiceTestSuite {
         Complaint create1 = complaintService.createComplaint(complaintDTOCreate);
         ComplaintDTO update = complaintService.putComplaintStatus(create1.getComplaintId(), complaintDTOUpdate);
         //Then
-        assertEquals(create1.getComplaintId(), update.getComplaintId());
+        assertEquals(create1.getComplaintId(), update.complaintId());
     }
 
     @Test
