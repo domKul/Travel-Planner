@@ -18,7 +18,7 @@ public class ComplaintService extends AbstractRepository<ComplaintRepository, Co
     private final ComplaintMapper complaintMapper;
     private final CustomerService customerService;
 
-    public ComplaintService(ComplaintRepository complaintRepository, ComplaintMapper complaintMapper, CustomerService customerService) {
+     ComplaintService(ComplaintRepository complaintRepository, ComplaintMapper complaintMapper, CustomerService customerService) {
         this.complaintRepository = complaintRepository;
         this.complaintMapper = complaintMapper;
         this.customerService = customerService;

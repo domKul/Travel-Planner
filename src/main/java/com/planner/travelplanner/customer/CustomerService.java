@@ -1,5 +1,7 @@
 package com.planner.travelplanner.customer;
 
+import com.planner.travelplanner.enums.ExceptionMessages;
+import com.planner.travelplanner.exception.AlreadyExistException;
 import com.planner.travelplanner.jpa.AbstractRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,7 @@ public class CustomerService extends AbstractRepository<CustomerRepository, Cust
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
 
-    public CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper) {
+     CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper) {
         this.customerRepository = customerRepository;
         this.customerMapper = customerMapper;
     }
@@ -22,6 +24,9 @@ public class CustomerService extends AbstractRepository<CustomerRepository, Cust
 
 
      Customer saveCustomer(final CustomerDTO customerDTO) {
+         if (customerRepository.existsByFirstNameAndLastName(customerDTO.getFirstName(), customerDTO.getLastName())){
+             throw new AlreadyExistException(ExceptionMessages.TRAVELER_ALREADY_EXIST);
+         }
         Customer customer = customerMapper.mapToCustomer(customerDTO);
         return customerRepository.save(customer);
     }

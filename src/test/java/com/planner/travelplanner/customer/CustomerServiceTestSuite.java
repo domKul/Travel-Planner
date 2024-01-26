@@ -30,8 +30,8 @@ class CustomerServiceTestSuite {
     public void dataForTests() {
         customer = new Customer(1, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231, new ArrayList<>());
         customer2 = new Customer(1, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231, new ArrayList<>() );
-        customerDTO1 = new CustomerDTO("firstNameDTO", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231);
-        customerDTO2 = new CustomerDTO("firstNameDTO", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231);
+        customerDTO1 = new CustomerDTO("firstNameDTO1", "lastName1", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231);
+        customerDTO2 = new CustomerDTO("firstNameDTO2", "lastName2", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231);
     }
 
     @BeforeEach
