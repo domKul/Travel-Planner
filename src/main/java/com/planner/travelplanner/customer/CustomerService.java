@@ -21,8 +21,6 @@ public class CustomerService extends AbstractRepository<CustomerRepository, Cust
         this.customerMapper = customerMapper;
     }
 
-
-
      Customer saveCustomer(final CustomerDTO customerDTO) {
          if (customerRepository.existsByFirstNameAndLastName(customerDTO.getFirstName(), customerDTO.getLastName())){
              throw new AlreadyExistException(ExceptionMessages.TRAVELER_ALREADY_EXIST);
@@ -45,7 +43,6 @@ public class CustomerService extends AbstractRepository<CustomerRepository, Cust
 
     }
 
-
      CustomerDTO updateCustomer(final long customerId, final CustomerDTO customerDTO) {
         Customer customerOrThrow = findCustomerOrThrow(customerId);
         Customer getCustomer = customerMapper.mapToCustomerForUpdate(customerOrThrow.getCustomerId(), customerDTO);
@@ -54,7 +51,6 @@ public class CustomerService extends AbstractRepository<CustomerRepository, Cust
         return customerMapper.mapToCustomerDTO(update);
 
     }
-
 
      void deleteCustomerById(final long customerId) {
         Customer customerOrThrow = findCustomerOrThrow(customerId);

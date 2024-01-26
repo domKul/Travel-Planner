@@ -35,9 +35,7 @@ public class BookingService extends AbstractRepository<BookingRepository, Bookin
         observers.add(observer);
     }
     private void notifyObservers(Booking booking) {
-        for (BookingObserver observer : observers) {
-            observer.notifyBookingAdded(booking);
-        }
+        observers.forEach(o->o.notifyBookingAdded(booking));
     }
 
     Booking addBooking(final BookingDTOCreate bookingDTOCreate) {

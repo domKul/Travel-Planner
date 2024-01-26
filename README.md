@@ -2,9 +2,9 @@
 
 ### Travel-Planner is a application for finding new travel destinations/locations and planning your trips.
 
-##### To run the APi hosted on `onrender.com`:
+##### To run the APi hosted on `vps`:
 - 1.You need to clone this and [Front-End](https://github.com/domKul/Travel-Planner-Vaadin-FrontEnd)
-- 2.Run it. Onrender.com is a free service, please wait a few minutes for the application to start.
+- 2.Run it.
 - 3.The starter page is http://localhost:8081/maninView
 
 
@@ -16,7 +16,7 @@
 
 
 ### List of endpoints with documentation 
- [Endpoints documentation  - Swagger](https://travel-planner-jimh.onrender.com/swagger-ui/index.html#/)
+ [Endpoints documentation  - Swagger](http://vps-7c561477.vps.ovh.net:8080/swagger-ui/index.html#/)
 
 ###### This project was build with:
 ###### java 17
