@@ -1,5 +1,6 @@
 package com.planner.travelplanner.customer;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ class CustomerController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Void> addCustomer(@RequestBody CustomerDTO customerDTO) {
+    ResponseEntity<Void> addCustomer(@RequestBody @Valid CustomerDTO customerDTO) {
         customerService.saveCustomer(customerDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

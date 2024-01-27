@@ -1,6 +1,7 @@
 package com.planner.travelplanner.customer;
 
 import com.planner.travelplanner.exception.NotFoundException;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,20 +29,15 @@ class CustomerServiceTestSuite {
     private CustomerDTO customerDTO2;
 
     public void dataForTests() {
-        customer = new Customer(1, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231, new ArrayList<>());
-        customer2 = new Customer(1, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231, new ArrayList<>() );
-        customerDTO1 = new CustomerDTO("firstNameDTO1", "lastName1", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231);
-        customerDTO2 = new CustomerDTO("firstNameDTO2", "lastName2", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231);
+        customer = new Customer(1, "firstName1", "lastName1", new Date(2020, 02, 02), "string", "string", "string", "string", "example@email.com", 1231231, new ArrayList<>());
+        customer2 = new Customer(1, "firstName2", "lastName2", new Date(2020, 02, 02), "string", "string", "string", "string", "example2@email.com", 1231231, new ArrayList<>() );
+        customerDTO1 = new CustomerDTO("firstNameDTO1", "lastName1", new Date(2020, 02, 02), "string", "string", "string", "string", "example3@email.com", 1231231);
+        customerDTO2 = new CustomerDTO("firstNameDTO2", "lastName2", new Date(2020, 02, 02), "string", "string", "string", "string", "example4@email.com", 1231231);
     }
 
     @BeforeEach
     void clearData() {
         customerRepository.deleteAll();
-    }
-
-    @BeforeEach
-    public void clear() {
-        clearData();
     }
 
     @Test
@@ -101,6 +97,7 @@ class CustomerServiceTestSuite {
     }
 
     @Test
+    @Transactional
     public void shouldUpdateExistingCustomer() {
         // Given
         dataForTests();

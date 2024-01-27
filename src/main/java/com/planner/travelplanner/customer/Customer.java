@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.planner.travelplanner.booking.Booking;
 import com.planner.travelplanner.complaint.Complaint;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.*;
@@ -36,6 +37,8 @@ public class Customer {
     @NotNull
     private String postalCode;
     @NotNull
+    @Email
+    @Column(unique = true)
     private String email;
     @NotNull
     private int phoneNumber;

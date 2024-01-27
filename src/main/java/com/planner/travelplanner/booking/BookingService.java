@@ -80,13 +80,12 @@ public class BookingService extends AbstractRepository<BookingRepository, Bookin
 
 
     BookingDTO modifyBooking(final long bookingId, final BookingDTOCreate bookingDTOCreate) {
-        if (bookingRepository.existsById(bookingId)) {
+        if (!bookingRepository.existsById(bookingId)) {
+            throw new NotFoundException(ExceptionMessages.ENTITY_NOT_FOUND);
+        }
             Booking booking = mapToBookingForUpdate(bookingId, bookingDTOCreate);
             Booking saveUpdatedBooking = bookingRepository.save(booking);
             return bookingMapper.mapToBookingDTO(saveUpdatedBooking);
-        } else {
-            throw new NotFoundException(ExceptionMessages.ENTITY_NOT_FOUND);
-        }
     }
 
     void deleteBookingById(final long bookingId) {

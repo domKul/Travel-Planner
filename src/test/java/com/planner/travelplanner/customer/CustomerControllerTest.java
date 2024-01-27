@@ -55,8 +55,8 @@ class CustomerControllerTest {
     void shouldGetAllCustomers() throws Exception {
         // Given
         List<CustomerDTOGet> customers = List.of(
-                new CustomerDTOGet(1L, "firstName", "lastName", new Date(2020, 2, 2), "string", "string", "string", "string", "string", 1231231, new ArrayList<>()),
-                new CustomerDTOGet(2L, "firstName", "lastName", new Date(2020, 2, 2), "string", "string", "string", "string", "string", 1231231, new ArrayList<>())
+                new CustomerDTOGet(1L, "firstName1", "lastName1", new Date(2020, 2, 2), "string", "string", "string", "string", "example@email.com", 1231231, new ArrayList<>()),
+                new CustomerDTOGet(2L, "firstName2", "lastName2", new Date(2020, 2, 2), "string", "string", "string", "string", "example@email.com", 1231231, new ArrayList<>())
         );
         given(customerService.showAllCustomers()).willReturn(customers);
         // When & Then
@@ -64,15 +64,15 @@ class CustomerControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()").value(2))
-                .andExpect(jsonPath("$[0].firstName").value("firstName"))
-                .andExpect(jsonPath("$[1].firstName").value("firstName"));
+                .andExpect(jsonPath("$[0].firstName").value("firstName1"))
+                .andExpect(jsonPath("$[1].firstName").value("firstName2"));
     }
 
     @Test
     void shouldAddCustomer() throws Exception {
         // Given
-        CustomerDTO customerDTO = new CustomerDTO("string", "string", new Date(), "string", "string", "string", "string", "string", 123);
-        Customer customer = new Customer(1L, "string", "string", new Date(), "string", "string", "string", "string", "string", 123, new ArrayList<>());
+        CustomerDTO customerDTO = new CustomerDTO("string", "string", new Date(), "string", "string", "string", "string", "example@email.com", 123);
+        Customer customer = new Customer(1L, "string", "string", new Date(), "string", "string", "string", "string", "example@email.com", 123, new ArrayList<>());
         given(customerService.saveCustomer(any(CustomerDTO.class))).willReturn(customer);
         // When & Then
         mockMvc.perform(post("/v1/customers")
@@ -84,9 +84,9 @@ class CustomerControllerTest {
     @Test
     void shouldFindCustomerByIdInDB() throws Exception {
         // Given
-        CustomerDTO customerDTO = new CustomerDTO("string", "string", new Date(), "string", "string", "string", "string", "string", 123);
-        Customer customer = new Customer(1L, "string", "string", new Date(), "string", "string", "string", "string", "string", 123, new ArrayList<>());
-        CustomerDTOGet customerget = new CustomerDTOGet(1L, "string", "string", new Date(), "string", "string", "string", "string", "string", 123, new ArrayList<>());
+        CustomerDTO customerDTO = new CustomerDTO("string", "string", new Date(), "string", "string", "string", "string", "example@email.com", 123);
+        Customer customer = new Customer(1L, "string", "string", new Date(), "string", "string", "string", "string", "example@email.com", 123, new ArrayList<>());
+        CustomerDTOGet customerget = new CustomerDTOGet(1L, "string", "string", new Date(), "string", "string", "string", "string", "example@email.com", 123, new ArrayList<>());
         given(customerService.saveCustomer(customerDTO)).willReturn(customer);
         given(customerService.showCustomerGetById(customerget.getCustomerId())).willReturn(customerget);
         // When & Then

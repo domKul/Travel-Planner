@@ -24,4 +24,4 @@
 ###### SQLite as DB
 ###### Spring version 3.0.6
 ###### Junit version 4.13.1 for tests
-###### Tests with Coverage : Class 78%, Method 64%
+###### Tests with Coverage : Class 78%, Method 67%

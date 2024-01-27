@@ -36,7 +36,7 @@ class ComplaintServiceTestSuite {
     private ComplaintDTOUpdate complaintDTOUpdate;
 
     public void dataForTests() {
-        customer = new Customer(IdType.EMPTY_ID.getId(), "firstName1", "lastName1", new Date(2000, 2, 11), "country", "city", "streetName", "postalCode", "email", 1231231, new ArrayList<>());
+        customer = new Customer(IdType.EMPTY_ID.getId(), "firstName1", "lastName1", new Date(2000, 2, 11), "country", "city", "streetName", "postalCode", "example@email.com", 1231231, new ArrayList<>());
         customerDTO = new CustomerDTO("firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231);
         complaint = new Complaint(1L, "title", "descritpion", null, "status", 1);
         complaintDTOUpdate = new ComplaintDTOUpdate("update", "update", null, "status");

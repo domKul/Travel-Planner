@@ -4,6 +4,7 @@ import com.planner.travelplanner.customer.Customer;
 import com.planner.travelplanner.customer.CustomerRepository;
 import com.planner.travelplanner.destination.Destination;
 import com.planner.travelplanner.destination.DestinationRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,10 +33,14 @@ class BookingMapperTestSuite {
     private Destination destination;
 
     private void dataForTests() {
-        customer = new Customer(1L, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231, new ArrayList<>());
+        customer = new Customer(1L, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "example12@email.com", 1231231, new ArrayList<>());
         destination = new Destination();
         booking1 = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), null, null);
         booking2 = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), null, null);
+    }
+    @BeforeEach
+    void cleaData(){
+        customerRepository.deleteAll();
     }
 
     @Test

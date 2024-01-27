@@ -58,7 +58,7 @@ class BookingDTOCreate {
             return this;
         }
 
-        public BookingDTOCreate build() {
+         BookingDTOCreate build() {
             return new BookingDTOCreate(startDate, endDate, customerId, destinationId);
         }
     }

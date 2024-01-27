@@ -2,6 +2,7 @@ package com.planner.travelplanner.customer;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.Email;
 
 import java.util.Date;
 
@@ -22,6 +23,7 @@ public class CustomerDTO {
     @JsonProperty("postalCode")
     private String postalCode;
     @JsonProperty("email")
+    @Email(message = "wrong email")
     private String email;
     @JsonProperty("phoneNumber")
     private int phoneNumber;
