@@ -6,6 +6,7 @@
 - 1.You need to clone this and [Front-End](https://github.com/domKul/Travel-Planner-Vaadin-FrontEnd)
 - 2.Run it.
 - 3.The starter page is http://localhost:8081/maninView
+- 4.You can also go direct to the [Front-End](http://vps-7c561477.vps.ovh.net:8081/maninView)
 
 
 ##### To run the APi as `localhost`:
