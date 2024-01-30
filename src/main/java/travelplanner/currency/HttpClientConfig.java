@@ -10,18 +10,23 @@ import java.net.URI;
 
 @Component
 class HttpClientConfig {
+    private final ConnectionData connectionData;
+
+    HttpClientConfig(ConnectionData connectionData) {
+        this.connectionData = connectionData;
+    }
 
     HttpHeaders getHttpHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("X-RapidAPI-Key", "f243aef89dmshe81c48fa6dfb27ep142049jsne19c66e2bb54");
-        headers.set("X-RapidAPI-Host", "currency-conversion-and-exchange-rates.p.rapidapi.com");
+        headers.set("X-RapidAPI-Key", connectionData.getApiCurrencyKey());
+        headers.set("X-RapidAPI-Host", connectionData.getApiCurrencyHost());
         return headers;
     }
 
     URI getUri(String from, String to, BigDecimal amount) {
         return UriComponentsBuilder
-                .fromUriString("https://currency-conversion-and-exchange-rates.p.rapidapi.com/convert")
+                .fromUriString(connectionData.getApiCurrencyUrl())
                 .queryParam("from", from)
                 .queryParam("to", to)
                 .queryParam("amount", amount)

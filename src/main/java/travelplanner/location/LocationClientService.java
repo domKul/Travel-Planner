@@ -16,13 +16,13 @@ import java.util.List;
 
 @Service
 @Transactional
-class LocationRestService {
+class LocationClientService {
 
     private final RestTemplate restTemplate;
     private final LocationService locationService;
 
 
-    LocationRestService(RestTemplateBuilder builder, LocationService locationService) {
+    LocationClientService(RestTemplateBuilder builder, LocationService locationService) {
         this.restTemplate = builder.build();
         this.locationService = locationService;
     }
