@@ -1,6 +1,5 @@
 package travelplanner.booking;
 
-import travelplanner.booking.*;
 import travelplanner.customer.Customer;
 import travelplanner.customer.CustomerRepository;
 import travelplanner.destination.Destination;

@@ -1,9 +1,13 @@
 package travelplanner.currency;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import travelplanner.enums.ExceptionMessages;
+import travelplanner.exception.ClientException;
 
 import java.math.BigDecimal;
 import java.net.URI;
@@ -29,8 +33,8 @@ class CurrencyClient {
                 throw new RuntimeException("Error converting currency");
             }
             return mapper.readValue(response.getBody(), Currency.class);
-        } catch (Exception e) {
-            throw new RuntimeException("mmm");
+        } catch (HttpClientErrorException | JsonProcessingException e) {
+            throw new ClientException(ExceptionMessages.CONNECTION_PROBLEM);
         }
     }
 }
