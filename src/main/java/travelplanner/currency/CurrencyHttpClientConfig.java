@@ -9,24 +9,24 @@ import java.math.BigDecimal;
 import java.net.URI;
 
 @Component
-class HttpClientConfig {
-    private final ConnectionData connectionData;
+class CurrencyHttpClientConfig {
+    private final CurrencyClientConnectionData currencyClientConnectionData;
 
-    HttpClientConfig(ConnectionData connectionData) {
-        this.connectionData = connectionData;
+    CurrencyHttpClientConfig(CurrencyClientConnectionData currencyClientConnectionData) {
+        this.currencyClientConnectionData = currencyClientConnectionData;
     }
 
     HttpHeaders getHttpHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("X-RapidAPI-Key", connectionData.getApiCurrencyKey());
-        headers.set("X-RapidAPI-Host", connectionData.getApiCurrencyHost());
+        headers.set("X-RapidAPI-Key", currencyClientConnectionData.getApiCurrencyKey());
+        headers.set("X-RapidAPI-Host", currencyClientConnectionData.getApiCurrencyHost());
         return headers;
     }
 
     URI getUri(String from, String to, BigDecimal amount) {
         return UriComponentsBuilder
-                .fromUriString(connectionData.getApiCurrencyUrl())
+                .fromUriString(currencyClientConnectionData.getApiCurrencyUrl())
                 .queryParam("from", from)
                 .queryParam("to", to)
                 .queryParam("amount", amount)

@@ -16,15 +16,15 @@ import java.net.URI;
 class CurrencyClient {
 
     private final RestTemplate restTemplate = new RestTemplate();
-    private final HttpClientConfig httpClientConfig;
+    private final CurrencyHttpClientConfig currencyHttpClientConfig;
 
-    CurrencyClient(HttpClientConfig httpClientConfig) {
-        this.httpClientConfig = httpClientConfig;
+    CurrencyClient(CurrencyHttpClientConfig currencyHttpClientConfig) {
+        this.currencyHttpClientConfig = currencyHttpClientConfig;
     }
 
     Currency convert(String from, String to, BigDecimal amount) {
-        URI url = httpClientConfig.getUri(from, to, amount);
-        HttpHeaders headers = httpClientConfig.getHttpHeaders();
+        URI url = currencyHttpClientConfig.getUri(from, to, amount);
+        HttpHeaders headers = currencyHttpClientConfig.getHttpHeaders();
         HttpEntity<?> request = new HttpEntity<>(headers);
         try {
             ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, request, String.class);

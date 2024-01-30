@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-class ConnectionData {
+class CurrencyClientConnectionData {
 
     @Value("${rapidapi.api.key}")
     private String apiCurrencyKey;

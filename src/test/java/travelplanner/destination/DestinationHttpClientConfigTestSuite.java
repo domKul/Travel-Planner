@@ -9,11 +9,10 @@ import java.net.URI;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-class DestinationRestTemplateTestSuite {
+class DestinationHttpClientConfigTestSuite {
 
     @Autowired
-    private DestinationClientService destinationClienService;
-
+    private DestinationHttpClientConfig destinationHttpClientConfig;
 
     @Test
     void testUrlBuilder() {
@@ -29,7 +28,7 @@ class DestinationRestTemplateTestSuite {
         int roomNumber = 1;
         String destType = "city";
         // When
-        URI result = destinationClienService.urlBuilder(orderedBy, adultsNumber, checkinDate, filterByCurrency, destId, locale, checkoutDate, units, roomNumber, destType);
+      URI result = destinationHttpClientConfig.urlBuilder(orderedBy, adultsNumber, checkinDate, filterByCurrency, destId, locale, checkoutDate, units, roomNumber, destType);
         // Then
         String expectedUrl = "https://booking-com.p.rapidapi.com/v2/hotels/search?order_by=price&adults_number=2&checkin_date=2023-06-01&filter_by_currency=USD&dest_id=1234&locale=en_US&checkout_date=2023-06-05&units=metric&room_number=1&dest_type=city";
         assertEquals(expectedUrl, result.toString());
