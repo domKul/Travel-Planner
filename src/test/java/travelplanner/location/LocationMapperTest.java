@@ -63,9 +63,9 @@ class LocationMapperTest {
         assertEquals("test2", mapping.get(1).getCountry());
         assertEquals("test2", mapping.get(1).getName());
         assertEquals("test2", mapping.get(1).getLabel());
-        assertEquals("test1", mapping.get(0).getLabel());
-        assertEquals("test1", mapping.get(0).getName());
-        assertEquals("test1", mapping.get(0).getCountry());
+        assertEquals("test", mapping.get(0).getLabel());
+        assertEquals("test", mapping.get(0).getName());
+        assertEquals("test", mapping.get(0).getCountry());
     }
 
     @Test
