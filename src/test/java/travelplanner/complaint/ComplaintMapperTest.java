@@ -1,9 +1,5 @@
 package travelplanner.complaint;
 
-import travelplanner.complaint.Complaint;
-import travelplanner.complaint.ComplaintDTO;
-import travelplanner.complaint.ComplaintDTOCreate;
-import travelplanner.complaint.ComplaintMapper;
 import travelplanner.customer.Customer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-class ComplaintMapperTestSuite {
+class ComplaintMapperTest {
 
     @Autowired
     private ComplaintMapper complaintMapper;

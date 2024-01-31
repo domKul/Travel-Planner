@@ -1,6 +1,5 @@
 package travelplanner.complaint;
 
-import travelplanner.complaint.*;
 import travelplanner.customer.Customer;
 import travelplanner.customer.CustomerDTO;
 import travelplanner.customer.CustomerRepository;
@@ -20,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-class ComplaintServiceTestSuite {
+class ComplaintServiceTest {
 
     @Autowired
     private ComplaintService complaintService;

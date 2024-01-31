@@ -1,7 +1,5 @@
 package travelplanner.destination;
 
-import travelplanner.destination.Destination;
-import travelplanner.destination.DestinationRepository;
 import travelplanner.enums.IdType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +11,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class DestinationCrudTestSuite {
+class DestinationCrudTest {
 
     @Autowired
     private DestinationRepository destinationRepository;

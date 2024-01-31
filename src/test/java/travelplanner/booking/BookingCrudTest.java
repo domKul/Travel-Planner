@@ -1,8 +1,6 @@
 package travelplanner.booking;
 
 
-import travelplanner.booking.Booking;
-import travelplanner.booking.BookingRepository;
 import travelplanner.customer.Customer;
 import travelplanner.customer.CustomerRepository;
 import travelplanner.destination.Destination;
@@ -20,7 +18,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class BookingCrudTestSuite {
+class BookingCrudTest {
 
     @Autowired
     private BookingRepository bookingRepository;

@@ -1,6 +1,5 @@
 package travelplanner.booking;
 
-import travelplanner.booking.*;
 import travelplanner.customer.Customer;
 import travelplanner.customer.CustomerRepository;
 import travelplanner.destination.Destination;
@@ -21,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-class BookingServiceTestSuite {
+class BookingServiceTest {
 
     @Autowired
     private BookingService bookingService;

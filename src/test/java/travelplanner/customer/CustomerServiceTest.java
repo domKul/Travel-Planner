@@ -1,6 +1,5 @@
 package travelplanner.customer;
 
-import travelplanner.customer.*;
 import travelplanner.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
-class CustomerServiceTestSuite {
+class CustomerServiceTest {
 
     @Autowired
     private CustomerService customerService;

@@ -10,7 +10,7 @@ import java.net.URI;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-class LocationHttpClientConfigTestSuite {
+class LocationHttpClientConfigTest {
     @Autowired
     private LocationHttpClientConfig locationHttpClientConfig;
 

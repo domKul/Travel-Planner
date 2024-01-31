@@ -3,10 +3,6 @@ package travelplanner.customer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import travelplanner.customer.Customer;
-import travelplanner.customer.CustomerDTO;
-import travelplanner.customer.CustomerDTOGet;
-import travelplanner.customer.CustomerMapper;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @SpringBootTest
-class CustomerMapperTestSuite {
+class CustomerMapperTest {
 
     @Autowired
     private CustomerMapper customerMapper;

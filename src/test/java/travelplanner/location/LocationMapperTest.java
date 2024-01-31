@@ -1,12 +1,10 @@
 package travelplanner.location;
 
+import org.junit.jupiter.api.BeforeEach;
 import travelplanner.enums.IdType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import travelplanner.location.Location;
-import travelplanner.location.LocationDTO;
-import travelplanner.location.LocationMapper;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,22 +12,36 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-class LocationMapperTestSuite {
+class LocationMapperTest {
 
     @Autowired
     private LocationMapper locationMapper;
     private LocationDTO locationDTO1;
     private LocationDTO locationDTO2;
     private Location location;
+    private Location location1;
 
-    @Test
-    void shouldMapToLocation() {
-        //Given
+    @BeforeEach
+    void dataForTests(){
         locationDTO1 = new LocationDTO();
         locationDTO1.setCountry("test");
         locationDTO1.setLabel("test");
         locationDTO1.setName("test");
         locationDTO1.setRegion("test");
+        locationDTO2 = new LocationDTO();
+        locationDTO2.setCountry("test2");
+        locationDTO2.setLabel("test2");
+        locationDTO2.setName("test2");
+        locationDTO2.setRegion("test");
+        location = new Location(IdType.EMPTY_ID.getId(), "string", "string", "123", "region", "name", "country", 12, "null");
+        location1 = new Location(IdType.EMPTY_ID.getId(), "string1", "string1", "1231", "region", "name", "country", 12, "null");
+
+    }
+
+    @Test
+    void shouldMapToLocation() {
+        //Given
+
         //When
         Location mapping = locationMapper.mapToLocation(locationDTO1);
         //Then
@@ -43,16 +55,6 @@ class LocationMapperTestSuite {
     @Test
     void shouldMapToLocationList() {
         //Given
-        locationDTO1 = new LocationDTO();
-        locationDTO1.setCountry("test1");
-        locationDTO1.setLabel("test1");
-        locationDTO1.setName("test1");
-        locationDTO1.setRegion("test1");
-        locationDTO2 = new LocationDTO();
-        locationDTO2.setCountry("test2");
-        locationDTO2.setLabel("test2");
-        locationDTO2.setName("test2");
-        locationDTO2.setRegion("test");
         List<LocationDTO> dtoList = Arrays.asList(locationDTO1, locationDTO2);
         //When
         List<Location> mapping = locationMapper.mapToLocationListFromDTO(dtoList);
@@ -69,12 +71,22 @@ class LocationMapperTestSuite {
     @Test
     void shouldMapToLocationDTO() {
         //Given
-        location = new Location(IdType.EMPTY_ID.getId(), "string", "string", "123", "region", "name", "country", 12, "null");
         //When
         LocationDTO mappingToDto = locationMapper.mapToLocationDTO(location);
         //Then
         assertEquals(location.getLabel(), mappingToDto.getLabel());
         assertEquals(location.getDest_id(), mappingToDto.getDest_id());
         assertEquals(location.getTimezone(), mappingToDto.getTimezone());
+    }
+
+    @Test
+    void shouldMapListToDto(){
+        //Given
+        List<Location> locationList = List.of(location,location1);
+        //When
+        List<LocationDTO> toDto = locationMapper.mapToLocationListDTO(locationList);
+        //Then
+        assertEquals(LocationDTO.class,toDto.get(0).getClass());
+        assertEquals(LocationDTO.class,toDto.get(1).getClass());
     }
 }
