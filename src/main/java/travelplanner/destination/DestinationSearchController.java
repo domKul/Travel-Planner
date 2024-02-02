@@ -7,28 +7,26 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("v1/hotel")
 class DestinationSearchController {
 
-    private final DestinationClientService destinationClienService;
+    private final DestinationClientService destinationClientService;
 
-    DestinationSearchController(DestinationClientService destinationClienService) {
-        this.destinationClienService = destinationClienService;
+    DestinationSearchController(DestinationClientService destinationClientService) {
+        this.destinationClientService = destinationClientService;
     }
 
     @GetMapping("/destinationSave")
-    @ResponseBody
     ResponseEntity<DestinationlDTO> searchHotelsSave(@RequestParam String orderedby, @RequestParam int adults_number, @RequestParam String checkin_date,
                                                      @RequestParam String filter_by_currency, @RequestParam int dest_id,
                                                      @RequestParam String locale, @RequestParam String checkout_date, @RequestParam String units, @RequestParam int room_number, @RequestParam String dest_type) {
-        return destinationClienService.searchHotelWithSaveToData(orderedby, adults_number, checkin_date,
+        return destinationClientService.searchHotelWithSaveToData(orderedby, adults_number, checkin_date,
                 filter_by_currency, dest_id,
                 locale, checkout_date, units, room_number, dest_type);
     }
 
     @GetMapping("/destinations")
-    @ResponseBody
     ResponseEntity<DestinationlDTO> searchHotels(@RequestParam String orderedby, @RequestParam int adults_number, @RequestParam String checkin_date,
                                                  @RequestParam String filter_by_currency, @RequestParam int dest_id,
                                                  @RequestParam String locale, @RequestParam String checkout_date, @RequestParam String units, @RequestParam int room_number, @RequestParam String dest_type) {
-        return destinationClienService.searchHotel(orderedby, adults_number, checkin_date,
+        return destinationClientService.searchHotel(orderedby, adults_number, checkin_date,
                 filter_by_currency, dest_id,
                 locale, checkout_date, units, room_number, dest_type);
     }
