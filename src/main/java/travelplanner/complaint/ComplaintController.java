@@ -1,5 +1,6 @@
 package travelplanner.complaint;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ class ComplaintController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Void> addComplaints(@RequestBody ComplaintDTOCreate complaintDTOCreate) {
+    ResponseEntity<Void> addComplaints(@RequestBody @Valid ComplaintDTOCreate complaintDTOCreate) {
         complaintService.createComplaint(complaintDTOCreate);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

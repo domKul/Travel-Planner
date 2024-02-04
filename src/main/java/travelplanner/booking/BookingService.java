@@ -4,7 +4,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import travelplanner.customer.CustomerService;
 import travelplanner.destination.DestinationService;
-import travelplanner.enums.ExceptionMessages;
+import travelplanner.exception.ExceptionMessages;
 import travelplanner.exception.AlreadyExistException;
 import travelplanner.exception.NotFoundException;
 import travelplanner.jpa.AbstractRepository;

@@ -1,7 +1,5 @@
 package travelplanner.exception;
 
-import travelplanner.enums.ExceptionMessages;
-
 public class ClientException extends RuntimeException{
     private final ExceptionMessages exceptionMessages;
 

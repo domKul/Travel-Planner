@@ -51,9 +51,9 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(long customerId, String firstName, String lastName,
-                    Date birthdate, String country, String city, String streetName, String postalCode,
-                    String email, int phoneNumber, List<Complaint> complaints) {
+     public Customer(long customerId, String firstName, String lastName,
+                     Date birthdate, String country, String city, String streetName, String postalCode,
+                     String email, int phoneNumber) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -64,7 +64,7 @@ public class Customer {
         this.postalCode = postalCode;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.complaints = complaints;
+        this.complaints = new ArrayList<>();
         this.bookings = new ArrayList<>();
     }
 
@@ -113,7 +113,7 @@ public class Customer {
     }
 
     public List<Complaint> getComplaints() {
-        return complaints;
+        return Collections.unmodifiableList(complaints);
     }
 
     public String getPostalCode() {
@@ -145,16 +145,14 @@ public class Customer {
                 Objects.equals(city, customer.city) &&
                 Objects.equals(streetName, customer.streetName) &&
                 Objects.equals(postalCode, customer.postalCode) &&
-                Objects.equals(email, customer.email) &&
-                Objects.equals(complaints, customer.complaints) &&
-                Objects.equals(bookings, customer.bookings);
+                Objects.equals(email, customer.email);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(customerId, firstName, lastName, birthdate,
                 country, city, streetName, postalCode, email,
-                phoneNumber, complaints, bookings);
+                phoneNumber);
     }
 
     @Override

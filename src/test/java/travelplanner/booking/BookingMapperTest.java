@@ -33,7 +33,7 @@ class BookingMapperTest {
     private Destination destination;
 
     private void dataForTests() {
-        customer = new Customer(1L, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "example12@email.com", 1231231, new ArrayList<>());
+        customer = new Customer(1L, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "example12@email.com", 1231231);
         destination = new Destination();
         booking1 = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), null, null);
         booking2 = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), null, null);

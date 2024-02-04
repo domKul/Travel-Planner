@@ -3,7 +3,7 @@ package travelplanner.complaint;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import travelplanner.customer.CustomerService;
-import travelplanner.enums.ExceptionMessages;
+import travelplanner.exception.ExceptionMessages;
 import travelplanner.exception.NotFoundException;
 import travelplanner.jpa.AbstractRepository;
 
@@ -29,7 +29,7 @@ public class ComplaintService extends AbstractRepository<ComplaintRepository, Co
         if (!customerService.isCustomerExistById(complaintDTOCreate.getCustomerId())) {
             throw new NotFoundException(ExceptionMessages.ENTITY_NOT_FOUND);
         }
-        Complaint complaint = ComplaintMapper.mapFromComplaintCreate(complaintDTOCreate);
+        Complaint complaint = complaintMapper.mapFromComplaintCreate(complaintDTOCreate,customerService);
         return complaintRepository.save(complaint);
     }
 

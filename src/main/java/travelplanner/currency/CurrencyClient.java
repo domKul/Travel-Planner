@@ -6,7 +6,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import travelplanner.enums.ExceptionMessages;
+import travelplanner.exception.ExceptionMessages;
 import travelplanner.exception.ClientException;
 
 import java.math.BigDecimal;

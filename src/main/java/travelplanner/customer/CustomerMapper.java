@@ -18,8 +18,7 @@ class CustomerMapper {
                 customerDTO.getStreetName(),
                 customerDTO.getPostalCode(),
                 customerDTO.getEmail(),
-                customerDTO.getPhoneNumber(),
-                null);
+                customerDTO.getPhoneNumber());
     }
 
     Customer mapToCustomerForUpdate(final long customerId, CustomerDTO customerDTO) {
@@ -32,8 +31,7 @@ class CustomerMapper {
                 customerDTO.getStreetName(),
                 customerDTO.getPostalCode(),
                 customerDTO.getEmail(),
-                customerDTO.getPhoneNumber(),
-                null);
+                customerDTO.getPhoneNumber());
     }
 
     CustomerDTO mapToCustomerDTO(Customer customer) {

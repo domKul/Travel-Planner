@@ -36,7 +36,7 @@ class ComplaintServiceTest {
     private ComplaintDTOUpdate complaintDTOUpdate;
 
     public void dataForTests() {
-        customer = new Customer(IdType.EMPTY_ID.getId(), "firstName1", "lastName1", new Date(2000, 2, 11), "country", "city", "streetName", "postalCode", "example@email.com", 1231231, new ArrayList<>());
+        customer = new Customer(IdType.EMPTY_ID.getId(), "firstName1", "lastName1", new Date(2000, 2, 11), "country", "city", "streetName", "postalCode", "example@email.com", 1231231);
         customerDTO = new CustomerDTO("firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231);
         complaint = new Complaint(1L, "title", "descritpion", null, "status", 1);
         complaintDTOUpdate = new ComplaintDTOUpdate("update", "update", null, "status");
@@ -58,7 +58,7 @@ class ComplaintServiceTest {
         //Given
         dataForTests();
         Customer savedCustomer = customerRepository.save(customer);
-        complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", null, "status", savedCustomer.getCustomerId());
+        complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", "status", savedCustomer.getCustomerId());
         long cusId = savedCustomer.getCustomerId();
         //When
         Complaint create1 = complaintService.createComplaint(complaintDTOCreate);
@@ -74,7 +74,7 @@ class ComplaintServiceTest {
     public void shouldThrowCustomerNotFoundOnWrongId() {
         //Given
         dataForTests();
-        complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", null, "status", IdType.EMPTY_ID.getId());
+        complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", "status", IdType.EMPTY_ID.getId());
         //When & Then
         assertThrows(NotFoundException.class, () -> {
             complaintService.createComplaint(complaintDTOCreate);
@@ -86,7 +86,7 @@ class ComplaintServiceTest {
         //Given
         dataForTests();
         Customer savedCustomer = customerRepository.save(customer);
-        complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", null, "status", savedCustomer.getCustomerId());
+        complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", "status", savedCustomer.getCustomerId());
         long cusId = savedCustomer.getCustomerId();
         //When
         List<ComplaintDTO> emptyList = complaintService.showAllComplaints();
@@ -103,7 +103,7 @@ class ComplaintServiceTest {
         //Given
         dataForTests();
         Customer savedCustomer = customerRepository.save(customer);
-        complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", null, "status", savedCustomer.getCustomerId());
+        complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", "status", savedCustomer.getCustomerId());
         long cusId = savedCustomer.getCustomerId();
         //When
         Complaint create1 = complaintService.createComplaint(complaintDTOCreate);
@@ -117,7 +117,7 @@ class ComplaintServiceTest {
         //Given
         dataForTests();
         Customer savedCustomer = customerRepository.save(customer);
-        complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", null, "status", savedCustomer.getCustomerId());
+        complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", "status", savedCustomer.getCustomerId());
         long cusId = savedCustomer.getCustomerId();
         //When
         Complaint create1 = complaintService.createComplaint(complaintDTOCreate);
@@ -131,7 +131,7 @@ class ComplaintServiceTest {
         //Given
         dataForTests();
         Customer savedCustomer = customerRepository.save(customer);
-        complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", null, "status", savedCustomer.getCustomerId());
+        complaintDTOCreate = new ComplaintDTOCreate("titledto", "descritpiondto", "status", savedCustomer.getCustomerId());
         long cusId = savedCustomer.getCustomerId();
         //When
         Complaint create1 = complaintService.createComplaint(complaintDTOCreate);

@@ -34,8 +34,8 @@ class BookingCrudTest {
     private Destination destination2;
 
     private void dataForTests() {
-        customer1 = new Customer(IdType.EMPTY_ID.getId(), "firstName1", "lastName1", new Date(2000, 2, 11), "country", "city", "streetName", "postalCode", "example@email.com", 1231231, new ArrayList<>());
-        customer2 = new Customer(IdType.EMPTY_ID.getId(), "firstName2", "lastName2", new Date(2000, 2, 11), "country", "city", "streetName", "postalCode", "exampl2e@email.com", 1231231, new ArrayList<>());
+        customer1 = new Customer(IdType.EMPTY_ID.getId(), "firstName1", "lastName1", new Date(2000, 2, 11), "country", "city", "streetName", "postalCode", "example@email.com", 1231231);
+        customer2 = new Customer(IdType.EMPTY_ID.getId(), "firstName2", "lastName2", new Date(2000, 2, 11), "country", "city", "streetName", "postalCode", "exampl2e@email.com", 1231231);
         destination1 = new Destination(IdType.EMPTY_ID.getId(), IdType.EMPTY_ID.getId(), null, null, null, 231);
         destination2 = new Destination(IdType.EMPTY_ID.getId(), IdType.EMPTY_ID.getId(), null, null, null, 1231);
         booking1 = new Booking(IdType.EMPTY_ID.getId(), new Date(2020, 12, 12), new Date(2020, 01, 12), null, null);

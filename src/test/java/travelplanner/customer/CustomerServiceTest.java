@@ -12,8 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
@@ -29,8 +28,8 @@ class CustomerServiceTest {
     private CustomerDTO customerDTO2;
 
     public void dataForTests() {
-        customer = new Customer(1, "firstName1", "lastName1", new Date(2020, 02, 02), "string", "string", "string", "string", "example@email.com", 1231231, new ArrayList<>());
-        customer2 = new Customer(1, "firstName2", "lastName2", new Date(2020, 02, 02), "string", "string", "string", "string", "example2@email.com", 1231231, new ArrayList<>() );
+        customer = new Customer(1, "firstName1", "lastName1", new Date(2020, 02, 02), "string", "string", "string", "string", "example@email.com", 1231231);
+        customer2 = new Customer(1, "firstName2", "lastName2", new Date(2020, 02, 02), "string", "string", "string", "string", "example2@email.com", 1231231);
         customerDTO1 = new CustomerDTO("firstNameDTO1", "lastName1", new Date(2020, 02, 02), "string", "string", "string", "string", "example3@email.com", 1231231);
         customerDTO2 = new CustomerDTO("firstNameDTO2", "lastName2", new Date(2020, 02, 02), "string", "string", "string", "string", "example4@email.com", 1231231);
     }
@@ -40,6 +39,14 @@ class CustomerServiceTest {
         customerRepository.deleteAll();
     }
 
+    @Test
+    void testNotEquals(){
+        //Given
+        Customer customerForEquals1 = new Customer(1, "firstName1", "lastName1", new Date(2020, 02, 02), "string", "string", "string", "string", "example@email.com", 1231231);
+        Customer customerForEquals2 = new Customer(1, "firstName2", "lastName1", new Date(2020, 02, 02), "string", "string", "string", "string", "example@email.com", 1231231);
+        //When & Then
+        assertNotEquals(customerForEquals1,customerForEquals2);
+    }
     @Test
     public void shouldSaveCustomerToDB() {
         //Given

@@ -1,7 +1,5 @@
 package travelplanner.exception;
 
-import travelplanner.enums.ExceptionMessages;
-
 public class AlreadyExistException extends RuntimeException{
     private final ExceptionMessages errorsMessages;
 

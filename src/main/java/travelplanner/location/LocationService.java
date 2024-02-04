@@ -3,7 +3,7 @@ package travelplanner.location;
 import jakarta.transaction.Transactional;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import travelplanner.enums.ExceptionMessages;
+import travelplanner.exception.ExceptionMessages;
 import travelplanner.exception.NotFoundException;
 import travelplanner.jpa.AbstractRepository;
 

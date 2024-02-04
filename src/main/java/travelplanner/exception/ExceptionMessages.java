@@ -1,6 +1,6 @@
-package travelplanner.enums;
+package travelplanner.exception;
 
-public enum ExceptionMessages {
+ public enum ExceptionMessages {
 
     ENTITY_NOT_FOUND("Record not found with given id"),
     BODY_IS_NULL("No body found"),

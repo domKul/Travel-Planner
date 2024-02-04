@@ -44,8 +44,7 @@ class BookingServiceTest {
                 "string",
                 "string",
                 "string@gmail.com",
-                1231231,
-                new ArrayList<>());
+                1231231);
         destination = new Destination();
         booking = new Booking(1L,
                 new Date(2020, Calendar.DECEMBER, 12),
