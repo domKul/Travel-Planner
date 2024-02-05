@@ -96,16 +96,4 @@ public class Complaint {
     public int hashCode() {
         return Objects.hash(complaintId, title, description, complaintDate, status, customer);
     }
-
-    @Override
-    public String toString() {
-        return "Complaint{" +
-                "id=" + complaintId +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", complaintDate=" + complaintDate +
-                ", status='" + status + '\'' +
-                ", customer=" + customer.getCustomerId() +
-                '}';
-    }
 }

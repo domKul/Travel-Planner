@@ -84,23 +84,17 @@ public class Destination {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Destination destination = (Destination) o;
-        return Objects.equals(destinationId, destination.destinationId) && idName == destination.idName && destinationPrice == destination.destinationPrice && Objects.equals(name, destination.name) && Objects.equals(countryCode, destination.countryCode) && Objects.equals(currency, destination.currency);
+        return Objects.equals(destinationId, destination.destinationId) &&
+                idName == destination.idName &&
+                destinationPrice == destination.destinationPrice &&
+                Objects.equals(name, destination.name) &&
+                Objects.equals(countryCode, destination.countryCode) &&
+                Objects.equals(currency, destination.currency);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(destinationId, idName, name, countryCode, currency, destinationPrice);
-    }
-
-    @Override
-    public String toString() {
-        return "Destination{" +
-                "destinationId=" + destinationId +
-                ", idName=" + idName +
-                ", name='" + name + '\'' +
-                ", countryCode='" + countryCode + '\'' +
-                ", currency='" + currency + '\'' +
-                ", destinationPrice=" + destinationPrice +
-                '}';
+        return Objects.hash(destinationId, idName,
+                name, countryCode, currency, destinationPrice);
     }
 }

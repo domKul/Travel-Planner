@@ -8,7 +8,7 @@ import travelplanner.exception.ExceptionMessages;
 import travelplanner.exception.NotFoundException;
 
 @Repository
-public class AbstractRepository <R extends JpaRepository<EntityType,Long>, EntityType>{
+public abstract class AbstractRepository <R extends JpaRepository<EntityType,Long>, EntityType>{
     protected final Logger LOGGER = LoggerFactory.getLogger(Class.class);
     protected EntityType findEntity(R repository,Long id){
         return repository.findById(id).orElseThrow(()->{

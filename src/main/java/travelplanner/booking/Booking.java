@@ -87,15 +87,4 @@ public class Booking {
     public int hashCode() {
         return Objects.hash(bookingId, startDate, endDate, customer, destination);
     }
-
-    @Override
-    public String toString() {
-        return "Booking{" +
-                "bookingId=" + bookingId +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", customer=" + customer +
-                ", destination=" + destination +
-                '}';
-    }
 }

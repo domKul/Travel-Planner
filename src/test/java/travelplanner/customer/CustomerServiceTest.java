@@ -43,10 +43,21 @@ class CustomerServiceTest {
     void testNotEquals(){
         //Given
         Customer customerForEquals1 = new Customer(1, "firstName1", "lastName1", new Date(2020, 02, 02), "string", "string", "string", "string", "example@email.com", 1231231);
-        Customer customerForEquals2 = new Customer(1, "firstName2", "lastName1", new Date(2020, 02, 02), "string", "string", "string", "string", "example@email.com", 1231231);
+        Customer customerForEquals2 = new Customer(1, "firstName2", "lastName2", new Date(2022, 03, 12), "string1", "string1", "string1", "string1", "examp1le@email.com", 12231231);
         //When & Then
-        assertNotEquals(customerForEquals1,customerForEquals2);
+        assertNotEquals(customerForEquals1.hashCode(),customerForEquals2.hashCode());
     }
+    @Test
+    void testEquals(){
+        //Given
+        Customer customerForEquals1 = new Customer(1, "firstName1", "lastName1", new Date(2020, 02, 02), "string", "string", "string", "string", "example@email.com", 123);
+        Customer customerForEquals2 = new Customer(1, "firstName1", "lastName1", new Date(2020, 02, 02), "string", "string", "string", "string", "example@email.com", 123);
+        //When
+        boolean equals = customerForEquals1.equals(customerForEquals2);
+        // Then
+        assertTrue(equals);
+    }
+
     @Test
     public void shouldSaveCustomerToDB() {
         //Given

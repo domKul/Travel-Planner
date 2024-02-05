@@ -113,7 +113,7 @@ public class Customer {
     }
 
     public List<Complaint> getComplaints() {
-        return Collections.unmodifiableList(complaints);
+        return complaints;
     }
 
     public String getPostalCode() {
@@ -153,23 +153,5 @@ public class Customer {
         return Objects.hash(customerId, firstName, lastName, birthdate,
                 country, city, streetName, postalCode, email,
                 phoneNumber);
-    }
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "customerId=" + customerId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", birthdate=" + birthdate +
-                ", country='" + country + '\'' +
-                ", city='" + city + '\'' +
-                ", streetName='" + streetName + '\'' +
-                ", postalCode='" + postalCode + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber=" + phoneNumber +
-                ", complaints=" + complaints +
-                ", bookings=" + bookings +
-                '}';
     }
 }
