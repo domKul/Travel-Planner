@@ -1,9 +1,9 @@
 package travelplanner.sender;
 
 import jakarta.mail.MessagingException;
-import travelplanner.booking.Booking;
+import travelplanner.booking.query.SimpleBookingQueryDto;
 
 interface EmailSender {
 
-    void sendEmail(String email, Booking booking) throws MessagingException;
+    void sendEmail(String email, SimpleBookingQueryDto booking) throws MessagingException;
 }

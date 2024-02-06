@@ -1,11 +1,12 @@
 package travelplanner.sender;
 
 import org.springframework.stereotype.Component;
-import travelplanner.booking.Booking;
+import travelplanner.booking.query.SimpleBookingQueryDto;
+
 @Component
 class MessageBuilder {
 
-    StringBuilder createContent(Booking booking) {
+    StringBuilder createContent(SimpleBookingQueryDto booking) {
         StringBuilder content = new StringBuilder();
         content.append("Start Date ");
         content.append(booking.getStartDate());
@@ -19,13 +20,13 @@ class MessageBuilder {
         content.append(booking.getCustomer().getLastName());
         content.append("\n");
         content.append("Destination info: \n");
-        content.append("Destination name: ").append(booking.getDestinations().getName());
+        content.append("Destination name: ").append(booking.getDestination().getName());
         content.append("\n");
-        content.append("Destination country: ").append(booking.getDestinations().getCountryCode());
+        content.append("Destination country: ").append(booking.getDestination().getCountryCode());
         content.append("\n");
-        content.append("Destination price: ").append(booking.getDestinations().getDestinationPrice()).append(booking.getDestinations().getCurrency());
+        content.append("Destination price: ").append(booking.getDestination().getDestinationPrice()).append(booking.getDestination().getCurrency());
         content.append("\n");
-        content.append("Destination id: ").append(booking.getDestinations().getIdName());
+        content.append("Destination id: ").append(booking.getDestination().getIdName());
         return content;
     }
 }

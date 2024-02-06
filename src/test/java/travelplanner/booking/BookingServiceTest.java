@@ -102,7 +102,7 @@ class BookingServiceTest {
     }
 
     @Test
-    public void shouldDeleteBookingById() throws MessagingException {
+    public void shouldDeleteBookingById() {
         // Given
         clearData();
         dataForTests();

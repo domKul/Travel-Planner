@@ -2,6 +2,7 @@ package travelplanner.booking;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import travelplanner.booking.query.SimpleBookingQueryDto;
 import travelplanner.customer.CustomerService;
 import travelplanner.destination.DestinationService;
 import travelplanner.exception.ExceptionMessages;
@@ -34,7 +35,7 @@ public class BookingService extends AbstractRepository<BookingRepository, Bookin
     void addObserver(BookingObserver observer) {
         observers.add(observer);
     }
-    private void notifyObservers(Booking booking) {
+    private void notifyObservers(SimpleBookingQueryDto booking) {
         observers.forEach(o->o.notifyBookingAdded(booking));
     }
 
@@ -51,9 +52,11 @@ public class BookingService extends AbstractRepository<BookingRepository, Bookin
         booking.setStartDate(bookingDTOCreate.getStartDate());
         booking.setEndDate(bookingDTOCreate.getEndDate());
         booking.setDestinations(destinationOrElseThrow);
-        notifyObservers(booking);
+        Booking save = bookingRepository.save(booking);
+        notifyObservers(booking.toSimpleQuery());
         LOGGER.info("Email sent");
-        return bookingRepository.save(booking);
+        return save;
+
     }
 
     private void isDestinationExist(BookingDTOCreate bookingDTOCreate) {

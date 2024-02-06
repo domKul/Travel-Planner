@@ -1,6 +1,9 @@
 package travelplanner.booking;
 
+
+import travelplanner.booking.query.SimpleBookingQueryDto;
+
 interface BookingObserver {
-    void notifyBookingAdded(Booking booking);
+    void notifyBookingAdded(SimpleBookingQueryDto booking);
 
 }

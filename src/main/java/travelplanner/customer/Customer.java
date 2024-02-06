@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
-import travelplanner.booking.Booking;
+import travelplanner.booking.query.SimpleBookingQueryDto;
 import travelplanner.complaint.Complaint;
 
 import java.util.*;
@@ -46,7 +46,7 @@ public class Customer {
     private List<Complaint> complaints;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     @JsonBackReference
-    private List<Booking> bookings;
+    private List<SimpleBookingQueryDto> bookings;
 
     public Customer() {
     }
@@ -128,7 +128,7 @@ public class Customer {
         return phoneNumber;
     }
 
-    public List<Booking> getBookings() {
+    public List<SimpleBookingQueryDto> getBookings() {
         return Collections.unmodifiableList(bookings);
     }
 

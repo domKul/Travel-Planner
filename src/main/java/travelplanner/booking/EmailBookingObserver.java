@@ -2,6 +2,7 @@ package travelplanner.booking;
 
 import jakarta.mail.MessagingException;
 import org.springframework.stereotype.Component;
+import travelplanner.booking.query.SimpleBookingQueryDto;
 import travelplanner.sender.EmailSenderImpl;
 
 @Component
@@ -14,7 +15,7 @@ class EmailBookingObserver implements BookingObserver {
     }
 
     @Override
-    public void notifyBookingAdded(Booking booking) {
+    public void notifyBookingAdded(SimpleBookingQueryDto booking) {
         String customerEmail = booking.getCustomer().getEmail();
         try {
             emailSender.sendEmail(customerEmail, booking);

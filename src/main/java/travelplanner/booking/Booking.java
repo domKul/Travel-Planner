@@ -2,6 +2,7 @@ package travelplanner.booking;
 
 
 import jakarta.persistence.*;
+import travelplanner.booking.query.SimpleBookingQueryDto;
 import travelplanner.customer.Customer;
 import travelplanner.destination.Destination;
 
@@ -10,7 +11,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "bookings")
-public class Booking {
+ class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +29,7 @@ public class Booking {
     public Booking() {
     }
 
-    public Booking(long bookingId, Date startDate, Date endDate, Customer customer, Destination destination) {
+    Booking(long bookingId, Date startDate, Date endDate, Customer customer, Destination destination) {
         this.bookingId = bookingId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -36,40 +37,49 @@ public class Booking {
         this.destination = destination;
     }
 
-    public long getBookingId() {
+    long getBookingId() {
         return bookingId;
     }
 
-    public Date getStartDate() {
+    Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
-    public Customer getCustomer() {
+    Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
-    public Destination getDestinations() {
+    Destination getDestinations() {
         return destination;
     }
 
-    public void setDestinations(Destination destination) {
+    void setDestinations(Destination destination) {
         this.destination = destination;
+    }
+     SimpleBookingQueryDto toSimpleQuery() {
+        return new SimpleBookingQueryDto(
+                this.bookingId,
+                this.startDate,
+                this.endDate,
+                this.customer,
+                this.destination
+        );
     }
 
     @Override

@@ -5,7 +5,8 @@ import jakarta.mail.internet.MimeMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import travelplanner.booking.Booking;
+
+import travelplanner.booking.query.SimpleBookingQueryDto;
 
 @Service
 public class EmailSenderImpl implements EmailSender{
@@ -18,7 +19,7 @@ public class EmailSenderImpl implements EmailSender{
     }
 
     @Override
-    public void sendEmail(String email, Booking booking) throws MessagingException {
+    public void sendEmail(String email, SimpleBookingQueryDto booking) throws MessagingException {
         String title =" Travel plan";
         createAndSendEmail(email,title,messageBuilder.createContent(booking).toString());
     }
