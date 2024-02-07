@@ -2,14 +2,16 @@ package travelplanner.complaint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import travelplanner.complaint.query.SimpleComplaintQueryDto;
 import travelplanner.customer.Customer;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "complaints")
-public class Complaint {
+ class Complaint {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -82,6 +84,19 @@ public class Complaint {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    Complaint mapFromSimpleQueryDto(SimpleComplaintQueryDto simpleComplaintQueryDto){
+        return new Complaint(simpleComplaintQueryDto.getComplaintId(),
+                simpleComplaintQueryDto.getTitle(),
+                simpleComplaintQueryDto.getDescription(),
+                simpleComplaintQueryDto.getComplaintDate(),
+                simpleComplaintQueryDto.getStatus(),
+                simpleComplaintQueryDto.getComplaintId()
+        );
+    }
+    List<Complaint> mapFromSimpleQueryDtoList(List<SimpleComplaintQueryDto> simpleComplaintQueryDto){
+        return simpleComplaintQueryDto.stream().map(this::mapFromSimpleQueryDto).toList();
     }
 
     @Override

@@ -2,6 +2,7 @@ package travelplanner.complaint;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import travelplanner.complaint.query.SimpleComplaintQueryDto;
 import travelplanner.customer.Customer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,12 +95,21 @@ class ComplaintMapperTest {
     public void shouldMapToListDTO() {
         //GIven
         dataForTests();
-        customer.getComplaints().add(complaint1);
+        Complaint complaintForMapping = new Complaint();
+        customer.getComplaints().add(new SimpleComplaintQueryDto(complaint1.getComplaintId(),
+                complaint1.getTitle(),complaint1.getDescription(),
+                complaint1.getComplaintDate(),complaint1.getStatus(),
+                complaint1.getComplaintId()));
         complaint1.setCustomer(customer);
-        customer.getComplaints().add(complaint2);
+        customer.getComplaints().add(new SimpleComplaintQueryDto(complaint2.getComplaintId(),
+                complaint2.getTitle(),complaint2.getDescription(),
+                complaint2.getComplaintDate(),complaint2.getStatus(),
+                complaint2.getComplaintId()));
         complaint2.setCustomer(customer);
+        List<Complaint> complaints = complaintForMapping.mapFromSimpleQueryDtoList(customer.getComplaints());
+
         //When
-        List<ComplaintDTO> mappinglistToDTO = complaintMapper.mapToListDTO(customer.getComplaints());
+        List<ComplaintDTO> mappinglistToDTO = complaintMapper.mapToListDTO(complaints);
         //Then
         assertEquals(2, mappinglistToDTO.size());
         assertEquals(complaint1.getTitle(), mappinglistToDTO.get(0).getTitle());

@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import travelplanner.booking.query.SimpleBookingQueryDto;
-import travelplanner.complaint.Complaint;
+import travelplanner.complaint.query.SimpleComplaintQueryDto;
 
 import java.util.*;
 
@@ -43,7 +43,7 @@ public class Customer {
     @NotNull
     private int phoneNumber;
     @OneToMany(mappedBy = "customer")
-    private List<Complaint> complaints;
+    private List<SimpleComplaintQueryDto> complaints;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<SimpleBookingQueryDto> bookings;
@@ -112,7 +112,7 @@ public class Customer {
         return streetName;
     }
 
-    public List<Complaint> getComplaints() {
+    public List<SimpleComplaintQueryDto> getComplaints() {
         return complaints;
     }
 

@@ -1,6 +1,6 @@
 package travelplanner.customer;
 
-import travelplanner.complaint.Complaint;
+import travelplanner.complaint.query.SimpleComplaintQueryDto;
 
 import java.util.Date;
 import java.util.List;
@@ -17,9 +17,9 @@ class CustomerDTOGet {
     private final String postalCode;
     private final String email;
     private final int phoneNumber;
-    private final List<Complaint> complaints;
+    private final List<SimpleComplaintQueryDto> complaints;
 
-    public CustomerDTOGet(long customerId, String firstName, String lastName, Date birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, List<Complaint> complaints) {
+    public CustomerDTOGet(long customerId, String firstName, String lastName, Date birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber, List<SimpleComplaintQueryDto> complaints) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -65,7 +65,7 @@ class CustomerDTOGet {
         return postalCode;
     }
 
-    public List<Complaint> getComplaints() {
+    public List<SimpleComplaintQueryDto> getComplaints() {
         return complaints;
     }
 
