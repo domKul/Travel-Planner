@@ -1,59 +1,43 @@
 package travelplanner.booking;
 
-import travelplanner.customer.Customer;
-import travelplanner.customer.CustomerRepository;
-import travelplanner.destination.Destination;
-import travelplanner.destination.DestinationRepository;
-import org.junit.jupiter.api.BeforeEach;
+import travelplanner.customer.query.SimpleCustomerQueryDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import travelplanner.destination.query.SimpleDestinationQueryDto;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+
 @SpringBootTest
 class BookingMapperTest {
 
     @Autowired
     private BookingMapper bookingMapper;
-    @Autowired
-    private BookingRepository bookingRepository;
-    @Autowired
-    private CustomerRepository customerRepository;
-    @Autowired
-    private DestinationRepository destinationRepository;
     private Booking booking1;
     private Booking booking2;
-    private Customer customer;
-    private Destination destination;
+    private SimpleCustomerQueryDto customer;
+    private SimpleDestinationQueryDto destination;
+
+
 
     private void dataForTests() {
-        customer = new Customer(1L, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "example12@email.com", 1231231);
-        destination = new Destination();
-        booking1 = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), null, null);
-        booking2 = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), null, null);
-    }
-    @BeforeEach
-    void cleaData(){
-        customerRepository.deleteAll();
+        customer = new SimpleCustomerQueryDto(1L, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "example12@email.com", 1231231);
+        destination = new SimpleDestinationQueryDto(1L,1231L,"name","countryCode","currency",1231);
+        booking1 = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), customer, destination);
+        booking2 = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), customer, destination);
     }
 
     @Test
     public void shouldMapToBookingDTOGet() {
         //Given
         dataForTests();
-        Customer saveCustomer = customerRepository.save(customer);
-        Destination saveDestination = destinationRepository.save(destination);
-        booking2.setDestinations(saveDestination);
-        booking2.setCustomer(saveCustomer);
-        Booking saveBooking = bookingRepository.save(booking2);
         //When
-        BookingDTOGet mapToDTOGET = bookingMapper.mapToBookingDTOGet(saveBooking);
+        BookingDTOGet mapToDTOGET = bookingMapper.mapToBookingDTOGet(booking2);
         //When
         assertEquals(BookingDTOGet.class,mapToDTOGET.getClass());
         assertEquals(booking2.getCustomer().getFirstName(), mapToDTOGET.getCustomerFirstName());
@@ -65,15 +49,7 @@ class BookingMapperTest {
     public void shouldMapToDTOListGet() {
         //Given
         dataForTests();
-        Destination saveDest = destinationRepository.save(destination);
-        Customer saveCustomer = customerRepository.save(customer);
-        booking2.setDestinations(saveDest);
-        booking2.setCustomer(saveCustomer);
-        booking1.setDestinations(saveDest);
-        booking1.setCustomer(saveCustomer);
-        Booking saveBooking1 = bookingRepository.save(booking1);
-        Booking saveBooking2 = bookingRepository.save(booking2);
-        List<Booking> listOfBookings = List.of(saveBooking1, saveBooking2);
+        List<Booking> listOfBookings = List.of(booking1, booking2);
         //When
         List<BookingDTOGet> mappinglist = bookingMapper.mapToDTOListGet(listOfBookings);
         //Then
@@ -85,11 +61,8 @@ class BookingMapperTest {
     public void shouldMapToBookingDTO() {
         //Given
         dataForTests();
-        Customer saveCustomer = customerRepository.save(customer);
-        booking2.setCustomer(saveCustomer);
-        Booking save = bookingRepository.save(booking2);
         //When
-        BookingDTO mappingDTO = bookingMapper.mapToBookingDTO(save);
+        BookingDTO mappingDTO = bookingMapper.mapToBookingDTO(booking2);
         //Then
         assertEquals(booking2.getCustomer().getFirstName(), mappingDTO.getCustomer().getFirstName());
     }

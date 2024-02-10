@@ -3,11 +3,11 @@ package travelplanner.complaint;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import travelplanner.complaint.query.SimpleComplaintQueryDto;
-import travelplanner.customer.Customer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import travelplanner.customer.CustomerService;
+import travelplanner.customer.query.SimpleCustomerQueryDto;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -25,14 +25,14 @@ class ComplaintMapperTest {
     private Complaint complaint1;
     private Complaint complaint2;
     private ComplaintDTOCreate complaintDTOCreate;
-    private Customer customer;
+    private SimpleCustomerQueryDto customer;
     @Mock
     private CustomerService customerService;
     private ComplaintDTO complaintDTO;
 
     private void dataForTests() {
         LocalDateTime complaintDate = LocalDateTime.of(2023, 5, 15, 12, 0);
-        customer = new Customer(0, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231);
+        customer = new SimpleCustomerQueryDto(0, "firstName", "lastName", new Date(2020, 02, 02), "string", "string", "string", "string", "string", 1231231);
         complaint1 = new Complaint(1, "title1", "description1", complaintDate, "test1", customer.getCustomerId());
         complaint2 = new Complaint(1, "title2", "description2", complaintDate, "test2", customer.getCustomerId());
         complaintDTO = new ComplaintDTO(1L, "title2", "description2", complaintDate, "test2", 1L);

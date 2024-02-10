@@ -2,7 +2,8 @@ package travelplanner.complaint.query;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import travelplanner.customer.Customer;
+import travelplanner.customer.query.SimpleCustomerQueryDto;
+
 
 import java.time.LocalDateTime;
 
@@ -20,7 +21,7 @@ public class SimpleComplaintQueryDto {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     @JsonBackReference
-    private Customer customer;
+    private SimpleCustomerQueryDto customer;
 
     public SimpleComplaintQueryDto() {
     }
@@ -31,7 +32,7 @@ public class SimpleComplaintQueryDto {
         this.description = description;
         this.complaintDate = complaintDate;
         this.status = status;
-        this.customer = new Customer();
+        this.customer = new SimpleCustomerQueryDto();
         this.customer.setCustomerId(customerId);
     }
 
@@ -55,7 +56,7 @@ public class SimpleComplaintQueryDto {
         return status;
     }
 
-    public Customer getCustomer() {
+    public SimpleCustomerQueryDto getCustomer() {
         return customer;
     }
 }

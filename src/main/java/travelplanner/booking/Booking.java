@@ -3,8 +3,9 @@ package travelplanner.booking;
 
 import jakarta.persistence.*;
 import travelplanner.booking.query.SimpleBookingQueryDto;
-import travelplanner.customer.Customer;
-import travelplanner.destination.Destination;
+import travelplanner.customer.query.SimpleCustomerQueryDto;
+import travelplanner.destination.query.SimpleDestinationQueryDto;
+
 
 import java.util.Date;
 import java.util.Objects;
@@ -21,15 +22,15 @@ import java.util.Objects;
     private Date endDate;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private SimpleCustomerQueryDto customer;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "destination_id")
-    private Destination destination;
+    private SimpleDestinationQueryDto destination;
 
     public Booking() {
     }
 
-    Booking(long bookingId, Date startDate, Date endDate, Customer customer, Destination destination) {
+    Booking(long bookingId, Date startDate, Date endDate, SimpleCustomerQueryDto customer, SimpleDestinationQueryDto destination) {
         this.bookingId = bookingId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -57,19 +58,19 @@ import java.util.Objects;
         this.endDate = endDate;
     }
 
-    Customer getCustomer() {
+    SimpleCustomerQueryDto getCustomer() {
         return customer;
     }
 
-    void setCustomer(Customer customer) {
+    void setCustomer(SimpleCustomerQueryDto customer) {
         this.customer = customer;
     }
 
-    Destination getDestinations() {
+    SimpleDestinationQueryDto getDestinations() {
         return destination;
     }
 
-    void setDestinations(Destination destination) {
+    void setDestinations(SimpleDestinationQueryDto destination) {
         this.destination = destination;
     }
      SimpleBookingQueryDto toSimpleQuery() {

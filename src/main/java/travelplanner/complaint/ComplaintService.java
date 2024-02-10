@@ -42,7 +42,7 @@ public class ComplaintService extends AbstractRepository<ComplaintRepository, Co
         return complaintMapper.mapToComplaintDTO(entity);
     }
 
-    ComplaintDTO putComplaintStatus(final long complaintId, final ComplaintDTOUpdate complaintDTOUpdate) {
+    ComplaintDTO putComplaint(final long complaintId, final ComplaintDTOUpdate complaintDTOUpdate) {
         return complaintRepository.findById(complaintId).map(comp -> {
             Optional.ofNullable(complaintDTOUpdate.title())
                     .ifPresent(comp::setTitle);

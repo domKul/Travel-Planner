@@ -36,7 +36,7 @@ class ComplaintController {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<ComplaintDTO> updateComplaintsStatus(@RequestParam long complaintId, @RequestBody ComplaintDTOUpdate complaintDTOUpdate) {
-        return ResponseEntity.ok(complaintService.putComplaintStatus(complaintId, complaintDTOUpdate));
+        return ResponseEntity.ok(complaintService.putComplaint(complaintId, complaintDTOUpdate));
     }
 
     @DeleteMapping(value = "{complaintId}")

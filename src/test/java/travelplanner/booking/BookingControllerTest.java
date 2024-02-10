@@ -13,8 +13,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import travelplanner.customer.Customer;
-import travelplanner.destination.Destination;
+import travelplanner.customer.query.SimpleCustomerQueryDto;
+import travelplanner.destination.query.SimpleDestinationQueryDto;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -76,8 +76,8 @@ class BookingControllerTest {
     @Test
     void shouldSaveBooking() throws Exception {
         //Given
-        Customer customer = new Customer(1, "firstName", "lastName", Calendar.getInstance().getTime(), "string", "string", "string", "string", "string", 1231231);
-        Destination destination = new Destination();
+        SimpleCustomerQueryDto customer = new SimpleCustomerQueryDto(1, "firstName", "lastName", Calendar.getInstance().getTime(), "string", "string", "string", "string", "string", 1231231);
+        SimpleDestinationQueryDto destination = new SimpleDestinationQueryDto();
         BookingDTOCreate create = new BookingDTOCreate.Builder().build();
         Booking booking = new Booking(1L, new Date(), new Date(), customer, destination);
         when(bookingService.addBooking(create)).thenReturn(booking);
@@ -90,8 +90,8 @@ class BookingControllerTest {
 
     @Test
     void shouldFindBookingByGivenId() throws Exception {
-        Customer customer = new Customer(1, "firstName", "lastName", Calendar.getInstance().getTime(), "string", "string", "string", "string", "string", 1231231);
-        Destination destination = new Destination();
+        SimpleCustomerQueryDto customer = new SimpleCustomerQueryDto(1, "firstName", "lastName", Calendar.getInstance().getTime(), "string", "string", "string", "string", "string", 1231231);
+        SimpleDestinationQueryDto destination = new SimpleDestinationQueryDto();
         BookingDTOCreate create = new BookingDTOCreate.Builder().build();
         Booking booking = new Booking(1L, new Date(), new Date(), customer, destination);
         BookingDTOGet getBooking = BookingDTOGet.builder()
@@ -115,7 +115,7 @@ class BookingControllerTest {
     void shouldDeleteBookingByGivenId() throws Exception {
         //Given
         BookingDTOCreate create = new BookingDTOCreate.Builder().build();
-        Booking booking = new Booking(1L, new Date(), new Date(), new Customer(), new Destination());
+        Booking booking = new Booking(1L, new Date(), new Date(), new SimpleCustomerQueryDto(), new SimpleDestinationQueryDto());
         when(bookingService.addBooking(create)).thenReturn(booking);
 
         //When
@@ -137,5 +137,4 @@ class BookingControllerTest {
                         .content(objectMapper.writeValueAsString(userUpdateDTO)))
                 .andExpect(status().isAccepted());
     }
-
 }

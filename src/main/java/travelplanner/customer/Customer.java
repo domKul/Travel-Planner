@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import travelplanner.booking.query.SimpleBookingQueryDto;
 import travelplanner.complaint.query.SimpleComplaintQueryDto;
+import travelplanner.customer.query.SimpleCustomerQueryDto;
 
 import java.util.*;
 
@@ -17,7 +18,7 @@ import java.util.*;
 @Table(name = "customers_list")
 @JsonIgnoreProperties({"bookings", "complaints"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "customerId")
-public class Customer {
+class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,6 +67,31 @@ public class Customer {
         this.phoneNumber = phoneNumber;
         this.complaints = new ArrayList<>();
         this.bookings = new ArrayList<>();
+    }
+
+    static Customer mapFromQueryDto(SimpleCustomerQueryDto simpleCustomerQueryDto){
+        return new Customer(simpleCustomerQueryDto.getCustomerId(),
+                simpleCustomerQueryDto.getFirstName(),
+                simpleCustomerQueryDto.getLastName(),
+                simpleCustomerQueryDto.getBirthdate(),
+                simpleCustomerQueryDto.getCountry(),
+                simpleCustomerQueryDto.getCity(),
+                simpleCustomerQueryDto.getStreetName(),
+                simpleCustomerQueryDto.getPostalCode(),
+                simpleCustomerQueryDto.getEmail(),
+                simpleCustomerQueryDto.getPhoneNumber());
+    }
+    static SimpleCustomerQueryDto mapToQueryDto(Customer simpleCustomerQueryDto){
+        return new SimpleCustomerQueryDto(simpleCustomerQueryDto.getCustomerId(),
+                simpleCustomerQueryDto.getFirstName(),
+                simpleCustomerQueryDto.getLastName(),
+                simpleCustomerQueryDto.getBirthdate(),
+                simpleCustomerQueryDto.getCountry(),
+                simpleCustomerQueryDto.getCity(),
+                simpleCustomerQueryDto.getStreetName(),
+                simpleCustomerQueryDto.getPostalCode(),
+                simpleCustomerQueryDto.getEmail(),
+                simpleCustomerQueryDto.getPhoneNumber());
     }
 
     public long getCustomerId() {

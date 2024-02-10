@@ -2,12 +2,13 @@ package travelplanner.destination;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import travelplanner.destination.query.SimpleDestinationQueryDto;
 
 import java.util.Objects;
 
 @Entity
 @Table(name = "destination")
-public class Destination {
+class Destination {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +36,17 @@ public class Destination {
         this.destinationPrice = destinationPrice;
     }
 
+    SimpleDestinationQueryDto mapToSimpleQueryDto() {
+        return new SimpleDestinationQueryDto(
+                this.destinationId,
+                this.idName,
+                this.name,
+                this.countryCode,
+                this.currency,
+                this.destinationPrice
+        );
+    }
+
     public long getDestinationId() {
         return destinationId;
     }
@@ -43,7 +55,7 @@ public class Destination {
         return idName;
     }
 
-     void setIdName(long idName) {
+    void setIdName(long idName) {
         this.idName = idName;
     }
 
@@ -51,7 +63,7 @@ public class Destination {
         return name;
     }
 
-     void setName(String name) {
+    void setName(String name) {
         this.name = name;
     }
 
@@ -59,7 +71,7 @@ public class Destination {
         return countryCode;
     }
 
-     void setCountryCode(String countryCode) {
+    void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
     }
 
@@ -67,7 +79,7 @@ public class Destination {
         return currency;
     }
 
-     void setCurrency(String currency) {
+    void setCurrency(String currency) {
         this.currency = currency;
     }
 
@@ -75,7 +87,7 @@ public class Destination {
         return destinationPrice;
     }
 
-     void setDestinationPrice(int destinationPrice) {
+    void setDestinationPrice(int destinationPrice) {
         this.destinationPrice = destinationPrice;
     }
 

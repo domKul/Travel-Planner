@@ -53,10 +53,9 @@ public class BookingService extends AbstractRepository<BookingRepository, Bookin
         booking.setEndDate(bookingDTOCreate.getEndDate());
         booking.setDestinations(destinationOrElseThrow);
         Booking save = bookingRepository.save(booking);
-        notifyObservers(booking.toSimpleQuery());
+        notifyObservers(save.toSimpleQuery());
         LOGGER.info("Email sent");
         return save;
-
     }
 
     private void isDestinationExist(BookingDTOCreate bookingDTOCreate) {

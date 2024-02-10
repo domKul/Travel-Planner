@@ -2,6 +2,7 @@ package travelplanner.customer;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import travelplanner.customer.query.SimpleCustomerQueryDto;
 import travelplanner.exception.ExceptionMessages;
 import travelplanner.exception.AlreadyExistException;
 import travelplanner.jpa.AbstractRepository;
@@ -38,13 +39,13 @@ public class CustomerService extends AbstractRepository<CustomerRepository, Cust
     }
 
      CustomerDTOGet showCustomerGetById(final long customerId) {
-        Customer customerOrThrow = findCustomerOrThrow(customerId);
-        return customerMapper.mapToCustomerDTOGet(customerOrThrow);
+         SimpleCustomerQueryDto customerOrThrow = findCustomerOrThrow(customerId);
+        return customerMapper.mapToCustomerDTOGet(Customer.mapFromQueryDto(customerOrThrow));
 
     }
 
      CustomerDTO updateCustomer(final long customerId, final CustomerDTO customerDTO) {
-        Customer customerOrThrow = findCustomerOrThrow(customerId);
+         SimpleCustomerQueryDto customerOrThrow = findCustomerOrThrow(customerId);
         Customer getCustomer = customerMapper.mapToCustomerForUpdate(customerOrThrow.getCustomerId(), customerDTO);
         Customer update = customerRepository.save(getCustomer);
         LOGGER.info("Customer updated");
@@ -53,13 +54,15 @@ public class CustomerService extends AbstractRepository<CustomerRepository, Cust
     }
 
      void deleteCustomerById(final long customerId) {
-        Customer customerOrThrow = findCustomerOrThrow(customerId);
+         SimpleCustomerQueryDto customerOrThrow = findCustomerOrThrow(customerId);
         customerRepository.deleteById(customerOrThrow.getCustomerId());
         LOGGER.info("Customer deleted");
     }
 
-    public Customer findCustomerOrThrow(long id) {
-        return findEntity(customerRepository, id);
+    public SimpleCustomerQueryDto findCustomerOrThrow(long id) {
+        Customer entity = findEntity(customerRepository, id);
+        return Customer.mapToQueryDto(entity);
+
     }
 
     public boolean isCustomerExistById(long customerId){

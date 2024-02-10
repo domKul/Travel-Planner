@@ -1,8 +1,8 @@
 package travelplanner.booking.query;
 
 import jakarta.persistence.*;
-import travelplanner.customer.Customer;
-import travelplanner.destination.Destination;
+import travelplanner.customer.query.SimpleCustomerQueryDto;
+import travelplanner.destination.query.SimpleDestinationQueryDto;
 
 import java.util.Date;
 
@@ -18,15 +18,15 @@ public class SimpleBookingQueryDto {
     private Date endDate;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private SimpleCustomerQueryDto customer;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "destination_id")
-    private Destination destination;
+    private SimpleDestinationQueryDto destination;
 
     public SimpleBookingQueryDto() {
     }
 
-    public SimpleBookingQueryDto(long bookingId, Date startDate, Date endDate, Customer customer, Destination destination) {
+    public SimpleBookingQueryDto(long bookingId, Date startDate, Date endDate, SimpleCustomerQueryDto customer, SimpleDestinationQueryDto destination) {
         this.bookingId = bookingId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -46,11 +46,11 @@ public class SimpleBookingQueryDto {
         return endDate;
     }
 
-    public Customer getCustomer() {
+    public SimpleCustomerQueryDto getCustomer() {
         return customer;
     }
 
-    public Destination getDestination() {
+    public SimpleDestinationQueryDto getDestination() {
         return destination;
     }
 }

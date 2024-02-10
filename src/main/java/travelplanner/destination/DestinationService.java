@@ -2,6 +2,7 @@ package travelplanner.destination;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import travelplanner.destination.query.SimpleDestinationQueryDto;
 import travelplanner.jpa.AbstractRepository;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class DestinationService extends AbstractRepository<DestinationRepository
 
     @Transactional
     public void deleteDestinationById(long hotelId) {
-        Destination destinationOrElseThrow = getDestinationOrElseThrow(hotelId);
+        Destination destinationOrElseThrow = getDestination(hotelId);
         destinationRepository.delete(destinationOrElseThrow);
     }
 
@@ -35,10 +36,15 @@ public class DestinationService extends AbstractRepository<DestinationRepository
     }
 
     DestinationDTOForGet getDestinationById(long hotelId) {
-        Destination destinationOrElseThrow = getDestinationOrElseThrow(hotelId);
+        Destination destinationOrElseThrow = getDestination(hotelId);
         return destinationMapper.mapToDestinationResultDTO(destinationOrElseThrow);
     }
-    public Destination getDestinationOrElseThrow(long id) {
+    public SimpleDestinationQueryDto getDestinationOrElseThrow(long id) {
+        Destination entity = getDestination(id);
+        return entity.mapToSimpleQueryDto();
+    }
+
+    private Destination getDestination(long id) {
         return findEntity(destinationRepository, id);
     }
 }

@@ -1,7 +1,8 @@
 package travelplanner.booking;
 
-import travelplanner.customer.Customer;
-import travelplanner.destination.Destination;
+
+import travelplanner.customer.query.SimpleCustomerQueryDto;
+import travelplanner.destination.query.SimpleDestinationQueryDto;
 
 import java.util.Date;
 
@@ -10,10 +11,10 @@ class BookingDTO {
 
     private final Date startDate;
     private final Date endDate;
-    private final Customer customer;
-    private final Destination destination;
+    private final SimpleCustomerQueryDto customer;
+    private final SimpleDestinationQueryDto destination;
 
-    BookingDTO(Date startDate, Date endDate, Customer customer, Destination destination) {
+    BookingDTO(Date startDate, Date endDate, SimpleCustomerQueryDto customer, SimpleDestinationQueryDto destination) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.customer = customer;
@@ -28,11 +29,11 @@ class BookingDTO {
         return endDate;
     }
 
-    Customer getCustomer() {
+    SimpleCustomerQueryDto getCustomer() {
         return customer;
     }
 
-    Destination getHotel() {
+    SimpleDestinationQueryDto getHotel() {
         return destination;
     }
 }
