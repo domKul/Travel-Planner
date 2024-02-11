@@ -33,15 +33,10 @@ class ComplaintServiceTest {
     private ComplaintMapper complaintMapper;
     private Complaint complaint;
     private ComplaintDTOCreate complaintDTOCreate;
-    private CustomerDTO customerDTO;
-    private ComplaintDTOUpdate complaintDTOUpdate;
-
-
 
     @Test
     public void shouldCreateComplaint() {
         // Given
-        SimpleCustomerQueryDto customer = new SimpleCustomerQueryDto(IdType.EMPTY_ID.getId(), "firstName1", "lastName1", new Date(2000, 2, 11), "country", "city", "streetName", "postalCode", "example@email.com", 1231231);
         complaintDTOCreate = new ComplaintDTOCreate("title", "description", "status", 12L);
         complaint = new Complaint(1L, "title", "description", null, "status", 1);
         when(customerService.isCustomerExistById(complaintDTOCreate.getCustomerId())).thenReturn(true);

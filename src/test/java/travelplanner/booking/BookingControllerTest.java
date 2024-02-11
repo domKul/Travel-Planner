@@ -13,10 +13,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import travelplanner.booking.query.BookingDTOGet;
 import travelplanner.customer.query.SimpleCustomerQueryDto;
 import travelplanner.destination.query.SimpleDestinationQueryDto;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;

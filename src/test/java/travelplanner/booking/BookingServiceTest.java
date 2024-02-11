@@ -3,6 +3,8 @@ package travelplanner.booking;
 import org.junit.jupiter.api.Assertions;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import travelplanner.booking.query.BookingDTO;
+import travelplanner.booking.query.BookingDTOGet;
 import travelplanner.customer.CustomerService;
 import travelplanner.customer.query.SimpleCustomerQueryDto;
 import travelplanner.destination.DestinationService;

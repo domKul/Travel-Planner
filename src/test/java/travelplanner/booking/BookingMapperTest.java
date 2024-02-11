@@ -1,5 +1,7 @@
 package travelplanner.booking;
 
+import travelplanner.booking.query.BookingDTO;
+import travelplanner.booking.query.BookingDTOGet;
 import travelplanner.customer.query.SimpleCustomerQueryDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

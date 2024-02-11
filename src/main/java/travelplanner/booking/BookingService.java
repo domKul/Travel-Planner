@@ -2,6 +2,8 @@ package travelplanner.booking;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import travelplanner.booking.query.BookingDTO;
+import travelplanner.booking.query.BookingDTOGet;
 import travelplanner.booking.query.SimpleBookingQueryDto;
 import travelplanner.customer.CustomerService;
 import travelplanner.destination.DestinationService;

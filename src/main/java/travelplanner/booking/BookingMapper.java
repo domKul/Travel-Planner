@@ -1,6 +1,8 @@
 package travelplanner.booking;
 
 import org.springframework.stereotype.Component;
+import travelplanner.booking.query.BookingDTO;
+import travelplanner.booking.query.BookingDTOGet;
 
 import java.util.List;
 

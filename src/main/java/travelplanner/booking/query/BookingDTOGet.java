@@ -1,8 +1,8 @@
-package travelplanner.booking;
+package travelplanner.booking.query;
 
 import java.util.Date;
 
-class BookingDTOGet {
+public class BookingDTOGet {
 
     private final Long bookingId;
     private final Date bookTime;

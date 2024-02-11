@@ -1,4 +1,4 @@
-package travelplanner.booking;
+package travelplanner.booking.query;
 
 
 import travelplanner.customer.query.SimpleCustomerQueryDto;
@@ -7,33 +7,33 @@ import travelplanner.destination.query.SimpleDestinationQueryDto;
 import java.util.Date;
 
 
-class BookingDTO {
+public class BookingDTO {
 
     private final Date startDate;
     private final Date endDate;
     private final SimpleCustomerQueryDto customer;
     private final SimpleDestinationQueryDto destination;
 
-    BookingDTO(Date startDate, Date endDate, SimpleCustomerQueryDto customer, SimpleDestinationQueryDto destination) {
+    public BookingDTO(Date startDate, Date endDate, SimpleCustomerQueryDto customer, SimpleDestinationQueryDto destination) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.customer = customer;
         this.destination = destination;
     }
 
-    Date getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-     Date getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    SimpleCustomerQueryDto getCustomer() {
+    public SimpleCustomerQueryDto getCustomer() {
         return customer;
     }
 
-    SimpleDestinationQueryDto getHotel() {
+    public SimpleDestinationQueryDto getHotel() {
         return destination;
     }
 }
