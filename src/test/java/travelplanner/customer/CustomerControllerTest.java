@@ -13,7 +13,6 @@ import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import travelplanner.customer.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -102,8 +101,8 @@ class CustomerControllerTest {
     void shouldUpdateCustomer() throws Exception {
         // Given
         long customerId = 1L;
-        CustomerDTO customerDTO = new CustomerDTO("newFirstName", "newLastName", new Date(), "newAddress", "newCity", "newState", "newCountry", "newEmail", 123456789);
-        Customer updatedCustomer = new Customer(customerId, "newFirstName", "newLastName", new Date(), "newAddress", "newCity", "newState", "newCountry", "newEmail", 123456789);
+        CustomerDTO customerDTO = new CustomerDTO("newFirstName", "newLastName", new Date(2024,12,12), "newAddress", "newCity", "newState", "newCountry", "newEmail@email.com", 123456789);
+        Customer updatedCustomer = new Customer(customerId, "newFirstName", "newLastName", new Date(), "newAddress", "newCity", "newState", "newCountry", "newEmail@email.com", 123456789);
         CustomerDTO updatedCustomerDTO = new CustomerDTO("newFirstName", "newLastName", new Date(), "newAddress", "newCity", "newState", "newCountry", "newEmail", 123456789);
         given(customerService.saveCustomer(customerDTO)).willReturn(updatedCustomer);
         given(customerService.updateCustomer(customerId, customerDTO)).willReturn(updatedCustomerDTO);
