@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import travelplanner.customer.query.SimpleCustomerQueryDto;
 
-
 import java.time.LocalDateTime;
 
 @Entity

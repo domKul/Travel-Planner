@@ -7,8 +7,8 @@ import travelplanner.booking.query.BookingDTOGet;
 import travelplanner.booking.query.SimpleBookingQueryDto;
 import travelplanner.customer.CustomerService;
 import travelplanner.destination.DestinationService;
-import travelplanner.exception.ExceptionMessages;
 import travelplanner.exception.AlreadyExistException;
+import travelplanner.exception.ExceptionMessages;
 import travelplanner.exception.NotFoundException;
 import travelplanner.jpa.AbstractRepository;
 

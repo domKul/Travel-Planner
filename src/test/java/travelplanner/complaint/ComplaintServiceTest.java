@@ -1,23 +1,18 @@
 package travelplanner.complaint;
 
-//import travelplanner.customer.Customer;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import travelplanner.customer.CustomerDTO;
+import org.springframework.boot.test.context.SpringBootTest;
 import travelplanner.customer.CustomerService;
-import travelplanner.customer.query.SimpleCustomerQueryDto;
 import travelplanner.enums.IdType;
 import travelplanner.exception.NotFoundException;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest

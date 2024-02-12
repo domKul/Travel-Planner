@@ -11,7 +11,7 @@ import travelplanner.destination.query.SimpleDestinationQueryDto;
 import java.util.Date;
 
 @SpringBootTest
-public class MessageBuilderTest {
+class MessageBuilderTest {
     @Autowired
     private MessageBuilder messageBuilder;
 

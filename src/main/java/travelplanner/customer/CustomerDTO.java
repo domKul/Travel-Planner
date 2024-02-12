@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 
-public class CustomerDTO {
+class CustomerDTO {
 
     @JsonProperty("firstName")
     @NotNull(message = "First name required")

@@ -6,13 +6,12 @@ import travelplanner.booking.query.SimpleBookingQueryDto;
 import travelplanner.customer.query.SimpleCustomerQueryDto;
 import travelplanner.destination.query.SimpleDestinationQueryDto;
 
-
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "bookings")
- class Booking {
+class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,7 +72,8 @@ import java.util.Objects;
     void setDestinations(SimpleDestinationQueryDto destination) {
         this.destination = destination;
     }
-     SimpleBookingQueryDto toSimpleQuery() {
+
+    SimpleBookingQueryDto toSimpleQuery() {
         return new SimpleBookingQueryDto(
                 this.bookingId,
                 this.startDate,
@@ -88,7 +88,7 @@ import java.util.Objects;
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Booking booking = (Booking) o;
-        return  Objects.equals(startDate, booking.startDate) &&
+        return Objects.equals(startDate, booking.startDate) &&
                 Objects.equals(endDate, booking.endDate) &&
                 Objects.equals(customer, booking.customer) &&
                 Objects.equals(destination, booking.destination);

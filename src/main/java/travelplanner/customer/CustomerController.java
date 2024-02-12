@@ -35,7 +35,7 @@ class CustomerController {
     }
 
     @PutMapping(value = "{customerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<CustomerDTO> updateCustomer(@PathVariable long customerId, @RequestBody CustomerDTO customerDTO) {
+    ResponseEntity<CustomerDTO> updateCustomer(@PathVariable long customerId, @RequestBody @Valid CustomerDTO customerDTO) {
         return ResponseEntity.ok(customerService.updateCustomer(customerId, customerDTO));
     }
 
