@@ -76,10 +76,16 @@ class BookingControllerTest {
     @Test
     void shouldSaveBooking() throws Exception {
         //Given
-        SimpleCustomerQueryDto customer = new SimpleCustomerQueryDto(1, "firstName", "lastName", Calendar.getInstance().getTime(), "string", "string", "string", "string", "string", 1231231);
+        SimpleCustomerQueryDto customer = new SimpleCustomerQueryDto(1L, "firstName", "lastName", Calendar.getInstance().getTime(), "string", "string", "string", "string", "string", 1231231);
         SimpleDestinationQueryDto destination = new SimpleDestinationQueryDto();
-        BookingDTOCreate create = new BookingDTOCreate.Builder().build();
+
         Booking booking = new Booking(1L, new Date(), new Date(), customer, destination);
+        BookingDTOCreate create = new BookingDTOCreate.Builder()
+                .startDate(new Date(2024,12,12))
+                .endDate(new Date(2024,12,14))
+                .customerId(1L)
+                .destinationId(2L)
+                .build();
         when(bookingService.addBooking(create)).thenReturn(booking);
         // When & Then
         mockMvc.perform(post("/v1/bookings")

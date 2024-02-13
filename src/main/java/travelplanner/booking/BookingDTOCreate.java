@@ -1,12 +1,17 @@
 package travelplanner.booking;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.util.Date;
 
 class BookingDTOCreate {
-
+    @NotNull(message = "Start Date required")
     private final Date startDate;
+    @NotNull(message = "End Date required")
     private final Date endDate;
+    @NotNull(message = "Customer ID required")
     private final Long customerId;
+    @NotNull(message = "Destination ID required")
     private final Long destinationId;
 
     BookingDTOCreate(Date startDate, Date endDate, long customerId, long destinationId) {
@@ -58,7 +63,7 @@ class BookingDTOCreate {
             return this;
         }
 
-         BookingDTOCreate build() {
+        BookingDTOCreate build() {
             return new BookingDTOCreate(startDate, endDate, customerId, destinationId);
         }
     }

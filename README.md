@@ -19,6 +19,8 @@
 ### List of endpoints with documentation 
  [Endpoints documentation  - Swagger](http://vps-7c561477.vps.ovh.net:8080/swagger-ui/index.html#/)
 
+### DB Scheme
+![com.planner.Travel-Planner.png](src%2Fmain%2Fresources%2Fimages%2Fcom.planner.Travel-Planner.png)
 ###### This project was build with:
 ###### java 17
 ###### SQLite as DB
