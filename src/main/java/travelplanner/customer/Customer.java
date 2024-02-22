@@ -15,7 +15,9 @@ import travelplanner.booking.query.SimpleBookingQueryDto;
 import travelplanner.complaint.query.SimpleComplaintQueryDto;
 import travelplanner.customer.query.SimpleCustomerQueryDto;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "customers_list")

@@ -5,8 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import travelplanner.destination.query.SimpleDestinationQueryDto;
 
-import java.util.Objects;
-
 @Entity
 @Table(name = "destination")
 @AllArgsConstructor

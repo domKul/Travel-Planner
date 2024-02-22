@@ -10,7 +10,6 @@ import travelplanner.customer.query.SimpleCustomerQueryDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "complaints")

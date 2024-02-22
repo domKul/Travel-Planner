@@ -24,6 +24,7 @@
 ###### This project was build with:
 ###### java 17
 ###### SQLite as DB
+###### Lombok
 ###### Spring version 3.0.6
 ###### Junit version 4.13.1 for tests
-###### Tests with Coverage : Class 78%, Method 70%
+###### Tests with Coverage : Class 84%, Method 71%

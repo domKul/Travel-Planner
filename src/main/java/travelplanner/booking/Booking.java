@@ -7,7 +7,6 @@ import travelplanner.booking.query.SimpleBookingQueryDto;
 import travelplanner.customer.query.SimpleCustomerQueryDto;
 import travelplanner.destination.query.SimpleDestinationQueryDto;
 
-
 import java.util.Date;
 
 

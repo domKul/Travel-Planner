@@ -1,7 +1,6 @@
 package travelplanner.booking;
 
 import jakarta.validation.constraints.NotNull;
-
 import lombok.Builder;
 import lombok.Getter;
 
