@@ -1,6 +1,7 @@
 package travelplanner.customer;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,13 +11,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("v1/customers")
+@RequiredArgsConstructor
 class CustomerController {
 
     private final CustomerService customerService;
-
-    CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
-    }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Void> addCustomer(@RequestBody @Valid CustomerDTO customerDTO) {

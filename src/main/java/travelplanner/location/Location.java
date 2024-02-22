@@ -2,9 +2,17 @@ package travelplanner.location;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "location")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 class Location {
 
     @Id
@@ -26,60 +34,4 @@ class Location {
     private int hotels;
     @JsonProperty("timezone")
     private String timezone;
-
-    public Location() {
-    }
-
-    Location(long locationId, String label, String dest_id, String destination_type, String region, String name,
-             String country, int hotels, String timezone) {
-        this.locationId = locationId;
-        this.label = label;
-        this.dest_id = dest_id;
-        this.destination_type = destination_type;
-        this.region = region;
-        this.name = name;
-        this.country = country;
-        this.hotels = hotels;
-        this.timezone = timezone;
-    }
-
-    String getLabel() {
-        return label;
-    }
-
-    String getRegion() {
-        return region;
-    }
-
-    String getName() {
-        return name;
-    }
-
-    void setName(String name) {
-        this.name = name;
-    }
-
-    String getCountry() {
-        return country;
-    }
-
-    void setCountry(String country) {
-        this.country = country;
-    }
-
-    Integer getHotels() {
-        return hotels;
-    }
-
-    String getTimezone() {
-        return timezone;
-    }
-
-    String getDest_id() {
-        return dest_id;
-    }
-
-    String getDestination_type() {
-        return destination_type;
-    }
 }

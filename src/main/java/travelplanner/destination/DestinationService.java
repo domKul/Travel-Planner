@@ -1,6 +1,7 @@
 package travelplanner.destination;
 
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import travelplanner.destination.query.SimpleDestinationQueryDto;
 import travelplanner.jpa.AbstractRepository;
@@ -9,17 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class DestinationService extends AbstractRepository<DestinationRepository, Destination> {
+
     private final DestinationMapper destinationMapper;
     private final DestinationRepository destinationRepository;
-
-    DestinationService(DestinationMapper destinationMapper, DestinationRepository destinationRepository) {
-        this.destinationMapper = destinationMapper;
-        this.destinationRepository = destinationRepository;
-    }
-     void saveDestination(Destination destination){
-        destinationRepository.save(destination);
-    }
 
     @Transactional
     public void deleteDestinationById(long hotelId) {

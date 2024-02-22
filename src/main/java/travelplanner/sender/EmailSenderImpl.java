@@ -2,20 +2,17 @@ package travelplanner.sender;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import travelplanner.booking.query.SimpleBookingQueryDto;
 
 @Service
+@RequiredArgsConstructor
 public class EmailSenderImpl implements EmailSender{
     private final JavaMailSender javaMailSender;
     private final MessageBuilder messageBuilder;
-
-    EmailSenderImpl(JavaMailSender javaMailSender, MessageBuilder messageBuilder) {
-        this.javaMailSender = javaMailSender;
-        this.messageBuilder = messageBuilder;
-    }
 
     @Override
     public void sendEmail(String email, SimpleBookingQueryDto booking) throws MessagingException {

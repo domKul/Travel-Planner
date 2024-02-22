@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
 import travelplanner.booking.query.SimpleBookingQueryDto;
 import travelplanner.complaint.query.SimpleComplaintQueryDto;
 
@@ -18,6 +19,7 @@ import java.util.List;
 @Table(name = "customers_list")
 @JsonIgnoreProperties({"bookings", "complaints"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "customerId")
+@Getter
 public class SimpleCustomerQueryDto {
 
     @Id
@@ -72,53 +74,4 @@ public class SimpleCustomerQueryDto {
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
-
-    public Long getCustomerId() {
-        return customerId;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public Date getBirthdate() {
-        return birthdate;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public String getStreetName() {
-        return streetName;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public int getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public List<SimpleComplaintQueryDto> getComplaints() {
-        return complaints;
-    }
-
-    public List<SimpleBookingQueryDto> getBookings() {
-        return bookings;
-    }
-
 }

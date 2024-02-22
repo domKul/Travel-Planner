@@ -1,6 +1,5 @@
 package travelplanner.destination;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +21,9 @@ class DestinationMapperTest {
 
     @BeforeEach
     void dataForTests(){
-        destination1 = new Destination(12,123123,"name1","countrycode1","PLN",231231);
-        destination2 = new Destination(1231,123123,"name2","countrycode2","PLN",1231);
-        destination3 = new Destination(2,222,"name3","countrycode3","PLN",23131);
+        destination1 = new Destination(12L,123123,"name1","countrycode1","PLN",231231);
+        destination2 = new Destination(1231L,123123,"name2","countrycode2","PLN",1231);
+        destination3 = new Destination(2L,222,"name3","countrycode3","PLN",23131);
     }
 
     @Test

@@ -2,9 +2,15 @@ package travelplanner.destination.query;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "destination")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 public class SimpleDestinationQueryDto {
 
     @Id
@@ -21,39 +27,4 @@ public class SimpleDestinationQueryDto {
     @JsonProperty("value")
     private int destinationPrice;
 
-    public SimpleDestinationQueryDto() {
-    }
-
-    public SimpleDestinationQueryDto(long hotelId, long idName, String name, String countryCode, String currency, int destinationPrice) {
-        this.destinationId = hotelId;
-        this.idName = idName;
-        this.name = name;
-        this.countryCode = countryCode;
-        this.currency = currency;
-        this.destinationPrice = destinationPrice;
-    }
-
-    public Long getDestinationId() {
-        return destinationId;
-    }
-
-    public long getIdName() {
-        return idName;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public int getDestinationPrice() {
-        return destinationPrice;
-    }
 }

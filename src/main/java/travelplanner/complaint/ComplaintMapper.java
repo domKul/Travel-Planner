@@ -1,5 +1,6 @@
 package travelplanner.complaint;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import travelplanner.customer.CustomerService;
 import travelplanner.enums.IdType;

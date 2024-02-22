@@ -1,26 +1,30 @@
 package travelplanner.booking;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import travelplanner.booking.query.BookingDTO;
 import travelplanner.booking.query.BookingDTOGet;
 import travelplanner.customer.CustomerService;
 import travelplanner.customer.query.SimpleCustomerQueryDto;
 import travelplanner.destination.DestinationService;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import travelplanner.destination.query.SimpleDestinationQueryDto;
 import travelplanner.exception.NotFoundException;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
+
+@ExtendWith(MockitoExtension.class)
 class BookingServiceTest {
 
     @InjectMocks
@@ -53,7 +57,7 @@ class BookingServiceTest {
         // Then
         Assertions.assertNotNull(result);
         assertEquals(customer, result.getCustomer());
-        assertEquals(destination, result.getDestinations());
+        assertEquals(destination, result.getDestination());
     }
 
     @Test
@@ -73,9 +77,9 @@ class BookingServiceTest {
         // When
         BookingDTO modify = bookingService.modifyBooking(booking.getBookingId(), create);
         // Then
-        assertEquals(bookingUpdate.getCustomer(), modify.getCustomer());
-        assertEquals(bookingUpdate.getStartDate(), modify.getStartDate());
-        assertEquals(bookingUpdate.getEndDate(), modify.getEndDate());
+        assertEquals(bookingUpdate.customer(), modify.customer());
+        assertEquals(bookingUpdate.startDate(), modify.startDate());
+        assertEquals(bookingUpdate.endDate(), modify.endDate());
         verify(bookingRepository).existsById(booking.getBookingId());
         verify(bookingRepository).findById(booking.getBookingId());
         verify(customerService).findCustomerOrThrow(create.getCustomerId());
@@ -112,7 +116,7 @@ class BookingServiceTest {
                 1231231);
         destination = new SimpleDestinationQueryDto(1L, 1231L, "name", "countryCode", "currency", 1231);
         Booking booking = new Booking(1L, new Date(2020, 12, 12), new Date(2020, 12, 13), customer, destination);
-        BookingDTOGet getBooking = new BookingDTOGet.Builder()
+        BookingDTOGet getBooking =  BookingDTOGet.builder()
                 .bookingId(1L)
                 .bookTime(new Date(2024, 1, 1))
                 .customerId(customer.getCustomerId())
@@ -149,9 +153,9 @@ class BookingServiceTest {
         Booking booking1 = new Booking();
         Booking booking2 = new Booking();
         Booking booking3 = new Booking();
-        BookingDTOGet mappedBooking1 = new BookingDTOGet.Builder().build();
-        BookingDTOGet mappedBooking2 = new BookingDTOGet.Builder().build();
-        BookingDTOGet mappedBooking3 = new BookingDTOGet.Builder().build();
+        BookingDTOGet mappedBooking1 =  BookingDTOGet.builder().build();
+        BookingDTOGet mappedBooking2 =  BookingDTOGet.builder().build();
+        BookingDTOGet mappedBooking3 =  BookingDTOGet.builder().build();
         List<Booking> bookingsList = List.of(booking1, booking2, booking3);
         List<BookingDTOGet> mappedBookingsList = List.of(mappedBooking1, mappedBooking2, mappedBooking3);
         when(bookingRepository.findAll()).thenReturn(bookingsList);

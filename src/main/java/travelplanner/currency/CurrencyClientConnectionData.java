@@ -1,9 +1,11 @@
 package travelplanner.currency;
 
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
+@Getter
 class CurrencyClientConnectionData {
 
     @Value("${rapidapi.api.key}")
@@ -12,16 +14,4 @@ class CurrencyClientConnectionData {
     private String apiCurrencyHost;
     @Value("${currency.api.url}")
     private String apiCurrencyUrl;
-
-    public String getApiCurrencyKey() {
-        return apiCurrencyKey;
-    }
-
-    public String getApiCurrencyHost() {
-        return apiCurrencyHost;
-    }
-
-    public String getApiCurrencyUrl() {
-        return apiCurrencyUrl;
-    }
 }

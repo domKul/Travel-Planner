@@ -4,9 +4,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.util.Date;
-
+@Getter
+@AllArgsConstructor
 public class CustomerDTO {
 
     @JsonProperty("firstName")
@@ -36,55 +39,4 @@ public class CustomerDTO {
     @JsonProperty("phoneNumber")
     @NotNull(message = "Phone number required")
     private int phoneNumber;
-
-    public CustomerDTO(String firstName, String lastName, Date birthdate, String country, String city, String streetName, String postalCode, String email, int phoneNumber) {
-
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthdate = birthdate;
-        this.country = country;
-        this.city = city;
-        this.streetName = streetName;
-        this.postalCode = postalCode;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-
-    }
-
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public Date getBirthdate() {
-        return birthdate;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public String getStreetName() {
-        return streetName;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public int getPhoneNumber() {
-        return phoneNumber;
-    }
 }

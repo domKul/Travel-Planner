@@ -1,6 +1,7 @@
 package travelplanner.location;
 
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import travelplanner.exception.ExceptionMessages;
@@ -12,15 +13,11 @@ import java.util.List;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 class LocationService extends AbstractRepository<LocationRepository, Location> {
 
     private final LocationMapper locationMapper;
     private final LocationRepository locationRepository;
-
-    LocationService(LocationMapper locationMapper, LocationRepository locationRepository) {
-        this.locationMapper = locationMapper;
-        this.locationRepository = locationRepository;
-    }
 
      void saveLocations(List<LocationDTO> locationDTOs) {
         if (locationDTOs.isEmpty()){

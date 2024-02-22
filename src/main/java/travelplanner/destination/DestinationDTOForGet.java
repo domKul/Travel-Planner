@@ -1,7 +1,11 @@
 package travelplanner.destination;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+@AllArgsConstructor
+@Getter
 class DestinationDTOForGet {
     @JsonProperty("hotelId")
     private Long hotelId;
@@ -16,36 +20,4 @@ class DestinationDTOForGet {
     @JsonProperty("value")
     private int hotelPrice;
 
-    DestinationDTOForGet(long hotelId, long idName, String name, String countryCode, String currency, int hotelPrice) {
-        this.hotelId = hotelId;
-        this.idName = idName;
-        this.name = name;
-        this.countryCode = countryCode;
-        this.currency = currency;
-        this.hotelPrice = hotelPrice;
-    }
-
-    long getHotelId() {
-        return hotelId;
-    }
-
-    long getIdName() {
-        return idName;
-    }
-
-    String getName() {
-        return name;
-    }
-
-    String getCountryCode() {
-        return countryCode;
-    }
-
-    String getCurrency() {
-        return currency;
-    }
-
-    int getHotelPrice() {
-        return hotelPrice;
-    }
 }

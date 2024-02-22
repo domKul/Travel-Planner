@@ -1,5 +1,6 @@
 package travelplanner.location;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,15 +8,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("v1/locations")
+@RequiredArgsConstructor
 class LocationController {
 
     private final LocationClientService locationClientService;
     private final LocationService locationService;
-
-    LocationController(LocationClientService locationClientService, LocationService locationService) {
-        this.locationClientService = locationClientService;
-        this.locationService = locationService;
-    }
 
     @PostMapping("/getHotelslocation")
     ResponseEntity<Void> searchHotels(@RequestParam String name, @RequestParam String locale) {

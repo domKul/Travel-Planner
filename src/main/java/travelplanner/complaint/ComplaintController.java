@@ -1,6 +1,7 @@
 package travelplanner.complaint;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,13 +11,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("v1/complaints")
+@RequiredArgsConstructor
 class ComplaintController {
 
     private final ComplaintService complaintService;
-
-    ComplaintController(ComplaintService complaintService) {
-        this.complaintService = complaintService;
-    }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Void> addComplaints(@RequestBody @Valid ComplaintDTOCreate complaintDTOCreate) {

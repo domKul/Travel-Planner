@@ -1,5 +1,6 @@
 package travelplanner.destination;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -8,13 +9,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @Component
+@RequiredArgsConstructor
  class DestinationHttpClientConfig {
     private final DestinationClientConnectionData destinationClientConnectionData;
-
-     DestinationHttpClientConfig(DestinationClientConnectionData destinationClientConnectionData) {
-        this.destinationClientConnectionData = destinationClientConnectionData;
-    }
-
 
     URI urlBuilder(String orderedBy, int adults_number, String checkin_date,
                    String filter_by_currency, int dest_id,

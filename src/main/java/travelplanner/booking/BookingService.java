@@ -1,6 +1,7 @@
 package travelplanner.booking;
 
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import travelplanner.booking.query.BookingDTO;
 import travelplanner.booking.query.BookingDTOGet;
@@ -18,6 +19,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class BookingService extends AbstractRepository<BookingRepository, Booking> {
 
     private final BookingRepository bookingRepository;
@@ -26,14 +28,6 @@ public class BookingService extends AbstractRepository<BookingRepository, Bookin
     private final DestinationService destinationService;
     private final List<BookingObserver> observers = new ArrayList<>();
 
-
-    BookingService(BookingRepository bookingRepository, BookingMapper bookingMapper,
-                   CustomerService customerService, DestinationService destinationService) {
-        this.bookingRepository = bookingRepository;
-        this.bookingMapper = bookingMapper;
-        this.customerService = customerService;
-        this.destinationService = destinationService;
-    }
     void addObserver(BookingObserver observer) {
         observers.add(observer);
     }
@@ -53,7 +47,7 @@ public class BookingService extends AbstractRepository<BookingRepository, Bookin
         booking.setCustomer(customerOrThrow);
         booking.setStartDate(bookingDTOCreate.getStartDate());
         booking.setEndDate(bookingDTOCreate.getEndDate());
-        booking.setDestinations(destinationOrElseThrow);
+        booking.setDestination(destinationOrElseThrow);
         Booking save = bookingRepository.save(booking);
         notifyObservers(save.toSimpleQuery());
         LOGGER.info("Email sent");
@@ -105,7 +99,7 @@ public class BookingService extends AbstractRepository<BookingRepository, Bookin
         bookingEntity.setStartDate(bookingDTOCreate.getStartDate());
         bookingEntity.setEndDate(bookingDTOCreate.getEndDate());
         bookingEntity.setCustomer(customerOrThrow);
-        bookingEntity.setDestinations(destinationOrElseThrow);
+        bookingEntity.setDestination(destinationOrElseThrow);
         return bookingEntity;
     }
 }
