@@ -1,9 +1,10 @@
 package travelplanner.complaint;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
-
+@Getter
 class ComplaintDTOCreate {
     @NotNull(message = "Title required")
     private final String title;
@@ -22,30 +23,5 @@ class ComplaintDTOCreate {
         this.complaintDate = LocalDateTime.now();
         this.status = status;
         this.customerId = customerId;
-    }
-
-    long getCustomer() {
-        return customerId;
-    }
-
-    String getTitle() {
-        return title;
-    }
-
-    String getDescription() {
-        return description;
-    }
-
-    LocalDateTime getComplaintDate() {
-        return complaintDate;
-    }
-
-    String getStatus() {
-        return status;
-    }
-
-
-    long getCustomerId() {
-        return customerId;
     }
 }

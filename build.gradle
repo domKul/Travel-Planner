@@ -31,7 +31,6 @@ dependencies {
     implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.1.0'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
 
-
     implementation 'org.xerial:sqlite-jdbc'
     implementation 'org.hibernate.orm:hibernate-community-dialects'
 
@@ -40,7 +39,10 @@ dependencies {
     testImplementation 'junit:junit:4.13.1'
     testImplementation 'com.google.code.gson:gson:'
     testImplementation 'com.h2database:h2' // Explicitly specify H2 for testing
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 }
+
 
 tasks.named('test') {
     useJUnitPlatform()

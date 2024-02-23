@@ -1,6 +1,7 @@
 package travelplanner.complaint;
 
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import travelplanner.customer.CustomerService;
 import travelplanner.exception.ExceptionMessages;
@@ -12,18 +13,12 @@ import java.util.Optional;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class ComplaintService extends AbstractRepository<ComplaintRepository, Complaint> {
 
     private final ComplaintRepository complaintRepository;
     private final ComplaintMapper complaintMapper;
     private final CustomerService customerService;
-
-     ComplaintService(ComplaintRepository complaintRepository, ComplaintMapper complaintMapper, CustomerService customerService) {
-        this.complaintRepository = complaintRepository;
-        this.complaintMapper = complaintMapper;
-        this.customerService = customerService;
-    }
-
 
     Complaint createComplaint(final ComplaintDTOCreate complaintDTOCreate) {
         if (!customerService.isCustomerExistById(complaintDTOCreate.getCustomerId())) {

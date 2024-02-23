@@ -1,14 +1,13 @@
 package travelplanner.customer;
 
-import travelplanner.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import travelplanner.exception.NotFoundException;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

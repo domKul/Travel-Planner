@@ -1,5 +1,6 @@
 package travelplanner.destination;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,13 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("v1/hotel")
+@RequiredArgsConstructor
 class DestinationSearchController {
 
     private final DestinationClientService destinationClientService;
-
-    DestinationSearchController(DestinationClientService destinationClientService) {
-        this.destinationClientService = destinationClientService;
-    }
 
     @GetMapping("/destinationSave")
     ResponseEntity<DestinationlDTO> searchHotelsSave(@RequestParam String orderedby, @RequestParam int adults_number, @RequestParam String checkin_date,

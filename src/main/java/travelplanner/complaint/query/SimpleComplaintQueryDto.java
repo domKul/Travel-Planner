@@ -2,12 +2,14 @@ package travelplanner.complaint.query;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.Getter;
 import travelplanner.customer.query.SimpleCustomerQueryDto;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "complaints")
+@Getter
 public class SimpleComplaintQueryDto {
 
     @Id
@@ -33,29 +35,5 @@ public class SimpleComplaintQueryDto {
         this.status = status;
         this.customer = new SimpleCustomerQueryDto();
         this.customer.setCustomerId(customerId);
-    }
-
-    public Long getComplaintId() {
-        return complaintId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public LocalDateTime getComplaintDate() {
-        return complaintDate;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public SimpleCustomerQueryDto getCustomer() {
-        return customer;
     }
 }

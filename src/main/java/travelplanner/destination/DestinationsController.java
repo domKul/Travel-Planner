@@ -1,5 +1,6 @@
 package travelplanner.destination;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,13 +8,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("v1/destinations")
+@RequiredArgsConstructor
 class DestinationsController {
 
     private final DestinationService destinationService;
-
-    DestinationsController(DestinationService destinationService) {
-        this.destinationService = destinationService;
-    }
 
     @GetMapping()
     ResponseEntity<List<DestinationDTOForGet>> getAllDestinationsFromDB() {

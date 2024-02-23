@@ -1,6 +1,7 @@
 package travelplanner.customer;
 
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import travelplanner.customer.query.SimpleCustomerQueryDto;
 import travelplanner.exception.AlreadyExistException;
@@ -12,15 +13,11 @@ import java.util.List;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class CustomerService extends AbstractRepository<CustomerRepository, Customer> {
 
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
-
-     CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper) {
-        this.customerRepository = customerRepository;
-        this.customerMapper = customerMapper;
-    }
 
      Customer saveCustomer(final CustomerDTO customerDTO) {
          if (customerRepository.existsByFirstNameAndLastName(customerDTO.getFirstName(), customerDTO.getLastName())){

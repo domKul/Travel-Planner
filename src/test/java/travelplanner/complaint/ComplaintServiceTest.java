@@ -1,9 +1,12 @@
 package travelplanner.complaint;
 
+//import travelplanner.customer.Customer;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 import travelplanner.customer.CustomerService;
 import travelplanner.enums.IdType;
 import travelplanner.exception.NotFoundException;
@@ -15,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class ComplaintServiceTest {
 
     @InjectMocks
@@ -61,8 +64,8 @@ class ComplaintServiceTest {
         //Given
         Complaint complaint1 = new Complaint(1L, "title", "description", null, "status", 1);
         Complaint complaint2 = new Complaint(1L, "title", "description", null, "status", 1);
-        ComplaintDTO complaintDto1 = new ComplaintDTO(1L, "title", "description", null, "status", 1);
-        ComplaintDTO complaintdto2 = new ComplaintDTO(2L, "title2", "description2", null, "status", 1);
+        ComplaintDTO complaintDto1 = new ComplaintDTO(1L, "title", "description", null, "status", 1L);
+        ComplaintDTO complaintdto2 = new ComplaintDTO(2L, "title2", "description2", null, "status", 1L);
         List<Complaint> complaintsList = List.of(complaint1, complaint2);
         List<ComplaintDTO> complaintDtoList = List.of(complaintdto2, complaintDto1);
         when(complaintRepository.findAll()).thenReturn(complaintsList);
@@ -80,7 +83,7 @@ class ComplaintServiceTest {
     public void shouldShowComplaintsByID() {
         //Given
         Complaint complaint1 = new Complaint(1L, "title", "description", null, "status", 1);
-        ComplaintDTO complaintDto1 = new ComplaintDTO(1L, "title", "description", null, "status", 1);
+        ComplaintDTO complaintDto1 = new ComplaintDTO(1L, "title", "description", null, "status", 1L);
         when(complaintRepository.findById(complaint1.getComplaintId())).thenReturn(Optional.of(complaint1));
         when(complaintMapper.mapToComplaintDTO(complaint1)).thenReturn(complaintDto1);
         //When
@@ -94,7 +97,7 @@ class ComplaintServiceTest {
         // Given
         Complaint complaint1 = new Complaint(1L, "titlee", "descriptionn", null, "statuss", 1);
         ComplaintDTOUpdate complaintDTOUpdate = new ComplaintDTOUpdate("update", "update", null, "status");
-        ComplaintDTO complaintDto1 = new ComplaintDTO(1L, "updatetitle", "updatedescription", null, "status", 1);
+        ComplaintDTO complaintDto1 = new ComplaintDTO(1L, "updatetitle", "updatedescription", null, "status", 1L);
         when(complaintRepository.findById(complaint1.getComplaintId())).thenReturn(Optional.of(complaint1));
         when(complaintMapper.mapToComplaintDTO(complaint1)).thenReturn(complaintDto1);
         when(complaintRepository.save(complaint1)).thenReturn(complaint1);

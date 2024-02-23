@@ -2,6 +2,7 @@ package travelplanner.currency;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -13,14 +14,11 @@ import java.math.BigDecimal;
 import java.net.URI;
 
 @Service
+@AllArgsConstructor
 class CurrencyClient {
 
     private final RestTemplate restTemplate = new RestTemplate();
     private final CurrencyHttpClientConfig currencyHttpClientConfig;
-
-    CurrencyClient(CurrencyHttpClientConfig currencyHttpClientConfig) {
-        this.currencyHttpClientConfig = currencyHttpClientConfig;
-    }
 
     Currency convert(String from, String to, BigDecimal amount) {
         URI url = currencyHttpClientConfig.getUri(from, to, amount);

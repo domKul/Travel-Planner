@@ -30,7 +30,11 @@ class UserCountScheduler {
 
     int getUserCountFromDatabase() {
         String sql = "SELECT COUNT(*) FROM customers_list";
-        return jdbcTemplate.queryForObject(sql, Integer.class);
+        Integer customersCounter = jdbcTemplate.queryForObject(sql, Integer.class);
+        if (customersCounter != null){
+            return customersCounter;
+        }
+        return 0;
     }
 
     void saveUserCountToDatabase(int userCount, LocalDate date) {

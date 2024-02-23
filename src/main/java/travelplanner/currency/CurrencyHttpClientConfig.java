@@ -1,5 +1,6 @@
 package travelplanner.currency;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -9,12 +10,9 @@ import java.math.BigDecimal;
 import java.net.URI;
 
 @Component
+@RequiredArgsConstructor
 class CurrencyHttpClientConfig {
     private final CurrencyClientConnectionData currencyClientConnectionData;
-
-    CurrencyHttpClientConfig(CurrencyClientConnectionData currencyClientConnectionData) {
-        this.currencyClientConnectionData = currencyClientConnectionData;
-    }
 
     HttpHeaders getHttpHeaders() {
         HttpHeaders headers = new HttpHeaders();

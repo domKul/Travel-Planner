@@ -3,6 +3,8 @@ package travelplanner.location;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -17,6 +19,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "hotels",
         "nrHotels"
 })
+@AllArgsConstructor
+@NoArgsConstructor
 class LocationDTO {
     @JsonProperty("label")
     private String label;
@@ -34,20 +38,6 @@ class LocationDTO {
     private int hotels;
     @JsonProperty("timezone")
     private String timezone;
-
-    LocationDTO(String label, String region, String dest_id,String destination_type, String name, String country, Integer hotels, String timezone) {
-        this.label = label;
-        this.region = region;
-        this.dest_id = dest_id;
-        this.destination_type = destination_type;
-        this.name = name;
-        this.country = country;
-        this.hotels = hotels;
-        this.timezone = timezone;
-    }
-
-    LocationDTO() {
-    }
 
     @JsonProperty("label")
     String getLabel() {

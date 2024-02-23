@@ -66,6 +66,6 @@ class BookingMapperTest {
         //When
         BookingDTO mappingDTO = bookingMapper.mapToBookingDTO(booking2);
         //Then
-        assertEquals(booking2.getCustomer().getFirstName(), mappingDTO.getCustomer().getFirstName());
+        assertEquals(booking2.getCustomer().getFirstName(), mappingDTO.customer().getFirstName());
     }
 }

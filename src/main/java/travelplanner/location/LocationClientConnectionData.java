@@ -1,9 +1,11 @@
 package travelplanner.location;
 
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
+@Getter
 class LocationClientConnectionData {
 
     @Value("${rapidapi.api.key}")
@@ -13,15 +15,4 @@ class LocationClientConnectionData {
     @Value("${location.api.url}")
     private String apiLocationUrl;
 
-    public String getApiLocationKey() {
-        return apiLocationKey;
-    }
-
-    public String getApiLocationHost() {
-        return apiLocationHost;
-    }
-
-    public String getApiLocationUrl() {
-        return apiLocationUrl;
-    }
 }

@@ -1,5 +1,6 @@
 package travelplanner.location;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -8,12 +9,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @Component
+@RequiredArgsConstructor
  class LocationHttpClientConfig {
     private final LocationClientConnectionData locationClientConnectionData;
-
-    LocationHttpClientConfig(LocationClientConnectionData locationClientConnectionData) {
-        this.locationClientConnectionData = locationClientConnectionData;
-    }
 
     HttpHeaders locationHeader() {
         HttpHeaders headers = new HttpHeaders();

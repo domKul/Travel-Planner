@@ -8,14 +8,16 @@ import travelplanner.exception.ExceptionMessages;
 import travelplanner.exception.NotFoundException;
 
 @Repository
-public abstract class AbstractRepository <R extends JpaRepository<EntityType,Long>, EntityType>{
+public abstract class AbstractRepository<R extends JpaRepository<EntityType, Long>, EntityType> {
     protected final Logger LOGGER = LoggerFactory.getLogger(Class.class);
-    protected EntityType findEntity(R repository,Long id){
-        return repository.findById(id).orElseThrow(()->{
+
+    protected EntityType findEntity(R repository, Long id) {
+        return repository.findById(id).orElseThrow(() -> {
             LOGGER.warn("Record not found");
             return new NotFoundException(ExceptionMessages.ENTITY_NOT_FOUND);
         });
     }
+
     protected boolean existEntityById(R repository, Long id) {
         return repository.existsById(id);
     }

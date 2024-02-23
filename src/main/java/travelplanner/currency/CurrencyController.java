@@ -1,5 +1,6 @@
 package travelplanner.currency;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,12 +11,10 @@ import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/currency")
+@RequiredArgsConstructor
 class CurrencyController {
-    private final CurrencyClient currencyClient;
 
-    CurrencyController(CurrencyClient currencyClient) {
-        this.currencyClient = currencyClient;
-    }
+    private final CurrencyClient currencyClient;
 
     @GetMapping(value = "/conversion")
     ResponseEntity<Currency> convertCurrency(@RequestParam String from, @RequestParam String to, @RequestParam BigDecimal amount) {
